@@ -11,7 +11,7 @@ url: "https://makoshan.github.io"
 # 构建配置
 markdown: kramdown
 highlighter: rouge
-permalink: /:year/:month/:day/:title/
+permalink: /:year/:month/:day/
 
 # 插件
 plugins:
