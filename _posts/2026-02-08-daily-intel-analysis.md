@@ -17,9 +17,9 @@ permalink: /20260208-analysis.html
 
 ---
 
-### 1. 本地 AI 部署趋势升温 — LocalGPT
+### 1. 本地 AI 部署趋势升温 — [LocalGPT](https://github.com/localgpt-app/localgpt)
 
-**核心亮点**：Rust 编写的本地 AI 助手，无需联网、数据私有化
+**核心亮点**：Rust 编写的本地 AI 助手，无需联网、数据私有化 | 🔗 [查看原文](https://github.com/localgpt-app/localgpt)
 
 **深层逻辑**：
 - 2024-2025 年，大模型正在从"云端中心化"转向"本地私有化"
@@ -36,9 +36,9 @@ permalink: /20260208-analysis.html
 
 ---
 
-### 2. AI Agent 智能体成为新焦点
+### 2. AI Agent 智能体成为新焦点 — [Software factories and the agentic moment](https://haskellforall.com/2026/02/beyond-agentic-coding)
 
-**核心观点**：AI 从"工具"进化为"协作者"
+**核心观点**：AI 从"工具"进化为"协作者" | 🔗 [查看原文](https://haskellforall.com/2026/02/beyond-agentic-coding)
 
 **深层逻辑**：
 - ChatGPT 是"对话式 AI"，Agent 是"任务式 AI"
@@ -55,9 +55,9 @@ AI 系统架构正在向"自主智能体"演进，任务自动化是下一个主
 
 ---
 
-### 3. OpenAI 发布 Skills 目录
+### 3. OpenAI 发布 Skills 目录 — [openai/skills](https://github.com/openai/skills)
 
-**核心内容**：Codex 官方技能集合，类似"AI 的 App Store"
+**核心内容**：Codex 官方技能集合，类似"AI 的 App Store" | 🔗 [查看原文](https://github.com/openai/skills)
 
 **深层逻辑**：
 - Skills = 预定义的能力模块（编程、数据分析、自动化）
@@ -74,9 +74,9 @@ AI 系统架构正在向"自主智能体"演进，任务自动化是下一个主
 
 ---
 
-### 4. SpaceX 布局太空 AI 数据中心
+### 4. SpaceX 布局太空 AI 数据中心 — [马斯克确认招聘 AI 卫星工程师](https://wallstreetcn.com/livenews/3051816)
 
-**核心动态**：马斯克招聘工程师，开发太空 AI 计算基础设施
+**核心动态**：SpaceX 在奥斯汀和西雅图组建团队，开发太空 AI 计算基础设施 | 🔗 [查看原文](https://wallstreetcn.com/livenews/3051816)
 
 **深层逻辑**：
 - 地表算力面临能源瓶颈（数据中心耗电占全球 2%+）
@@ -93,9 +93,9 @@ AI 系统架构正在向"自主智能体"演进，任务自动化是下一个主
 
 ---
 
-### 5. AI 安全测试自动化 — Shannon
+### 5. AI 安全测试自动化 — [KeygraphHQ/shannon](https://github.com/KeygraphHQ/shannon)
 
-**核心能力**：全自动 AI 黑客，漏洞发现率 96.15%
+**核心能力**：全自动 AI 黑客，漏洞发现率 96.15% | 🔗 [查看原文](https://github.com/KeygraphHQ/shannon)
 
 **深层逻辑**：
 - 传统安全测试依赖人工渗透测试，成本高、覆盖率低
