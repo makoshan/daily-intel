@@ -62,9 +62,10 @@ def main():
         output_file = summarizer.save_summary(summary, args.output)
         print(f"\n[Saved] Report: {output_file}")
         
-        # 同时更新 docs 目录用于 GitHub Pages
-        docs_file = summarizer.save_summary(summary, 'docs')
-        print(f"[Pages] Updated: {docs_file}")
+        # 同时更新 docs/_posts 目录用于 Jekyll 博客
+        os.makedirs('docs/_posts', exist_ok=True)
+        blog_file = summarizer.save_blog_post(summary, 'docs/_posts')
+        print(f"[Blog] Jekyll post: {blog_file}")
     else:
         print("\n[DRY RUN] Not saving files")
         print("\n" + "="*50)

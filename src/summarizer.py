@@ -165,16 +165,59 @@ class ContentSummarizer:
         return summary
     
     def save_summary(self, summary: str, output_dir: str = 'output'):
-        """保存总结到文件"""
+        """保存总结到文件（Jekyll 博客格式）"""
         os.makedirs(output_dir, exist_ok=True)
         
         date_str = datetime.now().strftime('%Y-%m-%d')
-        filename = f"{output_dir}/{date_str}.md"
+        
+        # Jekyll front matter
+        front_matter = f"""---
+layout: post
+title: "每日科技情报 - {date_str}"
+date: {date_str} 08:00:00 +0800
+categories: daily
+tags: [科技, AI, Web3]
+---
+
+"""
+        
+        # 转换标题格式以适应博客
+        blog_content = summary.replace(f"# 每日科技资讯 - {date_str}", "")
+        
+        filename = f"{output_dir}/{date_str}-daily-intel.md"
         
         with open(filename, 'w', encoding='utf-8') as f:
-            f.write(summary)
+            f.write(front_matter + blog_content)
         
         print(f"Summary saved to {filename}")
+        return filename
+    
+    def save_blog_post(self, summary: str, blog_dir: str = '_posts'):
+        """保存为 Jekyll 博客文章格式"""
+        os.makedirs(blog_dir, exist_ok=True)
+        
+        date_str = datetime.now().strftime('%Y-%m-%d')
+        
+        # Jekyll front matter
+        front_matter = f"""---
+layout: post
+title: "每日科技情报 - {date_str}"
+date: {date_str} 08:00:00 +0800
+categories: daily
+tags: [科技, AI, Web3]
+---
+
+"""
+        
+        # 转换标题格式
+        blog_content = summary.replace(f"# 每日科技资讯 - {date_str}", "")
+        
+        filename = f"{blog_dir}/{date_str}-daily-intel.md"
+        
+        with open(filename, 'w', encoding='utf-8') as f:
+            f.write(front_matter + blog_content)
+        
+        print(f"Blog post saved to {filename}")
         return filename
 
 if __name__ == '__main__':

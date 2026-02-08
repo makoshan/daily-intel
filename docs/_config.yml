@@ -1,7 +1,7 @@
 # Jekyll Configuration for Daily Intel GitHub Pages
 
 # Site Settings
-title: "每日科技资讯"
+title: "每日科技情报"
 description: "Daily Intel - 每日科技资讯自动收集与 AI 总结"
 author: "Mako"
 email: ""
@@ -11,6 +11,14 @@ remote_theme: pages-themes/cayman@v0.2.0
 plugins:
   - jekyll-remote-theme
   - jekyll-seo-tag
+  - jekyll-feed
+
+# 文章 URL 格式
+permalink: /:year/:month/:day/:title/
+
+# 分页（可选）
+paginate: 10
+paginate_path: "/page/:num/"
 
 # 自定义 CSS
 custom_css: assets/css/style.css
@@ -18,17 +26,6 @@ custom_css: assets/css/style.css
 # 导航设置
 show_downloads: false
 show_nav: true
-
-# 社交链接
-# github_username: makoshan
-
-# 主题配置
-cayman:
-  show_header: true
-  show_footer: true
-
-# 字体设置（通过自定义 CSS 实现）
-# 手写字体将在自定义 CSS 中配置
 
 # 排除文件
 exclude:
@@ -49,6 +46,11 @@ timezone: Asia/Shanghai
 
 # 默认布局
 defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: default
   - scope:
       path: ""
       type: "pages"
