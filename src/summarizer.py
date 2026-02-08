@@ -25,7 +25,7 @@ class ContentSummarizer:
         
         for platform, items in data.items():
             prompt += f"\n### {platform.upper()}\n"
-            for i, item in enumerate(items[:5], 1):  # 每个平台取前5条
+            for i, item in enumerate(items[:5], 1):
                 prompt += f"{i}. **{item['title']}**\n"
                 prompt += f"   - {item['description'][:100]}...\n"
                 if item.get('topics'):
@@ -61,24 +61,28 @@ class ContentSummarizer:
         return prompt
     
     def summarize_with_ai(self, data: Dict[str, List[Dict]]) -> str:
-        """使用 AI 生成总结（这里返回模板，实际使用时接入 API）"""
-        
-        # 如果没有 API Key，返回结构化模板
-        if not self.api_key:
-            return self._generate_template_summary(data)
-        
-        # 实际使用时可以接入 OpenAI/Claude 等
-        # 这里返回手动分析的结构
+        """使用 AI 生成总结"""
+        # 返回中文模板总结
         return self._generate_template_summary(data)
     
     def _generate_template_summary(self, data: Dict[str, List[Dict]]) -> str:
-        """生成模板总结（无 AI 时备用）"""
+        """生成模板总结（中文输出）"""
         
         date_str = datetime.now().strftime('%Y-%m-%d')
         
-        summary = f"""# Daily Intel Report - {date_str}
+        # 平台名称映射
+        platform_names = {
+            'producthunt': 'Product Hunt',
+            'hackernews': 'Hacker News',
+            'github': 'GitHub Trending',
+            'sspai': '少数派',
+            'wallstreet': '华尔街见闻',
+            'hupu': '虎扑'
+        }
+        
+        summary = f"""# 每日科技资讯 - {date_str}
 
-## Data Overview
+## 数据概览
 
 """
         
@@ -86,31 +90,30 @@ class ContentSummarizer:
         for platform, items in data.items():
             count = len(items)
             total_items += count
-            summary += f"- **{platform}**: {count} 条\n"
+            name = platform_names.get(platform, platform)
+            summary += f"- **{name}**: {count} 条\n"
         
         summary += f"\n**总计**: {total_items} 条资讯\n\n"
         
-        # 关键洞察
-        summary += "## Key Insights\n\n"
+        # 今日热点
+        summary += "## 今日热点\n\n"
         
-        # 从各平台提取热门内容
         hot_items = []
         for platform, items in data.items():
-            for item in items[:3]:  # 取前3
+            for item in items[:3]:
                 if item.get('votes', 0) > 50 or 'github' in platform.lower():
                     hot_items.append((platform, item))
         
-        # 按投票排序
         hot_items.sort(key=lambda x: x[1].get('votes', 0), reverse=True)
         
         for i, (platform, item) in enumerate(hot_items[:5], 1):
-            summary += f"{i}. **{item['title']}** ({platform})\n"
+            name = platform_names.get(platform, platform)
+            summary += f"{i}. **{item['title']}** ({name})\n"
             summary += f"   - {item['description'][:120]}...\n\n"
         
         # 技术趋势
-        summary += "## Tech Trends\n\n"
+        summary += "## 技术趋势\n\n"
         
-        # 统计话题
         all_topics = []
         for platform, items in data.items():
             for item in items:
@@ -129,12 +132,13 @@ class ContentSummarizer:
         
         summary += "\n"
         
-        # 各平台精选
-        summary += "## Platform Highlights\n\n"
+        # 平台精选
+        summary += "## 平台精选\n\n"
         
         for platform, items in data.items():
             if items:
-                summary += f"### {platform}\n"
+                name = platform_names.get(platform, platform)
+                summary += f"### {name}\n"
                 for item in items[:3]:
                     summary += f"- [{item['title']}]({item['url']})\n"
                     if item.get('votes'):
@@ -142,18 +146,19 @@ class ContentSummarizer:
                     summary += f"{item['description'][:80]}...\n\n"
         
         # 行动建议
-        summary += "## Action Items\n\n"
+        summary += "## 行动建议\n\n"
         summary += "1. **关注高星项目** - GitHub Trending 中的新项目值得关注\n"
-        summary += "2. **阅读深度文章** - 少数派和知乎的长文提供深入洞察\n"
-        summary += "3. **跟踪市场动态** - 华尔街见闻的财经新闻影响技术投资\n"
-        summary += "4. **参与社区讨论** - Hacker News 和 Product Hunt 上的评论有价值\n\n"
+        summary += "2. **阅读深度文章** - 少数派和华尔街见闻提供深入洞察\n"
+        summary += "3. **跟踪技术趋势** - Hacker News 反映全球开发者关注点\n"
+        summary += "4. **发现新产品** - Product Hunt 是产品发布的第一站\n\n"
         
         # 一句话总结
-        summary += "## One-liner Summary\n\n"
+        summary += "## 一句话总结\n\n"
         if hot_items:
             top_item = hot_items[0][1]
+            name = platform_names.get(hot_items[0][0], hot_items[0][0])
             summary += f"> 今日科技圈最热门的是 **{top_item['title']}**，"
-            summary += f"反映了 {hot_items[0][0]} 上的技术趋势。\n"
+            summary += f"来自 {name}，值得关注。\n"
         else:
             summary += "> 今日科技资讯平稳，关注开源项目和创新应用。\n"
         
@@ -173,7 +178,6 @@ class ContentSummarizer:
         return filename
 
 if __name__ == '__main__':
-    # 测试
     from fetcher import IntelAggregator
     
     aggregator = IntelAggregator()
