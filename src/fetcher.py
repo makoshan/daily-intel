@@ -289,16 +289,18 @@ class ZhihuFetcher(BaseFetcher):
     def fetch(self) -> List[Dict]:
         """获取知乎热榜"""
         try:
-            # 使用 RSSHub 备用源
+            # 尝试多个备用 RSS 源
             rss_urls = [
-                "https://rsshub.rssforever.com/zhihu/hotlist",
-                "https://rsshub.app/zhihu/hotlist",
+                ("https://rsshub.rssforever.com/zhihu/hotlist", "RSSHub镜像1"),
+                ("https://rsshub.app/zhihu/hotlist", "RSSHub官方"),
+                ("https://rss.shab.fun/zhihu/hotlist", "RSShub备用"),
             ]
             
-            for url in rss_urls:
+            for url, name in rss_urls:
                 try:
-                    feed = feedparser.parse(url)
-                    if feed.entries:
+                    print(f"    Trying {name}...")
+                    feed = feedparser.parse(url, timeout=15)
+                    if feed.entries and len(feed.entries) > 0:
                         results = []
                         for entry in feed.entries[:10]:
                             results.append({
@@ -309,8 +311,10 @@ class ZhihuFetcher(BaseFetcher):
                                 'platform': '知乎热榜',
                                 'topics': []
                             })
+                        print(f"    ✓ Success with {name}")
                         return results
-                except:
+                except Exception as e:
+                    print(f"    ✗ Failed: {e}")
                     continue
             
             # 如果 RSS 都失败，尝试直接抓取知乎热榜页面
