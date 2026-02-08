@@ -104,14 +104,14 @@ permalink: /20260208.html
 ### Product Hunt
 
 #### [Inspector](https://www.producthunt.com/products/inspector-3)
-Figma for Claude Code — AI 编程助手的设计工具化趋势
+类 Figma 的 Claude Code 可视化界面 — AI 编程助手的设计工具化趋势
 
 🔗 [查看原文](https://www.producthunt.com/products/inspector-3)
 
 ---
 
 #### [VolumeHub](https://www.producthunt.com/products/volumehub)
-Per-app volume control for macOS — 细粒度系统控制工具
+macOS 应用独立音量控制 — 细粒度系统控制工具
 
 🔗 [查看原文](https://www.producthunt.com/products/volumehub)
 
@@ -132,7 +132,7 @@ LinkedIn AI 销售助手 — B2B 销售自动化
 ---
 
 #### [Axel](https://www.producthunt.com/products/axel-3)
-Todoist for AI coding agents — 任务管理与 AI 编程结合
+AI 编程代理的任务管理工具 — 任务管理与 AI 编程结合
 
 🔗 [查看原文](https://www.producthunt.com/products/axel-3)
 
