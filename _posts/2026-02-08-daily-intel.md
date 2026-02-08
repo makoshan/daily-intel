@@ -82,10 +82,227 @@ tags: [科技, AI, Web3]
 - **Hacker News**: 15 条
 - **GitHub Trending**: 10 条
 - **少数派**: 10 条
-- **华尔街见闻**: 10 条
+- **华尔街见闻**: 0 条
 - **虎扑**: 10 条
 
-**总计**: 65 条资讯
+**总计**: 55 条资讯
+
+## 📰 平台精选（详细解读）
+
+### Product Hunt
+
+#### Sway
+
+Turn spoken thoughts into clear structure.
+
+🔗 [查看原文](https://www.producthunt.com/products/sway-12)
+
+---
+
+#### Inspector
+
+Figma for Claude Code
+
+🔗 [查看原文](https://www.producthunt.com/products/inspector-3)
+
+---
+
+#### StayAwake.Dev
+
+The one tab developers never close
+
+🔗 [查看原文](https://www.producthunt.com/products/stayawake-dev)
+
+---
+
+#### Axel
+
+Todoist for AI coding agents
+
+🔗 [查看原文](https://www.producthunt.com/products/axel-3)
+
+---
+
+#### Snap
+
+The floating dock for developers
+
+🔗 [查看原文](https://www.producthunt.com/products/snap-8)
+
+---
+
+
+### Hacker News
+
+#### DoNotNotify is now Open Source
+🔥 热度: 153
+
+Score: 153 | Comments: 21
+
+🔗 [查看原文](https://donotnotify.com/opensource.html)
+
+---
+
+#### Show HN: LocalGPT – A local-first AI assistant in Rust with persistent memory
+🔥 热度: 237
+
+Score: 237 | Comments: 108
+
+🔗 [查看原文](https://github.com/localgpt-app/localgpt)
+
+---
+
+#### Matchlock: Linux-based sandboxing for AI agents
+🔥 热度: 21
+
+Score: 21 | Comments: 0
+
+🔗 [查看原文](https://github.com/jingkaihe/matchlock)
+
+---
+
+#### Reverse Engineering Raiders of the Lost Ark for the Atari 2600
+🔥 热度: 10
+
+Score: 10 | Comments: 1
+
+🔗 [查看原文](https://github.com/joshuanwalker/Raiders2600)
+
+---
+
+#### Haskell for all: Beyond agentic coding
+🔥 热度: 132
+
+Score: 132 | Comments: 38
+
+🔗 [查看原文](https://haskellforall.com/2026/02/beyond-agentic-coding)
+
+---
+
+
+### GitHub Trending
+
+#### KeygraphHQ/shannon
+🏷️ 标签: TypeScript
+
+Fully autonomous AI hacker to find actual exploits in your web apps. Shannon has achieved a 96.15% success rate on the hint-free, source-aware XBOW Be...
+
+🔗 [查看原文](https://github.com/KeygraphHQ/shannon)
+
+---
+
+#### openai/skills
+🏷️ 标签: Python
+
+Skills Catalog for Codex
+
+🔗 [查看原文](https://github.com/openai/skills)
+
+---
+
+#### microsoft/litebox
+🏷️ 标签: Rust
+
+A security-focused library OS supporting kernel- and user-mode execution
+
+🔗 [查看原文](https://github.com/microsoft/litebox)
+
+---
+
+#### p-e-w/heretic
+🏷️ 标签: Python
+
+Fully automatic censorship removal for language models
+
+🔗 [查看原文](https://github.com/p-e-w/heretic)
+
+---
+
+#### obra/superpowers
+🏷️ 标签: Shell
+
+An agentic skills framework & software development methodology that works.
+
+🔗 [查看原文](https://github.com/obra/superpowers)
+
+---
+
+
+### 少数派
+
+#### 从特斯拉一日自驾，看纯电在日本的实际体验
+
+对于想把车当作「工具」的日本人来说，最理想的状态还是充电发生在家里，而不是发生在路上...
+
+🔗 [查看原文](https://sspai.com/post/106020)
+
+---
+
+#### 当你想来一次新年大扫除，这里或许有些经验可供参考
+
+还对新年大扫除无从下手？不妨看看这份全家都能参与的全屋清洁指南...
+
+🔗 [查看原文](https://sspai.com/post/95652)
+
+---
+
+#### 本周看什么 | 最近值得一看的 11 部作品
+
+📅本周新预告《穿普拉达的女王2》正式预告2月2日，《穿普拉达的女王2》发布新预告。本片北美定档5月1日，前作主演梅丽尔·斯特里普、安妮·海瑟薇、艾米莉·布朗特、斯坦利·图齐回归，LadyGaga、刘玉 ...
+
+🔗 [查看原文](https://sspai.com/post/106136)
+
+---
+
+#### 醒醒现在是 2015：小米 1S 和红米 Note 背后的机圈历史
+
+使人觉得遥远的不是时间长，而是两三件不可挽回的事...
+
+🔗 [查看原文](https://sspai.com/post/105976)
+
+---
+
+#### Sonos × 少数派 × 暖风家联合打造：沉浸体验空间正式上线
+
+继暖风家墨水屏体验区成功为大家提供可触摸、可对比的纸感阅读空间后，我们再次向前，将线下体验的维度从视觉的专注，延伸至听觉的沉浸...
+
+🔗 [查看原文](https://sspai.com/post/106081)
+
+---
+
+
+### 虎扑
+
+#### [流言板]库里更新社媒：和我的GOAT一起参加《GOAT》的洛杉矶首映礼
+
+🔗 [查看原文](https://bbs.hupu.com)
+
+---
+
+#### [流言板]肯纳德湖人生涯首秀得分上双，文森特本赛季29场仅3次上双
+
+🔗 [查看原文](https://bbs.hupu.com)
+
+---
+
+#### [流言板]哈登：这支骑士很团结&所有人目标一致，我很高兴能来到这里
+
+🔗 [查看原文](https://bbs.hupu.com)
+
+---
+
+#### [流言板]硬汉！奥孔古今日佩戴特殊保护面罩对阵黄蜂
+
+🔗 [查看原文](https://bbs.hupu.com)
+
+---
+
+#### [流言板]有能！卡里克率领曼联接连终结对阵热刺、阿森纳的不胜纪录
+
+🔗 [查看原文](https://bbs.hupu.com)
+
+---
+
 
 ---
 
