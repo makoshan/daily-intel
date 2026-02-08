@@ -1,86 +1,60 @@
 # Daily Intel
 
-每日科技资讯自动收集与 AI 总结
+Mako 的日常情报站，记录市场研究、投资情报与行业洞察。
 
-[![Daily Intel](https://github.com/makoshan/daily-intel/actions/workflows/daily.yml/badge.svg)](https://github.com/makoshan/daily-intel/actions/workflows/daily.yml)
+## 🌐 在线访问
 
-## 📊 数据来源
+https://makoshan.github.io/daily-intel/
 
-- **Product Hunt** - 最新产品发布
-- **Hacker News** - 技术社区热门
-- **GitHub Trending** - 热门开源项目
-- **少数派** - 中文科技媒体
-- **华尔街见闻** - 财经科技新闻
-- **知乎热榜** - 中文社区热点
-- **虎扑** - 体育科技话题
+## 📝 写作指南
 
-## 🚀 使用方法
+### 新建日报
 
-### 本地运行
+在 `_posts/` 目录下创建文件，文件名格式：
+
+```
+YYYY-MM-DD-title.md
+```
+
+例如：
+```
+2026-02-08-daily-intel.md
+```
+
+### 文章模板
+
+```yaml
+---
+layout: post
+title: "2026年2月8日情报日报"
+date: 2026-02-08 08:00:00 +0800
+categories: daily
+tags: [Web3, AI, Market]
+---
+
+## 🪙 加密市场
+
+内容...
+
+## 🤖 AI 动态
+
+内容...
+
+## 📊 宏观观察
+
+内容...
+```
+
+## 🚀 本地预览
 
 ```bash
-# 克隆仓库
-git clone https://github.com/makoshan/daily-intel.git
-cd daily-intel
-
-# 安装依赖
-pip install -r requirements.txt
-
-# 运行
-python src/main.py
-
-# 查看报告
-open output/2026-02-08.md
+bundle install
+bundle exec jekyll serve
 ```
 
-### 配置
+访问 http://localhost:4000/daily-intel/
 
-复制 `config.example.json` 为 `config.json`，可配置：
-- OpenAI API Key（用于 AI 总结）
-- 各平台抓取数量
-- 输出格式
+## 📊 统计
 
-## 🌐 在线查看
-
-访问 [GitHub Pages](https://makoshan.github.io/daily-intel/) 查看每日报告。
-
-## 📁 项目结构
-
-```
-daily-intel/
-├── src/
-│   ├── main.py          # 主程序
-│   ├── fetcher.py       # 资讯抓取
-│   └── summarizer.py    # AI 总结
-├── output/              # 每日报告存档
-├── docs/                # GitHub Pages
-├── .github/workflows/   # 自动化配置
-├── requirements.txt     # 依赖
-└── config.example.json  # 配置模板
-```
-
-## 🔄 自动化
-
-通过 GitHub Actions 每天 UTC 00:00 自动：
-1. 抓取各平台资讯
-2. 生成 AI 总结
-3. 保存到 `output/`
-4. 部署到 GitHub Pages
-
-## 📝 报告格式
-
-每日报告包含：
-- 📈 数据概览
-- 🔍 关键洞察
-- 💡 技术趋势
-- 📰 平台精选
-- ✅ 行动建议
-- 🎯 一句话总结
-
-## 🤝 贡献
-
-欢迎提交 Issue 和 PR！
-
-## 📄 许可证
-
-MIT License
+- 总文章数：{{ site.posts | size }}
+- 最新更新：{{ site.time | date: "%Y-%m-%d %H:%M" }}

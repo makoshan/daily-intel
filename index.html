@@ -1,0 +1,46 @@
+---
+layout: default
+pagination:
+  enabled: true
+---
+
+<h2 style="margin-bottom: 1.5rem; font-size: 1.5rem;">最新情报</h2>
+
+{% for post in paginator.posts %}
+<article class="post-card">
+  <header class="post-header">
+    <span class="post-date">{{ post.date | date: "%Y年%m月%d日" }}</span>
+    <h2 class="post-title">
+      <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+    </h2>
+  </header>
+  <div class="post-excerpt">
+    {{ post.excerpt | strip_html | truncate: 200 }}
+  </div>
+  <a href="{{ post.url | relative_url }}" class="read-more">
+    阅读全文 →
+  </a>
+</article>
+{% endfor %}
+
+{% if paginator.total_pages > 1 %}
+<div class="pagination">
+  {% if paginator.previous_page %}
+    <a href="{{ paginator.previous_page_path | relative_url }}" class="page-link">←</a>
+  {% endif %}
+  
+  {% for page in (1..paginator.total_pages) %}
+    {% if page == paginator.page %}
+      <span class="page-link current">{{ page }}</span>
+    {% elsif page == 1 %}
+      <a href="{{ '/' | relative_url }}" class="page-link">{{ page }}</a>
+    {% else %}
+      <a href="{{ site.paginate_path | relative_url | replace: ':num', page }}" class="page-link">{{ page }}</a>
+    {% endif %}
+  {% endfor %}
+  
+  {% if paginator.next_page %}
+    <a href="{{ paginator.next_page_path | relative_url }}" class="page-link">→</a>
+  {% endif %}
+</div>
+{% endif %}
