@@ -40,6 +40,13 @@ Thumbs.db
 
 # Config (包含敏感信息)
 config.json
+.env
+.env.local
+.env.production
+
+# API Keys and secrets
+*.key
+secrets/
 
 # GitHub Pages 生成的缓存
 node_modules/
