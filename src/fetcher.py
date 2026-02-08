@@ -462,7 +462,7 @@ class IntelAggregator:
             'github': GitHubTrendingFetcher(),
             'sspai': SspaiFetcher(),
             'wallstreet': WallstreetFetcher(),
-            'zhihu': ZhihuFetcher(),
+            # 'zhihu': ZhihuFetcher(),  # 暂时禁用，RSSHub 源不稳定
             'hupu': HupuFetcher(),
         }
     
