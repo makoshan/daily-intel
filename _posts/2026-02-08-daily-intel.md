@@ -82,24 +82,16 @@ tags: [科技, AI, Web3]
 - **Hacker News**: 15 条
 - **GitHub Trending**: 10 条
 - **少数派**: 10 条
-- **华尔街见闻**: 0 条
+- **华尔街见闻**: 10 条
 - **虎扑**: 10 条
 
-**总计**: 55 条资讯
+**总计**: 65 条资讯
 
 ## 📰 平台精选（详细解读）
 
 ### Product Hunt
 
-#### Sway
-
-Turn spoken thoughts into clear structure.
-
-🔗 [查看原文](https://www.producthunt.com/products/sway-12)
-
----
-
-#### Inspector
+#### [Inspector](https://www.producthunt.com/products/inspector-3)
 
 Figma for Claude Code
 
@@ -107,15 +99,31 @@ Figma for Claude Code
 
 ---
 
-#### StayAwake.Dev
+#### [VolumeHub](https://www.producthunt.com/products/volumehub)
 
-The one tab developers never close
+Per-app volume control for macOS with no driver installs
 
-🔗 [查看原文](https://www.producthunt.com/products/stayawake-dev)
+🔗 [查看原文](https://www.producthunt.com/products/volumehub)
 
 ---
 
-#### Axel
+#### [One Minute News](https://www.producthunt.com/products/one-minute-news)
+
+Learning what happened around the world in one minute.
+
+🔗 [查看原文](https://www.producthunt.com/products/one-minute-news)
+
+---
+
+#### [Extrovert](https://www.producthunt.com/products/extrovert)
+
+Lead nurturing and warm outreach copilot for LinkedIn
+
+🔗 [查看原文](https://www.producthunt.com/products/extrovert)
+
+---
+
+#### [Axel](https://www.producthunt.com/products/axel-3)
 
 Todoist for AI coding agents
 
@@ -123,57 +131,49 @@ Todoist for AI coding agents
 
 ---
 
-#### Snap
-
-The floating dock for developers
-
-🔗 [查看原文](https://www.producthunt.com/products/snap-8)
-
----
-
 
 ### Hacker News
 
-#### DoNotNotify is now Open Source
-🔥 热度: 153
+#### [DoNotNotify is now Open Source](https://donotnotify.com/opensource.html)
+🔥 热度: 169
 
-Score: 153 | Comments: 21
+Score: 169 | Comments: 29
 
 🔗 [查看原文](https://donotnotify.com/opensource.html)
 
 ---
 
-#### Show HN: LocalGPT – A local-first AI assistant in Rust with persistent memory
-🔥 热度: 237
+#### [Reverse Engineering Raiders of the Lost Ark for the Atari 2600](https://github.com/joshuanwalker/Raiders2600)
+🔥 热度: 14
 
-Score: 237 | Comments: 108
-
-🔗 [查看原文](https://github.com/localgpt-app/localgpt)
-
----
-
-#### Matchlock: Linux-based sandboxing for AI agents
-🔥 热度: 21
-
-Score: 21 | Comments: 0
-
-🔗 [查看原文](https://github.com/jingkaihe/matchlock)
-
----
-
-#### Reverse Engineering Raiders of the Lost Ark for the Atari 2600
-🔥 热度: 10
-
-Score: 10 | Comments: 1
+Score: 14 | Comments: 1
 
 🔗 [查看原文](https://github.com/joshuanwalker/Raiders2600)
 
 ---
 
-#### Haskell for all: Beyond agentic coding
-🔥 热度: 132
+#### [Show HN: LocalGPT – A local-first AI assistant in Rust with persistent memory](https://github.com/localgpt-app/localgpt)
+🔥 热度: 240
 
-Score: 132 | Comments: 38
+Score: 240 | Comments: 116
+
+🔗 [查看原文](https://github.com/localgpt-app/localgpt)
+
+---
+
+#### [Matchlock: Linux-based sandboxing for AI agents](https://github.com/jingkaihe/matchlock)
+🔥 热度: 27
+
+Score: 27 | Comments: 2
+
+🔗 [查看原文](https://github.com/jingkaihe/matchlock)
+
+---
+
+#### [Haskell for all: Beyond agentic coding](https://haskellforall.com/2026/02/beyond-agentic-coding)
+🔥 热度: 136
+
+Score: 136 | Comments: 40
 
 🔗 [查看原文](https://haskellforall.com/2026/02/beyond-agentic-coding)
 
@@ -182,7 +182,7 @@ Score: 132 | Comments: 38
 
 ### GitHub Trending
 
-#### KeygraphHQ/shannon
+#### [KeygraphHQ/shannon](https://github.com/KeygraphHQ/shannon)
 🏷️ 标签: TypeScript
 
 Fully autonomous AI hacker to find actual exploits in your web apps. Shannon has achieved a 96.15% success rate on the hint-free, source-aware XBOW Be...
@@ -191,7 +191,7 @@ Fully autonomous AI hacker to find actual exploits in your web apps. Shannon has
 
 ---
 
-#### openai/skills
+#### [openai/skills](https://github.com/openai/skills)
 🏷️ 标签: Python
 
 Skills Catalog for Codex
@@ -200,7 +200,7 @@ Skills Catalog for Codex
 
 ---
 
-#### microsoft/litebox
+#### [microsoft/litebox](https://github.com/microsoft/litebox)
 🏷️ 标签: Rust
 
 A security-focused library OS supporting kernel- and user-mode execution
@@ -209,7 +209,7 @@ A security-focused library OS supporting kernel- and user-mode execution
 
 ---
 
-#### p-e-w/heretic
+#### [p-e-w/heretic](https://github.com/p-e-w/heretic)
 🏷️ 标签: Python
 
 Fully automatic censorship removal for language models
@@ -218,7 +218,7 @@ Fully automatic censorship removal for language models
 
 ---
 
-#### obra/superpowers
+#### [obra/superpowers](https://github.com/obra/superpowers)
 🏷️ 标签: Shell
 
 An agentic skills framework & software development methodology that works.
@@ -230,7 +230,7 @@ An agentic skills framework & software development methodology that works.
 
 ### 少数派
 
-#### 从特斯拉一日自驾，看纯电在日本的实际体验
+#### [从特斯拉一日自驾，看纯电在日本的实际体验](https://sspai.com/post/106020)
 
 对于想把车当作「工具」的日本人来说，最理想的状态还是充电发生在家里，而不是发生在路上...
 
@@ -238,7 +238,7 @@ An agentic skills framework & software development methodology that works.
 
 ---
 
-#### 当你想来一次新年大扫除，这里或许有些经验可供参考
+#### [当你想来一次新年大扫除，这里或许有些经验可供参考](https://sspai.com/post/95652)
 
 还对新年大扫除无从下手？不妨看看这份全家都能参与的全屋清洁指南...
 
@@ -246,7 +246,7 @@ An agentic skills framework & software development methodology that works.
 
 ---
 
-#### 本周看什么 | 最近值得一看的 11 部作品
+#### [本周看什么 | 最近值得一看的 11 部作品](https://sspai.com/post/106136)
 
 📅本周新预告《穿普拉达的女王2》正式预告2月2日，《穿普拉达的女王2》发布新预告。本片北美定档5月1日，前作主演梅丽尔·斯特里普、安妮·海瑟薇、艾米莉·布朗特、斯坦利·图齐回归，LadyGaga、刘玉 ...
 
@@ -254,7 +254,7 @@ An agentic skills framework & software development methodology that works.
 
 ---
 
-#### 醒醒现在是 2015：小米 1S 和红米 Note 背后的机圈历史
+#### [醒醒现在是 2015：小米 1S 和红米 Note 背后的机圈历史](https://sspai.com/post/105976)
 
 使人觉得遥远的不是时间长，而是两三件不可挽回的事...
 
@@ -262,7 +262,7 @@ An agentic skills framework & software development methodology that works.
 
 ---
 
-#### Sonos × 少数派 × 暖风家联合打造：沉浸体验空间正式上线
+#### [Sonos × 少数派 × 暖风家联合打造：沉浸体验空间正式上线](https://sspai.com/post/106081)
 
 继暖风家墨水屏体验区成功为大家提供可触摸、可对比的纸感阅读空间后，我们再次向前，将线下体验的维度从视觉的专注，延伸至听觉的沉浸...
 
@@ -271,33 +271,81 @@ An agentic skills framework & software development methodology that works.
 ---
 
 
+### 华尔街见闻
+
+#### [手眼通天！爱泼斯坦曾帮罗斯柴尔德家族"搞定"美国司法部交易，获利2500万美元](https://wallstreetcn.com/articles/3765249)
+
+在日内瓦湖畔的私人银行家圈子里，声誉被视为比黄金更昂贵的资产。然而，最新解密的文件揭开了一角令人咋舌的内幕...
+
+🔗 [查看原文](https://wallstreetcn.com/articles/3765249)
+
+---
+
+#### [出口民调：日本执政联盟预计获得众议院过半席位](https://wallstreetcn.com/livenews/3051824)
+
+据日本当地媒体最新报道，出口民调显示，自民党和日本维新会执政联盟在本次日本国会众议院选举中或获得过半席位...
+
+🔗 [查看原文](https://wallstreetcn.com/livenews/3051824)
+
+---
+
+#### [每次万得全A指数跌破20均线后一周左右，往往是加仓良机](https://wallstreetcn.com/charts/41958569)
+
+广发证券复盘了过往6轮大级别牛市周期中，万得全A指数跌破20日均线的情形，总结了一些经验规律...
+
+🔗 [查看原文](https://wallstreetcn.com/charts/41958569)
+
+---
+
+#### [有网友称，SpaceX正在奥斯汀和西雅图招聘工程师，以开发人工智能卫星和太空数据中心。马斯克转发相关帖子并回复称：是真的。](https://wallstreetcn.com/livenews/3051816)
+
+有网友称，SpaceX正在奥斯汀和西雅图招聘工程师，以开发人工智能卫星和太空数据中心。马斯克转发相关帖子并回复称：是真的...
+
+🔗 [查看原文](https://wallstreetcn.com/livenews/3051816)
+
+---
+
+#### [金银铜未来几周都将"盘整"！摩根大通：这只是牛市休整，铜或在二季度率先反弹](https://wallstreetcn.com/articles/3765251)
+
+在经历了数月的单边上扬与狂热追逐后，全球金属市场似乎撞上了"天花板"。面对近期价格的剧烈波动...
+
+🔗 [查看原文](https://wallstreetcn.com/articles/3765251)
+
+---
+
+
 ### 虎扑
 
-#### [流言板]库里更新社媒：和我的GOAT一起参加《GOAT》的洛杉矶首映礼
+#### [詹姆斯：我当然不喜欢失误，但还好我连续两场比赛助攻上双]()
+
 
 🔗 [查看原文](https://bbs.hupu.com)
 
 ---
 
-#### [流言板]肯纳德湖人生涯首秀得分上双，文森特本赛季29场仅3次上双
+#### [StatMuse：詹姆斯近五场对阵勇士，取得4胜1负的战绩]()
+
 
 🔗 [查看原文](https://bbs.hupu.com)
 
 ---
 
-#### [流言板]哈登：这支骑士很团结&所有人目标一致，我很高兴能来到这里
+#### [库里更新社媒：和我的GOAT一起参加《GOAT》的洛杉矶首映礼]()
+
 
 🔗 [查看原文](https://bbs.hupu.com)
 
 ---
 
-#### [流言板]硬汉！奥孔古今日佩戴特殊保护面罩对阵黄蜂
+#### [哈登：这支骑士很团结&所有人目标一致，我很高兴能来到这里]()
+
 
 🔗 [查看原文](https://bbs.hupu.com)
 
 ---
 
-#### [流言板]有能！卡里克率领曼联接连终结对阵热刺、阿森纳的不胜纪录
+#### [AL经理爱笑更新动态：逆流而上的故事最动人心弦]()
+
 
 🔗 [查看原文](https://bbs.hupu.com)
 
