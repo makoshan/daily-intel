@@ -1,6 +1,6 @@
 ---
-title: About Me
-description: "About the author."
+title: 关于我
+description: "关于作者。"
 created: 2026-02-09
 status: draft
 confidence: possible
@@ -8,9 +8,9 @@ importance: 0
 css-extension: dropcaps-not
 ...
 
-# About Me
+# 关于我
 
-This is a placeholder `/me` page so the homepage navigation matches gwern.net style.
+这是一个占位的 `/me` 页面，使首页导航与 gwern.net 风格一致。
 
-You can edit `me.page` to put your bio and contact links here.
+你可以编辑 `me.page` 来添加你的个人简介和联系方式。
 

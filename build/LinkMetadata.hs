@@ -20,7 +20,7 @@ import qualified Data.Set as Set (member, null)
 import qualified Data.Text as T (append, isInfixOf, isPrefixOf, pack, unpack, replace, Text, unlines)
 import Data.Containers.ListUtils (nubOrd)
 import Data.Function (on)
-import Data.List (intersect, isInfixOf, isPrefixOf, isSuffixOf, sort, sortBy, (\\))
+import Data.List (dropWhileEnd, intersect, isInfixOf, isPrefixOf, isSuffixOf, sort, sortBy, (\\))
 import Data.List.HT (search) -- utility-ht
 import Network.HTTP (urlEncode)
 import Network.URI (isURIReference)
@@ -475,49 +475,71 @@ annotateLink md x@(Link (_,_,_) _ (targetT,_))
       anyPrefixT targetT' ["/metadata/", "/doc/www/", "/ref/", "/blog/", "#", "!", "\8383", "$"] = return (Left Permanent) -- annotation intermediate files, self-links, interwiki links, and inflation-adjusted currencies *never* have annotations. And "/blog/" links are always generated *from* annotations and thus don't need to be checked.
   | otherwise =
   do let target = T.unpack targetT
-     when (null target) $ error (show x)
-     when ((reverse $ take 3 $ reverse target) == "%20" || last target == ' ') $ error $ "URL ends in space? " ++ target ++ " (" ++ show x ++ ")"
-     -- normalize: convert 'https://gwern.net/doc/foo.pdf' to '/doc/foo.pdf' and './doc/foo.pdf' to '/doc/foo.pdf'
-     -- the leading '/' indicates this is a local Gwern.net file
-     let target' = replace "https://gwern.net/" "/" target
-     let target'' = if head target' == '.' then drop 1 target' else target'
+     -- Empty link targets do exist in the corpus (eg `[Some Page]()` as a shorthand).
+     -- Link resolution happens elsewhere; annotation discovery should not hard-fail the build.
+     if null target
+       then do
+         printRed ("LM.annotateLink: empty link target (skipping): " ++ show x)
+         return (Left Permanent)
+       else do
+         when ((reverse $ take 3 $ reverse target) == "%20" || last target == ' ') $ error $ "URL ends in space? " ++ target ++ " (" ++ show x ++ ")"
+         -- normalize: convert 'https://gwern.net/doc/foo.pdf' to '/doc/foo.pdf' and './doc/foo.pdf' to '/doc/foo.pdf'
+         -- the leading '/' indicates this is a local Gwern.net file
+         let target' = replace "https://gwern.net/" "/" target
+         let target'' = if head target' == '.' then drop 1 target' else target'
 
-     -- check local link validity: every local link except tags should exist on-disk:
-     when (head target'' == '/' && not ("/metadata/annotation/" `isPrefixOf` target'')) $
-       unless (target'' == "/") $ do
-          isDirectory <- doesDirectoryExist (tail target'')
-          when isDirectory $ error ("Attempted to annotate a directory, which is not allowed (links must be to files or $DIRECTORY/index): " ++ target' ++ " : " ++ target ++ " (" ++ show x ++ ")")
-          let target''' = (\f -> if '.' `notElem` f then f ++ ".md" else f) $ takeWhile (/='#') $ tail target''
+         -- Allow directory-style links like "/foo/" or "/foo" by normalizing them to "/foo/index".
+         -- (The site serves directory paths as index pages; annotations should not hard-fail the build.)
+         targetNorm <- if not (null target'') && head target'' == '/' && target'' /= "/"
+                         then do
+                           let (pathPart, fragPart) = break (=='#') target''
+                           let pathPart' = dropWhileEnd (=='/') pathPart
+                           if null pathPart' || pathPart' == "/"
+                             then return target''
+                             else do
+                               isDir <- doesDirectoryExist (tail pathPart')
+                               return $ if isDir then pathPart' ++ "/index" ++ fragPart else target''
+                         else return target''
 
-          unless (takeFileName target''' == "index" || takeFileName target''' == "index.md") $
-             do exist <- doesFileExist target'''
-                unless exist $ printRed ("Link error in 'LM.annotateLink': file does not exist? " ++ target''' ++ " (" ++target++")" ++ " (" ++ show x ++ ")")
+         -- check local link validity: every local link except tags should exist on-disk:
+         when (head targetNorm == '/' && not ("/metadata/annotation/" `isPrefixOf` targetNorm)) $
+           unless (targetNorm == "/") $ do
+             isDirectory <- doesDirectoryExist (takeWhile (/='#') $ tail targetNorm)
+             when isDirectory $
+               printRed ("LM.annotateLink: directory link not normalized (skipping annotation): " ++ targetNorm ++ " (" ++ show x ++ ")")
+             let target''' = (\f -> if '.' `notElem` f then f ++ ".md" else f) $ takeWhile (/='#') $ tail targetNorm
 
-     let annotated = M.lookup target'' md
-     today <- C.todayDayString
-     case annotated of
-       -- the link has a valid annotation already defined, so we're done: nothing changed.
-       Just i  -> return (Right (target'', i))
-       Nothing -> do
-         let external = head target'' /= '/'
-         allowExternal <- lookupEnv "GWERN_EXTERNAL_ANNOTATIONS"
-         if external && allowExternal /= Just "1"
-           then return (Left Permanent)
-           else do
-             new <- linkDispatcher md x
-             case new of
-               -- some failures we don't want to cache because they may succeed when checked differently or later on or should be fixed:
-               Left Temporary -> return (Left Temporary)
-               -- cache the failures too, so we don't waste time rechecking the PDFs every build; return False because we didn't come up with any new useful annotations:
-               Left Permanent -> do
-                 allowWrite <- lookupEnv "GWERN_WRITE_MISSING_ANNOTATIONS"
-                 when (allowWrite == Just "1") $
-                   appendLinkMetadata target'' ("", "", "", today, [], [], "")
-                 return (Left Permanent)
-               Right y@(f,m) -> do
-                                       printGreen (f ++ "; GTX:\n" ++ T.unpack (T.unlines (GTX.untupleize today y)) ++ "\nHaskell: " ++ show y)
-                                       -- return true because we *did* change the database & need to rebuild:
-                                       appendLinkMetadata f m >> return (Right y)
+             unless (takeFileName target''' == "index" || takeFileName target''' == "index.md") $
+               do exist <- doesFileExist target'''
+                  unless exist $ printRed ("Link error in 'LM.annotateLink': file does not exist? " ++ target''' ++ " (" ++target++")" ++ " (" ++ show x ++ ")")
+
+         let annotated = case M.lookup targetNorm md of
+                           Just i  -> Just i
+                           Nothing -> M.lookup target'' md
+         today <- C.todayDayString
+         case annotated of
+           -- the link has a valid annotation already defined, so we're done: nothing changed.
+           Just i  -> return (Right (targetNorm, i))
+           Nothing -> do
+             let external = head targetNorm /= '/'
+             allowExternal <- lookupEnv "GWERN_EXTERNAL_ANNOTATIONS"
+             if external && allowExternal /= Just "1"
+               then return (Left Permanent)
+               else do
+                 new <- linkDispatcher md x
+                 case new of
+                   -- some failures we don't want to cache because they may succeed when checked differently or later on or should be fixed:
+                   Left Temporary -> return (Left Temporary)
+                   -- cache the failures too, so we don't waste time rechecking the PDFs every build; return False because we didn't come up with any new useful annotations:
+                   Left Permanent -> do
+                     allowWrite <- lookupEnv "GWERN_WRITE_MISSING_ANNOTATIONS"
+                     when (allowWrite == Just "1") $
+                       appendLinkMetadata target'' ("", "", "", today, [], [], "")
+                     return (Left Permanent)
+                   Right y@(f,m) -> do
+                     printGreen (f ++ "; GTX:\n" ++ T.unpack (T.unlines (GTX.untupleize today y)) ++ "\nHaskell: " ++ show y)
+                     -- return true because we *did* change the database & need to rebuild:
+                     appendLinkMetadata f m >> return (Right y)
 annotateLink _ x = error ("LM.annotateLink was passed an Inline which was not a Link: " ++ show x)
 
 -- walk the page, and modify each URL to specify if it has an annotation available or not, and add its link ID:

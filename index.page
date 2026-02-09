@@ -1,6 +1,6 @@
 ---
-title: Essays
-description: "Mako Shan personal website: blockchain, technology, economics. Homepage indexes the repo content."
+title: Mako Shan
+description: "Mako Shan personal site: daily newsletter, crypto economics, computing, statistics. Curated entrypoints + full index."
 created: 2026-02-09
 status: in progress
 belief: log
@@ -11,41 +11,104 @@ backlink: False
 ...
 
 <style type="text/css">
-/* Match gwern.net homepage layout: compact + wide. */
-div#markdownBody section { display: inline-block; vertical-align: top; max-width:700px; }
+/* Match gwern.net homepage layout: compact + wide; stack on mobile. */
+div#markdownBody section {
+  display: inline-block;
+  vertical-align: top;
+  max-width: 720px;
+  margin-right: 2.2rem;
+}
 div#TOC { display: none; }
 div#donations { display: none; }
 div#metadata { display: none; }
 body { max-width: 1700px; }
 li { margin-top: 0em; }
 li p { margin: 0em; }
+@media (max-width: 900px) {
+  body { max-width: none; }
+  div#markdownBody section { display: block; max-width: none; margin-right: 0; }
+}
 </style>
 
 <div class="abstract">
-<p><span class="smallcaps">这是</span> <strong>Mako Shan</strong> 个人网站。我写关于区块链、技术和经济学的内容。可以查看我历史内容
-<a href="/blockchain/sound-money" class="link-local">Sound Money</a>⁠、
-<a href="/blockchain/uniswap-social-money" class="link-local">Social Coin</a>⁠、
-<a href="/blockchain/dragon-slayer-become-the-dragon" class="link-local">Radical Market</a>⁠、
-<a href="/blockchain/gitcoin-grants" class="link-local">Gitcoin Grant</a>⁠。</p>
+<p><span class="smallcaps">这是</span> <strong>Mako Shan</strong> 个人网站。我写关于区块链、技术、经济学，以及每日资讯摘录。</p>
 
-<p>更多关于我个人和网站的信息，请查看 <em><a href="/about" class="link-local">About</a></em>;
-关于网站的实现，请查看 <em><a href="/design" class="link-local">Design</a></em>;
-最新更新请查看 <em><a href="/changelog" class="link-local">Changelog</a></em>;
-订阅更新：<em><a href="https://v2eth.substack.com/">Substack</a></em>（<a href="/doc/newsletter/index" class="link-local">archives</a>）。</p>
+<p>推荐阅读：
+<a href="/blockchain/sound-money" class="link-local">Sound Money</a>⁠、
+<a href="/blockchain/gitcoin-grants" class="link-local">Gitcoin Grants</a>⁠、
+<a href="/blockchain/dragon-slayer-become-the-dragon" class="link-local">Radical Market</a>⁠、
+<a href="/blockchain/uniswap-social-money" class="link-local">Social Money</a>⁠。</p>
+
+<p>更多信息：<em><a href="/About" class="link-local">About</a></em>;
+更新日志：<em><a href="/Changelog" class="link-local">Changelog</a></em>;
+订阅更新：<em><a href="https://v2eth.substack.com/">Substack</a></em>（<a href="/newsletter/index" class="link-local">archives</a>）。</p>
 </div>
 
-# 加密经济学
+# Newsletter
 
-- [货币的历史-从金本位到区块链](/blockchain/sound-money "研究货币的起源和未来")
-- [Gitcoin Grants：对公共物品融资模式的探索](/blockchain/gitcoin-grants "Vitalik Buterin 和 Glen Weyl 提出的二次方资助（Quadratic Funding）机制")
-- [当屠龙者成为恶龙：灵感买家俱乐部](/blockchain/dragon-slayer-become-the-dragon "用激进市场+区块链思路重新设计激励与治理")
-- [Social Money：代币化你的时间和才能](/blockchain/uniswap-social-money "个人代币/社交货币与 Uniswap")
+- [Newsletter 主页](/newsletter/index "Daily Intel Newsletter 归档")
+- [主题索引](/newsletter/topics "按主题浏览 Newsletter")
+- [最新一期 (2026-02-09)](/newsletter/newsletter-2026-02-09 "今日科技情报")
+
+
+## 加密经济学
+
+- [货币的历史: 从金本位到区块链](/blockchain/sound-money "研究货币的起源和未来")
+- [Gitcoin Grants: 公共物品融资机制](/blockchain/gitcoin-grants "二次方资助 (Quadratic Funding)")
+- [当屠龙者成为恶龙: 灵感买家俱乐部](/blockchain/dragon-slayer-become-the-dragon "激励与治理的重新设计")
+- [Social Money: 代币化你的时间和才能](/blockchain/uniswap-social-money "个人代币/社交货币与 Uniswap")
+
+## 计算机科学
+
+- [选择软件的标准](/Choosing%20Software "使软件值得长期使用的标准")
+- [归档 URLs](/Archiving%20URLs "网页归档的重要性与方法")
+- [开源许可证演化](/Evolutionary%20Licenses "开源许可证的政治与演化")
+
+## 统计学与实验
+
+- [Zeo 睡眠追踪](/Zeo "使用 Zeo 进行睡眠追踪实验")
+- [Google 产品关闭预测](/Google%20shutdowns "预测 Google 何时关闭产品")
+- [Google Alerts 统计](/Google%20Alerts "Google Alerts 使用统计")
+- [HN 统计](/HN "Hacker News 统计分析")
+
+## 哲学与社会学
+
+- [Sand](/Sand "诗歌、批评与政治")
+- [Anchoring](/Anchoring "锚定效应")
+- [Book reviews](/Book-reviews "书评")
+- [Copyright](/Copyright "版权问题")
+
+## 动漫与文化评论
+
+- [Against The Miletians](/Against%20The%20Miletians "针对米利都人")
+- [Touhou 统计分析](/Touhou "东方 Project 的统计学分析")
+- [Hafu](/hafu "动漫与社会学分析")
+- [FMP Parody](/FMP%20parody "全金属狂潮评论")
+- [Aria's past, present, and future](/Arias-past-present-and-future "咏叹调的过去、现在和未来")
+- [Death Note Ending](/Death-Note-Ending "死亡笔记结局分析")
+- [Death Note script](/Death-Note-script "死亡笔记剧本")
+
+
+## 历史文献
+
+- [1955 Nash](/docs/1955-nash)
+- [1963 Asimov: Sword of Achilles](/docs/1963-asimov-sword-of-achilles)
+- [1985 Hofstadter](/docs/1985-hofstadter)
+- [1987 Rossi](/docs/1987-rossi)
+- [2002 Gibson](/docs/2002-gibson)
+
+## 日本文化研究
+
+- [1996 Animerica: Conscience of Otaking](/docs/1996-animerica-conscience-otaking)
+- [1997 Utena](/docs/1997-utena)
+- [2002 Notenki Memoirs](/docs/2002-notenki-memoirs)
+- [2002 Radiance](/docs/2002-radiance)
 
 # 其他
 
-- [Links](/Links "Links page")
-- [Notes](/Notes "Notes")
-- [TODO](/TODO "TODO")
-
-（页面底部会自动生成“全站索引”，列出仓库里所有 `*.page`。）
-
+- [About](/About "关于本站")
+- [Changelog](/Changelog "更新日志")
+- [Links](/Links "链接页面")
+- [Notes](/Notes "笔记")
+- [TODO](/TODO "待办事项")
+- [me](/me "关于我")

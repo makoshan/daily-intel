@@ -1,11 +1,62 @@
-# Daily Intel 构建指南 (使用 WSL)
+# Daily Intel 编译指南（WSL 环境）
 
-本项目使用 Gwern.net 构建系统 (Hakyll)。请在您的 WSL 终端中按照以下步骤操作。
+本文档说明如何在 WSL (Windows Subsystem for Linux) 环境中编译和运行 Daily Intel 项目。
 
-## 前置条件
+---
 
-确保您已安装 WSL (推荐使用 Ubuntu 24.04)。
+## 🎯 构建模式说明
 
+Daily Intel 提供两种构建模式：
+
+### 🔧 开发模式（Development）
+**特点**：快速构建，适合日常开发
+- ❌ 禁用链接注解（加快构建速度）
+- ✅ 快速预览内容变化
+- ✅ 适合文章编辑和调试
+
+**使用场景**：
+- 编辑文章内容
+- 调整样式和布局
+- 快速预览效果
+
+### 🚀 生产模式（Production）
+**特点**：完整功能，适合最终发布
+- ✅ **启用链接注解**（绿色数字圆圈）
+- ✅ **弹出窗口**显示注释内容
+- ✅ **悬浮预览**功能
+- ✅ 适合 Newsletter 发布
+
+**使用场景**：
+- Newsletter 最终发布
+- 正式部署到网站
+- 展示完整功能
+
+---
+
+## 前提条件
+
+### WSL 环境
+
+1.  已安装 WSL (Ubuntu 推荐)
+2.  确认 WSL 已配置 `ghcup`, `cabal`, `ghc`:
+    ```bash
+    which ghcup cabal ghc
+    ```
+    
+    如未安装，参考 [GHCup 官方文档](https://www.haskell.org/ghcup/) 安装 Haskell 工具链。
+
+3.  确认 Python 3:
+    ```bash
+    python3 --version
+    ```
+
+---
+
+## 🚀 快速开始
+
+### 开发模式（Development）
+
+**在 WSL 中执行**:
 1.  打开 WSL:
     ```bash
     wsl
@@ -39,18 +90,63 @@
 
     *注意: 首次构建需要下载和编译依赖项，可能需要一些时间。*
 
-3.  运行开发服务器 (推荐使用这些环境变量以减少噪音和缺失文件报错):
+
+
+  cd /mnt/c/Users/ROG/.openclaw/workspace/projects/daily-intel/build
+  cabal run hakyll -- rebuild +RTS -N -RTS
+
+  或显式 clean 再 build：
+
+  cd /mnt/c/Users/ROG/.openclaw/workspace/projects/daily-intel/build
+  cabal run hakyll -- clean
+  cabal run hakyll -- build +RTS -N -RTS
+
+  你可以用这个快速确认输出数量是否恢复正常：
+
+  cd /mnt/c/Users/ROG/.openclaw/workspace/projects/daily-intel                                                                         
+  find _site -maxdepth 1 -type f | wc -l     
+
+
+3.  运行开发服务器（禁用注解以加快构建）:
     ```bash
-    GWERN_ANNOTATIONS=0 \
-    GWERN_EXTERNAL_ANNOTATIONS=0 \
-    GWERN_WRITE_MISSING_ANNOTATIONS=0 \
-    GWERN_LINK_ANNOTATIONS=0 \
-    GWERN_LINK_SIZES=0 \
-    cabal run hakyll -- watch
+    # 方式1: 使用 Makefile（推荐）
+    make watch
+    
+    # 方式2: 使用 shell 脚本
+    ./scripts/build.sh --watch
     ```
 
-4.  访问站点:
-    - WSL 内部: `http://127.0.0.1:8000`
+### 生产模式（Production）⭐
+
+**用于 Newsletter 发布和最终部署**：
+
+```bash
+cd /mnt/c/Users/ROG/.openclaw/workspace/projects/daily-intel
+
+# 方式1: 使用 Makefile（推荐）
+make production
+
+# 方式2: 使用 shell 脚本
+./scripts/build-production.sh
+
+# 方式3: 直接使用 cabal（依赖 site.hs 默认设置）
+cd build
+cabal run hakyll -- build +RTS -N -RTS
+```
+
+**生产构建后验证**：
+```bash
+# 启动预览服务器
+python3 webserver.py --bind 0.0.0.0 --port 8000 --directory _site
+```
+
+然后访问有注解的页面：
+- `http://localhost:8000/resorter` - 查看绿色数字圆圈
+- `http://localhost:8000/Bitcoin%20is%20Worse%20is%20Better` - 点击圆圈测试弹窗
+
+---
+
+4.  在 **Windows 浏览器** 打开（假设 WSL IP 为 `172.x.x.x`）://127.0.0.1:8000`
     - Windows 端 (如果 localhost 不通): 使用 WSL IP 访问
       ```bash
       hostname -I | awk '{print $1}'
@@ -59,21 +155,15 @@
 
 5.  只构建并用静态服务器预览 (更接近最终部署形态):
     ```bash
-    GWERN_ANNOTATIONS=0 \
-    GWERN_EXTERNAL_ANNOTATIONS=0 \
-    GWERN_WRITE_MISSING_ANNOTATIONS=0 \
-    GWERN_LINK_ANNOTATIONS=0 \
-    GWERN_LINK_SIZES=0 \
     cabal run hakyll -- clean
+    cabal run hakyll -- build
 
-    GWERN_ANNOTATIONS=0 \
-    GWERN_EXTERNAL_ANNOTATIONS=0 \
-    GWERN_WRITE_MISSING_ANNOTATIONS=0 \
-    GWERN_LINK_ANNOTATIONS=0 \
-    GWERN_LINK_SIZES=0 \
-    cabal run hakyll -- build index.md
+    # 用项目自带 webserver.py 预览（推荐；可正确渲染无扩展名页面如 /About）
+    python3 ../webserver.py --bind 0.0.0.0 --port 8000 --directory ../_site
     ```
-    然后用静态服务器打开生成目录 `../_site/` (见下方“本地预览方式”)。
+    然后在 Windows 浏览器打开: `http://<WSL_IP>:8000/` 或 `http://localhost:8000/`。
+    
+    **注**: 链接注解和弹出功能现在默认开启。
 
 ## 目录结构
 
@@ -100,7 +190,7 @@
 
 常见原因是只构建了单个页面，但 `_site/` 里没有同步静态资源。
 
-当前 `build/site.hs` 已强制在编译时复制 `static/**` 到 `_site/static/**`，即使只编译 `index.md` 也应该有样式。
+当前 `build/site.hs` 已强制在编译时复制 `static/**` 到 `_site/static/**`，即使只编译单个页面也应该有样式。
 
 快速自检:
 ```bash
@@ -181,9 +271,71 @@ Windows 侧如果开启了“系统代理”，需要把本地地址加入代理
 ### 7. 首页显示目录列表
 如果访问 `/` 时显示目录列表，说明没有生成 `index.html`，请执行:
 ```bash
-GWERN_ANNOTATIONS=0 GWERN_EXTERNAL_ANNOTATIONS=0 GWERN_WRITE_MISSING_ANNOTATIONS=0 GWERN_LINK_ANNOTATIONS=0 GWERN_LINK_SIZES=0 \
-cabal run hakyll -- build index.md
+cabal run hakyll -- build
 ```
+并确认你启动静态服务器时 `--directory` 指向的是生成目录 `../_site/`（而不是项目根目录）。
+
+---
+
+## 🔍 验证链接注解功能
+
+生产构建（`make production`）完成后，按以下步骤验证链接注解功能：
+
+### 1. 访问测试页面
+
+在浏览器打开以下页面（包含注解）：
+
+| 页面 | URL | 查看内容 |
+|------|-----|----------|
+| Resorter | `http://localhost:8000/resorter` | 绿色数字圆圈 |
+| Bitcoin | `http://localhost:8000/Bitcoin%20is%20Worse%20is%20Better` | 链接注解弹窗 |
+| Melatonin | `http://localhost:8000/Melatonin` | 悬浮预览 |
+
+### 2. 检查功能
+
+- ✅ **绿色圆圈**：链接旁边应该显示绿色数字（如 `①` `②`）
+- ✅ **点击测试**：点击圆圈应该弹出注解窗口
+- ✅ **悬浮测试**：鼠标悬停在链接上应该显示预览
+
+**参考示例**: [Gwern.net/resorter](https://gwern.net/resorter#source-code)
+
+---
+
+## ❓ 注解功能常见问题
+
+### Q1: 为什么开发模式禁用注解？
+
+**A**: 注解功能需要额外的处理时间。开发时频繁重建，禁用注解可以大幅加快构建速度（从分钟级降到秒级）。
+
+### Q2: 如何确认注解功能已启用？
+
+**A**: 
+1. 检查构建日志，确认没有设置 `GWERN_ANNOTATIONS=0`
+2. 访问 `/resorter` 页面，查看是否有绿色数字圆圈
+3. 点击圆圈，检查是否弹出注解窗口
+
+### Q3: 注解功能不工作怎么办？
+
+**A**: 检查以下几点：
+1. 确认使用 `make production` 而非 `make build`
+2. 清理重建：`cd build && cabal run hakyll -- clean && cd .. && make production`
+3. 检查 `_site/static/js/` 是否有相关 JavaScript 文件
+4. 检查浏览器控制台是否有错误
+
+### Q4: 构建时出现 "Warning: no thumbnail-text alt text" 怎么办？
+
+**A**: 这是正常的警告信息，表示某些链接没有定义缩略图替代文本。**不影响**注解功能和网站正常显示，可以忽略。
+
+### Q5: 如何只禁用注解，但使用正常构建？
+
+**A**: 
+```bash
+GWERN_ANNOTATIONS=0 \
+GWERN_LINK_ANNOTATIONS=0 \
+cabal run hakyll -- build +RTS -N -RTS
+```
+
+---
 
 ## 本地预览方式 (Windows 浏览器)
 
@@ -198,17 +350,17 @@ cabal run hakyll -- build index.md
 
 ### 方式 B: 构建 `_site/` 后用静态服务器 (WSL 或 Windows 启动)
 
-WSL 启动并允许 Windows 用 WSL IP 访问:
+WSL 启动并允许 Windows 用 WSL IP 访问（推荐用项目自带 `webserver.py`，否则 Python 自带的 `http.server` 可能会把无扩展名页面当附件下载）:
 ```bash
 cd /mnt/c/Users/ROG/.openclaw/workspace/projects/daily-intel
-python3 -m http.server 8000 --bind 0.0.0.0 --directory _site
+python3 webserver.py --bind 0.0.0.0 --port 8000 --directory _site
 ```
 Windows 浏览器打开: `http://<WSL_IP>:8000/`
 
 Windows 启动 (PowerShell):
 ```powershell
 cd C:\Users\ROG\.openclaw\workspace\projects\daily-intel
-python -m http.server 8000 --bind 127.0.0.1 --directory _site
+python webserver.py --bind 127.0.0.1 --port 8000 --directory _site
 ```
 Windows 浏览器打开: `http://localhost:8000/`
 

@@ -1,27 +1,27 @@
 ---
-title: Alerts Over Time
-description: Does Google Alerts return fewer results each year? A statistical investigation
+title: 警报数据的时间趋势
+description: Google Alerts 每年返回的结果是否在减少？一项统计调查
 created: 1 July 2013
 tags: statistics
 status: finished
 belief: likely
 ...
 
-> Has Google Alerts been sending fewer results the past few years? Yes. Responding to rumors of its demise, I investigate the number of results in my personal Google Alerts notifications 2007-2013, and find no overall trend of decline until I look at a transition in [mid-2011](#it-was-mid-2011) where the results fall dramatically. I speculate about [the cause](#panda) and [implications](#conclusion) for Alerts's future.
+> 过去几年 Google Alerts 发送的结果是否在减少？是的。针对关于其即将消亡的传言，我调查了我个人 Google Alerts 通知在 2007-2013 年间的结果数量，发现在查看[2011年中期](#it-was-mid-2011)的转变之前没有整体下降趋势，而在该时间点之后结果数量急剧下降。我对[原因](#panda)和对 Alerts 未来的[影响](#conclusion)进行了推测。
 
-While researching my [Google shutdowns]() essay on how long Google products survive before being killed (inspired by Reader), I came across speculation that [Google Alerts](!Wikipedia), a service which runs search queries on your behalf & emails you about any new matching webpages (extremely useful for keeping abreast of topics and one of the oldest Google services), [had](http://searchengineland.com/google-alerts-arent-working-148642 "Dear Google Alerts: Why Aren't You Working?") [broken](http://searchengineland.com/google-alerts-still-broken-152444 "Google Alerts: Still Broken") [badly](http://thefinancialbrand.com/28346/google-alerts-broken/ "An Open Letter to Google: Google Alerts Broken, Now Useless To Financial Marketers") in 2012. When I saw this, I remembered thinking that my own alerts did not seem to be as useful as they did, but I hadn't been sure if this was Alerts's fault or if my particular keywords were just less active than the past. Google's official comments on the topic have been minimal[^official-reply].
+在研究我的 [Google shutdowns]() 文章（关于 Google 产品在被关闭之前能存活多久，灵感来自 Reader 的关闭）时，我发现了关于 [Google Alerts](!Wikipedia) 服务的一些猜测。Google Alerts 是一项代替你运行搜索查询并通过电子邮件通知你任何新的匹配网页的服务（对于跟踪话题非常有用，也是最古老的 Google 服务之一），据报道它在 2012 年[出现了](http://searchengineland.com/google-alerts-arent-working-148642 "Dear Google Alerts: Why Aren't You Working?")[严重的](http://searchengineland.com/google-alerts-still-broken-152444 "Google Alerts: Still Broken")[故障](http://thefinancialbrand.com/28346/google-alerts-broken/ "An Open Letter to Google: Google Alerts Broken, Now Useless To Financial Marketers")。当我看到这些信息时，我回忆起自己的警报确实似乎不像以前那样有用了，但我无法确定这是 Alerts 本身的问题还是我的特定关键词只是没有过去那么活跃。Google 对此话题的官方评论极为有限[^official-reply]。
 
-[^official-reply]: ["What's Wrong With Google Alerts? The small but useful service seems to be dying. One researcher uses empirical research to answer the questions that Google won't."](http://www.buzzfeed.com/justinesharrock/whats-wrong-with-google-alerts), _BuzzFeed_:
+[^official-reply]: ["What's Wrong With Google Alerts? The small but useful service seems to be dying. One researcher uses empirical research to answer the questions that Google won't."](http://www.buzzfeed.com/justinesharrock/whats-wrong-with-google-alerts)，发表于 _BuzzFeed_：
 
     > Google has refused to shed light on the decline. Today, a Google spokesperson told BuzzFeed, "we're always working to improve our products - we'll continue making updates to Google Alerts to make it more useful for people." In other words, a polite non-answer.
 
-Alerts dying would be a problem for me as I have used Alerts extensively since 28 January 2007 (2347 days) with 23 current Alerts (and many more in the past) - of my 501,662 total emails, 3,815 were Alert emails - and there did not seem to be any usable alternatives^[I have seen some alternative services, [Yahoo! Search Alerts](http://www.ghacks.net/2013/06/29/yahoo-search-alerts-a-google-alerts-alternative/), [talkwalker](http://talkwalker.com/en) & [Mention](https://en.mention.net/) suggested, but have not used them; the latter 2 do well in [a comparison with Google Alerts](http://moz.com/ugc/google-alerts-vs-mention-vs-talkwalker "Google Alerts VS Mention VS Talkwalker").]. Troublingly, Alerts's RSS feeds were unavailable between [July](http://googlesystem.blogspot.com/2013/07/google-alerts-drops-rss-feeds.html "Google Alerts Drops RSS Feeds") & [September 2013](http://thenextweb.com/google/2013/09/11/google-alerts-regains-rss-delivery-option-it-lost-after-google-readers-demise/ "Google Alerts regains RSS delivery option it lost after Google Reader's demise").
+Alerts 的消亡对我来说将是一个严重的问题，因为我自 2007 年 1 月 28 日以来（2347 天）一直大量使用 Alerts，目前有 23 个活跃的 Alerts（过去还有更多）——在我总共 501,662 封电子邮件中，有 3,815 封是 Alert 邮件——而且似乎没有任何可用的替代方案^[我见过一些替代服务，如 [Yahoo! Search Alerts](http://www.ghacks.net/2013/06/29/yahoo-search-alerts-a-google-alerts-alternative/)、[talkwalker](http://talkwalker.com/en) 和 [Mention](https://en.mention.net/)，但我没有使用过它们；后两者在[与 Google Alerts 的对比中](http://moz.com/ugc/google-alerts-vs-mention-vs-talkwalker "Google Alerts VS Mention VS Talkwalker")表现不错。]。令人担忧的是，Alerts 的 RSS 订阅源在 [2013 年 7 月](http://googlesystem.blogspot.com/2013/07/google-alerts-drops-rss-feeds.html "Google Alerts Drops RSS Feeds")至 [2013 年 9 月](http://thenextweb.com/google/2013/09/11/google-alerts-regains-rss-delivery-option-it-lost-after-google-readers-demise/ "Google Alerts regains RSS delivery option it lost after Google Reader's demise")期间无法使用。
 
-As it happened, the survival model suggested that Alerts had a good chance of surviving a long time, and I put it from mind until I remembered that since I had used Alerts for so many years and had so many emails, I could easily check the claims empirically - *did* Alerts abruptly stop returning many hits? This is a straightforward question to answer: extract the subject/date/number of links from each Alerts email, stratify by unique alert, and regress over time. So I did.
+事实上，生存模型表明 Alerts 有很大机会长期存活，我暂时放下了这个问题，直到我想起，既然我使用 Alerts 这么多年并且有这么多邮件，我可以轻松地凭经验检验这些说法——Alerts *真的*突然停止返回大量结果了吗？这是一个简单明了的问题：从每封 Alerts 邮件中提取主题/日期/链接数量，按独立的警报分层，然后对时间进行回归分析。所以我就这样做了。
 
-# Data
+# 数据
 
-As part of my backup procedures, I fetch daily my Gmail emails using [`getmail4`](http://pyropus.ca/software/getmail/) into a [maildir](!Wikipedia). Alerts uses a unchanging subject line like `Subject: Google Alert - "Frank Herbert" -mason`, so it is easy to find all its emails and separate them out.
+作为备份程序的一部分，我每天使用 [`getmail4`](http://pyropus.ca/software/getmail/) 将 Gmail 邮件抓取到一个 [maildir](!Wikipedia) 中。Alerts 使用不变的主题行，例如 `Subject: Google Alert - "Frank Herbert" -mason`，因此很容易找到所有的 Alerts 邮件并将它们分离出来。
 
 ~~~{.Bash}
 ~/mail/
@@ -36,12 +36,12 @@ $ mv `cat alerts.txt` 2013-09-25-gwern-googlealertsemails/
 
 <!-- find 2013-09-25-gwern-googlealertsemails/ -type f -exec grep -l aaktgeb {} \; | xargs rm -->
 
-I deleted emails from a few alerts which were private; the remaining 72M of emails are available at [`2013-09-25-gwern-googlealertsemails.tar.xz`](/docs/2013-09-25-gwern-googlealertsemails.tar.xz). Then a loop & ad hoc shell-scripting extracts the subject-line, the date, and how many instances of "http://" there are in each email:
+我删除了一些私人警报的邮件；剩余的 72M 邮件可在 [`2013-09-25-gwern-googlealertsemails.tar.xz`](/docs/2013-09-25-gwern-googlealertsemails.tar.xz) 获取。然后通过循环和临时 Shell 脚本提取主题行、日期以及每封邮件中 "http://" 出现的次数：
 
 ~~~{.Bash}
 cd 2013-09-25-gwern-googlealertsemails/
 
-echo "Search,Date,Links" >> alerts.csv # set up the header
+echo "Search,Date,Links" >> alerts.csv # 设置标题行
 for EMAIL in *.craft *.elan; do
 
     SUBJECT="`egrep '^Subject: Google Alert - ' $EMAIL  | sed -e 's/Subject: Google Alert - //'`"
@@ -52,7 +52,7 @@ for EMAIL in *.craft *.elan; do
 done
 ~~~
 
-The scripting isn't perfect and I had to delete several spurious lines before I could read it into R and format it into a clean CSV:
+脚本并不完美，在将其读入 R 并格式化为干净的 CSV 之前，我不得不删除几行错误数据：
 
 ~~~{.R}
 alerts <- read.csv("alerts.csv", quote=c(), colClasses=c("character","character","integer"))
@@ -60,8 +60,8 @@ alerts$Date <- as.Date(alerts$Date, format="%d %b %Y")
 write.csv(alerts, file="2013-09-25-gwern-googlealerts.csv", row.names=FALSE)
 ~~~
 
-# Analysis
-## Descriptive
+# 分析
+## 描述性统计
 
 ~~~{.R}
 alerts <- read.csv("http://www.gwern.net/docs/2013-09-25-gwern-googlealerts.csv",
@@ -76,29 +76,28 @@ summary(alerts)
  "Frank Herbert" -mason : 184   Max.   :2013-09-25   Max.   :563.0
  (Other)                :2585
 
-# So many because I have deleted many topics I am no longer interested in,
-# and refined the search criteria of others
+# 数量如此之多是因为我已经删除了许多不再感兴趣的话题，
+# 并且精炼了其他警报的搜索条件
 length(unique(alerts$Search))
 [1] 68
 
 plot(Links ~ Date, data=alerts)
 ~~~
 
-![Links in each email, graphed over time](/images/google/alerts/linksperemail.png)
+![每封邮件中的链接数，按时间绘制](/images/google/alerts/linksperemail.png)
 
-The first thing I notice is that it looks like the number of links per email is going up over time, with a spike in mid-2010. The second is that there's quite a bit of variation from email to email - while most are around 0, some are as high as 300. The third is that there's a weird early anomaly where emails are recorded as having 0 links; looking at those emails, they are [base64](!Wikipedia) encoded, for no apparent reason, and then all subsequent emails are in more sensible HTML/text formats. An ill-fated experiment by Google? I have no idea. The highest number is 563, which isn't very big; so despite the skew, I didn't bother to log-transform `Links`.
+我注意到的第一件事是，每封邮件的链接数似乎随时间增加，在 2010 年中期出现一个峰值。第二个观察是邮件之间的差异相当大——虽然大多数在 0 附近，但有些高达 300。第三个是早期有一个奇怪的异常，邮件被记录为有 0 个链接；查看这些邮件后发现，它们是以 [base64](!Wikipedia) 编码的，原因不明，之后所有邮件都采用了更合理的 HTML/文本格式。这是 Google 一次失败的实验吗？我不得而知。最高数字是 563，并不算很大；因此尽管数据偏斜，我没有对 `Links` 进行对数变换。
 
-## Linear model
+## 线性模型
 
-The spikiness prompts me to adjust for variation in sending rate and whatnot by bucketing emails into months, and overlay a linear regression:
+数据的尖锐波动促使我通过将邮件按月分桶来调整发送频率等方面的变异，并叠加一个线性回归：
 
 ~~~
 library(lubridate)
 alerts$Date <- floor_date(alerts$Date, "month")
 alerts <- aggregate(Links ~ Search + Date, alerts, "sum")
 
-# a simple linear model agrees with *small* monthly increase, but notes that there is a tremendous
-# amount of unexplained variation
+# 一个简单的线性模型表明每月有微小的增长，但指出存在大量未解释的变异
 lm <- lm(Links ~ Date, data=alerts); summary(lm)
 ...
 Residuals:
@@ -118,13 +117,13 @@ plot(Links ~ Date, data=alerts)
 abline(lm)
 ~~~
 
-![Total links in each search, by month](/images/google/alerts/linkspermonth.png)
+![每个搜索的总链接数，按月统计](/images/google/alerts/linkspermonth.png)
 
-No big difference with the original plot: still a generic increasing trend. Here is a basic problem with this regression: does this increase reflect an increase in the *number of alerts* I am subscribed to, tweaks to each alert to make each return more hits (shifting from old alerts to *new* alerts), or a increase in links per *unique* alert? It is only the last claim we are interested in, but any of these or other phenomenon could produce an increase.
+与原始图没有太大差异：仍然是一个总体上升趋势。这个回归有一个基本问题：这种增长是反映了我*订阅的警报数量*的增加、对每个警报的调整使其返回更多结果（从旧警报转换到*新*警报），还是每个*独立*警报的链接数量增加？只有最后一种说法是我们感兴趣的，但这些或其他现象中的任何一个都可能产生增长。
 
-### Per alert
+### 每个警报单独分析
 
-We could try treating each alert separately and doing a linear regression on them, and comparing with the linear model on all data indiscriminately:
+我们可以尝试分别处理每个警报并对其进行线性回归，然后与对所有数据不加区分的线性模型进行比较：
 
 ~~~{.R}
 library(ggplot2)
@@ -135,20 +134,20 @@ qplot(Date, Links, color=Search, data=alerts) +
     theme(legend.position = "none")
 ~~~
 
-![Splitting data by alert, regressing individually](/images/google/alerts/monthlylinks-individuallinearregression.png)
+![按警报拆分数据，分别进行回归](/images/google/alerts/monthlylinks-individuallinearregression.png)
 
-The result is chaotic. Individual alerts are pointing every which way. Regressing on every alert together confounds issues, and regressing on individual alerts produces no agreement. We want some intermediate approach which respects that alerts have different behavior, but yields a meaningful overall statement.
+结果是混乱的。各个警报的趋势指向不同的方向。对所有警报一起进行回归会混淆问题，而对单个警报进行回归则无法产生一致的结论。我们需要一种折中的方法，既尊重不同警报具有不同的行为模式，又能得出有意义的整体结论。
 
-## Multi-level model
+## 多层次模型
 
-What we want is to look at each unique alert, estimate its increase/decrease over time, and perhaps summarize all the slopes into a single grand slope. There is a hierarchical structure to the data: the overall slope of Google influences the slope of each alert, which influences the distribution of the data points around each slope.
+我们想要的是查看每个独立警报，估计其随时间的增减趋势，并可能将所有斜率汇总为一个总体斜率。数据具有层次结构：Google 的整体斜率影响每个警报的斜率，而每个警报的斜率又影响该斜率周围数据点的分布。
 
-We can do this with a [multi-level model](!Wikipedia), using [`lme4`](http://cran.r-project.org/web/packages/lme4/index.html).
+我们可以使用[多层次模型](!Wikipedia)来实现这一点，使用 [`lme4`](http://cran.r-project.org/web/packages/lme4/index.html)。
 
-We'll start by fitting & comparing 2 models:
+我们将从拟合和比较两个模型开始：
 
-1. only the intercept varies between each alert, but all alerts increase or decrease at the same rate
-2. the intercept varies between each alert, and also alerts differ in their waxing or waning
+1. 每个警报之间只有截距不同，但所有警报以相同的速率增加或减少
+2. 每个警报之间截距不同，且警报在增长或衰减方面也有差异
 
 ~~~{.R}
 library(lme4)
@@ -187,7 +186,7 @@ Correlation of Fixed Effects:
      (Intr)
 Date -0.998
 
-# compare the models: does model 2 buy us anything?
+# 比较模型：模型 2 是否比模型 1 更好？
 anova(mlm1, mlm2)
 
 mlm1: Links ~ Date + (1 | Search)
@@ -198,7 +197,7 @@ mlm2  6 12771 12801  -6379    12759   303      2     <2e-16
 
 ~~~
 
-Model 2 is better on both simplicity/fit criteria, so we'll look at that closer:
+模型 2 在简洁性/拟合度两个标准上都更好，所以我们将更仔细地查看它：
 
 ~~~{.R}
 coef(mlm2)
@@ -225,18 +224,18 @@ wikipedia                                                         -1668.94  0.13
 Xen                                                                 390.01 -0.017209
 ~~~
 
-Date is in links per month, so when Xen has a slope of -0.02, that means that every year it falls one link.
+Date 的单位是每月链接数，所以当 Xen 的斜率为 -0.02 时，意味着每年减少一个链接。
 
 ~~~{.R}
 max(abs(coef(mlm2)$Search$Date))
 [1] 0.6762
 ~~~
 
-Which comes from the `"Frank Herbert" -mason` search, probably reflecting how relatively new the search is or the effectiveness of the filter I added to the original `"Frank Herbert"` search. In general, the slopes are very similar, there seem to be as many positive slopes as there are negative, and the overall summary slope is a tiny negative slope in the second model (-0.01); but most of the searches' slopes exclude zero in the caterpillar plot:
+这个最大值来自 `"Frank Herbert" -mason` 搜索，可能反映了该搜索相对较新，或者我添加到原始 `"Frank Herbert"` 搜索中的过滤条件的有效性。总体而言，斜率非常相似，正斜率和负斜率的数量似乎相当，第二个模型中的总体汇总斜率是一个微小的负斜率（-0.01）；但在毛虫图中，大多数搜索的斜率的置信区间不包含零：
 
 ![`qqmath(ranef(mlm2, postVar=TRUE))`](/images/google/alerts/mlm2-slopes.png)
 
-This says to me that there is no large change over time happening within each alert, as the original claims went, but there does seem to be something going on. When we plot the overall regression and the per-alert regressions, we see
+这告诉我，正如最初的说法所声称的那样，每个警报内部并没有发生大的时间变化，但似乎确实有一些情况在发生。当我们绘制总体回归和每个警报的回归时，我们看到：
 
 ~~~{.R}
 fixParam <- fixef(mlm2)
@@ -250,14 +249,14 @@ p +
   theme(legend.position = "none")
 ~~~
 
-![Multi-level regression, grand and individual fits](/images/google/alerts/monthlylinks-individualmlm.png)
+![多层次回归，总体和个体拟合](/images/google/alerts/monthlylinks-individualmlm.png)
 
-This clearly makes more sense than regressing each alert separately, as we avoid crazily steep slopes when there are just a few emails to use and their regressions get shrunk to the overall regression. We also see no evidence for any large or statistically-significant change over time for alerts in general: some alerts do increase over time but some alerts also decrease over time, and there is only a small decrease which we might blame on internal Google problems.
+这显然比分别对每个警报进行回归更有意义，因为我们避免了在只有少量邮件可用时出现疯狂陡峭的斜率——这些回归被收缩到了总体回归方向。我们也没有发现警报总体上存在任何大的或具有统计显著性的时间变化的证据：一些警报确实随时间增加，但一些也在随时间减少，只有一个微小的下降，我们可能将其归咎于 Google 内部问题。
 
 <!--
-### Robustness
+### 稳健性
 
-How reliable *is* the slight negative overall correlation that we saw? We can do a posterior check of how much variation there is in the inferred model by randomly generating data from that model and seeing how often the overall `Date` fixed effect varies from positive to negative:
+我们观察到的轻微负总体相关性有多可靠？我们可以通过从推断模型中随机生成数据来进行后验检查，看看总体 `Date` 固定效应从正到负变化的频率：
 
 ~~~{.R}
 library(arm)
@@ -270,12 +269,12 @@ quantile(fixef.mlm2.sim[,2], probs = c(0, 0.025, 0.975, 1))
 hist(fixef.mlm2.sim[,2], main="Change in hits per month, 100k simulations", xlab="Coefficient")
 ~~~
 
-![Distribution of slopes estimated from 100k simulation runs](/images/google/alerts/mlm2-simulation.png)
+![100k 次模拟运行中估计的斜率分布](/images/google/alerts/mlm2-simulation.png)
 -->
 
-## What about the fall?
+## 那下降呢？
 
-Having done all this, I thought I was finished until I remembered that the original bloggers didn't complain about a *steady* deterioration over time, but an abrupt one starting somewhere in 2012. What happens when I do a binary split and compare 2010/2011 to 2012/2013?
+完成以上所有分析后，我以为已经结束了，直到我想起最初的博主抱怨的不是随时间的*稳定*恶化，而是从 2012 年某个时候开始的突然恶化。当我做一个二元分割并比较 2010/2011 与 2012/2013 时会发生什么？
 
 ~~~{.R}
 alertsRecent <- alerts[year(alerts$Date)>=2010,]
@@ -294,7 +293,7 @@ difference in location
                     53
 ~~~
 
-I avoided a normality-based test like [`t.test`](!Wikipedia "Student's t-test") and used instead [Wilcoxon](!Wikipedia "Mann-Whitney U") because there's no reason to expect the number of links per month to follow a normal distribution. Regardless of the details, there's a big difference between the two time periods: 219 vs 140 links! A fall of 36% is certainly a serious decline, and it cannot be waved away as due to my Alerts settings (I always use "All results" and never "Only the best results") nor, as we'll see now, a confound like the possibilities that motivated multi-level model use:
+我避免使用基于正态性的检验如 [`t.test`](!Wikipedia "Student's t-test")，而是使用了 [Wilcoxon 检验](!Wikipedia "Mann-Whitney U")，因为没有理由期望每月链接数遵循正态分布。不管细节如何，两个时期之间存在很大差异：219 对 140 个链接！36% 的下降无疑是一个严重的衰退，而且不能被归因为我的 Alerts 设置（我始终使用"所有结果"而不是"仅最佳结果"），也不能——正如我们接下来将看到的——归因为激发多层次模型使用的那些混淆因素：
 
 ~~~{.R}
 R> alerts$Recent <- year(alerts$Date) >= 2012
@@ -329,18 +328,18 @@ mlm2  6 12771 12801  -6379    12759   303      2     <2e-16
 mlm3  7 13015 13050  -6500    13001     0      1          1
 ~~~
 
-### It was mid-2011
+### 转折点在 2011 年中期
 
-A new model treating pre-2012 as different turns up with a superior fit. Can we do better? A [`changepoint`](http://cran.r-project.org/web/packages/changepoint/index.html) fingers May/June 2011 as the culprit and giving a larger difference in means (254 vs 147):
+将 2012 年之前视为不同时期的新模型具有更好的拟合度。我们能做得更好吗？[`changepoint`](http://cran.r-project.org/web/packages/changepoint/index.html) 包将 2011 年 5 月/6 月指认为罪魁祸首，并给出了更大的均值差异（254 对 147）：
 
 ~~~{.R}
 library(changepoint)
 plot(cpt.meanvar(alertsRecent$Links), ylab="Links")
 ~~~
 
-![Link count 2010-2013, depicting a regime transition in May/June 2011](/images/google/alerts/changepoint.png)
+![2010-2013 年的链接数，显示 2011 年 5 月/6 月的体制转变](/images/google/alerts/changepoint.png)
 
-With this new changepoint, the test is more significant
+使用这个新的变化点，检验更加显著：
 
 ~~~{.R}
 alertsRecent <- alerts[year(alerts$Date)>=2010,]
@@ -359,7 +358,7 @@ difference in location
                     87
 ~~~
 
-And the fit improves by a large amount:
+拟合度也有了很大改善：
 
 ~~~{.R}
 R> alerts$Recent <- alerts$Date > "2011-05-01"
@@ -392,10 +391,10 @@ mlm4  7 12948 12983  -6467    12934  66.8      0     <2e-16
 
 ~~~
 
-#### Robustness
+#### 稳健性
 
 <!--
-Given the foregoing, it's not surprising that the posterior simulation never spits out an estimate for `Recent` anywhere close to zero:
+鉴于上述结论，后验模拟从未给出 `Recent` 的估计值接近零也就不足为奇了：
 
 ~~~{.R}
 mlm4.sim <- sim(mlm4,  n.sims = 100000)
@@ -405,15 +404,15 @@ quantile(fixef.mlm4.sim[,3], probs = c(0, 0.025, 0.975, 1))
 -186.74 -152.69 -101.37  -69.05
 ~~~
 
-The posterior check is good, so I take a look at the other direction:
+后验检查结果良好，所以我从另一个方向进行检验：
 -->
 
-Is the fall robust against different samples of my data, using [bootstrapping](!Wikipedia "Bootstrapping (statistics)")? The answer is yes, and the Wilcoxon test even turns out to have given us a pretty good confidence interval earlier:
+使用[自助法](!Wikipedia "Bootstrapping (statistics)")，这种下降是否对数据的不同样本具有稳健性？答案是肯定的，而且 Wilcoxon 检验之前给出的置信区间其实相当不错：
 
 ~~~{.R}
 library(boot)
 recentEstimate <- function(dt, indices) {
-  d <- dt[indices,] # allows boot to select subsample
+  d <- dt[indices,] # 允许 boot 选择子样本
   mlm4 <- lmer(Links ~ Date + Recent + (1+Date|Search), d)
   return(fixef(mlm4)[3])
 }
@@ -433,38 +432,38 @@ Level     Percentile            BCa
 95%   (-172.9, -101.4 )   (-211.8, -156.7 )
 ~~~
 
-A confidence interval of (-159,-95) is both statistically-significant in this context and also an effect size to be reckoned with. It seems this mid-2011 fall is real. I'm surprised to find such a precise, localized, drop in my Alerts quantities. I did expect to find a decline, but I expected it to be a gradual incremental process as Google's search algorithms gradually excluded more and more links. I didn't expect to be able to say something like "in this month, results dropped by more than a third".
+置信区间（-159,-95）在此背景下既具有统计显著性，也是一个不容忽视的效应大小。看来这个 2011 年中期的下降是真实存在的。我惊讶地发现在我的 Alerts 数量中有如此精确、局部化的下降。我确实预期会发现一个下降，但我预期它是一个逐渐的过程——随着 Google 的搜索算法逐步排除越来越多的链接。我没想到能够做出这样的陈述："在这个月份，结果下降了超过三分之一。"
 
-### Panda?
+### 是 Panda 算法吗？
 
-I don't know of any changes announced to Google Alerts in May/June 2011, and the emails can't tell us directly what happened. But I can speculate.
+我不知道 2011 年 5 月/6 月有任何关于 Google Alerts 的变更公告，电子邮件也无法直接告诉我们发生了什么。但我可以进行推测。
 
-There is one culprit that comes to mind for what may have changed in early 2011 which would then led to a fall in collated links (a fall which would accumulate to statistical-significance in June 2011): the pervasive change to webpage rankings called [Google Panda](!Wikipedia). It affected many websites & searches, had teething problems, reportedly boosted social networking sites (which I generally see very few of in my own alerts), and was rolled out globally in April 2011 - just in time to trigger a change in May/June (with continuous [changes through 2011](http://moz.com/google-algorithm-change#2011 "Google Algorithm Change History")).
+有一个嫌疑犯让我想到了 2011 年初可能发生了什么变化，从而导致了汇总链接数量的下降（这种下降在 2011 年 6 月积累到了统计显著性水平）：对网页排名产生广泛影响的变更——[Google Panda](!Wikipedia)。它影响了许多网站和搜索，存在磨合问题，据报道促进了社交网络网站的排名（而我在自己的警报中很少看到这类网站），并于 2011 年 4 月在全球推出——恰好可以在 5 月/6 月触发变化（并在 [2011 年持续进行变更](http://moz.com/google-algorithm-change#2011 "Google Algorithm Change History")）。
 
-(We'll probably never know the true reason: Google is notoriously uncommunicative about many of its internal technical decisions and changes.)
+（我们可能永远不会知道真正的原因：Google 在其许多内部技术决策和变更方面是出了名的不善于沟通。）
 
-# Conclusion
+# 结论
 
-So where does this leave us?
+那么这一切意味着什么？
 
-Well, the overall linear regressions turned out to not answer the question, but they were still educational in demonstrating the considerable diversity between alerts and the trickiness of understanding what question exactly we were asking; the variability and differences between alerts reminds us to not be fooled by randomness and try to look for big effects & the big picture - if someone says their alerts seem a little down, they may have been fooled by selective memory, but when they say their alerts went from 20 links an email to 3, then we should avoid unthinking skepticism and look more carefully.
+总体线性回归最终未能回答这个问题，但它们仍然具有教育意义，展示了不同警报之间的巨大多样性以及理解我们到底在问什么问题的复杂性；警报之间的变异性和差异提醒我们不要被随机性所欺骗，要尝试寻找大效应和全局图景——如果有人说他们的警报似乎有所减少，他们可能是被选择性记忆所欺骗了，但当他们说他们的警报从每封邮件 20 个链接降到了 3 个时，我们就应该避免不假思索的怀疑，更仔细地观察。
 
-When we investigated the claim directly, we didn't *quite* find the claim: there was no changepoint anywhere in 2012 as claimed by bloggers like - they seem to have been half a year off from when the change occurred in my own alerts. What's going on there? It's hard to say. Google sometimes rolls out changes to users over long periods of time, so perhaps I was hit early by some changes drastically reducing links. Or perhaps it simply took time for people to become certain that there were fewer links (in which case I have given them too little credit). Or perhaps separate SEO-related changes hit their searches after mine were.
+当我们直接调查这一说法时，我们*并没有完全*找到所声称的情况：在博主们声称的 2012 年并没有变化点——他们似乎比我自己的警报中发生变化的时间晚了半年。这是怎么回事？很难说。Google 有时会在很长一段时间内向用户推出变更，因此也许我早期就受到了一些大幅减少链接的变更的影响。或者也许人们只是花了一些时间才确信链接减少了（在这种情况下，我对他们的评价过低了）。又或者是独立的 SEO 相关变更在我的搜索之后影响了他们的搜索。
 
-Is Alerts "broken"? Well, it's taken a clear hit: the number of found links are down, and my own impression is that the returned links are not such gems that they make up for their gem-like rarity. And it's certainly not good that the problem is now 2 years old without any discernible improvement.
+Alerts 是否"坏了"？嗯，它确实受到了明显的打击：发现的链接数量下降了，而我自己的印象是返回的链接质量并没有好到能弥补其稀缺性。而且问题已经持续了 2 年却没有任何明显改善，这肯定不是好事。
 
-But on closer inspection, the hit seems to have been a one-time deal, and if my Panda speculation is correct, it does not reflect any neglect or contempt by Google but simply more important factors - Search remaining high-quality will always be a higher priority than Alerts, because Search is the dog that wags the tail. My survival model may yet have the last laugh and Alerts outlast its more famous brethren.
+但仔细观察后，这次打击似乎是一次性的，如果我关于 Panda 的推测是正确的，它并不反映 Google 的忽视或轻蔑，而只是更重要的因素——Search 保持高质量始终是比 Alerts 更高的优先级，因为 Search 是摇尾巴的那条狗。我的生存模型可能最终会笑到最后，Alerts 可能会比它更著名的同类产品活得更久。
 
-I suppose it depends on whether you see the glass as half-full or half-empty: if half-full, then this is good news because it means that Alerts isn't in as bad shape as it looks and may not soon be following Reader into the great Recycle Bin in the sky; if half-empty, then this is another example of how Google does not communicate with its users, makes changes unilaterally and invisibly, will degrade one service for another more profitable service, and how users are helpless in the face of its technical supremacy (who else can do as good a job of spidering the Internet for new content matching keywords?).
+我想这取决于你如何看待这杯水：如果看到半满，那这就是好消息，因为这意味着 Alerts 的状况没有看起来那么糟糕，可能不会很快跟随 Reader 进入天上的大回收站；如果看到半空，那这就是 Google 不与用户沟通、单方面和隐蔽地进行更改、为了更有利可图的服务而降低一个服务质量的又一个例子，以及用户在其技术霸权面前是多么无助（还有谁能做得这么好——在互联网上爬取与关键词匹配的新内容？）。
 
-# See also
+# 参见
 
-- [Fanfiction reviewer survival curves](hpmor "A survival analysis finds no major anomalies in reviewer lifetimes, but an apparent increase in mortality for reviewers who started reviewing with later chapters")
-- [Weather]()
+- [同人小说评论者生存曲线](hpmor "生存分析未发现评论者寿命存在重大异常，但发现从较晚章节开始评论的评论者的死亡率似乎有所增加")
+- [天气]()
 
-# External links
+# 外部链接
 
-- [Hacker News discussion](https://news.ycombinator.com/item?id=6445270)
+- [Hacker News 讨论](https://news.ycombinator.com/item?id=6445270)
 
 <!-- For the update:
 0. fix the 0-link anomalous emails early in the sample

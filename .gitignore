@@ -1,38 +1,67 @@
-metadata/auto.yaml
-metadata/archive.hs
-metadata/annotations/http%3A%2F%2Fcogprints.org%2F772%2F3%2F152.pdf%23page%3D8.html
-metadata/annotations/http%3A%2F%2Fcogprints.org%2F772%2F3%2F152.pdf.html
-**\.png-768px\.png
-**\.jpg-768px\.jpg
-.DS_Store
-**.o
-**.hi
-static/build/hakyll
-static/build/generateDirectory
-static/build/generateBacklinks
-static/build/generateLinkBibliography
-static/build/link-extractor
-static/build/link-suggester
-static/build/generateSimilar
-static/build/preprocess-markdown
-_cache/
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+
+# Hakyll
 _site/
+_cache/
+dist/
+dist-newstyle/
+.stack-work/
+*.hi
+*.o
+hakyll
 
-# Generated homepage with auto index (built from index.page)
-index.generated.page
+# Cabal
+cabal.project.local
+cabal.project.local~
+.ghc.environment.*
 
-# Hakyll/Cabal outputs
-build/dist-newstyle/
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
 
-# Generated link/annotation artifacts (keep local)
-metadata/annotation/
-metadata/annotations/
+# Logs
+*.log
 
-# Large mirrored docs (optional)
-doc/www/
+# Environment
+.env
+.env.local
 
-# Upstream reference checkout (optional)
-gwern.net/
+# Temporary
+tmp/
+temp/
+*.tmp
 
-# Binary causing git add failure
-static/build/convert
+# OS
+Thumbs.db
+desktop.ini
+
+# Git
+*.orig
+
+# Build artifacts
+build/hakyll
+build/site
+*.exe
+
+# Newsletter specific - keep sources, ignore temp
+newsletter/*.html
+newsletter/temp/
+
+# Keep these
+!newsletter/*.page
+!newsletter/*.json
+!newsletter/*.md

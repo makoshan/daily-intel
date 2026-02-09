@@ -1,6 +1,6 @@
 ---
-title: Touhou music by the numbers
-description: Collect music metadata and look for patterns
+title: 东方音乐的数据分析
+description: 收集音乐元数据并寻找规律
 tags: statistics, sociology, Haskell
 created: 28 Feb 2013
 status: in progress
@@ -74,16 +74,16 @@ belief: possible
 
 <!-- "Videos containing Touhou tag  Total Hits: 153,553" http://www.nicovideo.jp/tag/Touhou TODO: scrape niconico -->
 
-Idea: correlate Touhou music production against Japanese youth unemployment: does the total production of music as measured in seconds increase with unemployment?
+构想：将东方音乐的产出量与日本青年失业率进行关联分析——以秒数衡量的音乐总产量是否会随失业率上升而增加？
 
-Opposite view, recessions dent production (perhaps because people are working harder and so have less free time even if other people are unemployed?) http://www.gamesetwatch.com/2009/12/sound_current_yokohamas_mediam.php
+相反观点认为，经济衰退反而会抑制产出（或许因为人们工作更辛苦，即使其他人失业了自己也没有多少空闲时间？）http://www.gamesetwatch.com/2009/12/sound_current_yokohamas_mediam.php
 
 > While the turnout at M3 remains strong, at the same time an economic recession cannot help but touch a community whose activities rely on having free time. Furthermore while previously many hobbyists dreamed of someday breaking into the industry, more recently many also fear that game companies will begin cracking down on unlicensed tributes.
 
-# Data
-## Unemployment data source
+# 数据
+## 失业率数据来源
 
-Used FRED [Adjusted Unemployment Rate for Youth [15-24yo] in Japan (JPNURYNAA)](http://research.stlouisfed.org/fred2/series/JPNURYNAA); downloaded as CSV, annual percentage 2000-2011
+使用了 FRED 的[日本青年（15-24岁）经调整失业率 (JPNURYNAA)](http://research.stlouisfed.org/fred2/series/JPNURYNAA)；下载为 CSV 格式，年度百分比数据涵盖 2000-2011 年
 
 ~~~{.R}
 jpn <- read.table(stdin(),header=TRUE)
@@ -102,22 +102,22 @@ jpn <- read.table(stdin(),header=TRUE)
 2011-01-01   8.1
 ~~~
 
-## Touhou data sources
+## 东方音乐数据来源
 
-TODO Suggestions: http://www.reddit.com/r/TOUHOUMUSIC/comments/19hh2m/touhou_music_databases_comprehensive_easily/ http://boards.4chan.org/jp/res/10559057
+TODO 建议来源：http://www.reddit.com/r/TOUHOUMUSIC/comments/19hh2m/touhou_music_databases_comprehensive_easily/ http://boards.4chan.org/jp/res/10559057
 
-alternative sources
+其他备选来源
 
-- [VGMdb Touhou entries](http://vgmdb.net/product/9) but it is substantially smaller with metadata on <1389 albums
-- The open source alternative is [MusicBrainz](!Wikipedia); looks like [it has 190 albums](http://musicbrainz.org/tag/touhou/release), but like 90%+ link to VGMdb, so I'm not sure I want to include them (waste of effort, and if someone just copied over all of VGMdb a few years ago, it'll be badly misleading to any capture-recapture analysis of population size).
-- [Touhouwiki.net](http://en.touhouwiki.net/wiki/Doujin_circles) another source, with <1182 albums
-- "東方音団録 ～ Arrange Circle Database ver.3.0"; [homepage](http://www16.atwiki.jp/toho) & [release info](http://www16.atwiki.jp/toho/pages/727.html) ([debate](http://www16.atwiki.jp/toho/pages/13.html), [chat](http://www16.atwiki.jp/toho/pages/948.html)), [product page](http://www.toranoana.jp/bl/article/04/0030/04/86/040030048682.html) with j-subculture.com quoting a partial total of $15, Paypal and shipping outside Japan boosting to ~$30! (Alternative proxies included [Yokatta](http://yokattaweb.jp/index.html).)
+- [VGMdb 东方条目](http://vgmdb.net/product/9) 规模较小，仅有不到 1389 张专辑的元数据
+- 开源替代方案是 [MusicBrainz](!Wikipedia)；看起来[有约 190 张专辑](http://musicbrainz.org/tag/touhou/release)，但其中 90% 以上链接到 VGMdb，所以我不确定是否值得纳入（浪费精力，而且如果几年前有人只是把 VGMdb 全部复制过来，对任何总体规模的标记-重捕分析来说都会产生严重误导）。
+- [Touhouwiki.net](http://en.touhouwiki.net/wiki/Doujin_circles) 另一个来源，不到 1182 张专辑
+- "東方音団録 ～ Arrange Circle Database ver.3.0"；[主页](http://www16.atwiki.jp/toho) 和 [发布信息](http://www16.atwiki.jp/toho/pages/727.html)（[讨论](http://www16.atwiki.jp/toho/pages/13.html)、[聊天](http://www16.atwiki.jp/toho/pages/948.html)），[商品页面](http://www.toranoana.jp/bl/article/04/0030/04/86/040030048682.html)，j-subculture.com 报价部分总计约 15 美元，加上 Paypal 和国际运费后约 30 美元！（其他代购包括 [Yokatta](http://yokattaweb.jp/index.html)。）
 
-   Strategy: first I'll ask for an Arrange CD download in the wiki's chatroom; then I'll look for an email by someone running it and email them directly; then I'll see if there's anyone in Japan who either owes me a favor or is willing to do me a favor; then I'll ask around for a cheaper reshipper; and if all that fails, then I'll pay j-subculture's extortionate $25 probable total cost.
+   策略：首先在 wiki 聊天室请求下载 Arrange CD 数据库；然后查找运营者的邮箱直接联系；再看看日本有没有欠我人情或愿意帮忙的人；然后打听更便宜的转运商；如果以上全部失败，就付 j-subculture 可能高达 25 美元的天价费用。
 
-   Email in 1 March 2013 failed to elicit any reply by 27 May; then [requested a purchase](http://www.reddit.com/r/TOUHOUMUSIC/comments/1f61p6/request_anyone_ordering_from_tora_no_ana_soon/ "[request] Anyone ordering from Tora no Ana soon? (self.TOUHOUMUSIC)") on `/r/TOUHOUMUSIC.
+   2013 年 3 月 1 日发出的邮件到 5 月 27 日未获任何回复；随后在 `/r/TOUHOUMUSIC` 上[发帖求购](http://www.reddit.com/r/TOUHOUMUSIC/comments/1f61p6/request_anyone_ordering_from_tora_no_ana_soon/ "[request] Anyone ordering from Tora no Ana soon? (self.TOUHOUMUSIC)")。
 
-Need more databases for capture-recapture analysis!
+需要更多数据库来进行标记-重捕分析！
 
 <!--
 The ISO file seems to be broken: `file` just calls it 'data', and when I mount it as a loopback iso9660 file, `mount` throws an error. I redownloaded it and compared it, but the copies were identical.
@@ -144,9 +144,9 @@ $ tail -1 Toho_arrange_circle_database-gwern.csv
 I am a little surprised that there are only 1316 entries. Either I've overestimated their thoroughness or this is limited to a specific convention or something like that... Need to look into this more.
 -->
 
-### Torrent
+### 种子文件
 
-Music source: [Touhou lossy music collection v.15.2](http://www.nyaa.eu/?page=torrentinfo&tid=387790) (derived from the [Touhou lossless music collection](http://www.tlmc.eu/) collection), 265.2GB of 44421 tracks from 4952 albums produced by <1,264 groups or "circles".
+音乐来源：[Touhou lossy music collection v.15.2](http://www.nyaa.eu/?page=torrentinfo&tid=387790)（源自 [Touhou lossless music collection](http://www.tlmc.eu/) 合集），共 265.2GB，包含来自不到 1264 个社团（"circles"）的 4952 张专辑中的 44421 首曲目。
 
 ~~~{.Bash}
 $ find ~/torrent/Touhou\ lossy\ music\ collection/ -type f -name "*.mp3" | wc
@@ -157,21 +157,21 @@ $ ls torrent/Touhou\ lossy\ music\ collection/*/ | wc
    7477
 ~~~
 
-File name, music length, and metadata year (if any) are extracted using `exiftool`:
+文件名、音乐时长和元数据中的年份（如有）使用 `exiftool` 提取：
 
-events:
-例大祭["","SP","SP2",2-9]: annual Reitaisai
-M3*: annual Media Mix Market eg. http://polymetrica.wordpress.com/2009/10/09/things-i-am-excited-about-04-m324/
-C[63-82]: semi-annual Comiket
-サンクリ[28-50]: annual? Sunshine Creation http://ja.wikipedia.org/wiki/%E3%82%AF%E3%83%AA%E3%82%A8%E3%82%A4%E3%82%B7%E3%83%A7%E3%83%B3_%28%E5%90%8C%E4%BA%BA%E5%8D%B3%E5%A3%B2%E4%BC%9A%29
-東方紅楼夢[?2-8]: annual Koromu
-月の宴?2-5: annual? Feast of the Month
-紅のひろば?2-6: semiannual Red Square
-東方不敗小町?2-6, SP, ぷちこまち: Komachi
+活动列表：
+例大祭["","SP","SP2",2-9]：年度例大祭
+M3*：年度 Media Mix Market，例如 http://polymetrica.wordpress.com/2009/10/09/things-i-am-excited-about-04-m324/
+C[63-82]：半年一度的 Comiket
+サンクリ[28-50]：年度？Sunshine Creation http://ja.wikipedia.org/wiki/%E3%82%AF%E3%83%AA%E3%82%A8%E3%82%A4%E3%82%B7%E3%83%A7%E3%83%B3_%28%E5%90%8C%E4%BA%BA%E5%8D%B3%E5%A3%B2%E4%BC%9A%29
+東方紅楼夢[?2-8]：年度 Koromu
+月の宴?2-5：年度？月之宴
+紅のひろば?2-6：半年一度 红色广场
+東方不敗小町?2-6, SP, ぷちこまち：Komachi
 杜の奇跡[15-16]
 東方杜郷想[2-3]
 幺樂団カァニバル！?2-3
-東方幻楽祭[2]: semiannual
+東方幻楽祭[2]：半年一度
 コミコミ[12-14]
 FF[9-17] ?
 こみトレ[12-17]
@@ -183,7 +183,7 @@ COMIC CITY大阪[63,73]
 
 exiftool; json
 
-Is `exiftool`'s length approximation trustworthy? Yes, it seems to be always within seconds of the full `mp3info` answer:
+`exiftool` 的时长近似值可靠吗？是的，它似乎总是在完整的 `mp3info` 结果的几秒之内：
 
 ~~~{.Bash}
 $ find "/home/gwern/torrent/Touhou lossy music collection/" -type f -name "*.mp3" \
@@ -215,37 +215,37 @@ $ find "/home/gwern/torrent/Touhou lossy music collection/" -type f -name "*.mp3
 ~~~
 
 ~~~{.R}
-# generate and parse and cleanup data
+# 生成、解析和清理数据
 #
-# takes ~30m:
+# 约需 30 分钟：
 # R> system("exiftool -extension mp3 -json -forcePrint
 #           -Title -Year -Album -Artist -Duration -Genre -Track -Directory -FileName -FileSize -AudioBitrate
 #           ~/torrent/Touhou\\ lossy\\ music\\ collection/*/* > ~/touhou.json")
 library(rjson)
-# download from http://www.gwern.net/docs/touhou/2013-torrent.json.xz and decompress with xz
+# 从 http://www.gwern.net/docs/touhou/2013-torrent.json.xz 下载并用 xz 解压
 json_data <- fromJSON(paste(readLines("2013-gwern-touhoutorrent.json"), collapse=""))
 touhou <- data.frame(matrix(unlist(json_data), ncol=12, byrow=TRUE))
 colnames(touhou) <- c("SourceFile", "Title", "Year", "Album", "Artist", "Length", "Genre",
                       "Track", "Directory", "FileName", "FileSize", "AudioBitrate")
-# Delete SourceFile column; redundant with Directory/FileName
+# 删除 SourceFile 列；与 Directory/FileName 重复
 touhou <- touhou[,-1]
 touhou$Directory <- sub("/home/gwern/torrent/Touhou lossy music collection/", "",
                          as.character(touhou$Directory))
 touhou[touhou==""] <- NA
 touhou[touhou=="-"] <- NA
 touhou$Year <- as.integer(as.character(touhou$Year))
-# torrent doesn't cover 2013 music, and music predating the PC-98 games doesn't exist...
+# 种子不包含 2013 年的音乐，而 PC-98 游戏之前的音乐根本不存在……
 touhou$Year[touhou$Year<1990] <- NA
 touhou$Year[touhou$Year>2012] <- NA
-# Genre is "None" or " "? both useless and false (thanks, tagger); so it goes too:
+# Genre 是 "None" 或 " "？都是无用且错误的（谢谢标签器）；所以也删掉：
 touhou$Genre[touhou$Genre=="None"] <- NA
 touhou$Genre[touhou$Genre==" "] <- NA
-# turn the track lengths and bitrates into usable numbers on a common scale (seconds and MBs, respectively)
+# 将曲目时长和比特率转换为可用的数字，统一单位（秒和 MB）
 touhou$Length <- gsub(" \\(approx\\)","",as.character(touhou$Length))
 touhou$AudioBitrate <- as.integer(sub(" kbps","",as.character(touhou$AudioBitrate)))
-# exiftool leaves us "16 s"; if so, strip the " s" and turn it into an integer
-# else, eg. "0:04:37"; split on colon,
-# multiply hour by 3600 seconds, minutes=60 each, seconds=seconds; and sum it
+# exiftool 输出 "16 s"；如果是这样，去掉 " s" 并转为整数
+# 否则格式为 "0:04:37"；按冒号分割，
+# 小时乘以 3600 秒，分钟乘以 60，秒数不变；然后求和
 interval <- function(x) { if (!is.na(x)) { if (grepl(" s",x)) as.integer(sub(" s","",x))
                                            else { y <- unlist(strsplit(x, ":"));
                                                   as.integer(y[[1]])*3600 + as.integer(y[[2]])*60 + as.integer(y[[3]]); }
@@ -255,57 +255,57 @@ interval <- function(x) { if (!is.na(x)) { if (grepl(" s",x)) as.integer(sub(" s
 touhou$Length <- sapply(touhou$Length,interval)
 filesize <- function(x) { if (grepl(" kB",x)) (as.integer(sub(" kB","",x))/1000) else as.integer(sub(" MB","",x))}
 touhou$FileSize <- sapply(touhou$FileSize, filesize)
-# Serious work: turn the encoded information in Directory into usable columns. Not for the faint of heart.
+# 重头戏：将 Directory 中编码的信息转换为可用的列。非胆小者勿入。
 #
-# The Directory column looks like "[twith1450]/2009.03.08 TOHOMOHO [例大祭6]"
-# The schema here is "[circle]/eventDate album [event]"
+# Directory 列的格式如 "[twith1450]/2009.03.08 TOHOMOHO [例大祭6]"
+# 编码规则为 "[社团]/活动日期 专辑名 [活动]"
 #
 # "[Angelic Quasar]/2006.01.29 [AQSH-0003] Racial Ethnic Nation"
 # "[Alstroemeria Records]/[ARCD0001] The regret of stars, but stars shine bright (C65) (mp3)"
 # "[Aqua Style／ひえろぐらふ]/2010.05.24 [AQUA-0031] 春宵一刻値千金 -シュンショウイッコク　アタイセンキン-"
 brackets <- function(b) sub("\\]","", sub("\\[","",b))
-# easy first step: parse out the leading group/circle (always there, terminated by forward-slash) as new column
+# 第一步简单：解析出开头的社团名称（总是存在的，以正斜杠结尾）作为新列
 touhou$Circle <- sapply(touhou$Directory, function(x) brackets(unlist(strsplit(as.character(x), "/"))[1]))
-# destructively update by removing the group/circle, to make the next step easier
-# this makes Directory looks like "2009.06.07 [PAER-0007] #01 -LILITH- [東方幻楽祭2]"
-# or "[ARCD0001] The regret of stars, but stars shine bright (C65) (mp3)"
+# 破坏性更新：移除社团名称，以简化下一步
+# 这使 Directory 变成类似 "2009.06.07 [PAER-0007] #01 -LILITH- [東方幻楽祭2]"
+# 或 "[ARCD0001] The regret of stars, but stars shine bright (C65) (mp3)"
 touhou$Directory <- sapply(touhou$Directory, function(x) unlist(strsplit(as.character(x), "/"))[2])
 touhou$Date <- as.Date(sapply(touhou$Directory, function(x) substring(x, 1, 10)), format="%Y.%m.%d")
-# and like before, we strip the event date that we've parsed out, leaving eg. "ピアノのための東方小品集 Op.1-1 [御射宮司祭]"
-# or "月遊 [例大祭8]" or "[AQUA-0031] 春宵一刻値千金 -シュンショウイッコク　アタイセンキン-"
+# 同样地，去掉已解析的活动日期，剩下如 "ピアノのための東方小品集 Op.1-1 [御射宮司祭]"
+# 或 "月遊 [例大祭8]" 或 "[AQUA-0031] 春宵一刻値千金 -シュンショウイッコク　アタイセンキン-"
 touhou$Directory <- sapply(touhou$Directory, function(x) substring(x, 12))
-# extracting the next parameter, the event the album was released at, is harder still
+# 提取下一个参数——专辑发布的活动名称——更加困难
 library(stringr)
-# if the directory does not end in a right-bracket, there's no event info and we should bomb out
-# else, grab w/regexp last pair of brackets with a space before (excludes any album numbering schemes) & trim
-# that didn't work? then it must be one of the directories where there's no space before the bracketed event, retry without leading space
+# 如果目录不以右方括号结尾，则没有活动信息，应返回空值
+# 否则用正则表达式抓取最后一对方括号（前面有空格，排除专辑编号方案）并修剪
+# 如果失败了？那么它一定是没有空格在括号前的目录格式，不加前导空格重试
 touhou$Event <- sapply(touhou$Directory, function(x) { if (str_sub(x,start=-1) == "]") { res <- brackets(unlist(str_split(x, " \\["))[2]); if (!is.na(res)) res else brackets(unlist(str_split(x, "\\["))[2]) } else x})
-# if you examine the Event column, it's full of wrong entries. I have made a list of 19 event-prefixes (I hope), which
-# we'll use as a whitelist by erasing anything which lacks all of the 19 prefixes.
+# 检查 Event 列会发现充满错误条目。我列出了 19 个活动名称前缀（希望是完整的），
+# 用作白名单，删除所有不包含这 19 个前缀的条目。
 isPrefix <- function(x,y) grepl(paste0("^",x), y)
 events <- c("例大祭","M3","C","サンクリ","東方紅楼夢","月の宴","紅のひろば","東方不敗小町","杜の奇跡","東方杜郷想",
             "幺樂団カァニバル！","東方幻楽祭","コミコミ","FF","こみトレ","COMIC1","COMIC CITY大阪","恋魔理","東方椰麟祭","東方名華祭")
 touhou$Event <- sapply(as.character(touhou$Event),
                        function(target) if (sum(sapply(events, function(e) isPrefix(e,target))) != 0) target else NA)
-# this whitelist covers almost the entire sample, so I think it works well:
+# 这个白名单覆盖了几乎整个样本，所以我认为效果很好：
 ## R> sum(!is.na(touhou$Event))
 ## [1] 39190
 ## R> length(touhou$Event)
 ## [1] 41866
 #
-# one final thing, since (almost) all directories had Dates while not all files had Years; overwrite any missing Years
-# based on the Date we just extracted
+# 最后一件事，由于（几乎）所有目录都有日期而并非所有文件都有年份；
+# 根据刚提取的日期覆盖缺失的年份
 touhou$Year <- as.integer(format(touhou$Date, "%Y"))
-touhou$Directory <- NULL # clean up
-# escape with the loot:
+touhou$Directory <- NULL # 清理
+# 带着战利品逃跑：
 write.csv(touhou, file="2013-gwern-touhoumusic-torrent.csv", row.names=FALSE)
 ~~~
 
 ## VGMdb
 
-The [Touhou project page](http://vgmdb.net/product/9) turns out to be incomplete: each entry had to be manually annotated as related to Touhou. I was pointed to [a search query](http://vgmdb.net/search?do=results&id=161863) which turned up many more results by looking for any page with the string "Touhou" in the "games" field.
+[东方项目页面](http://vgmdb.net/product/9)实际上并不完整：每个条目都需要手动标注为与东方相关。有人给我指了一个[搜索查询](http://vgmdb.net/search?do=results&id=161863)，通过在"games"字段中查找包含"Touhou"字符串的页面，找到了更多结果。
 
-The VGMdb administrators kindly gave me read-only access to their MySQL databases. I grabbed the entirety of the tables `vgmdb_albums` and `vgmdb_tracks` from the main VGMdb database; I exported them as 2 CSV files with comma separators, renamed `2013-vgmdb-albums.csv` and `2013-vgmdb-tracks.csv`. Before loading the exports, I had to delete all escaped quotes; the default R CSV parsing doesn't handle them. The track rows are 1 track with an album ID, so to turn each track record/row into an equivalent of the torrent rows, I need to fill in based on the album table.
+VGMdb 管理员友好地给予了我对其 MySQL 数据库的只读访问权限。我从 VGMdb 主数据库中导出了 `vgmdb_albums` 和 `vgmdb_tracks` 两张完整的表；导出为逗号分隔的 2 个 CSV 文件，分别命名为 `2013-vgmdb-albums.csv` 和 `2013-vgmdb-tracks.csv`。在加载导出文件之前，我必须删除所有转义引号；R 的默认 CSV 解析器无法处理它们。曲目行是一首曲目对应一个专辑 ID，因此要将每个曲目记录/行转换为与种子文件行等效的格式，我需要根据专辑表填充信息。
 
 ~~~{.R}
 albums <- read.csv("http://www.gwern.net/docs/touhou/2013-vgmdb.csv")
@@ -315,15 +315,15 @@ albums <- albums[grepl("ouhou", albums$game),]; albums$game <- NULL
 
 tracks <- read.csv("2013-vgmdb-tracks.csv")
 tracks$tracklistid <- NULL; tracks$trackid <- NULL; tracks$disctitle <- NULL; tracks$disc <- NULL
-tracks$length[tracks$length==0] <- NA # 0 is the default in the VGMdb schema
+tracks$length[tracks$length==0] <- NA # 0 是 VGMdb 架构中的默认值
 tracks <- tracks[tracks$albumid %in% albums$albumid,]
 touhou <- merge(tracks, albums)
 touhou$albumid <- NULL; albums <- NULL; tracks <- NULL
-# deal with the 41 dates with the format "2005-09-00" (the 0th months or days are not real...)
+# 处理 41 个格式为 "2005-09-00" 的日期（第 0 个月或日不存在……）
 touhou$date <- as.Date(sub("-00","-01",as.character(touhou$reldate)))
 touhou$reldate <- NULL
 touhou$year <- as.integer(format(touhou$date, "%Y"))
-# upcase, rearrange to torrent's order
+# 大写并重新排列为种子文件的列顺序
 colnames(touhou) <- c("Track","Title","Length","Circle","Album","Date","Year")
 touhou <- touhou[c(2,7,5,3,1,4,6)]
 write.csv(touhou, file="2013-vgmdb-touhou.csv", row.names=FALSE)
@@ -331,10 +331,10 @@ write.csv(touhou, file="2013-vgmdb-touhou.csv", row.names=FALSE)
 
 ## `touhouwiki.net`
 
-## Personal downloads
-### 4chan /jp/ C83 threads
+## 个人下载
+### 4chan /jp/ C83 主题帖
 
-A loose group of [4chan](!Wikipedia) users on the [/jp/](https://boards.4chan.org/jp/) subforum collaborate each Comiket to upload and distribute doujin manga, games, and music released at that Comiket; some are uploaded by Comiket attendees, some are bought from resellers like [Comic Toranoana](!Wikipedia), and many files are harvested from Japanese P2P filesharing networks like [Winny](!Wikipedia)/[Share](!Wikipedia "Share (P2P)")/[Perfect Dark](!Wikipedia "Perfect Dark (P2P)"). I compiled a list of ~400 files from the [/r/TouhouMusic](http://www.reddit.com/r/TOUHOUMUSIC/comments/15pp33/c83_resource_thread/) C83 thread (principally from the 4chan links) & the blog [All Doujin Music](http://alldoujinmusic.wordpress.com) and gradually downloaded them from January to March 2013. After dead links, I was left with 400-500 files. Many are not music, or even Touhou-related, so I hand-filtered albums, looking for signs of being Touhou doujin works (credits to ZUN, Touhou characters in the artwork, themes I recognized as Touhou, etc); when I was not sure, I erred on the side of exclusion. The [final compilation](/docs/touhou/2013-c83-downloads.txt) yielded 3503 files (evenly split: 1776 Touhou vs 1728 "other") with 953 Touhou music files.
+一群松散的 [4chan](!Wikipedia) 用户在 [/jp/](https://boards.4chan.org/jp/) 子版块每次 Comiket 期间合作上传和分发该次 Comiket 发布的同人漫画、游戏和音乐；有些由 Comiket 参加者上传，有些从 [Comic Toranoana](!Wikipedia) 等经销商购买，许多文件则从日本 P2P 文件共享网络如 [Winny](!Wikipedia)/[Share](!Wikipedia "Share (P2P)")/[Perfect Dark](!Wikipedia "Perfect Dark (P2P)") 收集而来。我从 [/r/TouhouMusic](http://www.reddit.com/r/TOUHOUMUSIC/comments/15pp33/c83_resource_thread/) 的 C83 主题帖（主要来自 4chan 链接）和博客 [All Doujin Music](http://alldoujinmusic.wordpress.com) 中汇编了约 400 个文件的列表，并在 2013 年 1 月至 3 月间逐步下载。去除死链后，剩余 400-500 个文件。其中很多不是音乐，甚至与东方无关，因此我手动筛选专辑，寻找东方同人作品的特征（致谢 ZUN、封面中的东方角色、我认出的东方主题等）；当我不确定时，宁可排除。[最终合集](/docs/touhou/2013-c83-downloads.txt)产出 3503 个文件（大致均分：1776 个东方 vs 1728 个"其他"），其中有 953 个东方音乐文件。
 
 ~~~{.R}
 # exiftool -extension ogg -json -forcePrint -Title -Year -Album -Artist -Duration -Genre -TrackNumber -Directory
@@ -342,12 +342,12 @@ A loose group of [4chan](!Wikipedia) users on the [/jp/](https://boards.4chan.or
 # ~/c83/touhou/ ~/c83/touhou/*/** ~/c83/touhou/*/*/** ~/c83/touhou/*/*/*/** > ~/2013-c83-downloads.json
 
 library(rjson)
-# download from http://www.gwern.net/docs/touhou/2013-torrent.json.xz and decompress with xz
+# 从 http://www.gwern.net/docs/touhou/2013-torrent.json.xz 下载并用 xz 解压
 json_data <- fromJSON(paste(readLines("2013-c83-downloads.json"), collapse=""))
 touhou <- data.frame(matrix(unlist(json_data), ncol=13, byrow=TRUE))
 colnames(touhou) <- c("SourceFile", "Title", "Year", "Album", "Artist", "Length", "Genre",
                       "Track", "Directory", "FileName", "FileSize", "AudioBitrate", "Date")
-# Delete SourceFile column; redundant with Directory/FileName
+# 删除 SourceFile 列；与 Directory/FileName 重复
 touhou <- touhou[,-1]
 for (filter in c("/home/gwern/c83/touhou/", "\\[touhou.vnsharing.net\\]", " \\(320K\\+BK\\)", "/mp3",
                  " MP3v0", " v0", " \\(flac\\+scans\\)", " \\(128K\\)", " \\(V0\\)", " \\(320\\)",
@@ -357,49 +357,49 @@ touhou[touhou==""] <- NA
 touhou[touhou=="-"] <- NA
 ~~~
 
-Playback length:
+播放时长：
 
 ~~~{.Bash}
 find c83/touhou/ -name "*.ogg" -exec ogginfo {} \;|fgrep "Playback length"
 ~~~
 
-### 4chan /jp/ C84 threads
+### 4chan /jp/ C84 主题帖
 
-591 Touhou music files:
+591 个东方音乐文件：
 
 /docs/touhou/2013-c84-downloads.json
 
-### 4chan /jp/ C85 threads
+### 4chan /jp/ C85 主题帖
 
-449 Touhou music files:
+449 个东方音乐文件：
 
 /docs/touhou/2013-c85-download.json
 
-### 4chan /jp/ Reitaisai 10 threads
+### 4chan /jp/ 例大祭10 主题帖
 
-Similarly to above, drawing on the [/r/TouhouMusic](http://www.reddit.com/r/TOUHOUMUSIC/comments/1f3ikk/the_reitaisai_10_resource_thread/) discussion and manually pruning duplicates & non-Touhou down to 491 music files.
+与上述类似，参考 [/r/TouhouMusic](http://www.reddit.com/r/TOUHOUMUSIC/comments/1f3ikk/the_reitaisai_10_resource_thread/) 的讨论，手动去除重复和非东方内容后，得到 491 个音乐文件。
 
 ~~~{.Bash}
 exiftool -extension ogg -json -forcePrint -Title -Year -Album -Artist -Duration -Genre -TrackNumber -Directory -FileName -FileSize -NominalBitrate -Date */*.ogg > ~/2013-reitaisai-downloads.json
 ~~~
 
-### Reitaisai 10 torrent
+### 例大祭10 种子
 
-In May & June 2013, an anonymous person compiled 67 albums and released two torrents of Reitaisai 10 albums ([vol. 1](http://www.nyaa.se/?page=view&tid=438733), [vol. 2](http://www.nyaa.se/?page=view&tid=440787))
+2013 年 5 月和 6 月，一位匿名人士汇编了 67 张专辑，发布了两个例大祭10 专辑种子（[第1卷](http://www.nyaa.se/?page=view&tid=438733)、[第2卷](http://www.nyaa.se/?page=view&tid=440787)）
 
 ~~~{.Bash}
 exiftool -extension ogg -json -forcePrint -Title -Year -Album -Artist -Duration -Genre -TrackNumber -Directory -FileName -FileSize -NominalBitrate -Date */*.ogg > ~/2013-reitaisai-downloads-torrent.json
 ~~~
 
-# Analysis
+# 分析
 
 ~~~{.R}
 touhou <- read.csv("http://www.gwern.net/docs/touhou/2013-torrent.csv",
                    colClasses=c("character", "integer", "factor", "character", "integer", "factor",
                                 "character", "character", "numeric", "integer", "factor", "Date"))
 
-# do stuff with the data
-# general correlations
+# 对数据进行分析
+# 总体相关性
 t <- data.frame(touhou$Year, touhou$Length, touhou$FileSize, touhou$AudioBitrate)
 cor(t,use="pairwise.complete.obs")
 #                     touhou.Year touhou.Length touhou.FileSize touhou.AudioBitrate
@@ -408,17 +408,17 @@ cor(t,use="pairwise.complete.obs")
 # touhou.FileSize         0.04484       0.93915
 # touhou.AudioBitrate     0.19188       0.11091         0.35499
 
-# test the correlation between higher bitrate and larger files:
+# 检验高比特率与大文件之间的相关性：
 cor.test(touhou$FileSize, touhou$AudioBitrate)
 
-# the genre metadata is useless!
+# 流派元数据毫无用处！
 sort(table(touhou$Genre), decreasing=TRUE)
 
-# boxplot avg length per year
+# 箱线图：每年平均时长
 plot(touhou$Length ~ factor(touhou$Year))
 ~~~
 
-Economics modeling:
+经济学建模：
 
 ~~~{.R}
 jpn <- read.csv(stdin(),header=TRUE)
@@ -436,7 +436,7 @@ DATE,VALUE
 2010-01-01,9.0
 2011-01-01,8.1
 
-# number of works per year does not correlate:
+# 每年作品数量不相关：
 cor.test(jpn$VALUE[3:12], table(touhou$Year)[1:10])
     Pearson`s product-moment correlation
 
@@ -492,13 +492,13 @@ plot(c(2002:2011),table(touhou$Year)[1:10])
 points(c(2002:2011),exp(predict(logModel)),type='l',col='blue')
 ~~~
 
-## Growth over time
+## 随时间增长
 
-How fast is the corpus of Touhou music growing?
+东方音乐语料库的增长速度有多快？
 
-Constant growth model: the first game was released in 1996, no? So that gives 17 years to accumulate 1.26TB or 1,260GB or 74.1GB per year. The screenshot is downloading at 0kb/s, which is not useful, but it says 2640 days left so we can estimate that he's downloading at 0.47GB per day (`1260/2640`), and over a year 0.47GB is 174GB which is 2.35x faster than the 74GB per year. So at that annual increase, OP is *not* doomed and can in fact catch up.
+恒定增长模型：第一款游戏发布于 1996 年，对吧？因此有 17 年时间积累了 1.26TB 即 1260GB，年均 74.1GB。截图显示下载速度为 0kb/s，这没什么参考价值，但它显示还需 2640 天，所以可以估算他的下载速度为每天 0.47GB（`1260/2640`），一年则为 174GB，是年均 74GB 的 2.35 倍。因此按这个年增速，发帖者*不会*永远追不上，实际上是可以赶上的。
 
-Exponential growth mode: a little trickier since we can't force a formula just from the cumulative total and elapsed time. I need more data. So using my 2012 Touhou Lossy Torrent data, I can try to regress an exponential against the annual count... but wait! The amount of music does not seem to be increasing exponentially!
+指数增长模型：这就有点棘手了，因为不能仅从累计总量和经过时间推导出公式。我需要更多数据。所以使用我 2012 年的 Touhou Lossy Torrent 数据，我可以尝试对年度数量拟合指数曲线……但等等！音乐数量似乎并没有呈指数增长！
 
     R> touhou <- read.csv("http://www.gwern.net/docs/touhou/2013-torrent.csv",
     +                    colClasses=c("character", "integer", "factor", "character",
@@ -511,9 +511,9 @@ Exponential growth mode: a little trickier since we can't force a formula just f
      2002  2003  2004  2005  2006  2007  2008  2009  2010  2011  2012
        13    23   255  1241  2070  2599  5073 10278  9765  7494  2999
 
-Graph: http://i.imgur.com/23fMA5c.png
+图表：http://i.imgur.com/23fMA5c.png
 
-Looks like Touhou music's growth peaked in 2009; this might reflect the torrent's incompleteness, except the torrent is from 2012, and you'd expect coverage of 2010 or 2011 to be pretty good by that point. So the growth of the torrent *overall* looks more like a sigmoid or log:
+看起来东方音乐的增长在 2009 年达到峰值；这可能反映了种子的不完整性，但种子来自 2012 年，你会期望到那时 2010 年或 2011 年的覆盖率应该相当好了。所以种子*整体*的增长看起来更像是 S 形曲线或对数曲线：
 
     R> runningTotal <- cumsum(table(touhou$Year)); runningTotal; plot(runningTotal)
      2002  2003  2004  2005  2006  2007  2008  2009  2010  2011  2012
@@ -521,18 +521,18 @@ Looks like Touhou music's growth peaked in 2009; this might reflect the torrent'
 
 http://i.imgur.com/Lv9vHrZ.png
 
-So probably it'd be better to ask, 'if 2012-rate growth continues, what is the ratio to his download speed?'
+所以更好的问法可能是：如果 2012 年的增长速率持续下去，与他的下载速度之比是多少？
 
-2012 added 19.5GB to the torrent:
+2012 年为种子增加了 19.5GB：
 
-    R> # FileSize is in megabytes, so gigabytes
+    R> # FileSize 单位为兆字节，转为吉字节
     R> sum(touhou[touhou$Year==2012,]$FileSize, na.rm=TRUE) / 1000
     [1] 19.5
 
-# Appendix
-## `touhouwiki.net` scraping code
+# 附录
+## `touhouwiki.net` 爬虫代码
 
-Uses the [Tagsoup](http://hackage.haskell.org/package/tagsoup) and [split](http://hackage.haskell.org/package/split) packages; emits CSV to standard out. It is a pile of kludges which I am a little ashamed to post publicly, and may not work for you.
+使用 [Tagsoup](http://hackage.haskell.org/package/tagsoup) 和 [split](http://hackage.haskell.org/package/split) 包；向标准输出发送 CSV。这是一堆拼凑的代码，我有点不好意思公开，可能对你不起作用。
 
 ~~~{.Haskell}
 import Text.HTML.TagSoup (fromAttrib, fromTagText, isTagOpen, isTagText,
@@ -637,7 +637,7 @@ lookForAnArtist t = let targets = dropWhile (\x -> not ("arrangement:" `isPrefix
                             | otherwise = head targets
                     in trim $ fromMaybe "" $ join $ fmap (stripPrefix "arrangement:") $ stripPrefix "composition:" target
 
--- utility functions
+-- 工具函数
 openURL :: String -> IO String
 openURL url = fmap decodeString (simpleHTTP (getRequest url) >>= getResponseBody)
 deleteParens, trim, dequote :: String -> String
@@ -653,9 +653,9 @@ maybeRead :: Read a => String -> Maybe a
 maybeRead = fmap fst . listToMaybe . reads
 ~~~
 
-## VGMdb scraping code
+## VGMdb 爬虫代码
 
-The following is a buggy program for scraping Touhou albums from VGMdb; it works on a limited subset of album pages, but has an unknown number of fatal bugs. I abandoned it once I was offered read-only database access, and that was what I actually used to get my VGMdb data. This is in case I ever need to go back.
+以下是一个用于爬取 VGMdb 上东方专辑的有缺陷的程序；它只能在有限的专辑页面子集上运行，存在数量不明的致命 bug。在我获得只读数据库访问权限后便放弃了它，实际上我用的是数据库访问来获取 VGMdb 数据。留在这里以备将来需要。
 
 ~~~{.haskell}
 import Text.HTML.TagSoup (fromTagText, isTagOpenName, isTagText, Tag(TagOpen,TagText), parseTags)
@@ -686,14 +686,14 @@ convert :: Track -> String
 convert t = "\"" ++ title t ++ "\"," ++ show(year t) ++ "," ++ show (date t) ++ ",\"" ++
               album t ++ "\",\"" ++ circle t ++ "\"," ++ maybe "" show(duration t) ++ "," ++ show (track t)
 
--- example album link: 'TagOpen "a" [("class","albumtitle album-doujin"),
+-- 示例专辑链接：'TagOpen "a" [("class","albumtitle album-doujin"),
 --                                   ("href","http://vgmdb.net/album/36901"),
 --                                   ("title","Majo to Ringo to Samayou Kimi to")]'
 getAlbums :: IO [String]
 getAlbums = do touhou <- openURL "http://vgmdb.net/product/9"
                return [snd(atts !! 1) | TagOpen "a" atts <- parseTags touhou, snd(head atts)=="albumtitle album-doujin"]
 
--- need 'decodeString' to deal with Japanese glyphs; see http://stackoverflow.com/questions/10558003/how-to-get-utf8-rss-feed
+-- 需要 'decodeString' 来处理日文字符；参见 http://stackoverflow.com/questions/10558003/how-to-get-utf8-rss-feed
 openURL :: String -> IO String
 openURL url = fmap decodeString (simpleHTTP (getRequest url) >>= getResponseBody)
 

@@ -1,17 +1,17 @@
 ---
-title: LW anchoring experiment
-description: Do mindless positive/negative comments skew article quality ratings up and down?
+title: LessWrong 锚定效应实验
+description: 无意义的正面/负面评论是否会使文章质量评分产生偏高或偏低的偏移？
 created: 27 Feb 2012
 tags: statistics, experiments, psychology
 status: finished
 belief: unlikely
 ...
 
-> I do an informal experiment testing whether LessWrong karma scores are susceptible to a form of anchoring based on the first comment posted; a medium-large effect size is found although the data does not fit the assumed normal distribution so there may or may not be any actual anchoring effect.
+> 我在 LessWrong 上进行了一项非正式实验，测试 karma 分数是否容易受到基于首条评论的锚定效应影响；发现了一个中等偏大的效应量，但数据不符合假设的正态分布，因此可能存在也可能不存在实际的锚定效应。
 
-# Problem
+# 问题
 
-27 February 2012 in `#lesswrong`:
+2012年2月27日，在 `#lesswrong` 频道：
 
     Grognor> I've been reading the highest-scoring articles, and I have noticed a pattern
              a MUCH HIGHER PROPORTION of top-scoring articles have "upvoted" in the first two words in the
@@ -61,76 +61,76 @@ belief: unlikely
              possibly be worked out, which is exactly why this proportion of first comments with an 'upvoted'
              note surprises me
 
-Such an [anchoring](!Wikipedia) or [social proof](!Wikipedia) effect resulting in a [first-mover advantage](!Wikipedia) seems plausible to me. At least one experiment found something similar online: ["Social Influence Bias: A Randomized Experiment"](http://web.natur.cuni.cz/~houdek3/papers/Muchnik%20et%20al%202013.pdf "Muchnik et al 2013"):
+这种[锚定效应](!Wikipedia)或[社会认同](!Wikipedia)效应所导致的[先发优势](!Wikipedia)在我看来是合理的。至少有一项在线实验发现了类似的现象：["Social Influence Bias: A Randomized Experiment"](http://web.natur.cuni.cz/~houdek3/papers/Muchnik%20et%20al%202013.pdf "Muchnik et al 2013")：
 
 > Our society is increasingly relying on the digitized, aggregated opinions of others to make decisions. We therefore designed and analyzed a large-scale randomized experiment on a social news aggregation Web site to investigate whether knowledge of such aggregates distorts decision-making. Prior ratings created significant bias in individual rating behavior, and positive and negative social influences created asymmetric herding effects. Whereas negative social influence inspired users to correct manipulated ratings, positive social influence increased the likelihood of positive ratings by 32% and created accumulating positive herding that increased final ratings by 25% on average. This positive herding was topic-dependent and affected by whether individuals were viewing the opinions of friends or enemies. A mixture of changing opinion and greater turnout under both manipulations together with a natural tendency to up-vote on the site combined to create the herding effects. Such findings will help interpret collective judgment accurately and avoid social influence bias in collective intelligence in the future.
 
-# Design
+# 实验设计
 
-So on the 27th, I registered the account ["Rhwawn"](http://lesswrong.com/user/Rhwawn/)^[If you were wondering about the account name: both 'Rhwawn' and 'Gwern' are character names from the Welsh collection _[Mabinogion](!Wikipedia)_. They share the distinctions of being short, nearly unique, and obviously pseudonymous to anyone who Googles them, which is why I also used that name as an alternate account [on Wikipedia](!Wikipedia "User:Rhwawn").]. I made some quality comments and upvotes to seed the account as a legitimate active account.
+因此在2月27日那天，我注册了账号 ["Rhwawn"](http://lesswrong.com/user/Rhwawn/)^[如果你对这个账号名感到好奇：'Rhwawn' 和 'Gwern' 都是威尔士故事集 _[Mabinogion](!Wikipedia)_ 中的角色名。它们有共同的特点：短小、几乎独一无二，而且任何用 Google 搜索的人都能看出是假名——这也是我在[维基百科](!Wikipedia "User:Rhwawn")上将其作为备用账号名的原因。]。我发表了一些高质量的评论和点赞，以便将该账号塑造为一个合法的活跃用户。
 
-Thereafter, whenever I wrote an Article or Discussion, after making it public, I flipped a coin and if Heads, I posted a comment as Rhwawn saying "Upvoted" or if Tails, a comment saying "Downvoted" with some additional text (see next section). Needless to say, no actual vote was made. I then made a number of quality comments and votes on other Articles/Discussions to camouflage the experimental intervention. (In no case did I upvote or downvote someone I had already replied to or voted on with my [Gwern](http://lesswrong.com/user/gwern) account.) Finally, I scheduled a reminder on my calendar for 30 days later to record the karma on that Article/Discussion. I don't post *that* often, so I decided to stop after 1 year, on 27 February 2013. I wound up breaking this decision since by September 2012 I had ceased to find it an interesting question, it was an unfinished task that was burdening my mind, and the necessity of making some genuine contributions as Rhwawn to cloak a anchoring comment was a not-so-trivial inconvenience that was stopping me from posting.
+此后，每当我撰写一篇文章或讨论帖并公开发布后，我就会抛一枚硬币：如果是正面，就以 Rhwawn 的身份发表一条"已点赞（Upvoted）"的评论；如果是反面，就发表一条"已踩（Downvoted）"的评论，并附带一些额外文字（见下一节）。不用说，实际上并没有进行任何投票操作。然后我会以该账号在其他文章/讨论帖上发表一些高质量评论和投票，以此掩盖实验干预行为。（在任何情况下，我都不会对已经用 [Gwern](http://lesswrong.com/user/gwern) 账号回复过或投票过的人进行点赞或踩。）最后，我在日历上设置了30天后的提醒，届时记录该文章/讨论帖的 karma 值。我发帖频率并不*那么*高，因此我决定在一年后即2013年2月27日停止实验。后来我提前结束了实验，因为到2012年9月我已经不再觉得这是一个有趣的问题了，它作为一项未完成的任务给我带来了心理负担，而且为了掩盖锚定评论而以 Rhwawn 身份做出一些真正有价值的贡献，这种不算微不足道的麻烦也阻碍了我的发帖意愿。
 
-To enlarge the sample, I passed [Recent Posts](http://lesswrong.com/recentposts) through `xclip -o | grep '^by ' | cut -d ' ' -f 2 | sort | uniq -c | sort -g` and picking everyone with >=6 posts (8 people excluding me), and I messaged them with a short message explaining my desire for a large sample and the burden of participation ("It would require perhaps half a minute to a minute of your time every time you post an Article or Discussion for the next year, which is for most of you no more than once a week or month.")
+为了扩大样本量，我将 [Recent Posts](http://lesswrong.com/recentposts) 的内容通过 `xclip -o | grep '^by ' | cut -d ' ' -f 2 | sort | uniq -c | sort -g` 处理，选出发帖数>=6的所有人（除我之外共8人），并给他们发送了一条简短消息，说明我希望获得更大的样本以及参与所需的工作量（"每次你发表文章或讨论帖时大约需要半分钟到一分钟的时间，为期一年。对大多数人来说，这不过是每周或每月一次的事情。"）
 
-For those who replied, I sent a copy of this writeup and explained their procedure would be as follows: every time they posted they would flip a coin and post likewise (the Rhwawn account password having been shared with them); however, as a convenience to them, I would take care of recording the karma a month later. (I subscribed to participants' post RSS feeds; this would not guarantee that I would learn of their posts in time to add a randomized sock comment - hence the need for their active participation - but I could at least handle the scheduling & karma-checking for them.)
+对于回复的人，我发送了这份文档的副本，并解释了他们的操作流程：每次发帖时抛一枚硬币，然后以同样的方式发布评论（Rhwawn 账号的密码已与他们共享）；不过为了方便他们，一个月后记录 karma 值的工作由我来完成。（我订阅了参与者的发帖 RSS 推送；这并不能保证我能及时得知他们的发帖以便添加随机化的马甲评论——因此仍然需要他们的主动参与——但至少我可以处理日程安排和 karma 值的核查工作。）
 
-## Comment variation
+## 评论变体
 
-Grognor pointed that the original comments came with reasons, but unfortunately if I came up with reasons for either comment, some criticisms or praise would be better than others and this would be *another* source of variability; so I added generic reasons.
+Grognor 指出原始评论是附带理由的，但遗憾的是，如果我为正面或负面评论都编造理由，某些批评或赞美必然比其他的更好，这将成为*另一个*变异来源；因此我添加了通用理由。
 
-I know from watching them plummet into oblivion that comments which are just "Upvoted" or "Downvoted" are not a good idea for any anchoring question - they'll quickly be hidden, so any effect size will be a lot smaller than usual, and it's possible that hidden comments themselves anchor (my guess: negatively, by making people think "why is this attracting stupid comments?").
+根据我观察那些迅速沉入深渊的评论的经验，只写"已点赞"或"已踩"的评论对于锚定效应的研究来说不是好主意——它们很快就会被折叠隐藏，因此效应量会比通常小很多，而且被隐藏的评论本身可能也会产生锚定效应（我猜测：负面的，因为人们会想"这帖子怎么吸引了这种蠢评论？"）。
 
-While if you go with more carefully rationalized comments, that's sort of like the [XKCD cartoon](http://xkcd.com/810/): quality comments start to draw on the experimenter's own strengths & weaknesses (I'm sure I could make both quality criticisms and praises of psychology-related articles, but not so much technical decision theory articles).
+而如果你选择更精心论证的评论，那就有点像 [XKCD 漫画](http://xkcd.com/810/)所描绘的：高质量评论开始依赖于实验者自身的优势和劣势（我确信我能对心理学相关文章做出有质量的批评和赞美，但对于技术性的决策理论文章就不那么擅长了）。
 
-It's a "damned if you do, damned if you don't" sort of dilemma.
+这是一种"做也不是，不做也不是"的两难困境。
 
-I hoped my strategy would be a golden mean of not too trivial to be downvoted into oblivion, but not so high-quality and individualized that comparability was lost. I think I came close, since as we see in the analysis section, the positive anchoring comments saw only a small negative net downvote, indicating LWers may not have regarded it as good enough to upvote but also not so obviously bad as to merit a downvote.
+我希望我的策略能成为一个折中方案——不会过于琐碎以至于被踩到深渊，但也不会过于高质量和个性化以至于失去可比性。我认为我做到了比较接近的效果，因为从分析部分可以看到，正面的锚定评论仅遭受了较小的净踩数，这表明 LW 用户可能认为它不够好到值得点赞，但也没有明显差到值得踩。
 
-(Of course, I didn't expect the positive and negative comments to be treated differently - they're pretty much the same thing, with a negation. I'm not sure how I would have designed it differently if I had known about the double-standard in advance.)
+（当然，我并没有预料到正面和负面评论会被区别对待——它们本质上是同一件事，只是加了否定词。如果我事先知道这种双重标准，我也不确定该如何改变设计。）
 
-To avoid issues with some criticisms being accurate and others poor, a fixed list of reasons was used with minor variation to make them fit in:
+为了避免某些批评准确而另一些较差的问题，使用了一个固定的理由列表，并做了少量变化以使其适合具体情境：
 
-1. Negative; "Downvoted; ..."
+1. 负面评论；"已踩；……"
 
-    - "too much weight on _n_ studies"
-    - "too many studies cited"
-    - "too reliant on personal anecdote"
-    - "too heavy on math"
-    - "not enough math"
-    - "rather obvious"
-    - "not very interesting"
-2. Positive; "Upvoted; ..."
+    - "过于依赖 _n_ 项研究"
+    - "引用了太多研究"
+    - "过于依赖个人轶事"
+    - "数学内容过多"
+    - "数学内容不够"
+    - "相当显而易见"
+    - "不太有趣"
+2. 正面评论；"已点赞；……"
 
-    - "good use of _n_ studies"
-    - "thorough citation of claims"
-    - "enjoyable anecdotes"
-    - "rigorous use of math"
-    - "just enough math"
-    - "not at all obvious"
-    - "very interesting"
+    - "很好地运用了 _n_ 项研究"
+    - "引用充分详实"
+    - "轶事引人入胜"
+    - "数学运用严谨"
+    - "数学用量恰到好处"
+    - "一点也不显而易见"
+    - "非常有趣"
 
-# Questions
+# 问答
 
 > I will have to do some contemplation of values before I accept or reject. I like getting honest feedback on my posts, I like accumulating karma, and I also like performing experiments.
 
-Randomization suggests that your expected-karma-value would be 0, unless you expect asymmetry between positive and negative.
+随机化意味着你的预期 karma 值为0，除非你预期正面和负面效果之间存在不对称性。
 
 > What do you anticipate doing with the data accumulated over the course of the experiment?
 
-Oh, it'd be simple enough. Sort articles into one group of karma scores for the positive anchors, the other group for the negative anchors; feed into a two-sample t-test to see if the means differ and if the difference is significant. I can probably copy the R code straight from my [various Zeo-related `R`](Zeo#vitamin-d-analysis) sessions.
+哦，这很简单。将文章按正面锚定和负面锚定分为两组 karma 分数；输入双样本 t 检验来看均值是否不同以及差异是否显著。我大概可以直接从我[各种 Zeo 相关的 `R`](Zeo#vitamin-d-analysis) 分析会话中复制代码。
 
-If I can hit _p_<0.10 or _p_<0.05 or so, post an Article triumphantly announcing the finding of bias and an object lesson of why one shouldn't take karma too seriously; if I don't, post a Discussion article discussing it and why I thought the results didn't reach significance. (Not enough articles? Too weak assumptions in my t-test?)
+如果我能达到 _p_<0.10 或 _p_<0.05 左右，就发表一篇文章，大张旗鼓地宣布发现了偏差，作为一个不应过于看重 karma 的实例教训；如果没有达到，就发表一篇讨论帖，讨论实验结果以及我认为结果未达到显著性的原因。（样本量不足？t 检验的假设太弱？）
 
 > And the ethics?
 
-The post authors are volunteers, and as already pointed out, the expected karma benefit is 0. So no one is harmed, and as for the deception, it does not seem to me to be a big deal. We are already nudged by countless primes and stimuli and biases, so another one, designed to be neutral in total effect, seems harmless to me.
+文章作者是自愿参与的，而且如前所述，预期的 karma 收益为0。因此没有人受到伤害，至于欺骗的问题，我认为这不是什么大事。我们已经被无数的启动效应、刺激和偏差所影响，因此再加一个被设计为总体效果中性的实验，在我看来是无害的。
 
 > "What comes before determines what comes after...The thoughts of all men arise from the darkness. If you are the movement of your soul, and the cause of that movement precedes you, then how could you ever call your thoughts your own? How could you be anything other than a slave to the darkness that comes before?...History. Language. Passion. Custom. All these things determine what men say, think, and do. These are the hidden puppet-strings from which all men hang...all men are deceived....So long as what comes before remains shrouded, so long as men are already deceived, what does [deceiving men] matter?" --Kelhus, [R. Scott Bakker](!Wikipedia)'s _[The Darkness That Comes Before](!Wikipedia)_
 
-# Data
+# 数据
 
-The results:
+实验结果：
 
 Post                                                     Author             Date      Anchor   Post karma Comment karma
 -------------------------------------------------------- ------------------ --------  -------- ---------- -------------
@@ -175,16 +175,16 @@ Post                                                     Author             Date
 [gwern]: http://lesswrong.com/user/gwern
 [Cashing Out Cognitive Biases as Behavior]: http://lesswrong.com/r/discussion/lw/ahz/cashing_out_cognitive_biases_as_behavior/
 
-# Analysis
+# 分析
 
-For the analysis, I have 2 questions:
+对于分析部分，我有两个问题：
 
-1. Is there a difference in karma between posts that received a negative initial comment and those that received a positive initial comment? (Any difference suggests that one or both are having an effect.)
-2. Is there a difference in karma between the two kinds of initial comments (as I began to suspect during the experiment)?
+1. 收到负面首条评论的帖子和收到正面首条评论的帖子，其 karma 之间是否存在差异？（任何差异都意味着其中一种或两种都产生了效果。）
+2. 两种首条评论本身的 karma 之间是否存在差异（这是我在实验过程中开始怀疑的）？
 
-## Article effect
+## 文章效果
 
-Some Bayesian inference using [BEST](http://www.indiana.edu/~kruschke/BEST/):
+使用 [BEST](http://www.indiana.edu/~kruschke/BEST/) 进行贝叶斯推断：
 
 ~~~{.R}
 lw <- data.frame(Anchor     = c( 0, 0, 1, 0, 1, 0, 1,  1, 1, 1, 0, 0, 1, 0, 1, 0, 0),
@@ -209,9 +209,9 @@ PARAMETER       mean  median     mode   HDIlow HDIhigh pcgtZero
   effSz      -0.7718  -0.765  -0.7632  -1.8555  0.3322    8.143
 ~~~
 
-![Graphical summary of BEST results for full dataset](/images/lw-anchoring-yvain.png)
+![完整数据集的 BEST 结果图形摘要](/images/lw-anchoring-yvain.png)
 
-The results are heavily skewed by Yvain's very popular post; we can't trust any results based on such a high scoring post. Let's try omitting Yvain's datapoint. BEST actually crashes displaying the result, perhaps due to making an assumption about there being at least 8 datapoints or something; and it's question whether we should be using a normal-based test like BEST in the first place: just from graphing we can see it's definitely not a normal distribution. So we'll fall back to a distribution-free [Mann-Whitney U](!Wikipedia) two-sample test (rather than a _t_-test):
+结果被 Yvain 那篇非常受欢迎的帖子严重扭曲了；我们不能信任基于如此高分帖子得出的结果。让我们试试去掉 Yvain 的数据点。BEST 在显示结果时实际上崩溃了，可能是因为它假设至少有8个数据点之类的条件；而且我们是否应该使用像 BEST 这样基于正态分布的检验本身就值得商榷：仅从图形上就能看出这绝对不是正态分布。因此我们退回到无分布假设的 [Mann-Whitney U](!Wikipedia) 双样本检验（而非 _t_ 检验）：
 
 ~~~{.R}
 wilcox.test(Post.karma ~ Anchor, data=lw)
@@ -229,7 +229,7 @@ data:  Post.karma by Anchor
 W = 19, p-value = 0.203
 ~~~
 
-Reasonable. To work around the bug, let's replace Yvain by the mean for that group without him, 33; the new results:
+结果合理。为了绕过这个 bug，让我们将 Yvain 的数据替换为该组去掉他后的均值33；新的结果：
 
 ~~~{.R}
            SUMMARY.INFO
@@ -245,17 +245,17 @@ PARAMETER       mean   median     mode  HDIlow HDIhigh pcgtZero
   effSz      -0.7139  -0.7066  -0.7053  -1.779  0.3607    9.396
 ~~~
 
-![Graphical summary of BEST results for dataset with Yvain replaced by a mean](/images/lw-anchoring-yvain-omitted.png)
+![将 Yvain 替换为均值后的 BEST 结果图形摘要](/images/lw-anchoring-yvain-omitted.png)
 
-The difference in means has shrunk but not gone away; it's large enough that 10% of the possible effect sizes (of "a negative initial comment rather than positive") may be zero or actually be positive (increase karma) instead. This is a little concerning, but I don't take this too seriously:
+均值差异缩小了但并未消失；它大到可能的效应量中有10%为零或实际上是正向的（即增加 karma 而非减少）。这有些令人担忧，但我不太认真对待这个结果：
 
-1. this is not a lot of data
-2. as we've seen there are extreme outliers suggesting that the assumption that karma scores are Gaussian/normal may be badly wrong
-3. even at face value, 10 karma points doesn't seem like it's large enough to have any important real-world consequences (like make people leave LW who should've stayed)
+1. 数据量不大
+2. 如我们所见，存在极端异常值，这意味着 karma 分数服从高斯/正态分布的假设可能严重错误
+3. 即使按面值理解，10个 karma 点的差异似乎也不足以产生任何重要的现实后果（比如让本该留下的人离开 LW）
 
-Pursuing point number two, there's two main options for dealing with the normal distribution assumption of BEST/_t_-tests being violated: either switch to a test which assumes a distribution more like what we actually see & hope that this new distribution is close enough to true, or use a test which doesn't rely on distributions at all.
+关于第二点，应对 BEST/_t_ 检验的正态分布假设被违反的情况，主要有两种选择：要么换用一个假设更接近实际观测分布的检验方法，并寄望于这个新分布足够接近真实情况；要么使用完全不依赖分布假设的检验。
 
-For example, we could try to model it as a [Poisson distribution](!Wikipedia) and see if the anchoring variable is an important predictor of the mean of the process sum, which it seems to be:
+例如，我们可以尝试将其建模为[泊松分布](!Wikipedia)，看看锚定变量是否是过程总和均值的重要预测因子——看起来确实如此：
 
 ~~~{.R}
 summary(glm(Post.karma ~ Anchor, data=lw, family=poisson))
@@ -281,11 +281,11 @@ Coefficients:
 Anchor        0.4669     0.0983    4.75    2e-06
 ~~~
 
-(On a side note, I regard these _p_-values as evidence for an effect even thought they don't fall under 0.05 or another alpha I defined in advance: with this small sample size and hence low [statistical power](!Wikipedia), to reach _p_<0.05, each anchoring comment would have to have a grotesquely large effect on article karma - but anchoring comments having such an effect is highly unlikely! Anchoring, in psychology, isn't *that* omnipotent: it's relatively subtle. So we have a similar problem as with the [2013 Lewis meditation results](Lewis meditation) - they're the sort of situations where it'd be nicer to be talking in more relative terms like [Bayes factor](!Wikipedia)s.)
+（顺便说一下，我将这些 _p_ 值视为效应存在的证据，即使它们没有低于0.05或我事先定义的其他 alpha 值：以如此小的样本量和相应较低的[统计功效](!Wikipedia)来说，要达到 _p_<0.05，每条锚定评论就必须对文章 karma 产生离谱的巨大效应——但锚定评论产生如此效应是极不可能的！心理学中的锚定效应并没有*那么*万能：它是相对微妙的。因此我们面临着与 [2013年 Lewis 冥想实验结果](Lewis meditation)类似的问题——在这些情况下，如果能用更具相对性的指标如[贝叶斯因子](!Wikipedia)来讨论会更好。）
 
-## Comment treatment
+## 评论待遇
 
-How did these mindless unsubstantiated comments either praising or criticizing an article get treated by the community? Let's look at the anchoring comment's karma:
+这些毫无根据地赞扬或批评文章的无意义评论，社区是如何对待它们的？让我们来看看锚定评论的 karma：
 
 ~~~{.R}
 neg <- lw[lw$Anchor==0,]$Comment.karma
@@ -305,10 +305,10 @@ PARAMETER      mean  median     mode   HDIlow HDIhigh pcgtZero
   effSz     -1.6750 -1.5931 -1.48805  -3.2757 -0.1889    0.569
 ~~~
 
-![Graphical summary of BEST results for full dataset of how the positive/negative comments were treated](/images/lw-anchoring-comment.png)
+![正面/负面评论待遇的完整数据集 BEST 结果图形摘要](/images/lw-anchoring-comment.png)
 
-As one would hope, neither group of comments ends up with net positive mean score, but they're clearly being treated very differently: the negative comments get downvoted far more than the positive comments. I take this as perhaps implying that LW's reputation for being negative & hostile is a bit overblown: we're negative and hostile to poorly thought out criticisms and arguments, not fluffy praise.
+正如人们所期望的，两组评论最终都没有获得净正均值分数，但它们受到的对待明显不同：负面评论被踩的程度远远超过正面评论。我认为这或许暗示 LW 以负面和充满敌意著称的名声有些言过其实了：我们对考虑不周的批评和论点是负面和充满敌意的，但对空洞的赞美则不是。
 
-# External links
+# 外部链接
 
-- [LW discussion](http://lesswrong.com/lw/gft/lw_anchoring_experiment_maybe/)
+- [LW 讨论帖](http://lesswrong.com/lw/gft/lw_anchoring_experiment_maybe/)

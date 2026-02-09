@@ -45,6 +45,7 @@ import qualified Data.Text as T (find, pack, splitOn, takeWhile, Text, append, u
 import Data.Maybe (isJust, isNothing, fromMaybe)
 import Text.Pandoc (Inline(Link, Span, Space, Str, RawInline), Format(..), nullAttr, Pandoc(Pandoc), Block(Para), nullMeta)
 import Network.HTTP (urlEncode)
+import System.Directory (findExecutable)
 
 import Data.FileStore.Utils (runShellCommand)
 import Interwiki (toWikipediaEnURLSearch, toWikipediaEnURL, isWPArticle)
@@ -217,7 +218,11 @@ authorsUnknownPrint auts = do let missing = authorsUnknown $ splitOn ", " auts
                                                                     mapM_ putStrLn urls
 
                  -- and open in web browser:
-                                                                    mapM_ (\aut -> void $ runShellCommand "./" Nothing "chromium" [aut]) urls
+                                                                    mbBrowser <- findExecutable "chromium"
+                                                                    case mbBrowser of
+                                                                      Nothing -> return ()
+                                                                      Just browser ->
+                                                                        mapM_ (\aut -> void $ runShellCommand "./" Nothing browser [aut]) urls
 
 -- final database of alias→author rewrites: combine the handwritten with the generated.
 -- WARNING: the two databases are required to be unique and non-overlapping; we could override generated with manual, but that kind of conflict indicates a semantic issue and must be dealt with by the user.
@@ -278,8 +283,12 @@ authorBrowseSearchEngines :: [T.Text] -> IO ()
 authorBrowseSearchEngines [] = error "Metadata.Author.authorBrowseSearchEngines: passed an empty list; this should never happen!"
 authorBrowseSearchEngines [""] = error "Metadata.Author.authorBrowseSearchEngines: passed an empty string; this should never happen!"
 authorBrowseSearchEngines authors = let urls = concatMap authorURLs authors
-                                       in void $ runShellCommand "./" (Just [("DISPLAY", ":0")]) "chromium"
-                                          (map T.unpack urls)
+                                       in do mbBrowser <- findExecutable "chromium"
+                                             case mbBrowser of
+                                               Nothing -> return ()
+                                               Just browser ->
+                                                 void $ runShellCommand "./" (Just [("DISPLAY", ":0")]) browser
+                                                   (map T.unpack urls)
  where authorURLs :: T.Text -> [T.Text]
        authorURLs "" = error "Metadata.Author.authorURLs: passed an empty string for an author; this should never happen!"
        authorURLs author = let escapedAuthor = T.pack $ urlEncode $ T.unpack author

@@ -77,9 +77,13 @@ main =
     let annotationBuildAllForce = filter (=="--annotation-rebuild") args'
     let annotationOneShot       = filter (=="--annotation-missing-one-shot") args'
     annotationsEnabled <- lookupEnv "GWERN_ANNOTATIONS"
-    let doAnnotations = annotationsEnabled == Just "1"
+    let doAnnotations = fromMaybe "1" annotationsEnabled == "1"
 
     C.cd
+
+    -- Ensure index.generated.page exists before Hakyll scans the filesystem.
+    -- (Creating it inside `preprocess` is too late: the provider snapshot is already built.)
+    writeOutHomepageIndexGenerated
 
     printGreen ("Local archives parsing…" :: String)
     am           <- readArchiveMetadataAndCheck
@@ -102,22 +106,23 @@ main =
              timestamp <- preprocess $ getMostRecentlyModifiedDir "metadata/annotation/id/"
 
              preprocess $ printGreen ("Begin site compilation…" :: String)
-             -- index.page is the homepage source. We generate index.generated.page from it so
-             -- the homepage can automatically index all existing *.page content.
-             preprocess writeOutHomepageIndexGenerated
 
              -- Only compile a small, known set of Markdown sources. This repo has many
              -- non-page .md files (notes, skills, docs) without required YAML metadata.
              let targetsMd =
-                   fromGlob "blog/**.md"
-                   .||. fromGlob "_posts/**.md"
-                   .||. fromGlob "posts/**.md"
-                   .||. fromGlob "about.md"
-             let targetsPage = fromGlob "**.page"
+                  fromGlob "blog/**/*.md"
+                  .||. fromGlob "_posts/**/*.md"
+                  .||. fromGlob "posts/**/*.md"
+                  .||. fromGlob "about.md"
+                  .||. fromGlob "resorter.md"
+             -- NOTE: include both top-level + nested pages (this glob implementation
+             -- does not treat `**/*.page` as matching top-level `*.page`).
+             let targetsPage = (fromGlob "*.page" .||. fromGlob "**/*.page")
                                  .&&. complement "doc/www/**.page"
                                  .&&. complement "gwern.net/**"
                                  .&&. complement "scripts/**"
                                  .&&. complement "build/**"
+                                 .&&. complement "static/**"
                                  .&&. complement "index.page"
                                  .&&. complement "index.generated.page"
              let targetsSingle = fromGlob $ head args'
@@ -343,10 +348,11 @@ writeOutHomepageIndexGenerated = do
       takeExtension p == ".page" &&
       p /= "./index.page" &&
       p /= "./index.generated.page" &&
+      not ("./doc/www/" `isPrefixOf` p) &&
       takeFileName p /= "index.generated.page"
 
     skipDirName :: FilePath -> Bool
-    skipDirName d = d `elem` ["_site", "_cache", "dist-newstyle", ".git", "build", "static", "metadata", "doc", "gwern.net", "scripts"]
+    skipDirName d = d `elem` ["_site", "_cache", "dist-newstyle", ".git", "build", "static", "metadata", "gwern.net", "scripts"]
 
     listFilesRec :: FilePath -> IO [FilePath]
     listFilesRec dir = do
@@ -370,17 +376,7 @@ writeOutHomepageIndexGenerated = do
         _ -> s ++ "\n" ++ line ++ "\n"
 
     renderAutoIndex :: [FilePath] -> String
-    renderAutoIndex ps =
-      let rel = map (\p -> if "./" `isPrefixOf` p then drop 2 p else p) ps
-          pairs = [(takeDirectory f, f) | f <- rel]
-          dirs = map head $ group $ sort $ map fst pairs
-          renderDir d =
-            let header = "## " ++ (if d == "." then "(root)" else d)
-                fs = [f | (d', f) <- pairs, d' == d]
-                items = unlines $
-                  map (\f -> "- [" ++ dropExtension (takeFileName f) ++ "](" ++ routeLike (dropExtension f) ++ ")") fs
-            in header ++ "\n\n" ++ items ++ "\n"
-      in "# 全站索引\n\n" ++ concatMap renderDir dirs
+    renderAutoIndex ps = ""  -- Disabled: no longer generating site-wide index
 
     routeLike :: FilePath -> String
     routeLike p0 =
@@ -529,8 +525,8 @@ pandocTransform md adb sizes indexp' p = -- linkAuto needs to run before `conver
   do
      linkAnnotationsEnabled <- lookupEnv "GWERN_LINK_ANNOTATIONS"
      linkSizesEnabled <- lookupEnv "GWERN_LINK_SIZES"
-     let doLinkAnnotations = linkAnnotationsEnabled == Just "1"
-     let doLinkSizes = linkSizesEnabled == Just "1"
+     let doLinkAnnotations = fromMaybe "1" linkAnnotationsEnabled == "1"
+     let doLinkSizes = fromMaybe "0" linkSizesEnabled == "1"
      let duplicateHeaders = duplicateTopHeaders p in
        unless (null duplicateHeaders) $
        error "Warning: Duplicate top-level headers found: " >> print duplicateHeaders

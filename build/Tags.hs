@@ -36,14 +36,18 @@ getDirFiltered :: (FilePath -> IO Bool) -- ^ Filepath filter
                -> FilePath
                -> IO [FilePath]
 getDirFiltered p fp = do
-    all' <- listDirectory fp
-    all'' <- filterM p (mkRel <$> all')
-    dirs <- filterM doesDirectoryExist all''
-    case dirs of
-        [] -> pure all''
-        ds -> do
-            next <- foldMapA (getDirFiltered p) ds
-            pure $ all'' ++ next
+    exists <- doesDirectoryExist fp
+    if not exists
+        then pure []
+        else do
+            all' <- listDirectory fp
+            all'' <- filterM p (mkRel <$> all')
+            dirs <- filterM doesDirectoryExist all''
+            case dirs of
+                [] -> pure all''
+                ds -> do
+                    next <- foldMapA (getDirFiltered p) ds
+                    pure $ all'' ++ next
     where mkRel = (fp </>)
           foldMapA = (fmap fold .) . traverse
 
@@ -130,10 +134,18 @@ validateTagsSyntax :: [String] -> Bool
 validateTagsSyntax = all validateTagSyntax
 
 listTagsAll :: IO [String]
-listTagsAll = do Config.Misc.cd
-                 tags <- fmap (map (delete "doc/") . sort . filter (\f' -> not $ anyInfix f' C.tagListBlacklist) ) $ getDirFiltered (\f -> doesFileExist (f++"/index.md")) "doc/"
-                 let tagsBad = filter (not . validateTagSyntax) tags
-                 if null tagsBad then return tags else error $ "Tags.listTagsAll: invalid tags found on-disk somehow? Bad tags were: " ++ show tagsBad ++ "; all tags were: " ++ show tags
+listTagsAll = do
+  Config.Misc.cd
+  hasDoc <- doesDirectoryExist "doc"
+  if not hasDoc
+    then return []
+    else do
+      tags <- fmap (map (delete "doc/") . sort . filter (\f' -> not $ anyInfix f' C.tagListBlacklist)) $
+                getDirFiltered (\f -> doesFileExist (f ++ "/index.md")) "doc/"
+      let tagsBad = filter (not . validateTagSyntax) tags
+      if null tagsBad
+        then return tags
+        else error $ "Tags.listTagsAll: invalid tags found on-disk somehow? Bad tags were: " ++ show tagsBad ++ "; all tags were: " ++ show tags
 
 -- given a list of ["doc/foo/index.md"] directories, convert them to what will be the final absolute path ("/doc/foo/index"), while checking they exist (typos are easy, eg. dropping 'doc/' is common).
 -- Bool argument = whether to include all sub-directories recursively.

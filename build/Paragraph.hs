@@ -11,6 +11,7 @@ import Text.Show.Pretty (ppShow)
 import Text.Pandoc (def, pandocExtensions, readerExtensions, readMarkdown, runPure, writeHtml5String, Pandoc)
 import System.Exit (ExitCode(ExitFailure))
 import qualified Data.ByteString.Lazy.UTF8 as U (toString)
+import System.Directory (findExecutable)
 
 import GTX (readGTXFast)
 import Metadata.Format (cleanAbstractsHTML)
@@ -46,8 +47,14 @@ processParagraphizer md p a = -- the path is necessary to check against the whit
 
 -- EXPERIMENTAL: the GPT-4o paragraphizer seems to confabulate a fair number of wrong URLs; let's double-check them manually for a while to see how bad the problem is.
 checkURLs :: Metadata -> Pandoc -> IO ()
-checkURLs md p = let urls = filter (\u -> not (isLocal u || M.member (T.unpack u) md)) $ extractURLs p in
-                   mapM_ (\u -> forkIO $ void $ runShellCommand "./" (Just [("DISPLAY", ":0")]) "chromium" [T.unpack u]) urls
+checkURLs md p = do
+  -- Optional developer convenience; don't fail a site build if Chromium is absent.
+  mbBrowser <- findExecutable "chromium"
+  case mbBrowser of
+    Nothing -> return ()
+    Just browser ->
+      let urls = filter (\u -> not (isLocal u || M.member (T.unpack u) md)) $ extractURLs p
+      in mapM_ (\u -> forkIO $ void $ runShellCommand "./" (Just [("DISPLAY", ":0")]) browser [T.unpack u]) urls
 
 -- Is an annotation (HTML or Markdown) already If the input has more than one <p>, or if there is one or more double-newlines, that means this input is already multiple-paragraphs
 -- and we will skip trying to break it up further.
