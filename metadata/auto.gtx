@@ -23627,3 +23627,119 @@ design/typography design/visualization
 <li><a href="/doc/cs/js/index#link-bibliography-section" id="toc-link-bibliography-section">Bibliography</a></li>
 </ul>
 </div>
+---
+/doc/cs/algorithm/information/index
+‘information theory’ directory
+
+2019-11-12
+2026-02-04
+
+cs/linkrot/archiving
+<figure><img class="float-right page-thumbnail invert-not outline" height="0" width="0" src="/doc/cs/algorithm/2021-tran-figure3-tradeoffbetweenevennessandrichnessinsouthindiankolamabstractdrawings.jpg" title="Figure 3: Trade-off between evenness and richness. The grey lines measure maximum entropy isoclines. The raw kolam data are jittered and illustrated in blue (light blue = low density, dark blue = high density). The (90, 75, 50%) kernel density of the average richness and evenness for each canvas size of the data are depicted in the orange area (light orange to dark orange)." alt=""></figure><div class="page-description-annotation">
+<p>Bibliography for directory <code>cs/algorithm/information</code>, most recent first: 9 <a href="/doc/cs/algorithm/information/index#see-alsos" class="icon-not">related tags</a>, 79 <a href="/doc/cs/algorithm/information/index#links" class="icon-not">annotations</a>, &amp; 8 <a href="/doc/cs/algorithm/information/index#miscellaneous" class="icon-not">links</a> (<a href="/doc/cs/algorithm/index" class="link-page link-tag directory-indexes-upwards link-annotated" data-link-icon="arrow-up-left" data-link-icon-type="svg" rel="tag" title="Link to parent directory">parent</a>).</p>
+</div>
+<div class="columns TOC">
+<ul>
+<li><a href="/doc/cs/algorithm/information/index#see-also" id="toc-see-also">See Also</a></li>
+<li><a href="/doc/cs/algorithm/information/index#gwern" id="toc-gwern">Gwern</a>
+<ul>
+<li><a href="/doc/cs/algorithm/information/index#gwern-2025-good-ai-samples-section" id="toc-gwern-2025-good-ai-samples-section">“Adding Bits Beats AI Slop”, Gwern 2025</a></li>
+<li><a href="/doc/cs/algorithm/information/index#gwern-rock-paper-scissors-section" id="toc-gwern-rock-paper-scissors-section">“Rock-Paper-Scissors Optimality”, Gwern 2024</a></li>
+<li><a href="/doc/cs/algorithm/information/index#gwern-difference-section" id="toc-gwern-difference-section">“How Complex Are Individual Differences?”, Gwern 2010</a></li>
+<li><a href="/doc/cs/algorithm/information/index#gwern-death-note-anonymity-section" id="toc-gwern-death-note-anonymity-section">“<em>Death Note</em>: L, Anonymity &amp; Eluding Entropy”, Gwern 2011</a></li>
+</ul></li>
+<li><a href="/doc/cs/algorithm/information/index#links" id="toc-links">Links</a>
+<ul>
+<li><a href="/doc/cs/algorithm/information/index#liu-et-al-2025-section" id="toc-liu-et-al-2025-section">“Neural Thermodynamic Laws for Large Language Model Training”, Liu et al 2025</a></li>
+<li><a href="/doc/cs/algorithm/information/index#alabdulmohsin-et-al-2024-section" id="toc-alabdulmohsin-et-al-2024-section">“Fractal Patterns May Illuminate the Success of Next-Token Prediction”, Alabdulmohsin et al 2024</a></li>
+<li><a href="/doc/cs/algorithm/information/index#_CVAQIHnn-section" id="toc-_CVAQIHnn-section">“Channel Capacity of a Telegraph”</a></li>
+<li><a href="/doc/cs/algorithm/information/index#zheng-meister-2024-section" id="toc-zheng-meister-2024-section">“The Unbearable Slowness of Being”, Zheng &amp; Meister 2024</a></li>
+<li><a href="/doc/cs/algorithm/information/index#ström-2024-section" id="toc-ström-2024-section">“UI Density: What UI Density Means and How to Design for It”, Ström 2024</a></li>
+<li><a href="/doc/cs/algorithm/information/index#jeon-et-al-2024-1-section" id="toc-jeon-et-al-2024-1-section">“An Information-Theoretic Analysis of In-Context Learning”, Jeon et al 2024</a></li>
+<li><a href="/doc/cs/algorithm/information/index#ebtekar-hutter-2023-section" id="toc-ebtekar-hutter-2023-section">“Foundations of Algorithmic Thermodynamics”, Ebtekar &amp; Hutter 2023</a></li>
+<li><a href="/doc/cs/algorithm/information/index#tromp-2023-section" id="toc-tromp-2023-section">“Functional Bits: Lambda Calculus Based Algorithmic Information Theory”, Tromp 2023</a></li>
+<li><a href="/doc/cs/algorithm/information/index#kirsch-gal-2023-section" id="toc-kirsch-gal-2023-section">“Unifying Approaches in Active Learning and Active Sampling via Fisher Information and Information-Theoretic Quantities”, Kirsch &amp; Gal 2023</a></li>
+<li><a href="/doc/cs/algorithm/information/index#guthmann-albrecht-2023-section" id="toc-guthmann-albrecht-2023-section">“Market Microstructure and Informational Efficiency: The Role of Intermediation”, Guthmann &amp; Albrecht 2023</a></li>
+<li><a href="/doc/cs/algorithm/information/index#kikuchi-et-al-2022-section" id="toc-kikuchi-et-al-2022-section">“Electrochemical Potential Enables Dormant Spores to Integrate Environmental Signals”, Kikuchi et al 2022</a></li>
+<li><a href="/doc/cs/algorithm/information/index#shwartz-ziv-et-al-2022-section" id="toc-shwartz-ziv-et-al-2022-section">“What Do We Maximize in Self-Supervised Learning?”, Shwartz-Ziv et al 2022</a></li>
+<li><a href="/doc/cs/algorithm/information/index#wu-et-al-2022-03-section" id="toc-wu-et-al-2022-03-section">“Macaques Preferentially Attend to Intermediately Surprising Information”, Wu et al 2022</a></li>
+<li><a href="/doc/cs/algorithm/information/index#mcgee-et-al-2022-section" id="toc-mcgee-et-al-2022-section">“The Cost of Information Acquisition by Natural Selection”, McGee et al 2022</a></li>
+<li><a href="/doc/cs/algorithm/information/index#sharma-et-al-2022-1-section" id="toc-sharma-et-al-2022-1-section">“Assembly Theory Explains and Quantifies the Emergence of Selection and Evolution”, Sharma et al 2022</a></li>
+<li><a href="/doc/cs/algorithm/information/index#bland-et-al-2022-section" id="toc-bland-et-al-2022-section">“Story Beyond the Eye: Glyph Positions Break PDF Text Redaction”, Bland et al 2022</a></li>
+<li><a href="/doc/cs/algorithm/information/index#glimcher-2022-section" id="toc-glimcher-2022-section">“Efficiently Irrational: Deciphering the Riddle of Human Choice”, Glimcher 2022</a></li>
+<li><a href="/doc/cs/algorithm/information/index#reddy-et-al-2022-section" id="toc-reddy-et-al-2022-section">“First Contact: Unsupervised Human-Machine Co-Adaptation via Mutual Information Maximization”, Reddy et al 2022</a></li>
+<li><a href="/doc/cs/algorithm/information/index#domingue-et-al-2022-section" id="toc-domingue-et-al-2022-section">“The InterModel Vigorish (IMV): A Flexible and Portable Approach for Quantifying Predictive Accuracy With Binary Outcomes”, Domingue et al 2022</a></li>
+<li><a href="/doc/cs/algorithm/information/index#cohen-et-al-2021-1-section" id="toc-cohen-et-al-2021-1-section">“Intelligence and Unambitiousness Using Algorithmic Information Theory”, Cohen et al 2021</a></li>
+<li><a href="/doc/cs/algorithm/information/index#tran-et-al-2021-1-section" id="toc-tran-et-al-2021-1-section">“Entropy Trade-Offs in Artistic Design: A Case Study of Tamil <em>kolam</em>”, Tran et al 2021</a></li>
+<li><a href="/doc/cs/algorithm/information/index#_n-KJUWSR-section" id="toc-_n-KJUWSR-section">“Why Are Plants Green? To Reduce the Noise in Photosynthesis”</a></li>
+<li><a href="/doc/cs/algorithm/information/index#levy-calvert-2020-section" id="toc-levy-calvert-2020-section">“Computation in the Human Cerebral Cortex Uses Less Than 0.2 Watts yet This Great Expense Is Optimal When considering Communication Costs”, Levy &amp; Calvert 2020</a></li>
+<li><a href="/doc/cs/algorithm/information/index#xu-et-al-2020-section" id="toc-xu-et-al-2020-section">“A Theory of Usable Information Under Computational Constraints”, Xu et al 2020</a></li>
+<li><a href="/doc/cs/algorithm/information/index#chollet-2019-section" id="toc-chollet-2019-section">“On the Measure of Intelligence”, Chollet 2019</a></li>
+<li><a href="/doc/cs/algorithm/information/index#mingard-et-al-2019-section" id="toc-mingard-et-al-2019-section">“Neural Networks Are a Priori Biased towards Boolean Functions With Low Entropy”, Mingard et al 2019</a></li>
+<li><a href="/doc/cs/algorithm/information/index#leibfried-et-al-2019-section" id="toc-leibfried-et-al-2019-section">“A Unified Bellman Optimality Principle Combining Reward Maximization and Empowerment”, Leibfried et al 2019</a></li>
+<li><a href="/doc/cs/algorithm/information/index#kobayashi-hsu-2019-section" id="toc-kobayashi-hsu-2019-section">“Common Neural Code for Reward and Information Value”, Kobayashi &amp; Hsu 2019</a></li>
+<li><a href="/doc/cs/algorithm/information/index#mollica-piantadosi-2019-section" id="toc-mollica-piantadosi-2019-section">“Humans Store about 1.5 Megabytes of Information during Language Acquisition”, Mollica &amp; Piantadosi 2019</a></li>
+<li><a href="/doc/cs/algorithm/information/index#gold-et-al-2019-section" id="toc-gold-et-al-2019-section">“Predictability and Uncertainty in the Pleasure of Music: A Reward for Learning?”, Gold et al 2019</a></li>
+<li><a href="/doc/cs/algorithm/information/index#johnstone-2018-section" id="toc-johnstone-2018-section">“Accounting Theory As a Bayesian Discipline”, Johnstone 2018</a></li>
+<li><a href="/doc/cs/algorithm/information/index#frank-2018-section" id="toc-frank-2018-section">“Measurement Invariance Explains the Universal Law of Generalization for Psychological Perception”, Frank 2018</a></li>
+<li><a href="/doc/cs/algorithm/information/index#mueller-2017-section" id="toc-mueller-2017-section">“Law without Law: from Observer States to Physics via Algorithmic Information Theory”, Mueller 2017</a></li>
+<li><a href="/doc/cs/algorithm/information/index#bagrow-et-al-2017-section" id="toc-bagrow-et-al-2017-section">“Information Flow Reveals Prediction Limits in Online Social Activity”, Bagrow et al 2017</a></li>
+<li><a href="/doc/cs/algorithm/information/index#calvo-friston-2017-section" id="toc-calvo-friston-2017-section">“Predicting Green: Really Radical (Plant) Predictive Processing”, Calvo &amp; Friston 2017</a></li>
+<li><a href="/doc/cs/algorithm/information/index#murdock-et-al-2016-section" id="toc-murdock-et-al-2016-section">“Exploration and Exploitation of Victorian Science in Darwin’s Reading Notebooks”, Murdock et al 2016</a></li>
+<li><a href="/doc/cs/algorithm/information/index#krause-et-al-2016-section" id="toc-krause-et-al-2016-section">“Multiplicative LSTM for Sequence Modeling”, Krause et al 2016</a></li>
+<li><a href="/doc/cs/algorithm/information/index#erlich-zielinski-2016-section" id="toc-erlich-zielinski-2016-section">“Capacity-Approaching DNA Storage”, Erlich &amp; Zielinski 2016</a></li>
+<li><a href="/doc/cs/algorithm/information/index#demaine-et-al-2016-section" id="toc-demaine-et-al-2016-section">“Energy-Efficient Algorithms”, Demaine et al 2016</a></li>
+<li><a href="/doc/cs/algorithm/information/index#_23GbxpS6-section" id="toc-_23GbxpS6-section">“13 Animals Made From 13 Circles”</a></li>
+<li><a href="/doc/cs/algorithm/information/index#adamatzky-2016-section" id="toc-adamatzky-2016-section"><em>Advances in Physarum Machines: Sensing and Computing With Slime Mould</em>, Adamatzky 2016</a></li>
+<li><a href="/doc/cs/algorithm/information/index#hagar-2016-section" id="toc-hagar-2016-section">“Ed Fredkin and the Physics of Information: An Inside Story of an Outsider Scientist”, Hagar 2016</a></li>
+<li><a href="/doc/cs/algorithm/information/index#bartol-et-al-2015-section" id="toc-bartol-et-al-2015-section">“Nanoconnectomic Upper Bound on the Variability of Synaptic Plasticity”, Bartol et al 2015</a></li>
+<li><a href="/doc/cs/algorithm/information/index#soler-toscano-et-al-2014-section" id="toc-soler-toscano-et-al-2014-section">“Calculating Kolmogorov Complexity from the Output Frequency Distributions of Small Turing Machines”, Soler-Toscano et al 2014</a></li>
+<li><a href="/doc/cs/algorithm/information/index#ben-jacob-et-al-2014-section" id="toc-ben-jacob-et-al-2014-section">“The Physics of Bacterial Decision Making”, Ben-Jacob et al 2014</a></li>
+<li><a href="/doc/cs/algorithm/information/index#gelman-2013-section" id="toc-gelman-2013-section">“Understanding Predictive Information Criteria for Bayesian Models”, Gelman 2013</a></li>
+<li><a href="/doc/cs/algorithm/information/index#watanabe-2012-section" id="toc-watanabe-2012-section">“WBIC: A Widely Applicable Bayesian Information Criterion”, Watanabe 2012</a></li>
+<li><a href="/doc/cs/algorithm/information/index#ortega-braun-2012-section" id="toc-ortega-braun-2012-section">“Thermodynamics As a Theory of Decision-Making With Information Processing Costs”, Ortega &amp; Braun 2012</a></li>
+<li><a href="/doc/cs/algorithm/information/index#pellegrino-et-al-2011-section" id="toc-pellegrino-et-al-2011-section">“A Cross-Language Perspective On Speech Information Rate”, Pellegrino et al 2011</a></li>
+<li><a href="/doc/cs/algorithm/information/index#baez-stay-2010-section" id="toc-baez-stay-2010-section">“Algorithmic Thermodynamics”, Baez &amp; Stay 2010</a></li>
+<li><a href="/doc/cs/algorithm/information/index#harper-2009-section" id="toc-harper-2009-section">“Information Geometry and Evolutionary Game Theory”, Harper 2009</a></li>
+<li><a href="/doc/cs/algorithm/information/index#stigler-2007-section" id="toc-stigler-2007-section">“The Epic Story of Maximum Likelihood”, Stigler 2007</a></li>
+<li><a href="/doc/cs/algorithm/information/index#rodriguez-2006-section" id="toc-rodriguez-2006-section">“A Methodology for Studying Various Interpretations of the <em>N,N</em>-Dimethyltryptamine-Induced Alternate Reality”, Rodriguez 2006</a></li>
+<li><a href="/doc/cs/algorithm/information/index#skala-2004-section" id="toc-skala-2004-section">“What Color Are Your Bits?”, Skala 2004</a></li>
+<li><a href="/doc/cs/algorithm/information/index#levin-2002-section" id="toc-levin-2002-section">“Forbidden Information”, Levin 2002</a></li>
+<li><a href="/doc/cs/algorithm/information/index#lloyd-1999-section" id="toc-lloyd-1999-section">“Ultimate Physical Limits to Computation”, Lloyd 1999</a></li>
+<li><a href="/doc/cs/algorithm/information/index#lachmann-et-al-1999-section" id="toc-lachmann-et-al-1999-section">“The Physical Limits of Communication”, Lachmann et al 1999</a></li>
+<li><a href="/doc/cs/algorithm/information/index#sarpeshkar-1998-section" id="toc-sarpeshkar-1998-section">“Analog Versus Digital: Extrapolating from Electronics to Neurobiology”, Sarpeshkar 1998</a></li>
+<li><a href="/doc/cs/algorithm/information/index#jozsa-1998-section" id="toc-jozsa-1998-section">“Quantum Effects in Algorithms”, Jozsa 1998</a></li>
+<li><a href="/doc/cs/algorithm/information/index#akaike-1998-section" id="toc-akaike-1998-section">“Information Theory and an Extension of the Maximum Likelihood Principle”, Akaike 1998</a></li>
+<li><a href="/doc/cs/algorithm/information/index#li-vitányi-1992-section" id="toc-li-vitányi-1992-section">“Average Case Complexity under the Universal Distribution Equals Worst-Case Complexity”, Li &amp; Vitányi 1992</a></li>
+<li><a href="/doc/cs/algorithm/information/index#rao-1992-section" id="toc-rao-1992-section">“Information and the Accuracy Attainable in the Estimation of Statistical Parameters”, Rao 1992</a></li>
+<li><a href="/doc/cs/algorithm/information/index#graves-1989-section" id="toc-graves-1989-section">“The Total Evidence Theorem for Probability Kinematics”, Graves 1989</a></li>
+<li><a href="/doc/cs/algorithm/information/index#liversidge-shannon-1987-section" id="toc-liversidge-shannon-1987-section">“Profile of Claude Shannon”, Liversidge &amp; Shannon 1987</a></li>
+<li><a href="/doc/cs/algorithm/information/index#landauer-1986-section" id="toc-landauer-1986-section">“How Much Do People Remember? Some Estimates of the Quantity of Learned Information in Long-Term Memory”, Landauer 1986</a></li>
+<li><a href="/doc/cs/algorithm/information/index#bennett-landauer-1985-section" id="toc-bennett-landauer-1985-section">“The Fundamental Physical Limits of Computation”, Bennett &amp; Landauer 1985</a></li>
+<li><a href="/doc/cs/algorithm/information/index#levin-1984-section" id="toc-levin-1984-section">“Randomness Conservation Inequalities; Information and Independence in Mathematical Theories”, Levin 1984</a></li>
+<li><a href="/doc/cs/algorithm/information/index#cover-king-1978-section" id="toc-cover-king-1978-section">“A Convergent Gambling Estimate Of The Entropy Of English”, Cover &amp; King 1978</a></li>
+<li><a href="/doc/cs/algorithm/information/index#gordon-1962-section" id="toc-gordon-1962-section">“Quantum Effects in Communications Systems”, Gordon 1962</a></li>
+<li><a href="/doc/cs/algorithm/information/index#shannon-1959-section" id="toc-shannon-1959-section">“Coding Theorems for a Discrete Source With a Fidelity Criterion”, Shannon 1959</a></li>
+<li><a href="/doc/cs/algorithm/information/index#pierce-1949-section" id="toc-pierce-1949-section">“Chance Remarks”, Pierce 1949</a></li>
+<li><a href="/doc/cs/algorithm/information/index#pierce-1949-page-4-section" id="toc-pierce-1949-page-4-section">“Chance Remarks § Shannon’s <em>n</em>-Gram Generations”, Pierce 1949 (page 4)</a></li>
+<li><a href="/doc/cs/algorithm/information/index#_a7PQVyXe-section" id="toc-_a7PQVyXe-section">“Constant-Time Crypto”, Pornin 2026</a></li>
+<li><a href="/doc/cs/algorithm/information/index#_d62WwXp--section" id="toc-_d62WwXp--section">“Gyrophone: Recognizing Speech From Gyroscope Signals”, Michalevsky 2026</a></li>
+<li><a href="/doc/cs/algorithm/information/index#_IuvgLhYl-section" id="toc-_IuvgLhYl-section">“John Tromp Homepage”, Tromp 2026</a></li>
+<li><a href="/doc/cs/algorithm/information/index#_RUCY7Lhh-section" id="toc-_RUCY7Lhh-section">“Binary Lambda Calculus”, Tromp 2026</a></li>
+<li><a href="/doc/cs/algorithm/information/index#_IRHoQq94-section" id="toc-_IRHoQq94-section">“How Many Persons Can There Be: Brain Reconstruction and Big Numbers”</a></li>
+<li><a href="/doc/cs/algorithm/information/index#_tlHZoJdW-section" id="toc-_tlHZoJdW-section">“Mechanisms Too Simple for Humans to Design”</a></li>
+<li><a href="/doc/cs/algorithm/information/index#_lTYrVEA1-section" id="toc-_lTYrVEA1-section">“Harder Drive: Hard Drives We Didn’t Want or Need”, tom7 2026</a></li>
+<li><a href="/doc/cs/algorithm/information/index#sort-by-magic" id="toc-sort-by-magic">Sort By Magic</a>
+<ul>
+<li><a href="/doc/cs/algorithm/information/index#dna-storage" id="toc-dna-storage"><code>dna-storage</code></a></li>
+<li><a href="/doc/cs/algorithm/information/index#quantum-communication" id="toc-quantum-communication"><code>quantum-communication</code></a></li>
+<li><a href="/doc/cs/algorithm/information/index#information-quantification" id="toc-information-quantification"><code>information-quantification</code></a></li>
+<li><a href="/doc/cs/algorithm/information/index#computation-thermodynamics" id="toc-computation-thermodynamics"><code>computation-thermodynamics</code></a></li>
+<li><a href="/doc/cs/algorithm/information/index#information-theory" id="toc-information-theory"><code>information-theory</code></a></li>
+</ul></li>
+<li><a href="/doc/cs/algorithm/information/index#titled-links-wikipedia" id="toc-titled-links-wikipedia">Wikipedia (12)</a></li>
+</ul></li>
+<li><a href="/doc/cs/algorithm/information/index#miscellaneous" id="toc-miscellaneous">Miscellaneous</a></li>
+<li><a href="/doc/cs/algorithm/information/index#link-bibliography-section" id="toc-link-bibliography-section">Bibliography</a></li>
+</ul>
+</div>

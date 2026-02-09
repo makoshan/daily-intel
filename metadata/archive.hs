@@ -7374,11 +7374,13 @@
 , ( "https://news.ycombinator.com/item?id=7521462" , Left 61080 )
 , ( "https://news.ycombinator.com/item?id=7539390" , Left 61080 )
 , ( "https://newshacker.me/story?id=46885841" , Left 61080 )
+, ( "https://newshacker.me/story?id=46889710" , Left 61080 )
 , ( "https://newshacker.me/story?id=46924264" , Left 61080 )
 , ( "https://newshacker.me/story?id=46933401" , Left 61080 )
 , ( "https://newshacker.me/story?id=46933515" , Left 61080 )
 , ( "https://newshacker.me/story?id=46934107" , Left 61080 )
 , ( "https://newshacker.me/story?id=46934579" , Left 61080 )
+, ( "https://newshacker.me/story?id=46936237" , Left 61080 )
 , ( "https://newshacker.me/story?id=46937696" , Left 61080 )
 , ( "https://newshacker.me/story?id=46938511" , Left 61080 )
 , ( "https://newshacker.me/story?id=46939312" , Left 61080 )
@@ -7386,6 +7388,9 @@
 , ( "https://newshacker.me/story?id=46941603" , Left 61080 )
 , ( "https://newshacker.me/story?id=46941640" , Left 61080 )
 , ( "https://newshacker.me/story?id=46941882" , Left 61080 )
+, ( "https://newshacker.me/story?id=46943568" , Left 61080 )
+, ( "https://newshacker.me/story?id=46943752" , Left 61080 )
+, ( "https://newshacker.me/story?id=46944245" , Left 61080 )
 , ( "https://notes.andymatuschak.org/zXDPrYcxUSZbF5M8vM5Y1U9"
   , Left 61080
   )

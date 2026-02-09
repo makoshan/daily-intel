@@ -48,6 +48,26 @@ class RSSFetcher:
                 "url": "https://rsshub.app/wallstreetcn/news/global",  # 全球要闻
                 "category": "财经市场",
                 "limit": 10
+            },
+
+            # 新增源 - AI 强化版
+            "huggingface": {
+                "name": "Hugging Face Blog",
+                "url": "https://huggingface.co/blog/feed.xml",
+                "category": "AI 模型",
+                "limit": 8
+            },
+            "ruanyifeng": {
+                "name": "阮一峰网络日志",
+                "url": "https://www.ruanyifeng.com/blog/atom.xml",
+                "category": "技术周刊",
+                "limit": 5
+            },
+            "producthunt": {
+                "name": "Product Hunt",
+                "url": "https://rsshub.app/producthunt/today",
+                "category": "新产品",
+                "limit": 10
             }
         }
     
