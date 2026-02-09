@@ -1,15 +1,18 @@
 {-# LANGUAGE OverloadedStrings #-}
 module Config.Misc where
 
+import Control.Monad (msum)
 import Data.Char (toLower)
 import qualified Data.Text as T (head, takeWhile, Text)
-import System.Directory (setCurrentDirectory, getHomeDirectory, makeAbsolute)
+import System.Directory (setCurrentDirectory, getCurrentDirectory, doesFileExist)
+import System.FilePath ((</>), takeDirectory)
 import System.IO.Unsafe (unsafePerformIO)
+import System.Environment (getExecutablePath)
 
 import Data.Time.Calendar (addDays, diffDays, toModifiedJulianDay, toGregorian, Day)
 import Data.Time.Clock (getCurrentTime)
 import Data.Time (utcToLocalTime, localDay, localTimeOfDay, getCurrentTimeZone, todHour)
-import Data.Time.Format   (formatTime, defaultTimeLocale, parseTimeOrError)
+import Data.Time.Format   (formatTime, defaultTimeLocale, parseTimeM)
 
 import Utils (anyInfixT, anyPrefixT, setLike)
 
@@ -18,7 +21,28 @@ author = "Mako"
 authorL = map toLower author
 
 root :: FilePath
-root = unsafePerformIO $ makeAbsolute ".."
+root = unsafePerformIO $ do
+  cwd <- getCurrentDirectory
+  mRoot1 <- findRootMaybe cwd
+  case mRoot1 of
+    Just r  -> return r
+    Nothing -> do
+      exe <- getExecutablePath
+      mRoot2 <- findRootMaybe (takeDirectory exe)
+      case mRoot2 of
+        Just r  -> return r
+        Nothing -> error "Config.Misc.root: could not find site root (missing index.page in all parent directories)"
+  where
+    findRootMaybe :: FilePath -> IO (Maybe FilePath)
+    findRootMaybe d = do
+      ok <- doesFileExist (d </> "index.page")
+      if ok
+        then return (Just d)
+        else do
+          let parent = takeDirectory d
+          if parent == d
+            then return Nothing
+            else findRootMaybe parent
 
 cd :: IO ()
 cd = setCurrentDirectory root
@@ -103,25 +127,42 @@ tomorrowDayStringUnsafe = unsafePerformIO $ dayStringFromToday 1
 
 -- | True when (later − earlier) > n days.
 --   Example:  isOlderThan 90 "2025-01-01" "2025-06-02"  == True
+--   NOTE: accepts several date formats (see `toDay`), because legacy `.page`
+--   files often use "27 Jan 2009" instead of ISO-8601.
 isOlderThan :: Integer        -- ^ threshold in days
             -> String     -- ^ earlier date (YYYY-MM-DD)
             -> String     -- ^ later   date (YYYY-MM-DD)
             -> Bool
 isOlderThan n earlier later =
     diffDays (toDay later) (toDay earlier) > n
--- | Parse YYYY-MM-DD, YYYY-MM, or YYYY into a Day.
+-- | Parse a date string into a Day.
+-- Supports:
+-- - ISO:  "1999", "1999-05", "1999-05-23" (missing parts default to 01)
+-- - Legacy: "27 Jan 2009", "16 Jun 2012"
 --   Missing parts default to the first day of the period.
 --     "1999"      -> 1999-01-01
 --     "1999-05"   -> 1999-05-01
 --     "1999-05-23"-> 1999-05-23
 toDay :: String -> Day
-toDay s = parseTimeOrError True defaultTimeLocale "%Y-%m-%d" padded
+toDay s =
+  case parseDay s of
+    Just d  -> d
+    Nothing -> error $ "Config.Misc.toDay: could not parse date: " ++ show s
   where
-    padded = case length s of
-        4  -> s ++ "-01-01"  -- YYYY
-        7  -> s ++ "-01"     -- YYYY-MM
-        10 -> s              -- YYYY-MM-DD
-        _  -> error $ "Config.Misc.toDay: bad date (by length): '" ++ show s ++ "'"
+    parseDay :: String -> Maybe Day
+    parseDay x = msum
+      [ -- ISO-8601 variants:
+        parseTimeM True defaultTimeLocale "%Y-%m-%d" x
+      , parseTimeM True defaultTimeLocale "%Y-%m-%d %H:%M" x
+      , parseTimeM True defaultTimeLocale "%Y-%m-%d %H:%M:%S" x
+      , parseTimeM True defaultTimeLocale "%Y-%m"    x
+      , parseTimeM True defaultTimeLocale "%Y"       x
+        -- Legacy Gwern-style / older metadata:
+      , parseTimeM True defaultTimeLocale "%e %b %Y" x
+      , parseTimeM True defaultTimeLocale "%e %B %Y" x
+      , parseTimeM True defaultTimeLocale "%d %b %Y" x
+      , parseTimeM True defaultTimeLocale "%d %B %Y" x
+      ]
 
 isNewWithinNDays :: Integer
 isNewWithinNDays = 31 * 2

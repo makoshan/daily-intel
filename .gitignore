@@ -18,6 +18,9 @@ static/build/preprocess-markdown
 _cache/
 _site/
 
+# Generated homepage with auto index (built from index.page)
+index.generated.page
+
 # Hakyll/Cabal outputs
 build/dist-newstyle/
 

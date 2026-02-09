@@ -308,7 +308,7 @@ archiveItem url =
     return (Right archive)
 
 insertLinkIntoDB :: ArchiveMetadataItem -> String -> IO ()
-insertLinkIntoDB a                "" = error $ "LinkArchive.hs: called with empty URL! Other input was: " ++ show a
+insertLinkIntoDB _                "" = return () -- tolerate empty-link targets in legacy content
 insertLinkIntoDB (Right Nothing) url = error $ "LinkArchive.hs: called with meaningless ArchiveMetadataItem (Right Nothing)! Other input was: " ++ show url
 insertLinkIntoDB a url = do adb <- readArchiveMetadata
                             let adb' = M.insert url a adb

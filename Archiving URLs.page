@@ -1,0 +1,558 @@
+---
+description: Archiving the Web, because nothing lasts forever - pulling together all the previous archive tools.
+tags: Haskell, archiving
+created: 10 Mar 2011
+status: finished
+belief: highly likely
+...
+
+> "Decay is inherent in all compound things. Work out your own salvation with diligence." --Last words of the Buddha
+
+Given my interest in [long term content](About#long-content) and extensive linking, [link rot](!Wikipedia) is an issue of deep concern to me. I need backups not just for my files[^backups], but for the web pages I read and use - they're all part of my [exomind](!Wikipedia). It's not much good to have an extensive essay on some topic where half the links are dead and the reader can neither verify my claims nor get context for my claims.
+
+[^backups]: I use [`duplicity`](http://duplicity.nongnu.org/) & [`rdiff-backup`](http://www.nongnu.org/rdiff-backup/) to backup my entire home directory to a cheap 1.5TB hard drive (bought from Newegg using `forre.st`'s ["Storage Analysis - GB/$ for different sizes and media"](http://forre.st/storage#hdd) price-chart); a limited selection of folders are backed up to [Tarsnap](http://www.tarsnap.com/).
+
+    I used to semiannually tar up my important folders, add [PAR2](!Wikipedia) redundancy, and burn them to DVD, but that's no longer really feasible; if I ever get a Blu-ray burner, I'll resume WORM backups. (Magnetic media doesn't strike me as reliable over many decades, and it would ease my mind to have optical backups.)
+
+# Link rot
+
+The dimension of digital decay is dismal and distressing. [Wikipedia](!Wikipedia "Link rot#Prevalence"):
+
+> In a 2003 experiment, [Fetterly et al.](http://www2003.org/cdrom/papers/refereed/p097/P97%20sources/p97-fetterly.html) discovered that about one link out of every 200 disappeared each week from the Internet. [McCown et al. (2005)](http://iwaw.europarchive.org/05/papers/iwaw05-mccown1.pdf) discovered that half of the URLs cited in [D-Lib Magazine](!Wikipedia) articles were no longer accessible 10 years after publication [the irony!], and other studies have shown link rot in academic literature to be even worse ([Spinellis, 2003](http://www.spinellis.gr/pubs/jrnl/2003-CACM-URLcite/html/urlcite.html), [Lawrence et al., 2001](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.97.9695&rep=rep1&type=pdf)). [Nelson and Allen (2002)](http://www.dlib.org/dlib/january02/nelson/01nelson.html) examined link rot in digital libraries and found that about 3% of the objects were no longer accessible after one year.
+
+[Bruce Schneier](!Wikipedia) remarks that one friend experienced 50% linkrot in one of his pages over less than 9 years (not that the situation was any better [in 1998](http://www.pantos.org/atw/35654.html)), and that his own blog posts link to news articles that go dead in days[^Schneier]; the [Internet Archive](!Wikipedia) has estimated the average lifespan of a Web page at [100 days](https://web.archive.org/web/20071019225237/http://www.wired.com/culture/lifestyle/news/2001/10/47894 "Wayback Goes Way Back on Web"). A _[Science](!Wikipedia "Science (journal)")_ study looked at articles in prestigious journals; they didn't use many Internet links, but when they did, 2 years later ~13% were dead[^science]. The French company Linterweb studied external links on the [French Wikipedia](!Wikipedia) before setting up [their cache](http://www.wikiwix.com/) of French external links, and found - back in 2008 - already [5% were dead](http://fr.wikipedia.org/wiki/Utilisateur:Pmartin/Cache). (The English Wikipedia has seen a 2010-2011 spike from a few thousand dead links to [~110,000](!Wikipedia "File:Articles-w-Dead-Links-Jan-2011.png") out of [~17.5m live links](!Wikipedia "Wikipedia talk:WikiProject External links/Webcitebot2#Summary").)  The dismal studies [just](http://jnci.oxfordjournals.org/content/96/12/969.full "'Internet Citations in Oncology Journals: A Vanishing Resource?', Hester et al 2004") [go](/docs/2007-dimitrova.pdf "'The half-life of internet references cited in communication journals', Dimitrova & Bugeja 2007") [on](/docs/2008-wren.pdf "'URL decay in MEDLINE - a 4-year follow-up study', Wren 2008") [and](http://archderm.ama-assn.org/cgi/reprint/142/9/1147.pdf "'Uniform Resource Locator Decay in Dermatology Journals: Author Attitudes and Preservation Practices', Wren et al 2006") [on](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2213465/ "'The Prevalence and Inaccessibility of Internet References in the Biomedical Literature at the Time of Publication', Aronsky et al 2007") [and](http://yjolt.org/sites/default/files/Something_Rotten_in_Legal_Citation.pdf "'Something Rotten in the State of Legal Citation: the Life Span of a United States Supreme Court Citation Containing an Internet Link (1996-2010)', Liebler & Liebert 2013") [on](http://www.fasebj.org/content/19/14/1943.full "'Unavailability of online supplementary scientific information from articles published in major journals', Evangelou et al 2005") ([and](http://ijism.ricest.ac.ir/ojs/index.php/ijism/article/download/49/53 "'Availability and Half-life of Web References Cited in Information Research Journal: A Citation Study', Moghaddam et al 2012") [on](http://papers.ssrn.com/sol3/papers.cfm?abstract_id=2329161 "'Perma: Scoping and Addressing the Problem of Link and Reference Rot in Legal Citations', Zittrain  & Albert 2013")). Even in a highly stable, funded, curated environment, link rot happens anyway. For example, about [11% of Arab Spring-related tweets](http://arxiv.org/pdf/1209.3026v1.pdf "'Losing My Revolution: How Many Resources Shared on Social Media Have Been Lost?', SalahEldeen & Nelson 2012") were gone within a year (even though Twitter is - currently - still around).
+
+[^science]: ["Going, Going, Gone: Lost Internet References"](http://scimaps.org/exhibit/docs/dellawalle.pdf); abstract:
+
+    > The extent of Internet referencing and Internet reference activity in medical or scientific publications was systematically examined in more than 1000 articles published between 2000 and 2003 in the New England Journal of Medicine, The Journal of the American Medical Association, and Science. Internet references accounted for 2.6% of all references (672/25548) and in articles 27 months old, 13% of Internet references were inactive.
+[^Schneier]: ["When the Internet Is My Hard Drive, Should I Trust Third Parties?"](https://web.archive.org/web/20121108093008/http://www.wired.com/politics/security/commentary/securitymatters/2008/02/securitymatters_0221), _Wired_:
+
+    > Bits and pieces of the web disappear all the time. It's called 'link rot', and we're all used to it. A friend saved 65 links in 1999 when he planned a trip to Tuscany; only half of them still work today. In my own blog, essays and news articles and websites that I link to regularly disappear -- sometimes within a few days of my linking to them.
+
+My specific target date is 2070, 60 years from now. As of 10 March 2011, `gwern.net` has around 6800 external links (with around 2200 to non-Wikipedia websites)^[By 6 January 2013, the number has increased to ~12000 external links, ~7200 to non-Wikipedia domains.]. Even at the lowest estimate of 3% annual linkrot, few will survive to 2070. If each link has a 97% chance of surviving each year, then the chance a link will be alive in 2070 is $0.97^{2070-2011} = ~0.16$ (or to put it another way, an 84% chance any given link *will* die). The 95% [confidence interval](!Wikipedia) for such a [binomial distribution](!Wikipedia) says that of the 2200 non-Wikipedia links, ~336-394 will survive to 2070[^R-binomial]. If we try to predict using a more reasonable estimate of 50% linkrot, then an average of 0 links will survive ($0.50^{2070-2011} \times 2200 = 1.735 \times 10^{-16} \times 2200 \simeq 0$). It would be a good idea to simply assume that *no* link will survive.
+
+[^R-binomial]: If each link has a fixed chance of dying in each time period, such as 3%, then the total risk of death is an [exponential distribution](!Wikipedia); over the time period 2011-2070 the cumulative chance it will beat each of the 3% risks is 0.1658. So in 2070, how many of the 2200 links will have beat the odds? Each link is independent, so they are like flipping a biased coin and form a [binomial distribution](!Wikipedia). The binomial distribution, being discrete, has no easy equation, so we just ask R how many links survive at the 5th percentile/quantile (a lower bound) and how many survive at the 95th percentile (an upper bound):
+
+    ~~~{.R}
+    qbinom(c(0.05, 0.95), 2200, 0.97^(2070-2011))
+    [1] 336 394
+
+    # the 50% annual link rot hypothetical:
+    qbinom(c(0.05, 0.50), 2200, 0.50^(2070-2011))
+    [1] 0 0
+    ~~~
+
+With that in mind, one can consider remedies. (If we lie to ourselves and say it won't be a problem in the future, then we guarantee that it *will* be a problem. ["People can stand what is true, for they are already enduring it."](http://wiki.lesswrong.com/wiki/Litany_of_Gendlin))
+
+# Detection
+
+> With every new spring \
+> the blossoms speak not a word \
+> yet expound the Law -- \
+> knowing what is at its heart \
+> by the scattering storm winds.^[Shōtetsu; 101, 'Buddhism related to Blossoms'; [_Unforgotten Dreams: Poems by the Zen monk Shōtetsu_](http://www.amazon.com/Unforgotten-Dreams-Steven-D-Carter/dp/0231105762/); trans. Steven D. Carter, ISBN 0-231-10576-2]
+
+The first remedy is to learn about broken links as soon as they happen, which allows one to react quickly and scrape archives or search engine caches (['lazy preservation'](http://www.cs.odu.edu/~fmccown/research/lazy/)). I currently use [`linkchecker`](http://wummel.github.io/linkchecker/) to spider gwern.net looking for broken links. `linkchecker` is run in a [cron](!Wikipedia) job like so:
+
+~~~{.bash}
+@monthly linkchecker --check-extern --timeout=35 --no-warnings --file-output=html \
+                      --ignore-url=^mailto --ignore-url=^irc --ignore-url=http://.*\.onion \
+                      --ignore-url=paypal.com --ignore-url=web.archive.org \
+                     http://www.gwern.net
+~~~
+
+Just this command would turn up many false positives. For example, there would be several hundred warnings on Wikipedia links because I link to redirects; and `linkchecker` respects [robots.txt](!Wikipedia)s which forbid it to check liveness, but emits a warning about this. These can be suppressed by editing `~/.linkchecker/linkcheckerrc` to say `ignorewarnings=http-moved-permanent,http-robots-denied` (the available warning classes are listed in `linkchecker -h`).
+
+The quicker you know about a dead link, the sooner you can look for replacements or its new home.
+
+# Prevention
+## Remote caching
+
+We can ask a third party to keep a cache for us. There are several [archive site](!Wikipedia) possibilities:
+
+1. the [Internet Archive](!Wikipedia)
+2. [WebCite](!Wikipedia)
+3. [Perma.cc](http://perma.cc/)
+3. Linterweb's WikiWix^[Which I suspect is only accidentally 'general' and would shut down access if there were some other way to ensure that Wikipedia external links still got archived.].
+4. [Peeep.us](http://www.peeep.us/)
+5. [Archive.is](http://archive.is/)
+6. [Pinboard](https://pinboard.in/) (with the $25/yr archiving option^[Since Pinboard is a bookmarking service more than an archive site, I asked whether treating it as such would be acceptable and Maciej said "Your current archive size, growing at 20 GB a year, should not be a problem. I'll put you on the heavy-duty server where my own stuff lives."])
+7. [Hiyo.jp](http://hiyo.jp/) & [Megalodon.jp](http://megalodon.jp/) (may be difficult to use)
+
+There are other options but they are not available like Google^[Google Cache is generally recommended only as a last ditch resort because pages expire quickly from it. Personally, I'm convinced that Google would never just delete colossal amounts of Internet data - this is Google, after all, the epitome of storing unthinkable amounts of data - and that Google Cache merely ceases to make public its copies. And to request a Google spider visit, one has to solve a CAPTCHA - so that's not a scalable solution.] or various commercial/government archives^[Which would not be publicly accessible or submittable; I know they exist, but because they hide themselves, I know only from random comments online eg. ["years ago a friend of mine who I'd lost contact with caught up with me and told me he found a cached copy of a website I'd taken down in his employer's equivalent to the Wayback Machine. His employer was a branch of the federal government."](https://news.ycombinator.com/item?id=2880427).]
+
+<!-- TODO: develop and cover Pinboard, Archive.is, and Peeep.us support -->
+
+(An example would be [`bits.blogs.nytimes.com/2010/12/07/palm-is-far-from-game-over-says-former-chief/`](http://bits.blogs.nytimes.com/2010/12/07/palm-is-far-from-game-over-says-former-chief/ "Palm Is Far From 'Game Over', Says Former Chief") being archived at [`webcitation.org/5ur7ifr12`](http://webcitation.org/5ur7ifr12).)
+
+My first program in this vein of thought was a bot which fired off WebCite and Internet Archive/Alexa requests: [Wikipedia Archiving Bot](haskell/Wikipedia Archive Bot), quickly followed up by a [RSS version](haskell/Wikipedia RSS Archive Bot). (Or you could install the [Alexa Toolbar](!Wikipedia) to get automatic submission to the Internet Archive, if you have ceased to care about privacy.)
+
+The core code was quickly adapted into a [gitit](!Hackage) wiki plugin which hooked into the save-page functionality and tried to archive every link in the newly-modified page, [Interwiki.hs](https://github.com/jgm/gitit/blob/master/plugins/Interwiki.hs)
+
+Finally, I wrote [archiver](!Hackage), a daemon which watches[^watch]/reads a text file. (Source is available via `git clone https://github.com/gwern/archiver-bot.git`.)
+
+[^watch]: [Version 0.1](http://hackage.haskell.org/package/archiver-0.1) of my `archiver` daemon didn't simply read the file until it was empty and exit, but actually watched it for modifications with [inotify](!Wikipedia). I removed this functionality when I realized that the required WebCite choking (just one URL every ~25 seconds) meant that `archiver` would *never* finish any reasonable workload.
+
+The library half of `archiver` is a simple wrapper around the appropriate HTTP requests; the executable half reads a specified text file and loops as it (slowly) fires off requests and deletes the appropriate URL.
+
+That is, `archiver` is a daemon which will process a specified text file, each line of which is a URL, and will one by one request that the URLs be archived or spidered
+
+Usage of `archiver` might look like `archiver ~/.urls.txt gwern@gwern.net`. In the past, `archiver` would sometimes crash for unknown reasons, so I usually wrap it in a `while` loop like so: `while true; do archiver ~/.urls.txt gwern@gwern.net; done`.
+If I wanted to put it in a detached [GNU screen](!Wikipedia) session: `screen  -d -m -S "archiver" sh -c 'while true; do archiver ~/.urls.txt gwern@gwern.net; done'`.
+Finally, rather than start it manually, I use a cron job to start it at boot, for a final invocation of
+
+~~~{.Bash}
+@reboot sleep 4m && screen -d -m -S "archiver" sh -c 'while true; do archiver ~/.urls.txt gwern2@gwern.net \
+        "cd ~/www && nice -n 20 ionice -c3 torify wget --unlink --limit-rate=20k --page-requisites --timestamping \
+        -e robots=off --reject .iso,.exe,.gz,.xz,.rar,.7z,.tar,.bin,.zip,.jar,.flv,.mp4,.avi,.webm \
+        --user-agent='Firefox/4.9'" 200; done'
+~~~
+
+## Local caching
+
+Remote archiving, while convenient, has a major flaw: the archive services cannot keep up with the growth of the Internet and are woefully incomplete. I experience this regularly, where a link on `gwern.net` goes dead and I cannot find it in the Internet Archive or WebCite, and it is a general phenomenon: [Ainsworth et al 2012](http://arxiv.org/pdf/1212.6177v1.pdf "How Much of the Web Is Archived?") find <35% of common Web pages ever copied into an archive service, and typically only one copy exists.
+
+On a roughly monthly basis, I run a shell script named, imaginatively enough, `local-archiver`:
+
+~~~{.bash}
+#!/bin/sh
+set -e
+
+cp `find ~/.mozilla/ -name "places.sqlite"` ~/
+sqlite3 places.sqlite "SELECT url FROM moz_places, moz_historyvisits \
+                       WHERE moz_places.id = moz_historyvisits.place_id \
+                             and visit_date > strftime('%s','now','-1.5 month')*1000000 ORDER by \
+                       visit_date;" | filter-urls >> ~/.tmp
+rm ~/places.sqlite
+split -l500 ~/.tmp ~/.tmp-urls
+rm ~/.tmp
+
+cd ~/www/
+for file in ~/.tmp-urls*;
+ do (wget --unlink --continue --page-requisites --timestamping --input-file $file && rm $file &);
+done
+
+find ~/www -size +4M -delete
+~~~
+
+The code is not the prettiest, but it's fairly straightforward:
+
+- the script grabs my Firefox browsing history by extracting it from the history SQL database file^[Much easier than it was in the past; [Jamie Zawinski](!Wikipedia) records his travails with the *previous* Mozilla history format in the aptly-named ["when the database worms eat into your brain"](http://www.jwz.org/blog/2004/03/when-the-database-worms-eat-into-your-brain/).], and feeds the URLs into [wget](!Wikipedia)
+- The script `split`s the long list of URLs into a bunch of files and runs that many `wget`s because `wget` apparently has no way of simultaneously downloading from multiple domains.
+- The [`filter-urls`](#filter-urls) command is another shell script, which removes URLs I don't want archived. This script is a hack which looks like this:
+
+    ~~~{.bash}
+    #!/bin/sh
+    set -e
+    cat /dev/stdin | sed -e "s/#.*//" | sed -e "s/&sid=.*$//" | sed -e "s/\/$//" | grep -v -e 4chan -e reddit ...
+    ~~~
+
+A local copy is not the best resource - what if a link goes dead in a way your tool cannot detect so you don't *know* to put up your copy somewhere? But it solves the problem pretty decisively.
+
+`archiver` has an extra feature where any third argument is treated as an arbitrary `sh` command to run after each URL is archived, to which is appended said URL. You might use this feature if you wanted to load each URL into Firefox, or append them to a log file, or simply download or archive the URL in some other way.
+
+For example, in conjunction with the big `local-archiver` runs, I have `archiver` run `wget` on each individual URL: `screen  -d -m -S "archiver" sh -c 'while true; do archiver ~/.urls.txt gwern@gwern.net "cd ~/www && wget --unlink --continue --page-requisites --timestamping -e robots=off --reject .iso,.exe,.gz,.xz,.rar,.7z,.tar,.bin,.zip,.jar,.flv,.mp4,.avi,.webm --user-agent='Firefox/3.5' 120"; done'`.
+
+Alternately, you might use `curl` or a specialized archive downloader like the Internet Archive's crawler [Heritrix](http://crawler.archive.org/).
+
+The space consumed by such a backup is not that bad; only 30-50 gigabytes for a year of browsing, and less depending on how hard you prune the downloads. (More, of course, if you use `linkchecker` to archive entire sites and not just the pages you visit.) Storing this is quite viable in the long term; while page sizes have [increased 7x](http://www.websiteoptimization.com/speed/tweak/average-web-page/) between 2003 and 2011 and pages average around 400kb^[An older [2010 Google article](https://code.google.com/speed/articles/web-metrics.html) put the average at 320kb, but that was an average over the entire Web, including all the old content.], [Kryder's law](!Wikipedia) has also been operating and has increased disk capacity by ~128x - in 2011, \$80 will buy you at least [2 terabytes](http://forre.st/storage#hdd), that works out to 4 cents a gigabyte or 80 cents for the low estimate for downloads; that is much better than the $25 annual fee that somewhere like [Pinboard](http://pinboard.in/upgrade/) charges. Of course, you need to back this up yourself. We're relatively fortunate here - most Internet documents are 'born digital' and easy to migrate to new formats or inspect in the future. We can download them and worry about how to view them only when we need a particular document, and Web browser backwards-compatibility already stretches back to files written in the early 1990s. (Of course, we're probably screwed if we discover the content we wanted was presented only in Adobe Flash or as an inaccessible 'cloud' service.) In contrast, if we were trying to preserve programs or software libraries instead, we would face a much more formidable task in keeping a working ladder of binary-compatible virtual machines or interpreters^[Already one runs old games like the classic [LucasArts adventure games](!Wikipedia) in emulators of the DOS operating system like [DOSBox](!Wikipedia); but those emulators will not always be maintained. Who will emulate the emulators? Presumably in 2050, one will instead emulate some ancient but compatible OS - Windows 7 or Debian 6.0, perhaps - and inside *that* run DOSBox (to run the DOS which can run the game).]. The situation with [digital movie preservation](http://www.davidbordwell.net/blog/2012/02/13/pandoras-digital-box-pix-and-pixels/ "Pandora's digital box: Pix and pixels") hardly bears thinking on.
+
+There are ways to cut down on the size; if you tar it all up and run [7-Zip](!Wikipedia) with maximum compression options, you could probably compact it to 1/5th the size. I found that the uncompressed files could be reduced by around 10% by using [fdupes](!Wikipedia) ([homepage](http://netdial.caribe.net/~adrian2/fdupes.html)) to look for duplicate files and turning the duplicates into a space-saving [hard link](!Wikipedia) to the original with a command like `fdupes --recurse --hardlink ~/www/`. (Apparently there are a *lot* of bit-identical JavaScript (eg. [JQuery](!Wikipedia)) and images out there.)
+
+### URL sources
+#### Browser history
+
+There are a number of ways to populate the source text file. For example, I have a script `firefox-urls`:
+
+~~~{.bash}
+#!/bin/sh
+set -e
+
+cp --force `find ~/.mozilla/firefox/ -name "places.sqlite"|sort|head -1` ~/
+sqlite3 -batch places.sqlite "SELECT url FROM moz_places, moz_historyvisits \
+                       WHERE moz_places.id = moz_historyvisits.place_id and \
+                       visit_date > strftime('%s','now','-1 day')*1000000 ORDER by \
+                       visit_date;" | filter-urls
+rm ~/places.sqlite
+~~~
+
+(`filter-urls` is the same script as in `local-archiver`. If I don't want a domain locally, I'm not going to bother with remote backups either. In fact, because of WebCite's rate-limiting, `archiver` is almost perpetually back-logged, and I *especially* don't want it wasting time on worthless links like [4chan](!Wikipedia).)
+
+This is called every hour by `cron`:
+
+~~~{.bash}
+@hourly firefox-urls >> ~/.urls.txt
+~~~
+
+This gets all visited URLs in the last time period and prints them out to the file for archiver to process. Hence, everything I browse is backed-up through `archiver`.
+
+Non-Firefox browsers can be supported with similar strategies; for example, Zachary Vance's Chromium scripts likewise extracts URLs from Chromium's [SQL history](https://github.com/vanceza/rip-chrome-history) & [bookmarks](https://github.com/vanceza/export-chrome-bookmarks).
+
+#### Document links
+
+More useful perhaps is a script to extract external links from Markdown files and print them to standard out: [link-extractor.hs](haskell/link-extractor.hs)
+
+So now I can take `find . -name "*.page"`, pass the 100 or so Markdown files in my wiki as arguments, and add the thousand or so external links to the archiver queue (eg. `find . -name "*.page" -type f -print0 | xargs -0 runhaskell haskell/link-extractor.hs | filter-urls >> ~/.urls.txt`); they will eventually be archived/backed up.
+
+#### Website spidering
+
+Sometimes a particular website is of long-term interest to one even if one has not visited *every* page on it; one could manually visit them and rely on the previous Firefox script to dump the URLs into `archiver` but this isn't always practical or time-efficient. `linkchecker` inherently spiders the websites it is turned upon, so it's not a surprise that it can build a [site map](!Wikipedia) or simply spit out all URLs on a domain; unfortunately, while `linkchecker` has the ability to output in a remarkable variety of formats, it cannot simply output a newline-delimited list of URLs, so we need to post-process the output considerably. The following is the shell one-liner I use when I want to archive an entire site (note that this is a bad command to run on a large or heavily hyper-linked site like the English Wikipedia or [LessWrong](http://lesswrong.com)!); edit the target domain as necessary:
+
+~~~{.bash}
+linkchecker --check-extern -odot --complete -v --ignore-url=^mailto --no-warnings http://www.longbets.org
+    | fgrep http
+    | fgrep -v -e "label=" -e "->" -e '" [' -e '" ]' -e "/ "
+    | sed -e "s/href=\"//" -e "s/\",//" -e "s/ //"
+    | filter-urls
+    | sort --unique >> ~/.urls.txt
+~~~
+
+When `linkchecker` does not work, one alternative is to do a `wget --mirror` and extract the URLs from the filenames - list all the files and prefix with a "http://" etc.
+
+# Reacting to broken links
+
+`archiver` combined with a tool like `link-checker` means that there will rarely be any broken links on `gwern.net` since one can either find a live link or use the archived version. In theory, one has multiple options now:
+
+0. Search for a copy on the live Web
+1. link the Internet Archive copy
+2. link the WebCite copy
+3. link the WikiWix copy
+4. use the `wget` dump
+
+    If it's been turned into a full local file-based version with `--convert-links --page-requisites`, one can easily convert the dump into something like a standalone PDF suitable for public distribution. (A PDF is easier to store and link than the original directory of bits and pieces or other HTML formats like a ZIP archive of said directory.)
+
+    I use [`wkhtmltopdf`](http://code.google.com/p/wkhtmltopdf/) which does a good job; an example of a dead webpage with no Internet mirrors is `http://www.aeiveos.com/~bradbury/MatrioshkaBrains/MatrioshkaBrainsPaper.html` which can be found at [1999-bradbury-matrioshkabrains.pdf](/docs/1999-bradbury-matrioshkabrains.pdf), or Sternberg et al's 2001 review ["The Predictive Value of IQ"](/docs/dnb/2001-sternberg.pdf).
+
+# External links
+
+- [Archive-It](http://www.archive-it.org/) -(by the Internet Archive)
+- [Pinboard](http://pinboard.in/)
+
+    - ["Bookmark Archives That Don't"](http://blog.pinboard.in/2010/11/bookmark_archives_that_don_t/)
+- ["Testing 3 million hyperlinks, lessons learned"](http://samsaffron.com/archive/2012/06/07/testing-3-million-hyperlinks-lessons-learned#comment-31366), Stack Exchange
+- ["Backup All The Things"](/docs/2011-muflax-backup.pdf), muflax
+- [Hacker News discussion](https://news.ycombinator.com/item?id=6504331)
+
+# Appendices
+## `filter-urls`
+
+A raw dump of URLs, while certainly archivable, will typically result in a very large mirror of questionable value (is it really necessary to archive Google search queries or Wikipedia articles? usually, no) and worse, given the rate-limiting necessary to store URLs in the Internet Archive or other services, may wind up delaying the archiving of the important links & risking their total loss. Disabling the remote archiving is unacceptable, so the best solution is to simply take a little time to manually blacklist various domains or URL patterns.
+
+This blacklisting can be as simple as a command like `filter-urls | grep -v en.bwikipedia.org`, but can be much more elaborate. The following shell script is the skeleton of my own custom blacklist, derived from manually filtering through several years of daily browsing as well as spiders of [dozens of websites](http://lesswrong.com/lw/7kg/rationalist_sites_worth_archiving/ "Rationalist sites worth archiving?") for various people & purposes, demonstrating a variety of possible techniques: regexps for domains & file-types & query-strings, `sed`-based rewrites, fixed-string matches (both blacklists and whitelists), etc:
+
+~~~{.Bash}
+#!/bin/sh
+
+# USAGE: `filter-urls` accepts on standard input a list of newline-delimited URLs or filenames,
+# and emits on standard output a list of newline-delimited URLs or filenames.
+#
+# This list may be shorter and entries altered. It tries to remove all unwanted entries, where 'unwanted'
+# is a highly idiosyncratic list of regexps and fixed-string matches developed over hundreds of thousands
+# of URLs/filenames output by my daily browsing, spidering of interesting sites, and requests
+# from other people to spider sites for them.
+#
+# You are advised to test output to make sure it does not remove
+# URLs or filenames you want to keep. (An easy way to test what is removed is to use the `comm` utility.)
+#
+# For performance, it does not sort or remove duplicates from output; both can be done by
+# piping `filter-urls` to `sort --unique`.
+
+set -e
+
+cat /dev/stdin \
+    | sed -e "s/#.*//" -e 's/>$//' -e "s/&sid=.*$//" -e "s/\/$//" -e 's/$/\n/' -e 's/\?sort=.*$//' \
+      -e 's/^[ \t]*//' -e 's/utm_source.*//' -e 's/https:\/\//http:\/\//' -e 's/\?showComment=.*//' \
+    | grep "\." \
+    | fgrep -v "*" \
+    | egrep -v -e '\/\.rss$' -e "\.tw$" -e "//%20www\." -e "/file-not-found" -e "258..\.com/$" \
+       -e "3qavdvd" -e "://avdvd" -e "\.avi" -e "\.com\.tw" -e "\.onion" -e "\?fnid\=" -e "\?replytocom=" \
+       -e "^lesswrong.com/r/discussion/comments$" -e "^lesswrong.com/user/gwern$" \
+       -e "^webcitation.org/query$" \
+       -e "ftp.*" -e "6..6\.com" -e "6..9\.com" -e "6??6\.com" -e "7..7\.com" -e "7..8\.com" -e "7..\.com" \
+       -e "78..\.com" -e "7??7\.com" -e "8..8\.com" -e "8??8\.com" -e "9..9\.com" -e "9??9\.com" \
+       -e gold.*sell -e vip.*club \
+    | fgrep -v -e "#!" -e ".bin" -e ".mp4" -e ".swf" -e "/mediawiki/index.php?title=" -e "/search?q=cache:" \
+      -e "/wiki/Special:Block/" -e "/wiki/Special:WikiActivity" -e "Special%3ASearch" \
+      -e "Special:Search" -e "__setdomsess?dest="
+
+# prevent URLs from piling up at the end of the file
+echo ""
+~~~
+
+`filter-urls` can be used on one's local archive to save space by deleting files which may be downloaded by `wget` as dependencies. For example:
+
+~~~{.Bash}
+find ~/www | sort --unique >> full.txt && \
+    find ~/www | filter-urls | sort --unique >> trimmed.txt
+comm -23 full.txt trimmed.txt | xargs -d "\n" rm
+rm full.txt trimmed.txt
+~~~
+
+This shrunk my archive by 9GB from 65GB to 56GB, although at the cost of some archiving fidelity by removing many filetypes like CSS or JavaScript or GIF images.
+
+## `sort --key` compression trick
+
+One way to look at data compression is as a form of intelligence (see the [Hutter Prize](!Wikipedia) & [Burfoot 2011](http://arxiv.org/abs/1104.5466 "Notes on a New Philosophy of Empirical Science")): a compression tool like [`xz`](!Wikipedia "xz") is being asked to predict what the next bit of the original file is, and the better its predictions, the less data needs to be stored to correct its mistaken predictions ("I know how to spell 'banana', I just don't know when to stop"). The smarter the program is, the better its compression will be; but on the flip side, you can also improve the compression ratio by giving it a little help and organizing the data into an equivalent form the program can understand better - for example, by using the [Burrows-Wheeler transform](!Wikipedia). Or by preserving spatial locality: keeping similar data together, and not dispersing it all over. (This also explains why multimedia files barely compress: because the lossy encodings are the product of decades of work specialized to the particular domain of audio or images or video, and a general-purpose lossless compression would have to be *very* intelligent, on par with [PAQ](!Wikipedia), to beat them at their own game.) Files on one topic should be compressed together.
+
+### Locality
+
+Spatial locality can be subtle. For example, natural language text, though not structured line-by-line as visibly as a dictionary, is still far from random and has many local correlations a compression tool might be able to pick up. If this is true, we would expect that with a sufficiently smart compressor, a text file would compress better in its natural form than if it were randomly shuffled. Is this the case, or are compression utilities are too stupid to see any different between random lines and English prose? Taking 14M of text from `gwern.net`, we can see for ourselves:
+
+~~~{.Bash}
+# uncompressed
+$ cat *.page */*.page */*/*.page |                                                 wc --bytes
+13588814
+
+# compressed, files in lexicographic order
+$ cat *.page */*.page */*/*.page |                      xz -9 --extreme --stdout | wc --bytes
+3626732
+# compressed, all lines sorted alphabetically
+$ cat *.page */*.page */*/*.page | sort               | xz -9 --extreme --stdout | wc --bytes
+3743756
+# compressed, all lines randomly shuffled except for non-unique lines sorted together
+$ cat *.page */*.page */*/*.page | sort --random-sort | xz -9 --extreme --stdout | wc --bytes
+3831740
+# compressed, all lines randomly shuffled
+$ cat *.page */*.page */*/*.page | shuf               | xz -9 --extreme --stdout | wc --bytes
+3862632
+~~~
+
+<!-- $ -->
+
+The unmolested text compresses to 3.626M, but the *same* text randomly shuffled is 3.862M! I also included an intermediate form of randomization: despite the name, the `--random-sort` option to `sort` is not actually a random shuffle but a random *hash* (this is not documented in the man page, though it is in the info page) and so any repeated non-unique lines will be sorted together (allowing for some easy duplication deletion), and so we would expect the only-partial randomization of `--random-sort` to maybe perform a bit better than the true random shuffle of `shuf`. And it does.
+
+### Web archives
+
+Spatial locality also applies to our web archiving. If you are mirroring websites, or otherwise compiling a lot of directories with redundant data on a file-by-file level, there's a cute trick to massively improve your compression ratios: don't sort the usual lexicographic way, but sort by a subdirectory. (I learned about this trick a few years ago while messing around with archiving my home directory using `find` and `tar`.) This is one of the issues with archiving gigabytes of crawls from thousands of domains: URLs have a historical oddity where they are not consistently hierarchical. URLs were originally modeled after hierarchical Unix filesystems; this page, for example, lives at the name `/home/gwern/wiki/Archiving URLs.page`, which follows a logical left-to-right pattern of increasing narrowness. If one lists my entire filesystem in lexicographic order, all the files in `/home/gwern/` will be consecutive, and the files in `wiki/` will be consecutive, and so on. unfortunately, the top level of URLs breaks this scheme - one does not visit `https://com/google/mail/?shva=1#search/l%3aunread`, one visits `https://mail.google.com/mail/?shva=1#search/l%3aunread`; one does not visit `http://net/www/gwern/Archiving%20URLs` but `http://www.gwern.net/Archiving%20URLs`. So if I download `a.google.com` and then later `z.google.com`, a lexicographic list of downloaded files will separate the files as much as possible (even though they are semantically probably similar). A quick example from my current WWW archive:
+
+~~~{.Bash}
+$ ls
+...
+typemoon.wikia.com/
+tytempletonart.wordpress.com/
+ubc-emotionlab.ca/
+ubook.info/
+ucblibrary3.berkeley.edu/
+uhaweb.hartford.edu/
+ujsportal.pacourts.us/
+ukpmc.ac.uk/
+uk.reuters.com/
+ultan.org.uk/
+...
+~~~
+
+The directories are indeed sorted, but aside from the initial 2 letters or so, look nothing like each other: a Wikia subdomain rubs shoulders with a WordPress blog, a `.ca` domain is between a `.com`, a `.info`, and a `.edu` (with a `.us` and ` .uk` thrown in for variety), and so on. Is there any way to sort these directories with a bit of parsing thrown in? For example, maybe we could reverse each line? Some web browsers store URLs reversed right-to-left to enable more efficient database operations, as do Google's [BigTable](!Wikipedia) systems[^BigTable-sort] (to assist their relatively weak compression utility [Snappy](!Wikipedia "Snappy (software)")). Turns out GNU [`sort`](!Wikipedia "sort (Unix)") already supports something similar, the `--key` & `--field-separator` options; the man page is not very helpful but the [info](!Wikipedia "info (Unix)") page tells us:
+
+    '-t SEPARATOR'
+    '--field-separator=SEPARATOR'
+         Use character SEPARATOR as the field separator when finding the
+         sort keys in each line.  By default, fields are separated by the
+         empty string between a non-blank character and a blank character.
+         By default a blank is a space or a tab, but the 'LC_CTYPE' locale
+         can change this.
+
+         That is, given the input line ' foo bar', 'sort' breaks it into
+         fields ' foo' and ' bar'.  The field separator is not considered
+         to be part of either the field preceding or the field following,
+         so with 'sort -t " "' the same input line has three fields: an
+         empty field, 'foo', and 'bar'.  However, fields that extend to the
+         end of the line, as '-k 2', or fields consisting of a range, as
+         '-k 2,3', retain the field separators present between the
+         endpoints of the range.
+
+
+    '-k POS1[,POS2]'
+    '--key=POS1[,POS2]'
+         Specify a sort field that consists of the part of the line between
+         POS1 and POS2 (or the end of the line, if POS2 is omitted),
+         _inclusive_.
+
+         Each POS has the form 'F[.C][OPTS]', where F is the number of the
+         field to use, and C is the number of the first character from the
+         beginning of the field.  Fields and character positions are
+         numbered starting with 1; a character position of zero in POS2
+         indicates the field's last character.  If '.C' is omitted from
+         POS1, it defaults to 1 (the beginning of the field); if omitted
+         from POS2, it defaults to 0 (the end of the field).  OPTS are
+         ordering options, allowing individual keys to be sorted according
+         to different rules; see below for details.  Keys can span multiple
+         fields.
+
+         Example:  To sort on the second field, use '--key=2,2' ('-k 2,2').
+         See below for more notes on keys and more examples.  See also the
+         '--debug' option to help determine the part of the line being used
+         in the sort.
+
+[^BigTable-sort]: ["BigTable: A Distributed Storage System for Structured Data"](http://research.google.com/archive/bigtable-osdi06.pdf), Chang et al 2006:
+
+    > BigTable maintains data in lexicographic order by row key. The row range for a table is dynamically partitioned. Each row range is called a *tablet*, which is the unit of distribution and load balancing. As a result, reads of short row ranges are efficient and typically require communication with only a small number of machines. Clients can exploit this property by selecting their row keys so that they get good locality for their data accesses. For example, in Webtable, pages in the same domain are grouped together into contiguous rows by reversing the hostname components of the URLs. For example, we store data for `maps.google.com/index.html` under the key `com.google.maps/index.html`. Storing pages from the same domain near each other makes some host and domain analyses more efficient.
+
+Hence, we can do better by ordering `sort` to break on the dots and focus on the second part of a URL, like so:
+
+~~~{.Bash}
+$ ls | sort --key=2 --field-separator="."
+...
+uhaweb.hartford.edu/
+adsabs.harvard.edu/
+chandra.harvard.edu/
+cmt.harvard.edu/
+dash.harvard.edu/
+gking.harvard.edu/
+isites.harvard.edu/
+...
+~~~
+
+There's many possible ways to sort, though.
+So I took my WWW archive as of 15 June 2014, optimized all PNGs & JPEGs with `optipng` & `jpegoptim`, ran all the files through `filter-urls` & deleted the ones which failed (this took out all of the JS files, which is fine since I don't think those are useful for archival purposes), and was left with ~86.5GB of files.
+Then I tested out several ways of sorting the filenames to see what gave the best compression on my corpus.
+
+First, I establish the baseline:
+
+1. Size of uncompressed unsorted tarball, which eliminates filesystem overhead and tells us how much compression is really saving:
+
+    ~~~{.Bash}
+    cd ~/www/ && find ./ -type f -print0 | tar c --to-stdout --no-recursion --null --files-from - | wc --bytes
+    86469734400
+    1x
+    ~~~
+2. Size of sorted tarball:
+
+    ~~~{.Bash}
+    cd ~/www/ && find . -type f -print0 | sort --zero-terminated | \
+                 tar c --to-stdout --no-recursion --null --files-from - | wc --bytes
+    86469734400
+    1x
+    ~~~
+
+    So sorting a tarball doesn't give any benefits. This is mostly as I expected, since `tar` is only supposed to produce a linear archive packing together all the specified files and otherwise preserve them exactly.
+    I thought there might have been some sort of consolidation of full path-names which might yield a small space savings, but apparently not.
+
+Now we can begin sorting before compression. I thought of 6 approaches; in decreasing order of final archive (smaller=better):
+
+1. Sort by file names, simply by reversing, sorting, unreverse (`foo.png ... bar.png` reverses to `gnp.oof ... gnp.rab`, which then sort together, and then losslessly reverse back to `bar.png / foo.png / ...`):
+
+    ~~~{.Bash}
+    cd ~/www/ && find . -type f | rev | sort | rev | \
+                 tar c --to-stdout --no-recursion --files-from - | xz -9 --stdout | wc --bytes
+    24970605748
+    0.2887x
+    ~~~
+
+    (Note that `find`+`rev` doesn't correctly handle filenames with the wrong/non-UTF-8 encoding; I ultimately used brute force in the form of [`detox`](http://linux.die.net/man/1/detox) to find all the non-UTF-8 files and rename them.)
+2. Compress tarball, but without any sorting (files are consumed in the order `find` produces them in the filesystem):
+
+    ~~~{.Bash}
+    cd ~/www/ && find . -type f -print0 | \
+                 tar c --to-stdout --no-recursion --null --files-from - | xz -9 --stdout | wc --bytes
+    24268747400
+    0.2806x
+    ~~~
+3. Sort by file suffixes, trying to parsing the filenames first:
+
+    ~~~{.Bash}
+    cd ~/www/ && find . -type f -printf '%f/%p\n' | sort --field-separator="." --key=2  | cut -f2- -d/ | \
+                 tar c --to-stdout --no-recursion --files-from - | xz -9 --stdout | wc --bytes
+    24097155132
+    0.2786x
+    ~~~
+4. Sort normally, in lexicographic order (subdomain, domain, TLD, subdirectories & files etc):
+
+    ~~~{.Bash}
+    cd ~/www/ && find . -type f -print0 | sort --zero-terminated | \
+        tar c --to-stdout --no-recursion --null --files-from - | xz -9 --stdout | wc --bytes
+    23967317664
+    0.2771x
+    ~~~
+5. Sort by middle of domain:
+    ~~~{.Bash}
+    cd ~/www/ && find . -type f -print0 | sort --zero-terminated --key=3 --field-separator="." | \
+                  tar c --to-stdout --no-recursion --null --files-from - | xz -9 --stdout | wc --bytes
+    23946061272
+    0.2769x
+    ~~~
+6. Sort by first subdirectory (if there's a bunch of `foo.com/wp-content/*` & `bar.com/wp-content/*` files, then the `/wp-content/` files will all sort together regardless of "f" and "b" being far from each other; similarly for `domain.com/images/`, `domain.com/css/` etc):
+
+    ~~~{.Bash}
+    cd ~/www/ && find . -type f -print0 | sort --zero-terminated --key=3 --field-separator="/"  | \
+                 tar c --to-stdout --no-recursion --null --files-from - | xz -9 --stdout | wc --bytes
+    23897682908
+    0.2763x
+    ~~~
+
+Surprisingly, #1, reversing filenames in order to sort on the suffixes, turns out to be even worse than not sorting at all.
+The improved attempt to sort on filetypes doesn't do much better, although it at least beats the baseline of no-sorting; it may be that to get a compression win real semantic knowledge of filetypes will be needed (perhaps calling `file` on every file and sorting by the detected filetype?).
+The regular sort also performs surprisingly well, but my intuitions win for once and it's beaten by my previous strategy of sorting by the middle of domains.
+Finally, the winner is a bit of a surprise too, a sort I only threw in out of curiosity because I noticed blogs tend to have similar site layouts.
+
+In this case, the best version saved $24268747400-23897682908=371064492$ or 371MB over the unsorted version.
+Not as impressive as in the next use case, but enough to show this seems like a real gain
+
+### Separate mirrors
+
+Top-level domains are not the only thing we might want to sort differently on. To take my mirrors of black-market drug sites such as [Silk Road](/Silk Road): I download a site each time as a separate `wget` run in a timestamped folder. So in my Silk Road 2 folder, I have both `2013-12-25/` & `2014-01-15/`. These share many similar & identical files so they compress together with `xz` down from 1.8GB to 0.3GB.
+
+But they *could* compress even better: the similar files may be thousands of files and hundreds of megabytes away by alphabetical or file-inode order, so even with a very large window and a top-notch compressor, it will fail to spot many long-range redundancies. In between `2013-12-25/default.css` and `2014-01-15/default.css` is going to be all sorts of files which have nothing to do with CSS, like `2014-01-16/items/2-grams-of-pure-vanilla-ketamine-powder-dutchdope?vendor_feedback_page=5` and `2014-01-16/items/10-generic-percocet-10-325-plus-1-30mg-morphine`. You see the problem.
+
+Because we sort the files by 'all files starting with "2013"' and then 'all files starting "2014"', we lose all proximity. If instead, we could sort by subfolder and only then by the top-level folder, then we'd have everything line up nicely. Fortunately, we already know how to do this! Reuse the sort-key trick, specify "/" as the delimiter to parse on, and the nth field to sort on.  We feed it a file list, tell it to break filenames by "/", and then to sort on a lower level, and if we did it right, we will indeed get output like `2013-12-25/default.css` just before `2014-01-15/default.css`, which will do wonders for our compression, and which will pay ever more dividends as we accumulate more partially-redundant mirrors.
+
+Here is an example of output for my Pandora mirrors, where, due to frequent rumors of its demise triggering mirroring on my part, I have 5 full mirrors at the time of testing; and naturally, if we employ the sort-key trick (`find . -type f | sort --key=3 --field-separator="/"`), we find a lot of similar-sounding files:
+
+~~~{.Bash}
+./2014-01-15/profile/5a66e5238421f0422706b267b735d2df/6
+./2014-01-16/profile/5a9df4f5482d55fb5a8997c270a1e22d
+./2013-12-25/profile/5a9df4f5482d55fb5a8997c270a1e22d/1
+./2014-01-15/profile/5a9df4f5482d55fb5a8997c270a1e22d.1
+./2013-12-25/profile/5a9df4f5482d55fb5a8997c270a1e22d/2
+./2014-01-15/profile/5a9df4f5482d55fb5a8997c270a1e22d.2
+./2013-12-25/profile/5a9df4f5482d55fb5a8997c270a1e22d/3
+./2014-01-15/profile/5a9df4f5482d55fb5a8997c270a1e22d/4
+./2014-01-15/profile/5a9df4f5482d55fb5a8997c270a1e22d/5
+./2014-01-15/profile/5a9df4f5482d55fb5a8997c270a1e22d/6
+./2013-12-25/profile/5abb81db167294478a23ca110284c587
+./2013-12-25/profile/5acc44d370e305e252dd4e2b91fda9d0/1
+./2014-01-15/profile/5acc44d370e305e252dd4e2b91fda9d0.1
+./2013-12-25/profile/5acc44d370e305e252dd4e2b91fda9d0/2
+./2014-01-15/profile/5acc44d370e305e252dd4e2b91fda9d0.2
+~~~
+
+Note the interleaving of 5 different mirrors, impossible in a normal left-to-right alphabetical sort. You can bet that these 4 files (in 15 versions) are going to compress much better than if they were separated by a few thousand other profile pages.
+
+So here's an example invocation (doing everything in pipelines to avoid disk IO):
+
+~~~{.R}
+find . -type f -print0 | sort --zero-terminated --key=3 --field-separator="/"
+ | tar --no-recursion --null --files-from - -c
+ | xz -9 --extreme --stdout
+ > ../mirror.tar.xz
+~~~
+
+Used on my two Silk Road 2 mirrors which together weigh 1800M, a normal run without the `--key`/`--field-separator` options, as mentioned before, yields a 308M archive. That's not too bad. Certainly much better than hauling around almost 2GB. However - if I switch to the sort-key trick, however, the archive is now 271M, or 37M less. Same compression algorithm, same files, same unpacked results, same speed, just 2 little obscure `sort` options... and I get an archive 87% the size of the original.
+
+Not impressed? Well, I did say that the advantage increases with the number of mirrors to extract redundancy from. With only 2 mirrors, the SR2 results can't be too impressive. How about the Pandora mirrors? 5 of them gives the technique more scope to shine. And as expected, it's even more impressive when I compare the Pandora archives: 71M vs 162M. The sort-keyed archive is 44% of the regular archive!
+
+### Alternatives
+
+The sort-key trick is most useful when we can infer a lot of spatial locality just from parts of the file names, it's not a panacea. There are other approaches:
+
+1. if we have multiple temporally-ordered datasets and we don't mind making it more difficult to access older copies, it may be simpler to store the data as a DVCS like [git](!Wikipedia "Git (software)") where each dataset is a large patch
+2. sort files by minimizing binary differences between them using Timm S. Müller's [`binsort`](http://neoscientists.org/~tmueller/binsort/) utility
+
+    The default optimization setting of `-o15` underperforms the sort-key trick on both the SR2 and Pandora datasets by 5-10MB, and a higher setting like `-o1000` is best. Note that `binsort` is $O(n^2)$ in number of files, so it's limited to sorting <10,000 files. An example pipeline for compressing posts from the Silk Road forums regarding [a minor Ponzi scheme there](http://www.reddit.com/r/SilkRoad/comments/1yzndq/a_trip_down_memory_lane_vladimir_limetless_and/), since the filenames offer little guidance for a semantically-meaningful sort:
+
+    ~~~{.Bash}
+    find dkn255hz262ypmii.onion/ -type f -exec fgrep -i -l vladimir  {} \; >> ponzi.txt
+    find dkn255hz262ypmii.onion/ -type f -exec fgrep -i -l Limetless {} \; >> ponzi.txt
+
+    mkdir ponzi/ && cp `cat ponzi.txt` ponzi/
+    ~/bin/binsort/binsort -t 6 -o 1000 ponzi/ > ponzi-list.txt
+    cat ponzi-list.txt | tar --no-recursion --files-from - -c | xz -9 --extreme --stdout > ~/srf1-ponzi.tar.xz
+    ~~~
+
+    (Embarrassingly, `binsort` seems to underperform on this dataset: the files are 380M uncompressed, 3.536M sort-keyed, and 3.450M sorted.)
+3. if we know there are many duplicates but they are far apart by a lexicographic sort and we don't have any good way to sort filenames and a lot of RAM, we can try out a compression tool which specifically looks for long-range redundancies throughout the entire bitstream, such as [`lrzip`](!Wikipedia "rzip") ([homepage](http://ck.kolivas.org/apps/lrzip/)/[Arch wiki](https://wiki.archlinux.org/index.php/Lrzip). `lrzip` is packaged in Debian and should be at least as good as `xz` since it too uses LZMA; but it is an obscure tool which is not a default install on Linux distributions like `xz` is, and this makes distributing archives to other people difficult.
+
+
+### External links
+
+- ["Sorting multiple keys with Unix `sort`"](https://stackoverflow.com/questions/357560/sorting-multiple-keys-with-unix-sort)
+- ["SimHash: Hash-based Similarity Detection"](http://simhash.googlecode.com/svn/trunk/paper/SimHashWithBib.pdf "Sadowski & Levin 2007") (see also [MinHash](!Wikipedia))

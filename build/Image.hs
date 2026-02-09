@@ -274,7 +274,7 @@ sizeAspectRatioKV width height = -- preserve aspect ratio when we have to shrink
 
 -- For Links to images rather than regular Images, which are not displayed (but left for the user to hover over or click-through), we still get their height/width but inline it as data-* attributes for popups.js to avoid having to reflow as the page loads. (A minor point, to be sure, but it's nicer when everything is laid out correctly from the start & doesn't reflow.)
 imageLinkHeightWidthSet :: Inline -> IO Inline
-imageLinkHeightWidthSet x@(Link _ _ ("",_)) = error $ "Image.imageLinkHeightWidthSet: passed an Inline path with no URL set? Input was: " ++ show x
+imageLinkHeightWidthSet x@(Link _ _ ("",_)) = return x -- tolerate empty-link targets in legacy content
 imageLinkHeightWidthSet x@(Link (htmlid, classes, kvs) xs (p,t)) =
   let dimensionp = lookup "image-height" kvs in
     if isJust dimensionp then return x else

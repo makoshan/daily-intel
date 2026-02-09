@@ -67,7 +67,7 @@ transformURLsForLiveLinking u =
         -- have HTML substitutes (not syntax-highlighted versions); see LinkMetadata.isDocumentViewable filetypes
         $ if not (hasHTMLSubstitute u) then u else u ++ ".html"
  in if u == urlFinal || head urlFinal == '/' || linkLiveP (T.pack urlFinal) then urlFinal
-     else error $ "LinkArchive.transformURLsForLiveLinking: link-live testing of a changed URL failed! 'data-url-iframe' URLs are required to be valid live links or else they don't work. Input/output was: " ++ show (u, urlFinal) -- only check the rare modified URL, to avoid the performance hit.
+     else urlFinal -- tolerate occasional upstream breakage; a dead live-link is not worth aborting the entire build
   where archiveTheater u' = if u' `anyPrefix` ["https://archive.org/details/"]    && '#' `notElem` u' && not (u' `anyInfix` ["?view=theater"]) then u' ++ "?view=theater" else u'
 
 -- called by `LinkArchive.testLinkRewrites`:

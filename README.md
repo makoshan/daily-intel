@@ -24,7 +24,7 @@ cabal run hakyll -- watch
 ## 主页与模板
 
 - 首页内容使用 `gwen-net-index模版.md` 作为原版索引模板，并覆盖到 `index.md`。
-- 模板文件使用 `/home/mako/wiki/static/template/default.html`。
+- 模板文件使用 `static/template/default.html` (已移除 SSI 依赖，改为由 Hakyll 注入 `static/include/*.html` 片段)。
 - 如果访问 `/` 出现目录列表，执行:
   ```bash
   GWERN_ANNOTATIONS=0 GWERN_EXTERNAL_ANNOTATIONS=0 GWERN_WRITE_MISSING_ANNOTATIONS=0 GWERN_LINK_ANNOTATIONS=0 GWERN_LINK_SIZES=0 \

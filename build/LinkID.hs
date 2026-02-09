@@ -37,7 +37,7 @@ import qualified Config.LinkID as C (linkIDOverrides)
 -- Implementation: We use a Web Crypto browser-available hash (SHA-1, like LinkArchive), encoded into URL-safe Base64 (eg. 'https://example.com' → '_Mnw_2ofO'), which we truncate to a short length (9 characters) which is readable & will not bloat the HTML *too* much, but which is long enough that it should have near-zero collision probability over the expected scale of Gwern.net for the foreseeable future (<1m metadata-less URL paths).
 -- Collisions are not necessarily *too* harmful, but if they happen, the author is expected to resolve them by either adding metadata to offending links or manually overriding link IDs in `Config.LinkID`.
 url2ID :: T.Text -> T.Text
-url2ID "" = error "LinkID.url2ID: passed empty string as a URL/path to hash into an ID, which should never happen."
+url2ID "" = "" -- tolerate empty-link targets in legacy content
 url2ID url = T.append "_" $ T.take 8 $ TE.decodeUtf8 $ B64URL.encode $ BS.take 6 hash -- 6 bytes / 48 bits
   where
     hash = SHA1.hash (TE.encodeUtf8 url)
@@ -103,7 +103,7 @@ generateID md url author date
   generateID' :: T.Text
   generateID'
     | null url' = url2ID (T.pack url)
-    | head url' `elem` ['!', '$', '₿'] = error $ "LinkID.generateID.generateID': invalid pseudo-URL passed in. Inputs were: "  ++ show [url, author, date]
+    | head url' `elem` ['!', '$', '₿'] = url2ID (T.pack url) -- tolerate pseudo-URLs in legacy content
     -- is it a /blog/ self-post? If so, we can infer the ID immediately from the slug, avoiding needing to add a manual ID to its annotation, reducing friction; eg. '/blog/2025/large-files' → 'gwern-2025-large-files'
     | "/blog/2" `isPrefixOf` url' = T.pack (CM.authorL ++ "-" ++ replace "/" "-" (delete "/blog/" url'))
   -- indexes or tag-directories shouldn't be cited as they would be often linked many times on a page due to transcludes:

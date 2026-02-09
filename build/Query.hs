@@ -39,7 +39,7 @@ extractURLs :: Pandoc -> [T.Text]
 extractURLs = extractURLsWith (const True)
 
 extractURLWith :: (Inline -> Bool) -> Inline -> [(T.Text,T.Text,T.Text)]
-extractURLWith _ x@(Link _ _ ("", _)) = error $ "Invalid link used in extractURLWith: " ++ show x
+extractURLWith _ (Link _ _ ("", _)) = [] -- tolerate empty-link targets in legacy content
 extractURLWith rule x@(Link _ anchorText (url, tooltip))
     | url == "" || isInflationURL url = []
     | rule x = [(url, inlinesToText anchorText, tooltip)]

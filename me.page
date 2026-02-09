@@ -1,0 +1,16 @@
+---
+title: About Me
+description: "About the author."
+created: 2026-02-09
+status: draft
+confidence: possible
+importance: 0
+css-extension: dropcaps-not
+...
+
+# About Me
+
+This is a placeholder `/me` page so the homepage navigation matches gwern.net style.
+
+You can edit `me.page` to put your bio and contact links here.
+

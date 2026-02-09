@@ -1,0 +1,2608 @@
+---
+title: A/B testing long-form readability
+description: a log of experiments done on the site design, intended to render pages more readable
+created: 16 Jun 2012
+tags: experiments, statistics, computer science, meta
+status: in progress
+belief: possible
+...
+
+> To gain some statistical & web development experience and to improve my readers' experiences, I have been running a series of CSS A/B tests since June 2012. As expected, most do not show any meaningful difference.
+
+# Background
+
+- https://www.google.com/analytics/siteopt/exptlist?account=18912926
+- http://www.pqinternet.com/196.htm
+- https://support.google.com/websiteoptimizer/bin/answer.py?hl=en&answer=61203 "Experiment with site-wide changes"
+- https://support.google.com/websiteoptimizer/bin/answer.py?hl=en&answer=117911 "Working with global headers"
+- https://support.google.com/websiteoptimizer/bin/answer.py?hl=en-GB&answer=61427
+- https://support.google.com/websiteoptimizer/bin/answer.py?hl=en&answer=188090 "Varying page and element styles" - testing with inline CSS overriding the defaults
+- http://stackoverflow.com/questions/2993199/with-google-website-optimizers-multivariate-testing-can-i-vary-multiple-css-cl
+- http://www.xemion.com/blog/the-secret-to-painless-google-website-optimizer-70.html
+- http://stackoverflow.com/tags/google-website-optimizer/hot
+
+# Problems with "conversion" metric
+
+https://support.google.com/websiteoptimizer/bin/answer.py?hl=en-AU&answer=74345 "Time on page as a conversion goal" - every page converts, by using a timeout (mine is 40 seconds). Problem: dichotomizing a continuous variable into a single binary variable destroys a massive amount of information. This is well-known in the statistical and psychological literature (eg. [MacCallum et al 2002](http://www.psychology.sunysb.edu/attachment/measures/content/maccallum_on_dichotomizing.pdf "On the Practice of Dichotomization of Quantitative Variables")) but I'll illustrate further with some information-theoretical observations.
+
+According to my Analytics, the mean reading time (time on page) is 1:47 and the maximum bracket, hit by 1% of viewers, is 1801 seconds, and the range 1-1801 takes <10.8 bits to encode (`log2(1801) ~> 10.81`), hence each page view could be represented by <10.8 bits (less since reading time is so highly skewed). But if we dichotomize, then we learn simply that ~14% of readers will read for 40 seconds, hence each reader carries not 6 bits, nor 1 bit (if 50% read that long) but closer to 2/3 of a bit:
+
+~~~{.R}
+R> p=0.14;  q=1-p; (-p*log2(p) - q*log2(q))
+[1] 0.5842
+~~~
+
+This isn't even an efficient dichotomization: we could improve the fractional bit to 1 bit if we could somehow dichotomize at 50% of readers:
+
+~~~{.R}
+R> p=0.50;  q=1-p; (-p*log2(p) - q*log2(q))
+[1] 1
+~~~
+
+But unfortunately, simply lowering the timeout will have minimal returns as Analytics also reports that 82% of reader spend 0-10 seconds on pages. So we are stuck with a severe loss.
+
+# ideas for testing
+
+        JS:
+                disqus
+        CSS
+                differences from readability
+                every declaration in default.CSS?
+        Donation
+                placement - left, right, bottom
+                donation text
+                         help pay for hosting
+                         help sponsor X experiment
+                         Xah's text - did you find this article useful?
+
+- test the suggestions in https://code.google.com/p/better-web-readability-project/ http://www.vcarrer.com/2009/05/how-we-read-on-web-and-how-can-we.html
+
+# Testing
+## `max-width`
+
+CSS-3 property: set how wide the page will be in pixels if unlimited screen real estate is available. I noticed some people complained that pages were 'too wide' and this made it hard to read, which apparently is a real thing since lines are supposed to fit in eye saccades. So I tossed in 800px, 900px, 1300px, and 1400px to the first A/B test.
+
+~~~{.Html}
+<!-- Google Website Optimizer Control Script -->
+<script>
+function utmx_section(){}function utmx(){}
+(function(){var k='0520977997',d=document,l=d.location,c=d.cookie;function f(n){
+if(c){var i=c.indexOf(n+'=');if(i>-1){var j=c.indexOf(';',i);return escape(c.substring(i+n.
+length+1,j<0?c.length:j))}}}var x=f('__utmx'),xx=f('__utmxx'),h=l.hash;
+d.write('<sc'+'ript src="'+
+'http'+(l.protocol=='https:'?'s://ssl':'://www')+'.google-analytics.com'
++'/siteopt.js?v=1&utmxkey='+k+'&utmx='+(x?x:'')+'&utmxx='+(xx?xx:'')+'&utmxtime='
++new Date().valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
+'" type="text/javascript" charset="utf-8"></sc'+'ript>')})();
+</script>
+<!-- End of Google Website Optimizer Control Script -->
+<!-- Google Website Optimizer Tracking Script -->
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['gwo._setAccount', 'UA-18912926-2']);
+  _gaq.push(['gwo._trackPageview', '/0520977997/test']);
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www')
+              + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+<!-- End of Google Website Optimizer Tracking Script -->
+<!-- Google Website Optimizer Tracking Script -->
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['gwo._setAccount', 'UA-18912926-2']);
+      setTimeout(function() {
+  _gaq.push(['gwo._trackPageview', '/0520977997/goal']);
+      }, 40000);
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') +
+              '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+<!-- End of Google Website Optimizer Tracking Script -->
+    <script>utmx_section("max width")</script>
+    <style type="text/css">
+      body { max-width: 800px; }
+    </style>
+    </noscript>
+~~~
+
+It ran from mid-June to 1 August 2012. Unfortunately, I cannot be more specific: on 1 August, Google deleted Website Optimizer and told everyone to use 'Experiments' in Google Analytics - and *deleted all my information*. The graph over time, the exact numbers - all gone. So this is from memory.
+
+The results were initially very promising: 'conversion' was defined as staying on a page for 40 seconds (I reasoned that this meant someone was actually reading the page), and had a base of around 70% of readers converting. With a few hundred hits, 900px converted at 10-20% more than the default! I was ecstatic. So when it began falling, I was only a little bothered (one had to expect some regression to the mean since the results were too good to be true). But as the hits increased into the low thousands, the effect kept shrinking all the way down to 0.4% improved conversion. At some points, 1300px actually exceeded 900px.
+
+The second distressing thing was that Google's estimated chance of a particular intervention beating the default (which I believe is a Bonferroni-corrected _p_-value), did not increase! Even as each version received 20,000 hits, the chance stubbornly bounced around the 70-90% range for 900px and 1300px. This remained true all the way to the bitter end. At the end, each version had racked up 93,000 hits *and still was in the 80% decile*. Wow.
+
+Ironically, I was warned at the beginning about both of these possible behaviors by a paper I read on large-scale corporate A/B testing: http://www.exp-platform.com/Documents/puzzlingOutcomesInControlledExperiments.pdf and http://www.exp-platform.com/Documents/controlledExperimentDMKD.pdf and http://www.exp-platform.com/Documents/2013%20controlledExperimentsAtScale.pdf It covered at length how many apparent trends simply evaporated, but it also covered later a peculiar phenomenon where A/B tests did not converge even after being run on ungodly amounts of data because the standard deviations kept changing (the user composition kept shifting and rendering previous data more uncertain). And it's a general phenomenon that even for large correlations, the trend will bounce around a lot before it stabilizes ([Schönbrodt & Perugini 2013](http://www.psy.lmu.de/allg2/download/schoenbrodt/pub/stable_correlations.pdf "At what sample size do correlations stabilize?")).
+
+Oy vey! When I discovered Google had deleted my results, I decided to simply switch to 900px. Running a new test would not provide any better answers.
+
+## TODO
+
+how about a blue background?
+see http://www.overcomingbias.com/2010/06/near-far-summary.html for more design ideas
+
+5. table striping
+
+~~~{.Css}
+tbody tr:hover td { background-color: #f5f5f5;}
+tbody tr:nth-child(odd) td { background-color: #f9f9f9;}
+~~~
+
+8. link decoration
+
+~~~{.Css}
+a { color: black; text-decoration: underline;}
+a { color:#005AF2; text-decoration:none; }
+~~~
+
+# Resumption: ABalytics
+
+In March 2013, I decided to give A/B testing another whack. Google Analytics Experiment did not seem to have improved and the commercial services continued to charge unacceptable prices, so I gave the Google Analytics custom variable integration approach another trying using [ABalytics](https://github.com/danmaz74/ABalytics). The usual puzzling, debugging, and frustration of combining so many disparate technologies (HTML *and* CSS *and* JS *and* Google Analytics) aside, it seemed to work on my test page. The current downside seems to be that the ABalytics approach may be fragile, and the UI in GA is awful (you have to do the statistics yourself).
+
+## `max-width` redux
+
+The test case is to rerun the `max-width` test and finish it.
+
+### Implementation
+
+The exact changes:
+
+~~~{.Diff}
+Sun Mar 17 11:25:39 EDT 2013  gwern@gwern.net
+  * default.html: setup ABalytics a/b testing https://github.com/danmaz74/ABalytics
+                  (hope this doesn't break anything...)
+    addfile ./static/js/abalytics.js
+    hunk ./static/js/abalytics.js 1
+...
+    hunk ./static/templates/default.html 28
+    +    <!-- override CSS with a/b test -->
+    +    <div class="maxwidth_class1"></div>
+    +
+...
+    -    <noscript><p>Enable JavaScript for Disqus comments</p></noscript>
+    +      window.onload = function() {
+    +      ABalytics.applyHtml();
+    +      };
+    +    </script>
+    hunk ./static/templates/default.html 119
+    +
+    +      ABalytics.init({
+    +      maxwidth: [
+    +      {
+    +      name: '800',
+    +      "maxwidth_class1": "<style>body { max-width: 800px; }</style>",
+    +      "maxwidth_class2": ""
+    +      },
+    +      {
+    +      name: '900',
+    +      "maxwidth_class1": "<style>body { max-width: 900px; }</style>",
+    +      "maxwidth_class2": ""
+    +      },
+    +      {
+    +      name: '1100',
+    +      "maxwidth_class1": "<style>body { max-width: 1100px; }</style>",
+    +      "maxwidth_class2": ""
+    +      },
+    +      {
+    +      name: '1200',
+    +      "maxwidth_class1": "<style>body { max-width: 1200px; }</style>",
+    +      "maxwidth_class2": ""
+    +      },
+    +      {
+    +      name: '1300',
+    +      "maxwidth_class1": "<style>body { max-width: 1300px; }</style>",
+    +      "maxwidth_class2": ""
+    +      },
+    +      {
+    +      name: '1400',
+    +      "maxwidth_class1": "<style>body { max-width: 1400px; }</style>",
+    +      "maxwidth_class2": ""
+    +      }
+    +      ],
+    +      }, _gaq);
+    +
+~~~
+
+### Results
+
+I wound up the test on 17 April 2013 with the following results:
+
+Width (px) Visits Conversion
+---------- ------ ----------
+1100       18,164 14.49%
+1300       18,071 14.28%
+1200       18,150 13.99%
+800        18,599 13.94%
+900        18,419 13.78%
+1400       18,378 13.68%
+           109772 14.03%
+
+### Analysis
+
+1100px is close to my original A/B test indicating 1000px was the leading candidate, so that gives me additional confidence, as does the observation that 1300px and 1200px are the other leading candidates. (Curiously, the site conversion average before was 13.88%; perhaps my underlying traffic changed slightly around the time of the test? This would demonstrate why alternatives need to be tested simultaneously.) A quick and dirty R test of 1100px vs 1300px (`prop.test(c(2632,2581),c(18164,18071))`) indicates the difference isn't statistically-significant (at _p_=0.58), and we might want more data; worse, there is no clear linear relation between conversion and width (the plot is erratic, and a linear fit a dismal _p_=0.89):
+
+~~~{.R}
+rates <- read.csv(stdin(),header=TRUE)
+Width,N,Rate
+1100,18164,0.1449
+1300,18071,0.1428
+1200,18150,0.1399
+800,18599,0.1394
+900,18419,0.1378
+1400,18378,0.1368
+
+
+rates$Successes <- rates$N * rates$Rate
+rates$Successes <- round(rates$Successes,0)
+rates$Failures <-rates$N - rates$Successes
+
+g <- glm(cbind(Successes,Failures) ~ Width, data=rates, family="binomial")
+...Coefficients:
+             Estimate Std. Error z value Pr(>|z|)
+(Intercept) -1.82e+00   4.65e-02  -39.12   <2e-16
+Width        5.54e-06   4.10e-05    0.14     0.89
+# not much better:
+rates$Width <- as.factor(rates$Width)
+rates$Width <- relevel(rates$Width, ref="900")
+g2 <- glm(cbind(Successes,Failures) ~ Width, data=rates, family="binomial"); summary(g2)
+~~~
+
+But I want to move on to the next test and by the same logic it is highly unlikely that the difference between them is large or much in 1300px's favor (the kind of mistake I care about: switching between 2 equivalent choices doesn't matter, missing out on an improvement *does* matter - maximizing β, not minimizing α).
+
+## Fonts
+
+The _New York Times_ ran [an informal online experiment](http://opinionator.blogs.nytimes.com/2012/08/08/hear-all-ye-people-hearken-o-earth/ "Hear, All Ye People; Hearken, O Earth (Part One)") with a large number of readers (_n_=60750) and found that the [Baskerville](!Wikipedia) font led to more readers agreeing with a short text passage - this seems plausible enough given their very large sample size and Wikipedia's note that "The refined feeling of the typeface makes it an excellent choice to convey dignity and tradition."
+
+### Power analysis
+
+Would this font work its magic on `gwern.net` too? Let's see. The sample size is quite manageable, as over a month I will easily have 60k visits, and they tested 6 fonts, expanding their necessary sample. What sample size do I actually need? Their professor estimates the effect size of Baskerville at 1.5%; I would like my A/B test to have very high statistical power (0.9) and reach more stringent statistical-significance (_p_<0.01) so I can go around and in good conscience tell people to use Baskerville. I already know the average "conversion rate" is ~13%, so I get this power calculation:
+
+~~~{.R}
+power.prop.test(p1=0.13+0.015, p2=0.13, power=0.90, sig.level=0.01)
+
+     Two-sample comparison of proportions power calculation
+
+              n = 15683
+             p1 = 0.145
+             p2 = 0.13
+      sig.level = 0.01
+          power = 0.9
+    alternative = two.sided
+
+ NOTE: n is number in *each* group
+~~~
+
+15000 visitors in each group seems reasonable; at ~16k visitors a week, that suggests a few weeks of testing. Of course I'm testing 4 fonts (see below), but that still fits in the ~2 months I've allotted for this test.
+
+### Implementation
+
+I had previously drawn on the NYT experiment for my site design:
+
+~~~{.Css}
+html {
+...
+    font-family: Georgia, "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica,
+                 Arial, "Lucida Grande", garamond, palatino, verdana, sans-serif;
+}
+~~~
+
+I had not used Baskerville but [Georgia](!Wikipedia "Georgia (typeface)") since Georgia seemed similar and was convenient, but we'll fix that now. Besides Baskerville & Georgia, we'll omit [Comic Sans](!Wikipedia) (of course), but we can try [Trebuchet](!Wikipedia "Trebuchet MS") for a total of 4 fonts (falling back to Georgia):
+
+~~~{.Html}
+hunk ./static/templates/default.html 28
++    <!-- override CSS with a/b test -->
++    <div class="fontfamily_class1"></div>
+...
+hunk ./static/templates/default.html 121
++      fontfamily: [
++      {
++      name: 'Baskerville',
++      "fontfamily_class1": "<style>html { font-family: Baskerville, Georgia; }</style>",
++      "fontfamily_class2": ""
++      },
++      {
++      name: 'Georgia',
++      "fontfamily_class1": "<style>html { font-family: Georgia; }</style>",
++      "fontfamily_class2": ""
++      },
++      {
++      name: 'Trebuchet',
++      "fontfamily_class1": "<style>html { font-family: 'Trebuchet MS', Georgia; }</style>",
++      "fontfamily_class2": ""
++      },
++      {
++      name: 'Helvetica',
++      "fontfamily_class1": "<style>html { font-family: Helvetica, Georgia; }</style>",
++      "fontfamily_class2": ""
++      }
++      ],
+~~~
+
+### Results
+
+Running from 14 April 2013 to 16 June 2013:
+
+Font         Type   Visits  Conversion
+----------   ------ ------- ----------
+Trebuchet    sans   35,473  13.81%
+Baskerville  serif  36,021  13.73%
+Helvetica    sans   35,656  13.43%
+Georgia      serif  35,833  13.31%
+             sans   71,129  13.62%
+             serif  71,854  13.52%
+                    142,983 13.57%
+
+The sample size for each font is 20k higher than I projected due to the enormous popularity of [an analysis of the lifetimes of Google services](Google shutdowns) I finished during the test. Regardless, it's clear that the results - with double the total sample size of the NYT experiment, focused on fewer fonts - are disappointing and there seems to be very little difference between fonts.
+
+### Analysis
+
+Picking the most extreme difference, between Trebuchet and Georgia, the difference is close to the usual definition of statistical-significance:
+
+~~~{.R}
+R> prop.test(c(0.1381*35473,0.1331*35833),c(35473,35833))
+
+    2-sample test for equality of proportions with continuity correction
+
+data:  c(0.1381 * 35473, 0.1331 * 35833) out of c(35473, 35833)
+X-squared = 3.76, df = 1, p-value = 0.0525
+alternative hypothesis: two.sided
+95% confidence interval:
+ -5.394e-05  1.005e-02
+sample estimates:
+prop 1 prop 2
+0.1381 0.1331
+~~~
+
+Which naturally implies that the much smaller difference between Trebuchet and Baskerville is not statistically-significant:
+
+~~~{.R}
+R> prop.test(c(0.1381*35473,0.1373*36021), c(35473,36021))
+
+    2-sample test for equality of proportions with continuity correction
+
+data:  c(0.1381 * 35473, 0.1373 * 36021) out of c(35473, 36021)
+X-squared = 0.0897, df = 1, p-value = 0.7645
+alternative hypothesis: two.sided
+95% confidence interval:
+ -0.00428  0.00588
+~~~
+
+Since there's only small differences between individual fonts, I wondered if there might be a difference between the two sans-serifs and the two serifs. If we lump the 4 fonts into those 2 categories and look at the small difference in mean conversion rate:
+
+~~~{.R}
+R> prop.test(c(0.1362*71129,0.1352*71854), c(71129,71854))
+
+    2-sample test for equality of proportions with continuity correction
+
+data:  c(0.1362 * 71129, 0.1352 * 71854) out of c(71129, 71854)
+X-squared = 0.2963, df = 1, p-value = 0.5862
+alternative hypothesis: two.sided
+95% confidence interval:
+ -0.002564  0.004564
+~~~
+
+Nothing doing there either. More generally:
+
+~~~{.R}
+rates <- read.csv(stdin(),header=TRUE)
+Font,Serif,N,Rate
+Trebuchet,FALSE,35473,0.1381
+Baskerville,TRUE,6021,0.1373
+Helvetica,FALSE,35656,0.1343
+Georgia,TRUE,5833,0.1331
+
+
+rates$Successes <- rates$N * rates$Rate
+rates$Successes <- round(rates$Successes,0)
+rates$Failures <-rates$N - rates$Successes
+
+g <- glm(cbind(Successes,Failures) ~ Font, data=rates, family="binomial"); summary(g)
+...Coefficients:
+              Estimate Std. Error z value Pr(>|z|)
+(Intercept)   -1.83745    0.03744  -49.08   <2e-16
+FontGeorgia   -0.03692    0.05374   -0.69     0.49
+FontHelvetica -0.02591    0.04053   -0.64     0.52
+FontTrebuchet  0.00634    0.04048    0.16     0.88
+~~~
+
+With essentially no meaningful differences between conversion rates, this suggests that however fonts matter, they don't matter for reading duration. So I feel free to pick the font that appeals to me visually, which is Baskerville.
+
+## Line height
+
+I have seen complaints that lines on `gwern.net` are "too closely spaced" or "run together" or "cramped", referring to the [line height](!Wikipedia "Leading") (the CSS property `line-height`). I set the CSS to `line-height: 150%;` to deal with this objection, but this was a simple hack based on rough eyeballing of it, and it was done before I changed the `max-width` and `font-family` settings after the previous testing. So it's worth testing some variants.
+
+Most web design guides seem to suggest a safe default of 120%, rather than my current 150%. If we try to test each decile plus one on the outside, that'd give us 110, 120, 130, 140, 150, 160 or 6 options, which combined with the expected small effect, would require an unreasonable sample size (and I have nothing in the pipeline I expect might catch fire like the Google analysis and deliver an excess >50k visits). So I'll try just 120/130/140/150, and schedule a similar block of time as fonts (ending the experiment on 16 August 2013, with presumably >70k datapoints).
+
+### Implementation
+
+~~~{.Html}
+hunk ./static/templates/default.html 30
+-    <div class="fontfamily_class1"></div>
++    <div class="linewidth_class1"></div>
+hunk ./static/templates/default.html 156
+-      fontfamily:
++      linewidth:
+hunk ./static/templates/default.html 158
+-      name: 'Baskerville',
+-      "fontfamily_class1": "<style>html { font-family: Baskerville, Georgia; }</style>",
+-      "fontfamily_class2": ""
++      name: 'Line120',
++      "linewidth_class1": "<style>div#content { line-height: 120%;}</style>",
++      "linewidth_class2": ""
+hunk ./static/templates/default.html 163
+-      name: 'Georgia',
+-      "fontfamily_class1": "<style>html { font-family: Georgia; }</style>",
+-      "fontfamily_class2": ""
++      name: 'Line130',
++      "linewidth_class1": "<style>div#content { line-height: 130%;}</style>",
++      "linewidth_class2": ""
+hunk ./static/templates/default.html 168
+-      name: 'Trebuchet',
+-      "fontfamily_class1": "<style>html { font-family: 'Trebuchet MS', Georgia; }</style>",
+-      "fontfamily_class2": ""
++      name: 'Line140',
++      "linewidth_class1": "<style>div#content { line-height: 140%;}</style>",
++      "linewidth_class2": ""
+hunk ./static/templates/default.html 173
+-      name: 'Helvetica',
+-      "fontfamily_class1": "<style>html { font-family: Helvetica, Georgia; }</style>",
+-      "fontfamily_class2": ""
++      name: 'Line150',
++      "linewidth_class1": "<style>div#content { line-height: 150%;}</style>",
++      "linewidth_class2": ""
+~~~
+
+### Analysis
+
+From 15 June 2013 - 15 August 2013:
+
+line %  _n_    Conversion %
+------ ------- ------------
+130    18,124  15.26
+150    17,459  15.22
+120    17,773  14.92
+140    17,927  14.92
+       71,283  15.08
+
+Just from looking at the miserably small difference between the most extreme percentages ($15.26 - 14.92 = 0.34$%), we can predict that nothing here was statistically-significant:
+
+~~~{.R}
+x1 <- 18124; x2 <- 17927; prop.test(c(x1*0.1524, x2*0.1476), c(x1,x2))
+
+    2-sample test for equality of proportions with continuity correction
+
+data:  c(x1 * 0.1524, x2 * 0.1476) out of c(x1, x2)
+X-squared = 1.591, df = 1, p-value = 0.2072
+~~~
+
+I changed the 150% to 130% for the heck of it, even though the difference between 130 and 150 was trivially small.
+
+<!-- rates <- read.csv(stdin(),header=TRUE)
+Width,N,Rate
+130,18124,0.1526
+150,17459,0.1522
+120,17773,0.1492
+140,17927,0.1492
+
+
+rates$Successes <- rates$N * rates$Rate
+rates$Successes <- round(rates$Successes,0)
+rates$Failures <-rates$N - rates$Successes
+
+rates$Width <- as.factor(rates$Width)
+g <- glm(cbind(Successes,Failures) ~ Width, data=rates, family="binomial")
+...Coefficients:
+             Estimate Std. Error z value Pr(>|z|)
+(Intercept) -1.74e+00   2.11e-02  -82.69   <2e-16
+Width130     2.65e-02   2.95e-02    0.90     0.37
+Width140     9.17e-06   2.97e-02    0.00     1.00
+Width150     2.32e-02   2.98e-02    0.78     0.44
+-->
+
+## Null test
+
+One of the suggestions in the A/B testing papers was to run a "null" A/B test where the payload is empty but the A/B testing framework is still measuring conversions etc. By definition, the null hypothesis of "no difference" should be true and at an alpha of 0.05, only 5% of the time would the null tests yield a _p_<0.05 (which is very different from the usual situation). The interest here is that it's possible that something is going wrong in one's A/B setup or in general, and so if one gets a "statistically-significant" result, it may be worthwhile investigating this anomaly.
+
+It's easy to switch from the lineheight test to the null test; just rename the variables for Google Analytics, and empty the payloads:
+
+~~~{.Html}
+hunk ./static/templates/default.html 30
+-    <div class="linewidth_class1"></div>
++    <div class="null_class1"></div>
+hunk ./static/templates/default.html 158
+-      linewidth: [
++      null: [
++      ...]]
+hunk ./static/templates/default.html 160
+-      name: 'Line120',
+-      "linewidth_class1": "<style>div#content { line-height: 120%;}</style>",
++      name: 'null1',
++      "null_class1": "",
+hunk ./static/templates/default.html 165
+-      { ...
+-      name: 'Line130',
+-      "linewidth_class1": "<style>div#content { line-height: 130%;}</style>",
+-      "linewidth_class2": ""
+-      },
+-      {
+-      name: 'Line140',
+-      "linewidth_class1": "<style>div#content { line-height: 140%;}</style>",
+-      "linewidth_class2": ""
+-      },
+-      {
+-      name: 'Line150',
+-      "linewidth_class1": "<style>div#content { line-height: 150%;}</style>",
++      name: 'null2',
++      "null_class1": "",
++       ... }
+~~~
+
+Since any difference due to the testing framework should be noticeable, this will be a shorter experiment, from 15 August to 29 August.
+
+### Results
+
+While amusingly the first pair of 1k hits resulted in a dramatic 18% vs 14% result, this quickly disappeared into a much more normal-looking set of data:
+
+option _n_    conversion
+------ -----  ------
+null2  7,359  16.23%
+null1  7,488  15.89%
+       14,847 16.06%
+
+### Analysis
+
+Ah, but can we reject the null hypothesis that ""==""? In a rare victory for null-hypothesis-significance-testing, we do not commit a Type I error:
+
+~~~{.R}
+R> x1 <- 7359; x2 <- 7488; prop.test(c(x1*0.1623, x2*0.1589), c(x1,x2))
+
+    2-sample test for equality of proportions with continuity correction
+
+data:  c(x1 * 0.1623, x2 * 0.1589) out of c(x1, x2)
+X-squared = 0.2936, df = 1, p-value = 0.5879
+alternative hypothesis: two.sided
+95% confidence interval:
+ -0.008547  0.015347
+~~~
+
+But seriously, it is nice to see that ABalytics does not seem to be broken & favoring either option and any results driven by placement in the array of options.
+
+## Text & background color
+
+As part of the generally monochromatic color scheme, the background was off-white (grey) and the text was black:
+
+~~~{.Css}
+html { ...
+    background-color: #FCFCFC; /* off-white */
+    color: black;
+... }
+~~~
+
+The hyperlinks, on the other hand, make use of a off-black `color: #303C3C`, partially motivated by Ian Storm Taylor's advice to ["Never Use Black"](http://ianstormtaylor.com/design-tip-never-use-black/). I wonder - should all the text be off-black too? And which combination is best? White/black? Off-white/black? Off-white/off-black? White/off-black? Let's try all 4 combinations here.
+
+### Implementation
+
+The usual:
+
+~~~{.Html}
+hunk ./static/templates/default.html 30
+-    <div class="underline_class1"></div>
++    <div class="ground_class1"></div>
+hunk ./static/templates/default.html 155
+-      underline: [
++      ground: [
+hunk ./static/templates/default.html 157
+-      name: 'underlined',
+-      "underline_class1": "<style>a { color: #303C3C; text-decoration: underline; }</style>",
+-      "underline_class2": ""
++      name: 'bw',
++      "ground_class1": "<style>html { background-color: white; color: black; }</style>",
++      "ground_class2": ""
+hunk ./static/templates/default.html 162
+-      name: 'notUnderlined',
+-      "underline_class1": "<style>a { color: #303C3C; text-decoration: none; }</style>",
+-      "underline_class2": ""
++      name: 'obw',
++      "ground_class1": "<style>html { background-color: white; color: #303C3C; }</style>",
++      "ground_class2": ""
++      },
++      {
++      name: 'bow',
++      "ground_class1": "<style>html { background-color: #FCFCFC; color: black; }</style>",
++      "ground_class2": ""
++      },
++      {
++      name: 'obow',
++      "ground_class1": "<style>html { background-color: #FCFCFC; color: #303C3C; }</style>",
++      "ground_class2": ""
+... ]]
+~~~
+
+### Data
+
+I am a little curious about this one, so I scheduled a full month and half: 10 September - 20 October. Due to far more traffic than anticipated from submissions to Hacker News, I cut it short by 10 days to avoid wasting traffic on a test which was done (a total _n_ of 231,599 was more than enough). The results:
+
+Version  _n_       Conversion
+----     ------    ---------
+bw       58,237    12.90%
+obow     58,132    12.62%
+bow      57,576    12.48%
+obw      57,654    12.44%
+
+### Analysis
+
+~~~{.R}
+rates <- read.csv(stdin(),header=TRUE)
+Black,White,N,Rate
+TRUE,TRUE,58237,0.1290
+FALSE,FALSE,58132,0.1262
+TRUE,FALSE,57576,0.1248
+FALSE,TRUE,57654,0.1244
+
+
+rates$Successes <- rates$N * rates$Rate
+rates$Successes <- round(rates$Successes,0)
+rates$Failures <-rates$N - rates$Successes
+
+g <- glm(cbind(Successes,Failures) ~ Black * White, data=rates, family="binomial")
+summary(g)
+...
+Coefficients:
+                    Estimate Std. Error z value Pr(>|z|)
+(Intercept)          -1.9350     0.0125 -154.93   <2e-16
+BlackTRUE            -0.0128     0.0177   -0.72     0.47
+WhiteTRUE            -0.0164     0.0178   -0.92     0.36
+BlackTRUE:WhiteTRUE   0.0545     0.0250    2.17     0.03
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance:  6.8625e+00  on 3  degrees of freedom
+Residual deviance: -1.1758e-11  on 0  degrees of freedom
+AIC: 50.4
+summary(step(g))
+# same thing
+~~~
+
+So we can estimate the net effect of the 4 possibilities:
+
+1. Black, White: -0.0128 + -0.0164 + 0.0545 = 0.0253
+2. Off-black, Off-white: 0 + 0 + 0 = 0
+3. Black, Off-white: -0.0128 + 0 + 0 = -0.0128
+4. Off-black, White: 0 + -0.0164 + 0 = -0.0164
+
+The results exactly match the data's rankings.
+
+So, this suggests a change to the CSS: we switch the default background color from `#FCFCFC` to `white`, while leaving the default `color` its current `black`.
+
+Reader Lucas asks in the comment sections whether, since we would expect new visitors to the website to be less likely to read a page in full than a returning visitor (who knows what they're in for & probably wants more), whether including such a variable (which is something Google Analytics does track) might improve the analysis. It's easy to ask GA for "New vs Returning Visitor" so I did:
+
+~~~{.R}
+rates <- read.csv(stdin(),header=TRUE)
+Black,White,Type,N,Rate
+FALSE,TRUE,new,36695,0.1058
+FALSE,TRUE,old,21343,0.1565
+FALSE,FALSE,new,36997,0.1043
+FALSE,FALSE,old,21537,0.1588
+TRUE,TRUE,new,36600,0.1073
+TRUE,TRUE,old,22274,0.1613
+TRUE,FALSE,new,36409,0.1075
+TRUE,FALSE,old,21743,0.1507
+
+rates$Successes <- rates$N * rates$Rate
+rates$Successes <- round(rates$Successes,0)
+rates$Failures <-rates$N - rates$Successes
+
+g <- glm(cbind(Successes,Failures) ~ Black * White + Type, data=rates, family="binomial")
+summary(g)
+
+Coefficients:
+                     Estimate Std. Error z value Pr(>|z|)
+(Intercept)         -2.134459   0.013770 -155.01   <2e-16
+BlackTRUE           -0.009219   0.017813   -0.52     0.60
+WhiteTRUE            0.000837   0.017798    0.05     0.96
+BlackTRUE:WhiteTRUE  0.034362   0.025092    1.37     0.17
+Typeold              0.448004   0.012603   35.55   <2e-16
+~~~
+
+1. B/W: (-0.009219) + 0.000837 + 0.034362 = 0.02598
+2. 0 + 0 + 0 = 0
+3. B: (-0.009219) + 0 + 0 = -0.009219
+4. W: 0 + 0.000837 + 0 = 0.000837
+
+And again, 0.02598 > 0.000837. So as one hopes, thank to randomization, adding a missing covariate doesn't change our conclusion.
+
+## List symbol and font-size
+
+I make heavy use of unordered lists in articles; for no particular reason, the symbol denoting the start of each entry in a list is the little black square, rather than the more common little circle. I've come to find the little squares a little chunky and ugly, so I want to test that. And I just realized that I never tested font size (just type of font), even though increasing font size one of the most common CSS tweaks around. I don't have any reason to expect an interaction between these two bits of designs, unlike the previous A/B test, but I like the idea of getting more out of my data, so I am doing another factorial design, this time not 2x2 but 3x5. The options:
+
+~~~{.Css}
+ul { list-style-type: square; }
+ul { list-style-type: circle; }
+ul { list-style-type: disc; }
+
+html { font-size: 100%; }
+html { font-size: 105%; }
+html { font-size: 110%; }
+html { font-size: 115%; }
+html { font-size: 120%; }
+~~~
+
+### Implementation
+
+A 3x5 design, or 15 possibilities, does get a little bulkier than I'd like:
+
+~~~{.Html}
+hunk ./static/templates/default.html 30
+-    <div class="ground_class1"></div>
++    <div class="ulFontSize_class1"></div>
+hunk ./static/templates/default.html 146
+-      ground: [
++      ulFontSize: [
+hunk ./static/templates/default.html 148
+-      name: 'bw',
+-      "ground_class1": "<style>html { background-color: white; color: black; }</style>",
+-      "ground_class2": ""
++      name: 's100',
++      "ulFontSize_class1": "<style>ul { list-style-type: square; }; html { font-size: 100%; }</style>",
++      "ulFontSize_class2": ""
+hunk ./static/templates/default.html 153
+-      name: 'obw',
+-      "ground_class1": "<style>html { background-color: white; color: #303C3C; }</style>",
+-      "ground_class2": ""
++      name: 's105',
++      "ulFontSize_class1": "<style>ul { list-style-type: square; }; html { font-size: 105%; }</style>",
++      "ulFontSize_class2": ""
+hunk ./static/templates/default.html 158
+-      name: 'bow',
+-      "ground_class1": "<style>html { background-color: #FCFCFC; color: black; }</style>",
+-      "ground_class2": ""
++      name: 's110',
++      "ulFontSize_class1": "<style>ul { list-style-type: square; }; html { font-size: 110%; }</style>",
++      "ulFontSize_class2": ""
+hunk ./static/templates/default.html 163
+-      name: 'obow',
+-      "ground_class1": "<style>html { background-color: #FCFCFC; color: #303C3C; }</style>",
+-      "ground_class2": ""
++      name: 's115',
++      "ulFontSize_class1": "<style>ul { list-style-type: square; }; html { font-size: 115%; }</style>",
++      "ulFontSize_class2": ""
++      },
++      {
++      name: 's120',
++      "ulFontSize_class1": "<style>ul { list-style-type: square; }; html { font-size: 120%; }</style>",
++      "ulFontSize_class2": ""
++      },
++      {
++      name: 'c100',
++      "ulFontSize_class1": "<style>ul { list-style-type: circle; }; html { font-size: 100%; }</style>",
++      "ulFontSize_class2": ""
++      },
++      {
++      name: 'c105',
++      "ulFontSize_class1": "<style>ul { list-style-type: circle; }; html { font-size: 105%; }</style>",
++      "ulFontSize_class2": ""
++      },
++      {
++      name: 'c110',
++      "ulFontSize_class1": "<style>ul { list-style-type: circle; }; html { font-size: 110%; }</style>",
++      "ulFontSize_class2": ""
++      },
++      {
++      name: 'c115',
++      "ulFontSize_class1": "<style>ul { list-style-type: circle; }; html { font-size: 115%; }</style>",
++      "ulFontSize_class2": ""
++      },
++      {
++      name: 'c120',
++      "ulFontSize_class1": "<style>ul { list-style-type: circle; }; html { font-size: 120%; }</style>",
++      "ulFontSize_class2": ""
++      },
++      {
++      name: 'd100',
++      "ulFontSize_class1": "<style>ul { list-style-type: disc; }; html { font-size: 100%; }</style>",
++      "ulFontSize_class2": ""
++      },
++      {
++      name: 'd105',
++      "ulFontSize_class1": "<style>ul { list-style-type: disc; }; html { font-size: 105%; }</style>",
++      "ulFontSize_class2": ""
++      },
++      {
++      name: 'd110',
++      "ulFontSize_class1": "<style>ul { list-style-type: disc; }; html { font-size: 110%; }</style>",
++      "ulFontSize_class2": ""
++      },
++      {
++      name: 'd115',
++      "ulFontSize_class1": "<style>ul { list-style-type: disc; }; html { font-size: 115%; }</style>",
++      "ulFontSize_class2": ""
++      },
++      {
++      name: 'd120',
++      "ulFontSize_class1": "<style>ul { list-style-type: disc; }; html { font-size: 120%; }</style>",
++      "ulFontSize_class2": ""
+... ]]
+~~~
+
+### Data
+
+I halted the A/B test on 27 October because I was noticing clear damage as compared to my default CSS. The results were:
+
+List icon   Font zoom   _n_   Reading conversion rate
+----------- --------- ------- -----------------------
+square      100%        4,763       16.38%
+disc        100%        4,759       16.18%
+disc        110%        4,716       16.09%
+circle      115%        4,933       15.95%
+circle      100%        4,872       15.85%
+circle      110%        4,920       15.53%
+circle      120%        5,114       15.51%
+square      115%        4,815       15.51%
+square      110%        4,927       15.47%
+circle      105%        5,101       15.33%
+square      105%        4,775       14.85%
+disc        115%        4,797       14.78%
+disc        105%        5,006       14.72%
+disc        120%        4,912       14.56%
+square      120%        4,786       13.96%
+                       73,196     15.38%
+
+### Analysis
+
+Incorporating visitor type:
+
+~~~{.R}
+rates <- read.csv(stdin(),header=TRUE)
+Ul,Size,Type,N,Rate
+c,120,old,2673,0.1650
+c,115,old,2643,0.1854
+c,105,new,2636,0.1392
+d,105,old,2635,0.1613
+s,110,old,2596,0.1749
+s,120,old,2593,0.1678
+s,105,new,2582,0.1243
+d,120,old,2559,0.1649
+c,110,new,2558,0.1298
+d,110,new,2555,0.1307
+c,100,old,2553,0.2002
+c,105,old,2539,0.1713
+d,115,old,2524,0.1565
+s,115,new,2516,0.1391
+c,110,old,2505,0.1741
+d,100,new,2502,0.1431
+c,120,new,2500,0.1284
+s,110,new,2491,0.1265
+c,115,new,2483,0.1228
+d,120,new,2452,0.1277
+d,105,new,2448,0.1364
+c,100,new,2436,0.1199
+d,115,new,2435,0.1437
+s,100,new,2411,0.1497
+s,120,new,2411,0.1161
+s,105,old,2387,0.1571
+s,115,old,2365,0.1674
+d,100,old,2358,0.1735
+s,100,old,2329,0.1803
+d,110,old,2235,0.1888
+
+
+rates$Successes <- rates$N * rates$Rate
+rates$Successes <- round(rates$Successes,0)
+rates$Failures <-rates$N - rates$Successes
+
+g <- glm(cbind(Successes,Failures) ~ Ul * Size + Type, data=rates, family="binomial"); summary(g)
+
+...
+Coefficients:
+             Estimate Std. Error z value Pr(>|z|)
+(Intercept) -1.389310   0.270903   -5.13  2.9e-07
+Uld         -0.103201   0.386550   -0.27    0.789
+Uls          0.055036   0.389109    0.14    0.888
+Size        -0.004397   0.002458   -1.79    0.074
+Uld:Size     0.000842   0.003509    0.24    0.810
+Uls:Size    -0.000741   0.003533   -0.21    0.834
+Typeold      0.317126   0.020507   15.46  < 2e-16
+
+summary(step(g))
+
+...
+Coefficients:
+            Estimate Std. Error z value Pr(>|z|)
+(Intercept) -1.40555    0.15921   -8.83   <2e-16
+Size        -0.00436    0.00144   -3.02   0.0025
+Typeold      0.31725    0.02051   15.47   <2e-16
+
+# examine just the list type alone, since the Size result is clear.
+summary(glm(cbind(Successes,Failures) ~ Ul + Type, data=rates, family="binomial"))
+
+...
+Coefficients:
+            Estimate Std. Error z value Pr(>|z|)
+(Intercept)  -1.8725     0.0208  -89.91   <2e-16
+Uld          -0.0106     0.0248   -0.43     0.67
+Uls          -0.0265     0.0249   -1.07     0.29
+Typeold       0.3163     0.0205   15.43   <2e-16
+
+summary(glm(cbind(Successes,Failures) ~ Ul + Type, data=rates[rates$Size==100,], family="binomial"))
+
+...
+Coefficients:
+            Estimate Std. Error z value Pr(>|z|)
+(Intercept)  -1.8425     0.0465  -39.61  < 2e-16
+Uld          -0.0141     0.0552   -0.26     0.80
+Uls           0.0353     0.0551    0.64     0.52
+Typeold       0.3534     0.0454    7.78  7.3e-15
+~~~
+
+The results are a little confusing in factorial form: it seems pretty clear that `Size` is bad and that 100% performs best, but what's going on with the list icon type? Do we have too little data or is it interacting with the font size somehow? I find it a lot clearer when plotted:
+
+~~~{.R}
+library(ggplot2)
+qplot(Size,Rate,color=Ul,data=rates)
+~~~
+
+![Reading rate, split by font size, then by list icon type](/images/2013-10-27-abtesting-ulfontsize.png)
+
+Immediately the negative effect of increasing the font size jumps out, but it's easier to understand the list icon estimates: square performs the best in the 100% (the original default) font size condition but it performs poorly in the other font sizes, which is why it seems to do only medium-well compared to the others. Given how much better 100% performs than the others, I'm inclined to ignore their results and keep the squares.
+
+100% and squares, however, were the original CSS settings, so this means I will make no changes to the existing CSS based on these results.
+
+## Blockquote formatting
+
+Another bit of formatting I've been meaning to test for a while is seeing how well [Readability](http://www.readability.com/)'s pull-quotes next to blockquotes perform, and to check whether my zebra-striping of nested blockquotes is helpful or harmful.
+
+The Readability thing goes like this:
+
+~~~{.Css}
+blockquote: : before {
+    content: "\201C";
+    filter: alpha(opacity=20);
+    font-family: "Constantia", Georgia, 'Hoefler Text', 'Times New Roman', serif;
+    font-size: 4em;
+    left: -0.5em;
+    opacity: .2;
+    position: absolute;
+    top: .25em }
+~~~
+
+The current blockquote striping goes thusly:
+
+~~~{.Css}
+blockquote, blockquote blockquote blockquote,
+blockquote blockquote blockquote blockquote blockquote {
+    z-index: -2;
+    background-color: rgb(245, 245, 245); }
+blockquote blockquote, blockquote blockquote blockquote blockquote,
+blockquote blockquote blockquote blockquote blockquote blockquote {
+    background-color: rgb(235, 235, 235); }
+~~~
+
+### Implementation
+
+This is another 2x2 design since we can use the Readability quotes or not, and the zebra-striping or not.
+
+~~~{.Diff}
+hunk ./static/css/default.css 271
+-blockquote, blockquote blockquote blockquote,
+- blockquote blockquote blockquote blockquote blockquote {
+-    z-index: -2;
+-    background-color: rgb(245, 245, 245); }
+-blockquote blockquote, blockquote blockquote blockquote blockquote,
+- blockquote blockquote blockquote blockquote blockquote blockquote {
+-    background-color: rgb(235, 235, 235); }
++/* blockquote, blockquote blockquote blockquote, */
++/* blockquote blockquote blockquote blockquote blockquote { */
++/*     z-index: -2; */
++/*     background-color: rgb(245, 245, 245); } */
++/* blockquote blockquote, blockquote blockquote blockquote blockquote, */
++/*blockquote blockquote blockquote blockquote blockquote blockquote { */
++/*     background-color: rgb(235, 235, 235); } */
+hunk ./static/templates/default.html 30
+-    <div class="ulFontSize_class1"></div>
++    <div class="blockquoteFormatting_class1"></div>
+hunk ./static/templates/default.html 148
+-      ulFontSize: [
++      blockquoteFormatting: [
+hunk ./static/templates/default.html 150
+-      name: 's100',
+-      "ulFontSize_class1": "<style>ul { list-style-type: square; }; html { font-size: 100%; }</style>",
+-      "ulFontSize_class2": ""
++      name: 'rz',
++      "blockquoteFormatting_class1": "<style>blockquote: : before { content: '\201C';
+filter: alpha(opacity=20);
+font-family: 'Constantia', Georgia, 'Hoefler Text', 'Times New Roman', serif; font-size: 4em;left: -0.5em;
+opacity: .2; position: absolute; top: .25em }; blockquote, blockquote blockquote blockquote,
+blockquote blockquote blockquote blockquote blockquote { z-index: -2; background-color: rgb(245, 245, 245); };
+blockquote blockquote, blockquote blockquote blockquote blockquote,
+blockquote blockquote blockquote blockquote blockquote blockquote { background-color: rgb(235, 235, 235); }</style>",
++      "blockquoteFormatting_class2": ""
+hunk ./static/templates/default.html 155
+-      name: 's105',
+-      "ulFontSize_class1": "<style>ul { list-style-type: square; }; html { font-size: 105%; }</style>",
+-      "ulFontSize_class2": ""
++      name: 'orz',
++      "blockquoteFormatting_class1": "<style>blockquote, blockquote blockquote blockquote,
+blockquote blockquote blockquote blockquote blockquote { z-index: -2; background-color: rgb(245, 245, 245); };
+blockquote blockquote, blockquote blockquote blockquote blockquote,
+blockquote blockquote blockquote blockquote blockquote blockquote { background-color: rgb(235, 235, 235); }</style>",
++      "blockquoteFormatting_class2": ""
+hunk ./static/templates/default.html 160
+-      name: 's110',
+-      "ulFontSize_class1": "<style>ul { list-style-type: square; }; html { font-size: 110%; }</style>",
+-      "ulFontSize_class2": ""
++      name: 'roz',
++      "blockquoteFormatting_class1": "<style>blockquote: : before { content: '\201C';
+filter: alpha(opacity=20);
+font-family: 'Constantia', Georgia, 'Hoefler Text', 'Times New Roman', serif; font-size: 4em;left: -0.5em;
+opacity: .2; position: absolute; top: .25em }</style>",
++      "blockquoteFormatting_class2": ""
+hunk ./static/templates/default.html 165
+-      name: 's115',
+-      "ulFontSize_class1": "<style>ul { list-style-type: square; }; html { font-size: 115%; }</style>",
+-      "ulFontSize_class2": ""
+-      },
+-      {
+-      name: 's120',
+-      "ulFontSize_class1": "<style>ul { list-style-type: square; }; html { font-size: 120%; }</style>",
+-      "ulFontSize_class2": ""
+-      },
+-      {
+-      name: 'c100',
+-      "ulFontSize_class1": "<style>ul { list-style-type: circle; }; html { font-size: 100%; }</style>",
+-      "ulFontSize_class2": ""
+-      },
+-      {
+-      name: 'c105',
+-      "ulFontSize_class1": "<style>ul { list-style-type: circle; }; html { font-size: 105%; }</style>",
+-      "ulFontSize_class2": ""
+-      },
+-      {
+-      name: 'c110',
+-      "ulFontSize_class1": "<style>ul { list-style-type: circle; }; html { font-size: 110%; }</style>",
+-      "ulFontSize_class2": ""
+-      },
+-      {
+-      name: 'c115',
+-      "ulFontSize_class1": "<style>ul { list-style-type: circle; }; html { font-size: 115%; }</style>",
+-      "ulFontSize_class2": ""
+-      },
+-      {
+-      name: 'c120',
+-      "ulFontSize_class1": "<style>ul { list-style-type: circle; }; html { font-size: 120%; }</style>",
+-      "ulFontSize_class2": ""
+-      },
+-      {
+-      name: 'd100',
+-      "ulFontSize_class1": "<style>ul { list-style-type: disc; }; html { font-size: 100%; }</style>",
+-      "ulFontSize_class2": ""
+-      },
+-      {
+-      name: 'd105',
+-      "ulFontSize_class1": "<style>ul { list-style-type: disc; }; html { font-size: 105%; }</style>",
+-      "ulFontSize_class2": ""
+-      },
+-      {
+-      name: 'd110',
+-      "ulFontSize_class1": "<style>ul { list-style-type: disc; }; html { font-size: 110%; }</style>",
+-      "ulFontSize_class2": ""
+-      },
+-      {
+-      name: 'd115',
+-      "ulFontSize_class1": "<style>ul { list-style-type: disc; }; html { font-size: 115%; }</style>",
+-      "ulFontSize_class2": ""
+-      },
+-      {
+-      name: 'd120',
+-      "ulFontSize_class1": "<style>ul { list-style-type: disc; }; html { font-size: 120%; }</style>",
+-      "ulFontSize_class2": ""
++      name: 'oroz',
++      "blockquoteFormatting_class1": "<style></style>",
++      "blockquoteFormatting_class2": ""
+... ]]
+~~~
+
+### Data
+
+Readability Quote       Blockquote highlighting N       Conversion Rate
+--------------------    ----------------------- ------  ---------------
+no                      yes                     11,663  20.04%
+yes                     yes                     11,514  19.86%
+no                      no                      11,464  19.21%
+yes                     no                      10,669  18.51%
+                                                45,310  19.42%
+
+I discovered during this experiment that I could graph the conversion rate of each condition separately:
+
+![Google Analytics view on blockquote factorial test conversions, by day](/images/2013-11-25-abtesting-blockquotehighlighting.png)
+
+What I like about this graph is how it demonstrates some basic statistical points:
+
+1. the more traffic, the smaller sampling error is and the closer the 4 conditions are to their true values as they cluster together. This illustrates how even what *seems* like a large difference based on a large amount of data, may still be - unintuitively - dominated by sampling error
+2. day to day, any condition can be on top; no matter which one proves superior and which version is the worst, we can spot days where the worst version looks better than the best version. This illustrates how insidious selection biases or choice of datapoints can be: we can easily lie and show black is white, if we can just manage to cherrypick a little bit.
+3. the underlying traffic does not itself appear to be completely stable or consistent. There are a lot of movements which look like the underlying visitors may be changing in composition slightly and responding slightly. This harks back to the paper's warning that for some tests, no answer was possible as the responses of visitors kept changing which version was performing best.
+
+### Analysis
+
+~~~{.R}
+rates <- read.csv(stdin(),header=TRUE)
+Readability,Zebra,Type,N,Rate
+FALSE,FALSE,new,7191,0.1837
+TRUE,TRUE,new,7182,0.1910
+FALSE,TRUE,new,7112,0.1800
+TRUE,FALSE,new,6508,0.1804
+FALSE,TRUE,old,4652,0.2236
+TRUE,FALSE,old,4452,0.1995
+TRUE,TRUE,old,4412,0.2201
+FALSE,FALSE,old,4374,0.2046
+
+
+rates$Successes <- rates$N * rates$Rate
+rates$Successes <- round(rates$Successes,0)
+rates$Failures <-rates$N - rates$Successes
+
+g <- glm(cbind(Successes,Failures) ~ Readability * Zebra + Type, data=rates, family="binomial"); summary(g)
+
+...Coefficients:
+                          Estimate Std. Error z value Pr(>|z|)
+(Intercept)                -1.5095     0.0255  -59.09   <2e-16
+ReadabilityTRUE            -0.0277     0.0340   -0.81     0.42
+ZebraTRUE                   0.0327     0.0331    0.99     0.32
+ReadabilityTRUE:ZebraTRUE   0.0609     0.0472    1.29     0.20
+Typeold                     0.1788     0.0239    7.47    8e-14
+
+summary(step(g))
+...
+Coefficients:
+            Estimate Std. Error z value Pr(>|z|)
+(Intercept)  -1.5227     0.0197  -77.20  < 2e-16
+ZebraTRUE     0.0627     0.0236    2.66   0.0079
+Typeold       0.1782     0.0239    7.45  9.7e-14
+~~~
+
+The top-performing variant is the status quo (no Readability-style quote, zebra-striped blocks). So we keep it.
+
+## Font size & ToC background
+
+It was pointed out to me that in my previous font-size test, the clear linear trend may have implied that larger fonts than 100% were bad, but that I was making an unjustified leap in implicitly assuming that 100% was best: if bigger is worse, then mightn't the optimal font size be something *smaller* than 100%, like 95%?
+
+And while the blockquote background coloring is a good idea, per the previous test, what about the other place on `gwern.net` where I use a light background shading: the Table of Contents? Perhaps it would be better with the same background shading as the blockquotes, or no shading?
+
+Finally, because I am tired of just 2 factors, I throw in a third factor to make it really multifactorial. I picked the number-sizing from the existing list of suggestions.
+
+Each factor has 3 variants, giving 27 conditions:
+
+~~~{.Css}
+.num { font-size: 85%; }
+.num { font-size: 95%; }
+.num { font-size: 100%; }
+
+html { font-size: 85%; }
+html { font-size: 95%; }
+html { font-size: 100%; }
+
+div#TOC { background: #fff; }
+div#TOC { background: #eee; }
+div#TOC { background-color: rgb(245, 245, 245); }
+~~~
+
+### Implementation
+
+~~~{.Diff}
+hunk ./static/templates/default.html 30
+-    <div class="blockquoteFormatting_class1"></div>
++    <div class="tocFormatting_class1"></div>
+hunk ./static/templates/default.html 150
+-      blockquoteFormatting: [
++      tocFormatting: [
+hunk ./static/templates/default.html 152
+-      name: 'rz',
+-      "blockquoteFormatting_class1": "<style>blockquote:before { display: block; font-size: 200%; color: #ccc; content: open-quote; height: 0px; margin-left: -0.55em; position:relative; }; blockquote blockquote, blockquote blockquote blockquote blockquote, blockquote blockquote blockquote blockquote blockquote blockquote { background-color: rgb(235, 235, 235); }</style>",
+-      "blockquoteFormatting_class2": ""
++      name: '88f',
++      "tocFormatting_class1": "<style>.num { font-size: 85%; }; html { font-size: 85%; }; div#TOC { background: #fff; };</style>",
++      "tocFormatting_class2": ""
+hunk ./static/templates/default.html 157
+-      name: 'orz',
+-      "blockquoteFormatting_class1": "<style>blockquote, blockquote blockquote blockquote, blockquote blockquote blockquote blockquote blockquote { z-index: -2; background-color: rgb(245, 245, 245); }; blockquote blockquote, blockquote blockquote blockquote blockquote, blockquote blockquote blockquote blockquote blockquote blockquote { background-color: rgb(235, 235, 235); }</style>",
+-      "blockquoteFormatting_class2": ""
++      name: '88e',
++      "tocFormatting_class1": "<style>.num { font-size: 85%; }; html { font-size: 85%; }; div#TOC { background: #eee; }</style>",
++      "tocFormatting_class2": ""
+hunk ./static/templates/default.html 162
+-      name: 'oroz',
+-      "blockquoteFormatting_class1": "<style></style>",
+-      "blockquoteFormatting_class2": ""
++      name: '88r',
++      "tocFormatting_class1": "<style>.num { font-size: 85%; }; html { font-size: 85%; }; div#TOC { background-color: rgb(245, 245, 245); }</style>",
++      "tocFormatting_class2": ""
++      },
++      {
++      name: '89f',
++      "tocFormatting_class1": "<style>.num { font-size: 85%; }; html { font-size: 95%; }; div#TOC { background: #fff; }</style>",
++      "tocFormatting_class2": ""
++      },
++      {
++      name: '89e',
++      "tocFormatting_class1": "<style>.num { font-size: 85%; }; html { font-size: 95%; }; div#TOC { background: #eee; }</style>",
++      "tocFormatting_class2": ""
++      },
++      {
++      name: '89f',
++      "tocFormatting_class1": "<style>.num { font-size: 85%; }; html { font-size: 95%; }; div#TOC { background-color: rgb(245, 245, 245); }</style>",
++      "tocFormatting_class2": ""
++      },
++      {
++      name: '81f',
++      "tocFormatting_class1": "<style>.num { font-size: 85%; }; html { font-size: 100%; }; div#TOC { background: #fff; }</style>",
++      "tocFormatting_class2": ""
++      },
++      {
++      name: '81e',
++      "tocFormatting_class1": "<style>.num { font-size: 85%; }; html { font-size: 100%; }; div#TOC { background: #eee; }</style>",
++      "tocFormatting_class2": ""
++      },
++      {
++      name: '81r',
++      "tocFormatting_class1": "<style>.num { font-size: 85%; }; html { font-size: 100%; }; div#TOC { background-color: rgb(245, 245, 245); }</style>",
++      "tocFormatting_class2": ""
++      },
++      {
++      name: '98f',
++      "tocFormatting_class1": "<style>.num { font-size: 95%; }; html { font-size: 85%; }; div#TOC { background: #fff; };</style>",
++      "tocFormatting_class2": ""
++      },
++      {
++      name: '98e',
++      "tocFormatting_class1": "<style>.num { font-size: 95%; }; html { font-size: 85%; }; div#TOC { background: #eee; }</style>",
++      "tocFormatting_class2": ""
++      },
++      {
++      name: '98r',
++      "tocFormatting_class1": "<style>.num { font-size: 95%; }; html { font-size: 85%; }; div#TOC { background-color: rgb(245, 245, 245); }</style>",
++      "tocFormatting_class2": ""
++      },
++      {
++      name: '99f',
++      "tocFormatting_class1": "<style>.num { font-size: 95%; }; html { font-size: 95%; }; div#TOC { background: #fff; }</style>",
++      "tocFormatting_class2": ""
++      },
++      {
++      name: '99e',
++      "tocFormatting_class1": "<style>.num { font-size: 95%; }; html { font-size: 95%; }; div#TOC { background: #eee; }</style>",
++      "tocFormatting_class2": ""
++      },
++      {
++      name: '99f',
++      "tocFormatting_class1": "<style>.num { font-size: 95%; }; html { font-size: 95%; }; div#TOC { background-color: rgb(245, 245, 245); }</style>",
++      "tocFormatting_class2": ""
++      },
++      {
++      name: '91f',
++      "tocFormatting_class1": "<style>.num { font-size: 95%; }; html { font-size: 100%; }; div#TOC { background: #fff; }</style>",
++      "tocFormatting_class2": ""
++      },
++      {
++      name: '91e',
++      "tocFormatting_class1": "<style>.num { font-size: 95%; }; html { font-size: 100%; }; div#TOC { background: #eee; }</style>",
++      "tocFormatting_class2": ""
++      },
++      {
++      name: '91r',
++      "tocFormatting_class1": "<style>.num { font-size: 95%; }; html { font-size: 100%; }; div#TOC { background-color: rgb(245, 245, 245); }</style>",
++      "tocFormatting_class2": ""
++      },
++      {
++      name: '18f',
++      "tocFormatting_class1": "<style>.num { font-size: 100%; }; html { font-size: 85%; }; div#TOC { background: #fff; };</style>",
++      "tocFormatting_class2": ""
++      },
++      {
++      name: '18e',
++      "tocFormatting_class1": "<style>.num { font-size: 100%; }; html { font-size: 85%; }; div#TOC { background: #eee; }</style>",
++      "tocFormatting_class2": ""
++      },
++      {
++      name: '18r',
++      "tocFormatting_class1": "<style>.num { font-size: 100%; }; html { font-size: 85%; }; div#TOC { background-color: rgb(245, 245, 245); }</style>",
++      "tocFormatting_class2": ""
++      },
++      {
++      name: '19f',
++      "tocFormatting_class1": "<style>.num { font-size: 100%; }; html { font-size: 95%; }; div#TOC { background: #fff; }</style>",
++      "tocFormatting_class2": ""
++      },
++      {
++      name: '19e',
++      "tocFormatting_class1": "<style>.num { font-size: 100%; }; html { font-size: 95%; }; div#TOC { background: #eee; }</style>",
++      "tocFormatting_class2": ""
++      },
++      {
++      name: '19f',
++      "tocFormatting_class1": "<style>.num { font-size: 100%; }; html { font-size: 95%; }; div#TOC { background-color: rgb(245, 245, 245); }</style>",
++      "tocFormatting_class2": ""
++      },
++      {
++      name: '11f',
++      "tocFormatting_class1": "<style>.num { font-size: 100%; }; html { font-size: 100%; }; div#TOC { background: #fff; }</style>",
++      "tocFormatting_class2": ""
++      },
++      {
++      name: '11e',
++      "tocFormatting_class1": "<style>.num { font-size: 100%; }; html { font-size: 100%; }; div#TOC { background: #eee; }</style>",
++      "tocFormatting_class2": ""
++      },
++      {
++      name: '11r',
++      "tocFormatting_class1": "<style>.num { font-size: 100%; }; html { font-size: 100%; }; div#TOC { background-color: rgb(245, 245, 245); }</style>",
++      "tocFormatting_class2": ""
+... ]]
+~~~
+
+### Analysis
+
+~~~{.R}
+rates <- read.csv(stdin(),header=TRUE)
+NumSize,FontSize,TocBg,Type,N,Rate
+1,9,e,new,3060,0.1513
+8,9,e,new,2978,0.1605
+9,1,r,new,2965,0.1548
+8,8,f,new,2941,0.1629
+1,9,f,new,2933,0.1558
+9,9,r,new,2932,0.1576
+8,9,f,new,2906,0.1473
+1,9,r,new,2901,0.1482
+9,9,f,new,2901,0.1420
+8,8,r,new,2885,0.1567
+1,8,e,new,2876,0.1412
+8,1,r,new,2869,0.1593
+9,8,f,new,2846,0.1472
+1,1,e,new,2844,0.1551
+1,8,f,new,2841,0.1457
+9,8,e,new,2834,0.1478
+8,1,f,new,2833,0.1521
+1,8,r,new,2818,0.1544
+8,8,e,new,2818,0.1678
+8,1,e,new,2810,0.1605
+1,1,r,new,2806,0.1775
+9,8,r,new,2801,0.1682
+9,1,e,new,2799,0.1422
+8,9,r,new,2764,0.1548
+9,9,e,new,2753,0.1478
+1,1,f,new,2750,0.1611
+9,1,f,new,2700,0.1537
+8,8,r,old,1551,0.2521
+9,8,e,old,1519,0.2146
+9,8,f,old,1505,0.2153
+1,8,e,old,1489,0.2317
+1,1,e,old,1475,0.2339
+8,1,f,old,1416,0.2112
+1,9,r,old,1390,0.2245
+8,9,e,old,1388,0.2464
+9,9,r,old,1379,0.2466
+8,9,r,old,1374,0.1907
+1,9,f,old,1361,0.2337
+8,8,f,old,1348,0.2322
+1,9,e,old,1347,0.2279
+1,8,f,old,1340,0.2470
+9,1,r,old,1336,0.2605
+8,1,r,old,1326,0.2119
+8,8,e,old,1321,0.2286
+9,1,f,old,1318,0.2398
+1,1,r,old,1293,0.2111
+1,8,r,old,1293,0.2073
+9,9,f,old,1261,0.2411
+8,9,f,old,1254,0.2113
+9,9,e,old,1240,0.2435
+1,1,f,old,1232,0.2240
+8,1,e,old,1229,0.2587
+9,1,e,old,1182,0.2335
+9,8,r,old,1032,0.2403
+
+
+rates[rates$NumSize==1,]$NumSize <- 100
+rates[rates$NumSize==9,]$NumSize <- 95
+rates[rates$NumSize==8,]$NumSize <- 85
+rates[rates$FontSize==1,]$FontSize <- 100
+rates[rates$FontSize==9,]$FontSize <- 95
+rates[rates$FontSize==8,]$FontSize <- 85
+rates$Successes <- rates$N * rates$Rate
+rates$Successes <- round(rates$Successes,0)
+rates$Failures <-rates$N - rates$Successes
+
+g <- glm(cbind(Successes,Failures) ~ NumSize * FontSize * TocBg + Type, data=rates, family="binomial"); summary(g)
+
+...
+Coefficients:
+                         Estimate Std. Error z value Pr(>|z|)
+(Intercept)              0.124770   3.020334    0.04     0.97
+NumSize                 -0.022262   0.032293   -0.69     0.49
+FontSize                -0.012775   0.032283   -0.40     0.69
+TocBgf                   4.042812   4.287006    0.94     0.35
+TocBgr                   5.356794   4.250778    1.26     0.21
+NumSize:FontSize         0.000166   0.000345    0.48     0.63
+NumSize:TocBgf          -0.040645   0.045855   -0.89     0.38
+NumSize:TocBgr          -0.054164   0.045501   -1.19     0.23
+FontSize:TocBgf         -0.052406   0.045854   -1.14     0.25
+FontSize:TocBgr         -0.065503   0.045482   -1.44     0.15
+NumSize:FontSize:TocBgf  0.000531   0.000490    1.08     0.28
+NumSize:FontSize:TocBgr  0.000669   0.000487    1.37     0.17
+Typeold                  0.492688   0.015978   30.84   <2e-16
+
+summary(step(g))
+
+...
+                  Estimate Std. Error z value Pr(>|z|)
+(Intercept)       3.808438   1.750144    2.18   0.0295
+NumSize          -0.059730   0.018731   -3.19   0.0014
+FontSize         -0.052262   0.018640   -2.80   0.0051
+TocBgf           -0.844664   0.285387   -2.96   0.0031
+TocBgr           -0.747451   0.283304   -2.64   0.0083
+NumSize:FontSize  0.000568   0.000199    2.85   0.0044
+NumSize:TocBgf    0.008853   0.003052    2.90   0.0037
+NumSize:TocBgr    0.008139   0.003030    2.69   0.0072
+Typeold           0.492598   0.015975   30.83   <2e-16
+~~~
+
+The two size tweaks turn out to be unambiguously negative compared to the status quo (with an almost negligible interaction term probably reflecting reader preference for consistency in sizes of letters and numbers - as one gets smaller, the other does better if it's smaller too). The Table of Contents backgrounds also survive (thanks to the new vs old visitor type covariate adding power): there were 3 background types, `e`/`f`/`r`[gb], and `f`/`r` turn out to have negative coefficients, implying that `e` is best - but `e` is also the status quo, so no change is recommended.
+
+### Multifactorial roundup
+
+At this point it seems worth asking whether running multifactorials has been worthwhile. The analysis is a bit more difficult, and the more factors there are, the harder to interpret. I'm also not too keen on encoding the combinatorial explosion into a big JS array for ABalytics. In my tests so far, have there been many interactions? A quick tally of the `glm()`/`step()` results:
+
+1. Text & background color:
+
+    - original: 2 main, 1 two-way interaction
+    - survived: 2 main, 1 two-way interaction
+2. List symbol and font-size:
+
+    - original: 3 main, 2 two-way interactions
+    - survived: 1 main
+3. Blockquote formatting:
+
+    - original: 2 main, 1 two-way
+    - survived: 1 main
+4. Font size & ToC background:
+
+    - original: 4 mains, 5 two-ways, 2 three-ways
+    - survived: 3 mains, 2 two-way
+
+So of the 11 main effects, 9 two-ways, & 2 three-ways, there were confirmed in the reduced models: 7 mains, 3 two-ways (22%), & 0 three-ways (0%). And of the 2 interactions, only the black/white interaction was important (and even there, if I had regressed instead `cbind(Successes, Failures) ~ Black + White`, black & white would still have positive coefficients, they just would not be statistically-significant, and so I would likely have made the same choice as I did with the interaction data available).
+
+This is not a resounding endorsement so far.
+
+## Section header capitalization
+
+3x3:
+
+- `h1, h2, h3, h4, h5 { text-transform: uppercase; }`
+- `h1, h2, h3, h4, h5 { text-transform: none; }`
+- `h1, h2, h3, h4, h5 { text-transform: capitalize; }`
+- `div#header h1 { text-transform: uppercase; }`
+- `div#header h1 { text-transform: none; }`
+- `div#header h1 { text-transform: capitalize; }`
+
+~~~{.Diff}
+--- a/static/templates/default.html
++++ b/static/templates/default.html
+@@ -27,7 +27,7 @@
+   <body>
+
+     <!-- override CSS with A/B test -->
+-    <div class="tocFormatting_class1"></div>
++    <div class="headerCaps_class1"></div>
+
+     <div id="main">
+       <div id="sidebar">
+@@ -152,141 +152,51 @@
+       _gaq.push(['_setAccount', 'UA-18912926-1']);
+
+       ABalytics.init({
+-      tocFormatting: [
++      headerCaps: [
+       {
+-      name: '88f',
+-      "tocFormatting_class1": "<style>.num { font-size: 85%; }; html { font-size: 85%; }; div#TOC { background: #fff; };</style>",
+-      "tocFormatting_class2": ""
++      name: 'uu',
++      "headerCaps_class1": "<style>h1, h2, h3, h4, h5 { text-transform: uppercase; }; div#header h1 { text-transform: uppercase; }</style>",
++      "headerCaps_class2": ""
+       },
+       {
+-      name: '88e',
+-      "tocFormatting_class1": "<style>.num { font-size: 85%; }; html { font-size: 85%; }; div#TOC { background: #eee; }</style>",
+-      "tocFormatting_class2": ""
++      name: 'un',
++      "headerCaps_class1": "<style>div#header h1 { text-transform: uppercase; }; div#header h1 { text-transform: none; }</style>",
++      "headerCaps_class2": ""
+       },
+       {
+-      name: '88r',
+-      "tocFormatting_class1": "<style>.num { font-size: 85%; }; html { font-size: 85%; }; div#TOC { background-color: rgb(245, 245, 245); }</style>",
+-      "tocFormatting_class2": ""
++      name: 'uc',
++      "headerCaps_class1": "<style>div#header h1 { text-transform: uppercase; }; div#header h1 { text-transform: capitalize; }</style>",
++      "headerCaps_class2": ""
+       },
+       {
+-      name: '89f',
+-      "tocFormatting_class1": "<style>.num { font-size: 85%; }; html { font-size: 95%; }; div#TOC { background: #fff; }</style>",
+-      "tocFormatting_class2": ""
++      name: 'nu',
++      "headerCaps_class1": "<style>h1, h2, h3, h4, h5 { text-transform: none; }; div#header h1 { text-transform: uppercase; }</style>",
++      "headerCaps_class2": ""
+       },
+       {
+-      name: '89e',
+-      "tocFormatting_class1": "<style>.num { font-size: 85%; }; html { font-size: 95%; }; div#TOC { background: #eee; }</style>",
+-      "tocFormatting_class2": ""
++      name: 'nn',
++      "headerCaps_class1": "<style>h1, h2, h3, h4, h5 { text-transform: none; }; div#header h1 { text-transform: none; }</style>",
++      "headerCaps_class2": ""
+       },
+       {
+-      name: '89r',
+-      "tocFormatting_class1": "<style>.num { font-size: 85%; }; html { font-size: 95%; }; div#TOC { background-color: rgb(245, 245, 245); }</style>",
+-      "tocFormatting_class2": ""
++      name: 'nc',
++      "headerCaps_class1": "<style>h1, h2, h3, h4, h5 { text-transform: none; }; div#header h1 { text-transform: capitalize; }</style>",
++      "headerCaps_class2": ""
+       },
+       {
+-      name: '81f',
+-      "tocFormatting_class1": "<style>.num { font-size: 85%; }; html { font-size: 100%; }; div#TOC { background: #fff; }</style>",
+-      "tocFormatting_class2": ""
++      name: 'cu',
++      "headerCaps_class1": "<style>h1, h2, h3, h4, h5 { text-transform: capitalize; }; div#header h1 { text-transform: uppercase; }</style>",
++      "headerCaps_class2": ""
+       },
+       {
+-      name: '81e',
+-      "tocFormatting_class1": "<style>.num { font-size: 85%; }; html { font-size: 100%; }; div#TOC { background: #eee; }</style>",
+-      "tocFormatting_class2": ""
++      name: 'cn',
++      "headerCaps_class1": "<style>h1, h2, h3, h4, h5 { text-transform: capitalize; }; div#header h1 { text-transform: none; }</style>",
++      "headerCaps_class2": ""
+       },
+       {
+-      name: '81r',
+-      "tocFormatting_class1": "<style>.num { font-size: 85%; }; html { font-size: 100%; }; div#TOC { background-color: rgb(245, 245, 245); }</style>",
+-      "tocFormatting_class2": ""
+-      },
+-      {
+-      name: '98f',
+-      "tocFormatting_class1": "<style>.num { font-size: 95%; }; html { font-size: 85%; }; div#TOC { background: #fff; };</style>",
+-      "tocFormatting_class2": ""
+-      },
+-      {
+-      name: '98e',
+-      "tocFormatting_class1": "<style>.num { font-size: 95%; }; html { font-size: 85%; }; div#TOC { background: #eee; }</style>",
+-      "tocFormatting_class2": ""
+-      },
+-      {
+-      name: '98r',
+-      "tocFormatting_class1": "<style>.num { font-size: 95%; }; html { font-size: 85%; }; div#TOC { background-color: rgb(245, 245, 245); }</style>",
+-      "tocFormatting_class2": ""
+-      },
+-      {
+-      name: '99f',
+-      "tocFormatting_class1": "<style>.num { font-size: 95%; }; html { font-size: 95%; }; div#TOC { background: #fff; }</style>",
+-      "tocFormatting_class2": ""
+-      },
+-      {
+-      name: '99e',
+-      "tocFormatting_class1": "<style>.num { font-size: 95%; }; html { font-size: 95%; }; div#TOC { background: #eee; }</style>",
+-      "tocFormatting_class2": ""
+-      },
+-      {
+-      name: '99r',
+-      "tocFormatting_class1": "<style>.num { font-size: 95%; }; html { font-size: 95%; }; div#TOC { background-color: rgb(245, 245, 245); }</style>",
+-      "tocFormatting_class2": ""
+-      },
+-      {
+-      name: '91f',
+-      "tocFormatting_class1": "<style>.num { font-size: 95%; }; html { font-size: 100%; }; div#TOC { background: #fff; }</style>",
+-      "tocFormatting_class2": ""
+-      },
+-      {
+-      name: '91e',
+-      "tocFormatting_class1": "<style>.num { font-size: 95%; }; html { font-size: 100%; }; div#TOC { background: #eee; }</style>",
+-      "tocFormatting_class2": ""
+-      },
+-      {
+-      name: '91r',
+-      "tocFormatting_class1": "<style>.num { font-size: 95%; }; html { font-size: 100%; }; div#TOC { background-color: rgb(245, 245, 245); }</style>",
+-      "tocFormatting_class2": ""
+-      },
+-      {
+-      name: '18f',
+-      "tocFormatting_class1": "<style>.num { font-size: 100%; }; html { font-size: 85%; }; div#TOC { background: #fff; };</style>",
+-      "tocFormatting_class2": ""
+-      {
+-      name: '18e',
+-      "tocFormatting_class1": "<style>.num { font-size: 100%; }; html { font-size: 85%; }; div#TOC { background: #eee; }</style>",
+-      "tocFormatting_class2": ""
+-      },
+-      {
+-      name: '18r',
+-      "tocFormatting_class1": "<style>.num { font-size: 100%; }; html { font-size: 85%; }; div#TOC { background-color: rgb(245, 245, 245); }</style>",
+-      "tocFormatting_class2": ""
+-      },
+-      {
+-      name: '19f',
+-      "tocFormatting_class1": "<style>.num { font-size: 100%; }; html { font-size: 95%; }; div#TOC { background: #fff; }</style>",
+-      "tocFormatting_class2": ""
+-      },
+-      {
+-      name: '19e',
+-      "tocFormatting_class1": "<style>.num { font-size: 100%; }; html { font-size: 95%; }; div#TOC { background: #eee; }</style>",
+-      "tocFormatting_class2": ""
+-      },
+-      {
+-      name: '19r',
+-      "tocFormatting_class1": "<style>.num { font-size: 100%; }; html { font-size: 95%; }; div#TOC { background-color: rgb(245, 245, 245); }</style>",
+-      "tocFormatting_class2": ""
+-      },
+-      {
+-      name: '11f',
+-      "tocFormatting_class1": "<style>.num { font-size: 100%; }; html { font-size: 100%; }; div#TOC { background: #fff; }</style>",
+-      "tocFormatting_class2": ""
+-      },
+-      {
+-      name: '11e',
+-      "tocFormatting_class1": "<style>.num { font-size: 100%; }; html { font-size: 100%; }; div#TOC { background: #eee; }</style>",
+-      "tocFormatting_class2": ""
+-      },
+-      {
+-      name: '11r',
+-      "tocFormatting_class1": "<style>.num { font-size: 100%; }; html { font-size: 100%; }; div#TOC { background-color: rgb(245, 245, 245); }</style>",
+-      "tocFormatting_class2": ""
++      name: 'cc',
++      "headerCaps_class1": "<style>h1, h2, h3, h4, h5 { text-transform: capitalize; }; div#header h1 { text-transform: capitalize; }</style>",
++      "headerCaps_class2": ""
+       }
+       ],
+       }, _gaq);
+       ...)}
+~~~
+
+~~~{.R}
+rates <- read.csv(stdin(),header=TRUE)
+Sections,Title,Old,N,Rate
+c,u,FALSE,2362, 0.1808
+c,n,FALSE,2356,0.1855
+c,c,FALSE,2342,0.2003
+u,u,FALSE,2341,0.1965
+u,c,FALSE,2333,0.1989
+n,u,FALSE,2329,0.1928
+n,c,FALSE,2323,0.1941
+n,n,FALSE,2321,0.1978
+u,n,FALSE,2315,0.1965
+c,c,TRUE,1370,0.2190
+n,u,TRUE,1302,0.2558
+u,u,TRUE,1271,0.2919
+c,n,TRUE,1258,0.2377
+u,c,TRUE,1228,0.2272
+n,c,TRUE,1211,0.2337
+n,n,TRUE,1200,0.2400
+c,u,TRUE,1135,0.2396
+u,n,TRUE,1028,0.2442
+
+
+rates$Successes <- rates$N * rates$Rate
+rates$Successes <- round(rates$Successes,0)
+rates$Failures <-rates$N - rates$Successes
+
+g <- glm(cbind(Successes,Failures) ~ Sections * Title + Old, data=rates, family="binomial"); summary(g)
+...
+Coefficients:
+(Intercept)       -1.4552     0.0422  -34.50   <2e-16
+Sectionsn          0.0111     0.0581    0.19    0.848
+Sectionsu          0.0163     0.0579    0.28    0.779
+Titlen            -0.0153     0.0579   -0.26    0.791
+Titleu            -0.0318     0.0587   -0.54    0.588
+OldTRUE            0.2909     0.0283   10.29   <2e-16
+Sectionsn:Titlen   0.0429     0.0824    0.52    0.603
+Sectionsu:Titlen   0.0419     0.0829    0.51    0.613
+Sectionsn:Titleu   0.0732     0.0825    0.89    0.375
+Sectionsu:Titleu   0.1553     0.0820    1.89    0.058
+
+summary(step(g))
+...
+Coefficients:
+            Estimate Std. Error z value Pr(>|z|)
+(Intercept)  -1.4710     0.0263  -55.95   <2e-16
+Sectionsn     0.0497     0.0337    1.47    0.140
+Sectionsu     0.0833     0.0337    2.47    0.013
+OldTRUE       0.2920     0.0283   10.33   <2e-16
+~~~
+
+Uppercase and 'none' beat 'capitalize' in both page titles & section headers (interaction does not survive). So I toss in a CSS declaration to uppercase section headers as well as the status quo of the title.
+
+## ToC formatting
+
+After the page title, the next thing a reader will generally see on my pages in the table of contents. It's been tweaked over the years (particularly by suggestions from Hacker News) but still has some untested aspects, particularly the first two parts of `div#TOC`:
+
+~~~{.Css}
+    float: left;
+    width: 25%;
+~~~
+
+I'd like to test left vs right, and 15,20,25,30,35%, so that's a 2x5 design. Usual implementation:
+
+~~~{.Diff}
+diff --git a/static/templates/default.html b/static/templates/default.html
+index 83c6f9c..11c4ada 100644
+--- a/static/templates/default.html
++++ b/static/templates/default.html
+@@ -27,7 +27,7 @@
+   <body>
+
+     <!-- override CSS with A/B test -->
+-    <div class="headerCaps_class1"></div>
++    <div class="tocAlign_class1"></div>
+
+     <div id="main">
+       <div id="sidebar">
+@@ -152,51 +152,56 @@
+       _gaq.push(['_setAccount', 'UA-18912926-1']);
+
+       ABalytics.init({
+-      headerCaps: [
++      tocAlign: [
+       {
+-      name: 'uu',
+-      "headerCaps_class1": "<style>h1, h2, h3, h4, h5 { text-transform: uppercase; }; div#header h1 { text-transform: uppercase; }</style>",
+-      "headerCaps_class2": ""
++      name: 'l15',
++      "tocAlign_class1": "<style>div#TOC { float: left; width: 15%; }</style>",
++      "tocAlign_class2": ""
+       },
+       {
+-      name: 'un',
+-      "headerCaps_class1": "<style>div#header h1 { text-transform: uppercase; }; div#header h1 { text-transform: none; }</style>",
+-      "headerCaps_class2": ""
++      name: 'l20',
++      "tocAlign_class1": "<style>div#TOC { float: left; width: 20%; }</style>",
++      "tocAlign_class2": ""
+       },
+       {
+-      name: 'uc',
+-      "headerCaps_class1": "<style>div#header h1 { text-transform: uppercase; }; div#header h1 { text-transform: capitalize; }</style>",
+-      "headerCaps_class2": ""
++      name: 'l25',
++      "tocAlign_class1": "<style>div#TOC { float: left; width: 25%; }</style>",
++      "tocAlign_class2": ""
+       },
+       {
+-      name: 'nu',
+-      "headerCaps_class1": "<style>h1, h2, h3, h4, h5 { text-transform: none; }; div#header h1 { text-transform: uppercase; }</style>",
+-      "headerCaps_class2": ""
++      name: 'l30',
++      "tocAlign_class1": "<style>div#TOC { float: left; width: 30%; }</style>",
++      "tocAlign_class2": ""
+       },
+       {
+-      name: 'nn',
+-      "headerCaps_class1": "<style>h1, h2, h3, h4, h5 { text-transform: none; }; div#header h1 { text-transform: none; }</style>",
+-      "headerCaps_class2": ""
++      name: 'l35',
++      "tocAlign_class1": "<style>div#TOC { float: left; width: 35%; }</style>",
++      "tocAlign_class2": ""
+       },
+       {
+-      name: 'nc',
+-      "headerCaps_class1": "<style>h1, h2, h3, h4, h5 { text-transform: none; }; div#header h1 { text-transform: capitalize; }</style>",
+-      "headerCaps_class2": ""
++      name: 'r15',
++      "tocAlign_class1": "<style>div#TOC { float: right; width: 15%; }</style>",
++      "tocAlign_class2": ""
+       },
+       {
+-      name: 'cu',
+-      "headerCaps_class1": "<style>h1, h2, h3, h4, h5 { text-transform: capitalize; }; div#header h1 { text-transform: uppercase; }</style>",
+-      "headerCaps_class2": ""
++      name: 'r20',
++      "tocAlign_class1": "<style>div#TOC { float: right; width: 20%; }</style>",
++      "tocAlign_class2": ""
+       },
+       {
+-      name: 'cn',
+-      "headerCaps_class1": "<style>h1, h2, h3, h4, h5 { text-transform: capitalize; }; div#header h1 { text-transform: none; }</style>",
+-      "headerCaps_class2": ""
++      name: 'r25',
++      "tocAlign_class1": "<style>div#TOC { float: right; width: 25%; }</style>",
++      "tocAlign_class2": ""
+       },
+       {
+-      name: 'cc',
+-      "headerCaps_class1": "<style>h1, h2, h3, h4, h5 { text-transform: capitalize; }; div#header h1 { text-transform: capitalize; }</style>",
+-      "headerCaps_class2": ""
++      name: 'r30',
++      "tocAlign_class1": "<style>div#TOC { float: right; width: 30%; }</style>",
++      "tocAlign_class2": ""
++      },
++      {
++      name: 'r35',
++      "tocAlign_class1": "<style>div#TOC { float: right; width: 35%; }</style>",
++      "tocAlign_class2": ""
+       }
+       ],
+       }, _gaq));
+~~~
+
+I decided to end this test early on 10 March 2014 because I wanted to move onto the BeeLine Reader test, so it's underpowered & the results aren't as clear as usual:
+
+~~~{.R}
+rates <- read.csv(stdin(),header=TRUE)
+Alignment,Width,Old,N,Rate
+r,25,FALSE,1040,0.1673
+r,30,FALSE,1026,0.1891
+l,20,FALSE,1023,0.1896
+l,25,FALSE,1022,0.1800
+l,35,FALSE,1022,0.1820
+l,30,FALSE,1016,0.1781
+l,15,FALSE,1010,0.1851
+r,15,FALSE,991,0.1554
+r,20,FALSE,989,0.1881
+r,35,FALSE,969,0.1672
+l,30,TRUE,584,0.2414
+l,25,TRUE,553,0.2224
+l,20,TRUE,520,0.3096
+r,15,TRUE,512,0.2539
+l,35,TRUE,496,0.2520
+r,25,TRUE,494,0.2105
+l,15,TRUE,482,0.2282
+r,35,TRUE,480,0.2417
+r,20,TRUE,460,0.2326
+r,30,TRUE,455,0.2549
+
+
+rates$Successes <- rates$N * rates$Rate
+rates$Successes <- round(rates$Successes,0)
+rates$Failures <-rates$N - rates$Successes
+
+g <- glm(cbind(Successes,Failures) ~ Alignment * Width + Old, data=rates, family="binomial"); summary(g)
+Coefficients:
+                 Estimate Std. Error z value Pr(>|z|)
+(Intercept)      -1.43309    0.10583  -13.54   <2e-16
+Alignmentr       -0.17726    0.15065   -1.18     0.24
+Width            -0.00253    0.00403   -0.63     0.53
+OldTRUE           0.40092    0.04184    9.58   <2e-16
+Alignmentr:Width  0.00450    0.00580    0.78     0.44
+~~~
+
+So, as I expected, putting the ToC on the right performed worse; the larger ToC widths don't seem to be better but it's unclear what's going on there. A visual inspection of the Width data (`library(ggplot2); qplot(Width,Rate,color=Alignment,data=rates)`) suggests that 20% width was the best variant, so might as well go with that.
+
+## BeeLine Reader text highlighting
+
+> BLR is a JS library for highlighting textual paragraphs with pairs of half-lines to make reading easier.
+> I run a randomized experiment on several differently-colored versions to see if default site-wide usage of BLR will improve time-on-page for `gwern.net` readers, indicating easier reading of the long-form textual content.
+> Most versions perform worse than the control of no-highlighting; the best version performs slightly better but the improvement is not statistically-significant.
+
+[BeeLine Reader](http://www.beelinereader.com/) (BLR) is an interesting new browser plugin which launched around October 2013; I learned of it from the [Hacker News discussion](https://news.ycombinator.com/item?id=6335784 "Show HN: Ditch Black Text to Read Faster, Easier; +723, 266 comments").
+The idea is that part of the difficulty in reading text is that when one finishes a line and saccades left to the continuation of the next line, the uncertainty of where it is adds a bit of stress, so one can make reading easier by adding some sort of guide to the next line; in this case, each matching pair of half-lines is colored differently, so if you are on a red half-line, when you saccade left, you look for a line also colored red, then you switch to blue in the middle of that line, and so on.
+A colorful variant on [boustrophedon](!Wikipedia) writing.
+I found the default BLR coloring garish & distracting, but I couldn't see any reason that a subtle gray variant would not help: the idea seems plausible.
+And very long text pages (like mine) are where BLR should shine most.
+
+I asked if there were a JavaScript version I could use in an A/B test; the initial JS implementation was not fast enough, but by 10 March 2014 it was good enough.
+BLR has several themes, including "gray"; I decided to test the variants no BLR, "dark", "blues", & expanded the gray selection to include grays `#222222`/`#333333`/`#444444`/`#555555`/`#666666`/`#777777` (`gray`-`6`; they vary in how blatant the highlighting is) for a total of 9 equally-randomized variants.
+
+Since I'm particularly interested in these results, and I think many other people will find the results interesting, I will run this test extra-long: a minimum of 2 months.
+I'm only interested in the *best* variant, not estimating each variant exactly (what do I care if the ugly `dark` is 15% rather than 14%? I just want to know it's worse than the control) so conceptually I want something like a [sequential analysis](!Wikipedia) or [adaptive clinical trial](!wikipedia) or [multi-armed bandit](!Wikipedia) where bad variants get dropped over time; unfortunately, I haven't studied them yet (and MABs would be hard to implement on a static site), so I'll just ad hoc drop the worst variant every week or two.
+(Maybe next experiment I'll do a formal adaptive trial.)
+
+### Setup
+
+The usual implementation using ABalytics doesn't work because it uses a `innerHTML` call to substitute the various fragments, and while HTML & CSS get interpreted fine, JavaScript does not; the [offered solutions](https://stackoverflow.com/questions/1197575/can-scripts-be-inserted-with-innerhtml) were sufficiently baroque I wound up implementing a custom subset of ABalytics hardwired for BLR inside the Analytics script:
+
+~~~{.Diff}
+     <script id="googleAnalytics" type="text/javascript">
+       var _gaq = _gaq || [];
+       _gaq.push(['_setAccount', 'UA-18912926-1']);
++     // A/B test: heavily based on ABalytics
++      function readCookie (name) {
++        var nameEQ = name + "=";
++        var ca = document.cookie.split(';');
++        for(var i=0;i < ca.length;i++) {
++            var c = ca[i];
++            while (c.charAt(0)==' ') c = c.substring(1,c.length);
++            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
++        }
++        return null;
++      }
++
++      if (typeof(start_slot) == 'undefined') start_slot = 1;
++      var experiment = "blr3";
++      var variant_names = ["none", "dark", "blues", "gray1", "gray2", "gray3", "gray4", "gray5", "gray6"];
++
++      var variant_id = this.readCookie("ABalytics_"+experiment);
++      if (!variant_id || !variant_names[variant_id]) {
++      var variant_id = Math.floor(Math.random()*variant_names.length);
++      document.cookie = "ABalytics_"+experiment+"="+variant_id+"; path=/";
++                        }
++      function beelinefy (COLOR) {
++       if (COLOR != "none") {
++          var elements=document.querySelectorAll("#content");
++          for(var i=0;i < elements.length;i++) {
++                          var beeline=new BeeLineReader(elements[i], { theme: COLOR, skipBackgroundColor: true, skipTags: ['math', 'svg', 'h1', 'h2', 'h3', 'h4'] });
++                          beeline.color();
++                          }
++       }
++      }
++      beelinefy(variant_names[variant_id]);
++      _gaq.push(['_setCustomVar',
++                  start_slot,
++                  experiment,                 // The name of the custom variable = name of the experiment
++                  variant_names[variant_id],  // The value of the custom variable = variant shown
++                  2                           // Sets the scope to session-level
++                 ]);
+      _gaq.push(['_trackPageview']);
+~~~
+
+The themes are defined in `beeline.min.js` as:
+
+~~~{.Javascript}
+r.THEMES={
+ dark: ["#000000","#970000","#000000","#00057F","#FBFBFB"],
+ blues:["#000000","#0000FF","#000000","#840DD2","#FBFBFB"],
+ gray1:["#000000","#222222","#000000","#222222","#FBFBFB"],
+ gray2:["#000000","#333333","#000000","#333333","#FBFBFB"],
+ gray3:["#000000","#444444","#000000","#444444","#FBFBFB"],
+ gray4:["#000000","#555555","#000000","#555555","#FBFBFB"],
+ gray5:["#000000","#666666","#000000","#666666","#FBFBFB"],
+ gray6:["#000000","#777777","#000000","#777777","#FBFBFB"]
+}
+~~~
+
+(Why "bl*3*"? I don't know JS, so it took some time; things I learned along the line included always leaving whitespace around a `<` operator, and that the "none" argument passed into `beeline.setOptions` causes a problem which *some* browsers will ignore and continue recording A/B data after but most browsers will not; this broke the original test.
+Then I discovered that BLR by default broke all the MathML/MathJax, causing nasty-looking errors over pages with math expressions; this broke the second test, and I had to get a fixed version.)
+
+### Data
+
+On 31 March, with total _n_ having reached 15652 visits, I deleted the worst-performing variant: `gray4`, which at 19.21% was substantially underperforming the best-performing variant's 22.38%, and wasting traffic.
+On 6 April, two Hacker News submissions having doubled visits to 36533, I deleted the next-worst variant, `gray5` (14.66% vs control of 16.25%; _p_=0.038).
+On 9 April, the almost as inferior `gray6` (15.67% vs 16.26%) was deleted.
+On 17 April, `dark` (16.00% vs 16.94%) was deleted.
+On 30 April, I deleted `gray2` (17.56% vs 18.07%).
+11 May, `blues` was gone (18.11% vs 18.53%), and on 31 May, I deleted `gray3` (18.04% vs 18.24%).
+
+Due to caching, the deletions didn't necessarily drop data collection instantly to zero.
+Traffic was also heterogeneous: Hacker News traffic is much less likely to spend much time on page than the usual traffic.
+
+The conversion data, with new vs returning visitor, segmented by period, and ordered by when a variant was deleted:
+
+Variant   Old     Total: _n_ (%)        10-31 March     1-6 April     7-9 April     10-17 April     18-30 April     1-11 May       12-31 May     1-8 June
+-------   -----   ----------------     -------------   -----------   -----------   -------------   -------------   ------------   -----------   ------------
+`none`    FALSE   17648   (16.01%)      1189 (19.26%)  3607 (13.97%) 460 (17.39%)  1182 (16.58%)   3444 (17.04%)   2397 (14.39%)  3997 (17.39%) 2563 (16.35%)
+`none`    TRUE    8009    (23.65%)      578  (24.91%)  1236 (22.09%) 226 (20.35%)  570  (23.86%)   1364 (27.05%)   1108 (23.83%)  2142 (22.46%) 1363 (23.84%)
+`gray1`   FALSE   17579   (16.28%)      1177 (19.71%)  3471 (14.06%) 475 (13.47%)  1200 (17.33%)   3567 (17.49%)   2365 (13.57%)  3896 (18.17%) 2605 (17.24%)
+`gray1`   TRUE    7694    (23.85%)      515  (28.35%)  1183 (23.58%) 262 (21.37%)  518  (21.43%)   1412 (26.56%)   1090 (24.86%)  2032 (22.69%) 1197 (23.56%)
+`gray3`   FALSE   14871   (15.81%)      1192 (18.29%)  3527 (14.15%) 446 (15.47%)  1160 (15.43%)   3481 (17.98%)   2478 (14.65%)  3776 (16.26%) 3    (33.33%)
+`gray3`   TRUE    6631    (23.06%)      600  (24.83%)  1264 (21.52%) 266 (18.05%)  638  (21.79%)   1447 (25.22%)   1053 (24.60%)  1912 (23.17%) 51    (5.88%)
+`blues`   FALSE   10844   (15.34%)      1157 (18.93%)  3470 (14.35%) 449 (16.04%)  1214 (15.57%)   3346 (17.54%)   2362 (13.46%)  3     (0.00%)
+`blues`   TRUE    4544    (23.04%)      618  (27.18%)  1256 (23.81%) 296 (20.27%)  584  (22.09%)   1308 (24.46%)   1052 (22.15%)  48   (12.50%)
+`gray2`   FALSE   8646    (15.51%)      1220 (20.33%)  3649 (13.81%) 416 (15.14%)  1144 (15.03%)   3433 (17.54%)   4     (0.00%)
+`gray2`   TRUE    3366    (22.82%)      585  (22.74%)  1271 (21.79%) 230 (16.52%)  514  (21.60%)   1298 (25.42%)   44   (27.27%)  6     (0.00%) 3     (0.00%)
+`dark`    FALSE   5240    (14.05%)      1224 (20.59%)  3644 (13.83%) 420 (13.81%)  1175 (14.81%)   1    (0.00%)
+`dark`    TRUE    2161    (20.59%)      618  (21.52%)  1242 (20.85%) 276 (21.74%)  574  (20.56%)   64   (10.94%)   1     (0.00%)  2     (0.00%) 2    (50.00%)
+`gray6`   FALSE   4022    (13.30%)      1153 (19.51%)  3610 (12.88%) 409 (17.11%)  1     (0.00%)   2     (0.00%)   3     (0.00%)
+`gray6`   TRUE    1727    (20.61%)      654  (23.70%)  1358 (22.02%) 259 (18.92%)  95    (7.37%)   11    (9.09%)                  1     (0.00%)
+`gray5`   FALSE   3245    (12.20%)      1175 (16.68%)  3242 (12.21%) 3    (0.00%)
+`gray5`   TRUE    1180    (21.53%)      559  (25.94%)  1130 (21.77%) 34  (17.65%)  16   (12.50%)
+`gray4`   FALSE   1176    (18.54%)      1174 (18.57%)  1174 (18.57%)                               2     (0.00%)
+`gray4`   TRUE    673     (19.91%)      650  (20.31%)  669  (20.03%)               1     (0.00%)   1     (0.00%)   2     (0.00%)
+                  137438  (18.27%)
+
+Graphed:
+
+![Weekly conversion rates for each of the BeeLine Reader settings](/images/2014-06-08-abtesting-blr-byweek.png)
+
+I also received a number of complaints while running the BLR test (principally due to the `dark` and `blues` variants, but also apparently triggered by some of the less popular gray variants; the number of complaints dropped off considerably by halfway through):
+
+- 2 in emails
+- 2 on IRC unsolicited; when I later asked, there were 2 complaints of slowness loading pages & after reflowing
+- 2 on Reddit
+- 3 mentions in `gwern.net` comments
+- 4 through my anonymous feedback form
+- 6 complaints [on Hacker News](https://news.ycombinator.com/item?id=7539390)
+- total: 19
+
+### Analysis
+
+The BLR people say that there may be cross-browser differences, so I thought about throwing in browser as a covariate too (an unordered factor of Chrome & Firefox, and maybe I'll bin everything else as an 'other' browser); it seems I may have to use the GA API to extract conversion rates split by variant, visitor status, *and* browser.
+This turned out to be enough work that I decided to not bother.
+
+As usual, a logistic regression on the various BLR themes with new vs returning visitors (`Old`) as a covariate.
+Because of the heterogeneity in traffic (and because I bothered breaking out the data by time period this time for the table), I also include each block as a factor.
+Finally, because I expected the 6 gray variants to perform similarly, I try out a multilevel model nesting the grays together.
+
+The results are not impressive: only 2 gray variants out of the 8 variants have a positive estimate, and neither is statistically-significant; the best variant was `gray1` ("#222222" & "#FBFBFB"), at an estimated increase from 19.52% to 20.04% conversion rate.
+More surprising, the nesting turns out to not matter at all, and in fact the worst variant was gray.
+(The best-fitting multilevel model ignore the variants entirely, although it did not fit better than the regular logistic model incorporating all of the time periods, `Old`, and variants.)
+
+~~~{.R}
+# Pivot table view on custom variable:
+# ("Secondary dimension: User Type"; "Pivot by: Custom Variable (Value 01); Pivot metrics: Sessions | Time reading (Goal 1 Conversion Rate)")
+# then hand-edited to add Color and Date variables
+rates <- read.csv("http://www.gwern.net/docs/2014-06-08-abtesting-blr.csv")
+
+rates$Successes <- rates$N * rates$Rate
+rates$Successes <- round(rates$Successes,0)
+rates$Failures <-rates$N - rates$Successes
+
+# specify the control group is 'none'
+rates$Variant <- relevel(rates$Variant, ref="none")
+rates$Color <- relevel(rates$Color, ref="none")
+
+# normal:
+g0 <- glm(cbind(Successes,Failures) ~ Old + Variant + Date, data=rates, family=binomial); summary(g0)
+# ...Coefficients:
+#                  Estimate Std. Error z value Pr(>|z|)
+# (Intercept)     -1.633959   0.027712  -58.96  < 2e-16
+# OldTRUE          0.465491   0.014559   31.97  < 2e-16
+# Date10-17 April -0.021047   0.037563   -0.56   0.5753
+# Date10-31 March  0.150498   0.035017    4.30  1.7e-05
+# Date1-11 May    -0.107965   0.035133   -3.07   0.0021
+# Date12-31 May    0.009534   0.032448    0.29   0.7689
+# Date1-6 April   -0.138053   0.031809   -4.34  1.4e-05
+# Date18-30 April  0.095898   0.031817    3.01   0.0026
+# Date7-9 April   -0.129704   0.047314   -2.74   0.0061
+#
+# Variantgray5    -0.114487   0.040429   -2.83   0.0046
+# Variantdark     -0.060299   0.033912   -1.78   0.0754
+# Variantgray2    -0.027338   0.028518   -0.96   0.3378
+# Variantblues    -0.012120   0.026330   -0.46   0.6453
+# Variantgray3    -0.005484   0.023441   -0.23   0.8150
+# Variantgray4    -0.003556   0.047273   -0.08   0.9400
+# Variantgray6     0.000536   0.036308    0.01   0.9882
+# Variantgray1     0.026765   0.021757    1.23   0.2186
+
+library(lme4)
+g1 <- glmer(cbind(Successes,Failures) ~ Old + (1|Color/Variant) + (1|Date), data=rates, family=binomial)
+g2 <- glmer(cbind(Successes,Failures) ~ Old + (1|Color)         + (1|Date), data=rates, family=binomial)
+g3 <- glmer(cbind(Successes,Failures) ~ Old +                     (1|Date), data=rates, family=binomial)
+g4 <- glmer(cbind(Successes,Failures) ~ Old + (1|Variant),                  data=rates, family=binomial)
+g5 <- glmer(cbind(Successes,Failures) ~ Old + (1|Color),                    data=rates, family=binomial)
+AIC(g0, g1, g2, g3, g4, g5)
+#    df  AIC
+# g0 17 1035
+# g1  5 1059
+# g2  4 1058
+# g3 13 1041
+# g4  3 1252
+# g5  3 1264
+~~~
+
+<!-- unstepped main effects extracted from all past A/B experiments:
+x <- c(0.01360, 0.05859, 0.01754, 0.04173,-0.00843, 5.54e-06,-0.03692,-0.02591, 0.00634,2.65e-02,
+       9.17e-06,2.32e-02,0.0034,-0.009219, 0.000837,-0.103201, 0.055036,-0.004397,-0.0277,
+       0.0327,-0.022262,-0.012775, 4.042812, 5.356794, 0.0111, 0.0163,-0.0153,-0.0318,-0.17726,-0.00253)
+library(MASS)
+fitdistr(x,"cauchy")
+   location      scale
+  0.0004184   0.0184542
+ (0.0048720) (0.0046524)
+R> fitdistr(abs(x),"gamma")
+    shape     rate
+  0.22991   0.67727
+ (0.04594) (0.29123)
+
+penaltyFn <- function(sigma) dcauchy(sigma, location = 0.0004184, scale = 0.0184542, log = TRUE)
+bg2 <- bglmer(Rate ~ (Variant|Color), data=rates, cov.prior = custom(penaltyFn, chol = TRUE, scale = "log")); ranef(bg2)
+
+ gamma(shape = 0.22991, rate = 0.67727, posterior.scale = "sd")
+
+penaltyFn <- function(sigma) dcauchy(sigma, location = 0.0004184, scale = 0.0184542, log = TRUE)
+fm5 <- blmer(Reaction ~ Days + (0 + Days|Subject), sleepstudy,
+              cov.prior = custom(penaltyFn, chol = TRUE, scale = "log"))
+-->
+
+### Conclusion
+
+An unlikely +0.5% to reading rates isn't enough for me to want to add a dependency another JS library, so I will be removing BLR.
+I'm not surprised by this result, since most tests don't show an improvement, BLR coloring test is pretty unusual for a website, and users wouldn't have any understanding of what it is or ability to opt out of it; using BLR by default doesn't work, but the browser extension might be useful since the user expects the coloring & can choose their preferred color scheme.
+
+I was surprised that the gray variants could perform so wildly different, from slightly better than the control to horribly worse, considering that they didn't strike me as looking *that* different when I was previewing them locally.
+I also didn't expect `blues` to last as long as it did, and thought I would be deleting it as soon as `dark`.
+This makes me wonder: are there color themes only subtly different from the ones I tried which might work unpredictably well?
+Since BLR by default offers only a few themes, I think BLR should try out as many color themes as possible to locate good ones they've missed.
+
+Some limitations to this experiment:
+
+- no way for users to disable BLR or change color themes
+- did not include web browser type as a covariate, which might have shown that particular combinations of browser & theme substantially outperformed the control (then BLR could have improved their code for the bad browsers or a browser check done before highlighting any text)
+- did not use formal adaptive trial methodology, so the _p_-values have no particular interpretation
+
+## Floating footnotes
+
+One of the site features I like the most is how the endnotes pop-out/float when the mouse hovers over the link, so the reader doesn't have to jump to the endnotes and back, jarring their concentration and breaking their train of thought.
+I got the JS from [Luka Mathis back in 2010](http://ignorethecode.net/blog/2010/04/20/footnotes/).
+But sometimes the mouse hovers by accident, and with big footnotes, the popped-up footnote can cover the screen and be unreadable.
+I've wondered if it's as cool as I think it is, or whether it might be damaging.
+So now that I've hacked up an ABalytics clone which can handle JS in order to run the BLR experiment, I might as well run an A/B test to verify that the floating footnotes are not badly damaging conversions.
+(I'm not demanding the floating footnotes increase conversions by 1% or anything, just that the floating isn't coming at *too* steep a price.)
+
+### Implementation
+
+~~~{.Diff}
+diff --git a/static/js/footnotes.js b/static/js/footnotes.js
+index 69088fa..e08d63c 100644
+--- a/static/js/footnotes.js
++++ b/static/js/footnotes.js
+@@ -1,7 +1,3 @@
+-$(document).ready(function() {
+-    Footnotes.setup();
+-});
+-
+
+diff --git a/static/templates/default.html b/static/templates/default.html
+index 4395130..8c97954 100644
+--- a/static/templates/default.html
++++ b/static/templates/default.html
+@@ -133,6 +133,9 @@
+     <!-- Load infrastructure from Google's CDN: http://code.google.com/apis/libraries/devguide.html -->
+     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+
++    <!-- floating footnotes; see http://ignorethecode.net/blog/2010/04/20/footnotes/ -->
++    <script type="text/javascript" src="/static/js/footnotes.js"></script>
++
+     <!-- Load Google Analytics & setup A/B test -->
+     <script id="googleAnalytics" type="text/javascript">
+       var _gaq = _gaq || [];
+@@ -151,14 +154,23 @@
+
+       if (typeof(start_slot) == 'undefined') start_slot = 1;
+-      var experiment = "blr3";
+-      var variant_names = ["none", "gray1"];
++      var experiment = "floating_footnotes";
++      var variant_names = ["none", "float"];
+
+       var variant_id = this.readCookie("ABalytics_"+experiment);
+       if (!variant_id || !variant_names[variant_id]) {
+       var variant_id = Math.floor(Math.random()*variant_names.length);
+       document.cookie = "ABalytics_"+experiment+"="+variant_id+"; path=/";
+                         }
++      // enable the floating footnotes
++      function footnotefy (VARIANT) {
++       if (VARIANT != "none") {
++         $$(document).ready(function() {
++                        Footnotes.setup();
++                        });
++       }
++      }
++      footnotefy(variant_names[variant_id]);
+       _gaq.push(['_setCustomVar',
+                   start_slot,
+                   experiment,                 // The name of the custom variable = name of the experiment
+                   ...)]
+@@ -196,9 +208,6 @@
+     <!-- Handle cross-browser MathML rendering -->
+     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+-    <!-- floating footnotes; see http://ignorethecode.net/blog/2010/04/20/footnotes/ -->
+-    <script type="text/javascript" src="/static/js/footnotes.js"></script>
+-
+     <!-- http://tablesorter.com/docs/ -->
+     <script type="text/javascript" src="/static/js/tablesorter.js"></script>
+     <script type="text/javascript" id="tablesorter">
+~~~
+
+### Data
+### Analysis
+
+# Appendix
+## Covariate impact on power
+
+> Is it important in randomized testing to control for covariates, even powerful ones? A simulation using a website's data suggests not.
+
+In December 2013, I was discussing website testing with another site owner, which monetizes traffic by selling a product, while I just optimize for reading time.
+He argued (deleting identifying details since I will be using their real traffic & conversion numbers throughout):
+
+> I think a *big* part that gets lost out is the quality of traffic. For our [next website version]
+> (still speccing it all out), one of my biggest requirements for A/B testing
+> is that all referring traffic must be bucketed and split-test against them.
+> Buckets themselves are amorphous - they can be visitors of the same
+> resolution, visitors who have bought our guide, etc. But just comparing how
+> we did (and our affiliates did) on sales of our S-G Reference (an easy to
+> measure metric - our RPU), traffic matters so much. X sent 5x the
+> traffic that Y did, yet still generated 25% less sales. That
+> would destroy any meaningful A/B testing without splitting up the quality.
+
+I was a little skeptical that this was a major concern much less one worth expensively engineering into a site, and replied:
+
+> Eh. You would lose some power by not correcting for the covariates of
+> source, but the randomization would still work and deliver you
+> meaningful results. As long as visitors were being randomized into the
+> A and B variants, and there was no gross imbalance in cells between
+> Y and X, and Y and X visitors didn't react
+> differently, you'd still get the right results - just you would need
+> more traffic to get the same statistical power. I don't think 25%
+> difference between X and Y visitors would even cost you that
+> much power...
+
+[Lewis & Rao 2013](http://papers.ssrn.com/sol3/papers.cfm?abstract_id=2367103 "On the Near Impossibility of Measuring the Returns to Advertising") note that:
+
+> ...we conditioned on the user level covariates listed in the column labeled by the vector W in Table 1 using several methods to strengthen power; such panel techniques predict and absorb residual variation. Lagged sales are the best predictor and are used wherever possible, reducing variance in the dependent variable by as much as 40%...However, seemingly large improvements in R^2^ lead to only modest reductions in standard errors. A little math shows that going from $R^2 = 0$ in the univariate regression to $R^2_{|w}$ = 50% yields a sublinear reduction in standard errors of 29%. Hence, the modeling is as valuable as doubling the sample - a significant improvement, but one that does not materially change the measurement difficulty. An order-of-magnitude reduction in standard errors would require $R^2_{|w}$ = 99%, perhaps a “nearly impossible” goal.
+
+In particular, if you lost a *lot* of power, wouldn't that imply randomized trials were inefficient or impossible? The point of randomization is that it eliminates the impact of the indefinitely many observed and unobserved variables to let you do causal inference.
+
+### Power simulation
+
+Since this seems like a relatively simple problem, I suspect there is an analytic answer, but I don't know it. So instead, we can set this up as a simulated power analysis: we generate random data where we *force* the hypothesis to be true by construction, we run our planned analysis, and we see how often we get a _p_-value underneath 0.05 (which is the true correct answer, by construction).
+
+Let's say Y's visitors convert at 10%, then X's must convert at 10% * 0.75, as he said, and let's imagine our A/B test of a blue site-design increases sales by 1%. (So in the better version, Y visitors convert at 11% and X convert at 8.5%.) We generate $\frac{n}{4}$ datapoints from each condition (X/blue, X/not-blue, Y/blue, Y/not-blue), and then we do the usual logistic regression looking for a difference in conversion rate, with and without the info about the source. So we regress Conversion ~ Color, to look at what would happen if we had no idea where visitors came from, and then we regress `Conversion ~ Color + Source`. These will spit out _p_-values on the `Color` coefficient which are *almost* the same, but not quite the same: the regression with the `Source` variable is slightly better so it should yield slightly lower _p_-values for `Color`. Then we count up all the times the _p_-value was below the magical amount for each regression, and we see how many statistically-significant _p_-values we lost when we threw out `Source`. Phew!
+
+So we might like to do this for each sample size to get an idea of how they change. _n_=100 may not the same for _n_=10,000. And ideally, for each _n_, we do the random data generation step many times, because it's a simulation and so any particular run may not be representative. Below, I'll look at _n_=1000, 1100, 1200, 1300, and so on up until _n_=10,000. And for each _n_, I'll generate 1000 replicates, which should be pretty accurate.
+
+#### Large _n_
+
+The whole schmeer in R:
+
+~~~{.R}
+set.seed(666)
+yP <- 0.10
+xP <- yP * 0.75
+blueP <- 0.01
+
+# examine various possible sizes of N
+controlledResults <- NULL
+uncontrolledResults <- NULL
+for (n in seq(1000,10000,by=100)) {
+
+ controlled <- NULL
+ uncontrolled <- NULL
+
+ # generate 1000 hypothetical datasets
+ for (i in 1:1000) {
+
+ nn <- n/4
+ # generate 2x2=4 possible conditions, with different probabilities in each:
+ d1 <- data.frame(Converted=rbinom(nn, 1, xP   + blueP), X=TRUE,  Color=TRUE)
+ d2 <- data.frame(Converted=rbinom(nn, 1, yP + blueP), X=FALSE, Color=TRUE)
+ d3 <- data.frame(Converted=rbinom(nn, 1, xP   + 0),     X=TRUE,  Color=FALSE)
+ d4 <- data.frame(Converted=rbinom(nn, 1, yP + 0),     X=FALSE, Color=FALSE)
+ d <- rbind(d1, d2, d3, d4)
+
+ # analysis while controlling for X/Y
+ g1 <- summary(glm(Converted ~ Color + X, data=d, family="binomial"))
+ # pull out p-value for Color, which we care about; did we reach statistical-significance?
+ controlled[i] <- 0.05 > g1$coef[11]
+
+ # again, but not controlling
+ g2 <- summary(glm(Converted ~ Color        , data=d, family="binomial"))
+ uncontrolled[i] <- 0.05 > g2$coef[8]
+ }
+ controlledResults   <- c(controlledResults, (sum(controlled)/1000))
+ uncontrolledResults   <- c(uncontrolledResults, (sum(uncontrolled)/1000))
+}
+controlledResults
+uncontrolledResults
+uncontrolledResults / controlledResults
+~~~
+
+Results:
+
+~~~{.R}
+R> controlledResults
+ [1] 0.081 0.086 0.093 0.113 0.094 0.084 0.112 0.112 0.100 0.111 0.104 0.124 0.146 0.140 0.146 0.110
+[17] 0.125 0.141 0.162 0.138 0.142 0.161 0.170 0.161 0.184 0.182 0.199 0.154 0.202 0.180 0.189 0.202
+[33] 0.186 0.218 0.208 0.193 0.221 0.221 0.233 0.223 0.247 0.226 0.245 0.248 0.212 0.264 0.249 0.241
+[49] 0.255 0.228 0.285 0.271 0.255 0.278 0.279 0.288 0.333 0.307 0.306 0.306 0.306 0.311 0.329 0.294
+[65] 0.318 0.330 0.328 0.356 0.319 0.310 0.334 0.339 0.327 0.366 0.339 0.333 0.374 0.375 0.349 0.369
+[81] 0.366 0.400 0.363 0.384 0.380 0.404 0.365 0.408 0.387 0.422 0.411
+R> uncontrolledResults
+ [1] 0.079 0.086 0.093 0.113 0.092 0.084 0.111 0.112 0.099 0.111 0.103 0.124 0.146 0.139 0.146 0.110
+[17] 0.125 0.140 0.161 0.137 0.141 0.160 0.170 0.161 0.184 0.180 0.199 0.154 0.201 0.179 0.188 0.199
+[33] 0.186 0.218 0.206 0.193 0.219 0.221 0.233 0.223 0.245 0.226 0.245 0.248 0.211 0.264 0.248 0.241
+[49] 0.255 0.228 0.284 0.271 0.255 0.278 0.279 0.287 0.333 0.306 0.305 0.303 0.304 0.310 0.328 0.294
+[65] 0.316 0.330 0.328 0.356 0.319 0.310 0.334 0.339 0.326 0.366 0.338 0.331 0.374 0.372 0.348 0.369
+[81] 0.363 0.400 0.363 0.383 0.380 0.404 0.364 0.406 0.387 0.420 0.410
+R> uncontrolledResults / controlledResults
+ [1] 0.9753 1.0000 1.0000 1.0000 0.9787 1.0000 0.9911 1.0000 0.9900 1.0000 0.9904 1.0000 1.0000
+[14] 0.9929 1.0000 1.0000 1.0000 0.9929 0.9938 0.9928 0.9930 0.9938 1.0000 1.0000 1.0000 0.9890
+[27] 1.0000 1.0000 0.9950 0.9944 0.9947 0.9851 1.0000 1.0000 0.9904 1.0000 0.9910 1.0000 1.0000
+[40] 1.0000 0.9919 1.0000 1.0000 1.0000 0.9953 1.0000 0.9960 1.0000 1.0000 1.0000 0.9965 1.0000
+[53] 1.0000 1.0000 1.0000 0.9965 1.0000 0.9967 0.9967 0.9902 0.9935 0.9968 0.9970 1.0000 0.9937
+[66] 1.0000 1.0000 1.0000 1.0000 1.0000 1.0000 1.0000 0.9969 1.0000 0.9971 0.9940 1.0000 0.9920
+[79] 0.9971 1.0000 0.9918 1.0000 1.0000 0.9974 1.0000 1.0000 0.9973 0.9951 1.0000 0.9953 0.9976
+~~~
+
+So at _n_=1000 we don't have decent statistical power to detect our true effect of 1% increase in conversion rate thanks to blue - only 8% of the time will we get our magical _p_<0.05 and rejoice in the knowledge that blue is boss. That's not great, but that's not what we were asking about.
+
+#### Small _n_
+
+Moving on to our original question, we see that the regressions controlling for source had a very similar power as to the regressions which didn't bother. It looks like you may pay a small price of 2% less statistical power, but probably even less than that because so many of the other entries yielded an estimate of 0% penalty. And the penalty gets smaller as sample size increases and a mere 25% difference in conversion rate washes out as noise.
+
+What if we look at smaller samples? say, _n_=12-1012?
+
+~~~{.R}
+...
+for (n in seq(12,1012,by=10)) {
+... }
+
+R> controlledResults
+  [1] 0.000 0.000 0.000 0.001 0.003 0.009 0.010 0.009 0.024 0.032 0.023 0.027 0.033 0.032 0.045
+ [16] 0.043 0.035 0.049 0.048 0.060 0.047 0.043 0.035 0.055 0.051 0.069 0.055 0.057 0.045 0.046
+ [31] 0.037 0.049 0.057 0.057 0.050 0.061 0.055 0.054 0.053 0.062 0.076 0.064 0.055 0.057 0.064
+ [46] 0.077 0.059 0.062 0.073 0.059 0.053 0.059 0.058 0.062 0.073 0.070 0.060 0.045 0.075 0.067
+ [61] 0.077 0.072 0.068 0.069 0.082 0.062 0.072 0.067 0.076 0.069 0.074 0.074 0.062 0.076 0.087
+ [76] 0.079 0.073 0.065 0.076 0.087 0.059 0.070 0.079 0.084 0.068 0.077 0.089 0.077 0.081 0.086
+ [91] 0.094 0.080 0.080 0.087 0.085 0.087 0.082 0.084 0.073 0.083 0.077
+R> uncontrolledResults
+  [1] 0.000 0.000 0.000 0.001 0.002 0.009 0.005 0.007 0.024 0.031 0.023 0.024 0.033 0.032 0.044
+ [16] 0.043 0.035 0.048 0.047 0.060 0.047 0.043 0.035 0.055 0.051 0.068 0.054 0.057 0.045 0.045
+ [31] 0.037 0.048 0.057 0.057 0.050 0.060 0.055 0.054 0.053 0.062 0.074 0.063 0.055 0.057 0.059
+ [46] 0.077 0.058 0.062 0.073 0.059 0.053 0.059 0.057 0.061 0.071 0.068 0.060 0.045 0.074 0.067
+ [61] 0.076 0.072 0.068 0.069 0.082 0.062 0.072 0.066 0.076 0.069 0.073 0.073 0.061 0.074 0.085
+ [76] 0.079 0.073 0.065 0.076 0.087 0.058 0.066 0.076 0.084 0.067 0.077 0.089 0.077 0.081 0.086
+ [91] 0.094 0.080 0.080 0.087 0.085 0.087 0.080 0.081 0.071 0.083 0.076
+R> uncontrolledResults / controlledResults
+  [1]    NaN    NaN    NaN 1.0000 0.6667 1.0000 0.5000 0.7778 1.0000 0.9688 1.0000 0.8889 1.0000
+ [14] 1.0000 0.9778 1.0000 1.0000 0.9796 0.9792 1.0000 1.0000 1.0000 1.0000 1.0000 1.0000 0.9855
+ [27] 0.9818 1.0000 1.0000 0.9783 1.0000 0.9796 1.0000 1.0000 1.0000 0.9836 1.0000 1.0000 1.0000
+ [40] 1.0000 0.9737 0.9844 1.0000 1.0000 0.9219 1.0000 0.9831 1.0000 1.0000 1.0000 1.0000 1.0000
+ [53] 0.9828 0.9839 0.9726 0.9714 1.0000 1.0000 0.9867 1.0000 0.9870 1.0000 1.0000 1.0000 1.0000
+ [66] 1.0000 1.0000 0.9851 1.0000 1.0000 0.9865 0.9865 0.9839 0.9737 0.9770 1.0000 1.0000 1.0000
+ [79] 1.0000 1.0000 0.9831 0.9429 0.9620 1.0000 0.9853 1.0000 1.0000 1.0000 1.0000 1.0000 1.0000
+ [92] 1.0000 1.0000 1.0000 1.0000 1.0000 0.9756 0.9643 0.9726 1.0000 0.9870
+~~~
+
+As expected, with tiny samples like 12, 22, or 32, the A/B test has essentially 0% power to detect any difference, and so it doesn't matter if one controls for source or not. In the _n_=42+ range, we start seeing some small penalty, but the fluctuations from a 33% penalty to 0% penalty to 50% to 23% to 0% show that once we start nearing _n_=100, the difference barely exists, and the long succession of 1.0000s say that past that, we must be talking a very small power penalty of like 1%.
+
+#### Larger differences
+
+> So let me pull up some real #s. I will give you source, # of unique visitors
+> to sales page, # of unique visitors to buy page, # of actual buyers. Also
+> note that I am doing it on a per-affiliate basis, and thus disregarding the
+> *origin* of traffic (more on that later):
+>
+> - Website.com - 3963 - 722 - 293
+> - X - 1232 - 198 - 8
+> - Y - 1284 - 193 - 77
+> - Z - 489 - 175 - 75
+>
+> So even the origin of traffic was everywhere. X was all website, but
+> pushed via FB. EC was email. Y was Facebook. Ours was 3 - email, Facebook, Twitter.
+> Email converted at 13.72%, Facebook at 8.35%, and Twitter at 1.39%. All had
+> \>500 clicks.
+>
+> So with that in mind, especially seeing how X and Y had the same # of
+> people visit the buy page, but X converted at 10% the rate (and
+> relatively to X, Y converted at 200%), I would wager that re-running
+> your numbers would find that the origin matters.
+
+Those are much bigger conversion differentials than the original 25% estimate, but the loss of power was so minute in the first case that I suspect that the penalty will still be *relatively* small.
+
+I can fix the power analysis by looking at each traffic source separately and tweaking the random generation appropriately with liberal use of copy-paste. For the website, he said 3x500 but there's 3963 hits so I'll assume the remainder is your general organic website traffic. That gives me a total table:
+
+- Email: 500 * 13.72% = 67
+- Facebook: 500 * 8.35% = 42
+- Twitter: 500 * 1.39% = 7
+- organic: 293-(67+42+7) = 177; 3963 - (3*500) = 2463; 177 / 2463 = 7.186%
+
+Switching to R for convenience:
+
+~~~{.R}
+R> website <- read.csv(stdin(),header=TRUE)
+Source,N,Rate
+"X",1232,0.006494
+"Y",1284,0.05997
+"Z",489,0.1534
+"Website email",500,0.1372
+"Website Facebook",500,0.0835
+"Website Twitter",500,0.0139
+"Website organic",2463,0.07186
+
+R> website$N / sum(website$N)
+[1] 0.17681 0.18427 0.07018 0.07176 0.07176 0.07176 0.35347
+~~~
+
+Change the power simulation appropriately:
+
+~~~{.R}
+set.seed(666)
+blueP <- 0.01
+controlledResults <- NULL
+uncontrolledResults <- NULL
+for (n in seq(1000,10000,by=1000)) {
+ controlled <- NULL
+ uncontrolled <- NULL
+ for (i in 1:1000) {
+
+ d1 <- data.frame(Converted=rbinom(n*0.17681, 1, 0.006494   + blueP), Source="X",  Color=TRUE)
+ d2 <- data.frame(Converted=rbinom(n*0.17681, 1, 0.006494   + 0),     Source="X",  Color=FALSE)
+
+ d3 <- data.frame(Converted=rbinom(n*0.18427, 1, 0.05997 + blueP), Source="Y", Color=TRUE)
+ d4 <- data.frame(Converted=rbinom(n*0.18427, 1, 0.05997 + 0),     Source="Y", Color=FALSE)
+
+ d5 <- data.frame(Converted=rbinom(n*0.07018, 1, 0.1534 + blueP), Source="Z", Color=TRUE)
+ d6 <- data.frame(Converted=rbinom(n*0.07018, 1, 0.1534 + 0),     Source="Z", Color=FALSE)
+
+ d7 <- data.frame(Converted=rbinom(n*0.07176, 1, 0.1372 + blueP), Source="Website email", Color=TRUE)
+ d8 <- data.frame(Converted=rbinom(n*0.07176, 1, 0.1372 + 0),     Source="Website email", Color=FALSE)
+
+ d9  <- data.frame(Converted=rbinom(n*0.07176, 1, 0.0835 + blueP), Source="Website Facebook", Color=TRUE)
+ d10 <- data.frame(Converted=rbinom(n*0.07176, 1, 0.0835 + 0),     Source="Website Facebook", Color=FALSE)
+
+ d11 <- data.frame(Converted=rbinom(n*0.07176, 1, 0.0139 + blueP), Source="Website Twitter", Color=TRUE)
+ d12 <- data.frame(Converted=rbinom(n*0.07176, 1, 0.0139 + 0),     Source="Website Twitter", Color=FALSE)
+
+ d13 <- data.frame(Converted=rbinom(n*0.35347, 1, 0.07186 + blueP), Source="Website organic", Color=TRUE)
+ d14 <- data.frame(Converted=rbinom(n*0.35347, 1, 0.07186 + 0),     Source="Website organic", Color=FALSE)
+
+ d <- rbind(d1, d2, d3, d4, d5, d6, d7, d8, d9, d10, d11, d12)
+
+ g1 <- summary(glm(Converted ~ Color + Source, data=d, family="binomial"))
+ controlled[i] <- 0.05 > g1$coef[23]
+
+ g2 <- summary(glm(Converted ~ Color        , data=d, family="binomial"))
+ uncontrolled[i] <- 0.05 > g2$coef[8]
+ }
+ controlledResults   <- c(controlledResults, (sum(controlled)/1000))
+ uncontrolledResults   <- c(uncontrolledResults, (sum(uncontrolled)/1000))
+}
+controlledResults
+uncontrolledResults
+uncontrolledResults / controlledResults
+~~~
+
+An hour or so later:
+
+~~~{.R}
+R> controlledResults
+ [1] 0.105 0.175 0.268 0.299 0.392 0.432 0.536 0.566 0.589 0.631
+R> uncontrolledResults
+ [1] 0.093 0.167 0.250 0.285 0.379 0.416 0.520 0.542 0.576 0.618
+R> uncontrolledResults / controlledResults
+ [1] 0.8857 0.9543 0.9328 0.9532 0.9668 0.9630 0.9701 0.9576 0.9779 0.9794
+~~~
+
+In the most extreme case (total _n_=1000), where our controlled test's power is 0.105 or 10.5% (well, what do you expect from that small an A/B test?), our test where we throw away the Source info has a power of 0.093 or 9.3%. So we lost 0.1143 or 11% of the power.
+
+### Sample size implication
+
+That's not as bad as I feared when I saw the huge conversion rate differences, but maybe it has a bigger consequence than I guess?
+
+What does this 11% loss translate to in terms of extra sample size?
+
+Well, our original total conversion rate was 6.52%:
+
+~~~{.R}
+R> sum((website$N * website$Rate)) / sum(website$N)
+[1] 0.0652
+~~~
+
+We were examining a hypothetical increase by 1% to 7.52%. A regular 2-proportion power calculation (the closest thing to a binomial in the R standard library)
+
+~~~{.R}
+R> power.prop.test(n = 1000, p1 = 0.0652, p2 = 0.0752)
+
+     Two-sample comparison of proportions power calculation
+
+              n = 1000
+             p1 = 0.0652
+             p2 = 0.0752
+      sig.level = 0.05
+          power = 0.139
+     ...
+~~~
+
+Its 14% estimate is reasonably close to 10.5% given all the simplifications I'm doing here. So, imagine our 0.139 power here was the victim of the 11% loss, and the *true* power is $x = 0.11x + 0.139$ where then _x_=0.15618. Given the _p1_ and _p2_ for our A/B test, how big would _n_ then have to be to reach our true power?
+
+~~~{.R}
+R> power.prop.test(p1 = 0.0652, p2 = 0.0752, power=0.15618)
+
+     Two-sample comparison of proportions power calculation
+
+              n = 1178
+     ...
+~~~
+
+So in this worst-case scenario with small sample size and very different true conversion rates, we would need another 178 page-views/visits to make up for completely throwing out the source covariate. This is usually a doable number of extra page-views.
+
+#### `Gwern.net`
+
+What are the implications for my own A/B tests, with less extreme "conversion" differences? It might be interesting to imagine a hypothetical where my traffic split between my highest conversion traffic source and my lowest, and see how much extra _n_ I must pay in my testing because I decline to figure out how to record source for tested traffic.
+
+Looking at my traffic for the year 26 December 2012-2013, I see that of the top 10 referral sources, the highest converting source is [bulletproofexec.com](http://www.bulletproofexec.com/) traffic at 29.95% of the 9461 visits, and the lowest is [t.co](!Wikipedia) (Twitter) at 8.35% of 15168. We'll split traffic 50/50 between these two sources.
+
+~~~{.R}
+set.seed(666)
+# model specification:
+bulletP <- 0.2995
+tcoP    <- 0.0835
+blueP   <- 0.0100
+
+sampleSizes <- seq(100,5000,by=100)
+replicates  <- 1000
+
+controlledResults <- NULL
+uncontrolledResults <- NULL
+
+for (n in sampleSizes) {
+
+ controlled <- NULL
+ uncontrolled <- NULL
+
+ # generate _m_ hypothetical datasets
+ for (i in 1:replicates) {
+
+ nn <- n/2
+ # generate 2x2=4 possible conditions, with different probabilities in each:
+ d1 <- data.frame(Converted=rbinom(nn, 1, bulletP + blueP), X=TRUE,  Color=TRUE)
+ d2 <- data.frame(Converted=rbinom(nn, 1, tcoP    + blueP), X=FALSE, Color=TRUE)
+ d3 <- data.frame(Converted=rbinom(nn, 1, bulletP + 0),     X=TRUE,  Color=FALSE)
+ d4 <- data.frame(Converted=rbinom(nn, 1, tcoP    + 0),     X=FALSE, Color=FALSE)
+ d0 <- rbind(d1, d2, d3, d4)
+
+ # analysis while controlling for Twitter/Bullet-Proof-Exec
+ g1 <- summary(glm(Converted ~ Color + X, data=d0, family="binomial"))
+ controlled[i]   <- g1$coef[11] < 0.05
+ g2 <- summary(glm(Converted ~ Color    , data=d0, family="binomial"))
+ uncontrolled[i] <- g2$coef[8]  < 0.05
+ }
+ controlledResults   <- c(controlledResults, (sum(controlled)/length(controlled)))
+ uncontrolledResults <- c(uncontrolledResults, (sum(uncontrolled)/length(uncontrolled)))
+}
+controlledResults
+uncontrolledResults
+uncontrolledResults / controlledResults
+~~~
+
+Results:
+
+~~~{.R}
+R> controlledResults
+ [1] 0.057 0.066 0.059 0.065 0.068 0.073 0.073 0.071 0.108 0.089 0.094 0.106 0.091 0.110 0.126 0.112
+[17] 0.123 0.125 0.139 0.117 0.144 0.140 0.145 0.137 0.161 0.165 0.170 0.148 0.146 0.171 0.197 0.171
+[33] 0.189 0.180 0.184 0.188 0.180 0.177 0.210 0.207 0.193 0.229 0.209 0.218 0.226 0.242 0.259 0.229
+[49] 0.254 0.271
+R> uncontrolledResults
+ [1] 0.046 0.058 0.046 0.056 0.057 0.066 0.053 0.062 0.095 0.080 0.078 0.090 0.077 0.100 0.099 0.103
+[17] 0.109 0.113 0.118 0.105 0.134 0.130 0.123 0.124 0.142 0.152 0.153 0.133 0.126 0.151 0.168 0.151
+[33] 0.163 0.163 0.168 0.170 0.160 0.162 0.189 0.183 0.170 0.209 0.192 0.198 0.209 0.215 0.233 0.208
+[49] 0.221 0.251
+R> uncontrolledResults / controlledResults
+ [1] 0.8070 0.8788 0.7797 0.8615 0.8382 0.9041 0.7260 0.8732 0.8796 0.8989 0.8298 0.8491 0.8462
+[14] 0.9091 0.7857 0.9196 0.8862 0.9040 0.8489 0.8974 0.9306 0.9286 0.8483 0.9051 0.8820 0.9212
+[27] 0.9000 0.8986 0.8630 0.8830 0.8528 0.8830 0.8624 0.9056 0.9130 0.9043 0.8889 0.9153 0.9000
+[40] 0.8841 0.8808 0.9127 0.9187 0.9083 0.9248 0.8884 0.8996 0.9083 0.8701 0.9262
+R> 1 - mean(uncontrolledResults / controlledResults)
+[1] 0.1194
+~~~
+
+So our power loss is not *too* severe in this worst-case scenario: we lose a mean of 12% of our power, or around half.
+
+We were examining a hypothetical conversion increase by 1% from 19.15% (`mean(c(bulletP, tcoP))`) to 20.15%. A regular 2-proportion power calculation (the closest thing to a binomial in the R standard library)
+
+~~~{.R}
+R> power.prop.test(n = 1000, p1 = 0.1915, p2 = 0.2015)
+
+     Two-sample comparison of proportions power calculation
+
+              n = 1000
+             p1 = 0.1915
+             p2 = 0.2015
+      sig.level = 0.05
+          power = 0.08116
+...
+
+~~~
+
+Its 14% estimate is reasonably close to 10.5% given all the simplifications I'm doing here. So, imagine our 0.08116 power here was the victim of the 12% loss, and the *true* power is $x = 0.12x + 0.08116$ where then _x_=0.0922273. Given the _p1_ and _p2_ for our A/B test, how big would _n_ then have to be to reach our true power?
+
+~~~{.R}
+R> power.prop.test(p1 = 0.1915, p2 = 0.2015, power=0.0922273)
+
+     Two-sample comparison of proportions power calculation
+
+              n = 1265
+~~~
+
+So this worst-case scenario means I must spend an extra _n_ of 265 or roughly a fifth of a day's traffic. Since it would probably cost me, on net, far more than a fifth of a day to find an implementation strategy, debug it, and incorporate it into all future analyses, I am happy to continue throwing out the source information & other covariates.

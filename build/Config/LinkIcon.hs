@@ -596,7 +596,8 @@ linkIconRulesFiletypes u
  | otherwise =
      let extWithDot = Utils.extension u
          ext = T.drop 1 extWithDot -- Get extension without leading dot
-     in if Utils.isLocal u && ext /= "" then error $ "Config.LinkIcon.linkIconRulesFiletypes: Unhandled file extension: '" ++ T.unpack ext ++ "' found in URL: " ++ T.unpack u
+     in if Utils.isLocal u && (ext == "html" || ext == "htm") then ("code", "svg", "") -- tolerate local HTML files outside /doc
+        else if Utils.isLocal u && ext /= "" then error $ "Config.LinkIcon.linkIconRulesFiletypes: Unhandled file extension: '" ++ T.unpack ext ++ "' found in URL: " ++ T.unpack u
         -- Otherwise (it's remote, or local without extension, or local but handled by a rule above)...
         else ("", "", "")
 

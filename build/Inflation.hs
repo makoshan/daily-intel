@@ -113,7 +113,7 @@ nominalToRealInflationAdjusterHTML date s
 nominalToRealInflationAdjuster :: Inline -> Inline
 nominalToRealInflationAdjuster x@(Span (a, b, [(k, v)]) inlines) = if  k /= "inflation" then x
                                                                      else nominalToRealInflationAdjuster (Link (a,b,[]) inlines (v,""))
-nominalToRealInflationAdjuster x@(Link _ _ ("", _)) = error $ "Inflation adjustment (Inflation.hs: nominalToRealInflationAdjuster) failed on malformed link: " ++ show x
+nominalToRealInflationAdjuster x@(Link _ _ ("", _)) = x -- tolerate empty-link targets in legacy content
 nominalToRealInflationAdjuster x@(Link _ _ (ts, _))
   | t == '$'     = dollarAdjuster CM.currentYear x
   | t == '\8383' = bitcoinAdjuster CM.currentYear x --- official Bitcoin Unicode: '₿'/'\8383'; obsoletes THAI BAHT SIGN

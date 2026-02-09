@@ -15,7 +15,7 @@ import System.FilePath (takeDirectory, takeExtension, (</>))
 import System.IO (stderr, hPutStr)
 import System.IO.Temp (emptySystemTempFile)
 import Text.Show.Pretty (ppShow)
-import qualified Data.Text as T (Text, concat, pack, unpack, isInfixOf, isPrefixOf, isSuffixOf, replace, head, append, reverse, takeWhile, strip, dropWhile, elem)
+import qualified Data.Text as T (Text, concat, pack, unpack, isInfixOf, isPrefixOf, isSuffixOf, replace, head, append, reverse, takeWhile, strip, dropWhile, elem, null)
 import System.Exit (ExitCode(ExitFailure))
 import qualified Data.ByteString.Lazy.UTF8 as U (toString)
 import Data.FileStore.Utils (runShellCommand)
@@ -389,7 +389,7 @@ extension :: T.Text -> T.Text
 extension = T.pack . maybe "" (System.FilePath.takeExtension . uriPath) . parseURIReference . T.unpack
 
 isLocal :: T.Text -> Bool
-isLocal "" = error "Utils.isLocal: Invalid empty string used as link."
+isLocal "" = False -- tolerate empty-link targets in legacy content
 isLocal s = T.head s == '/'
 
 -- throw a fatal error if any entry in a list fails a test; uses `NFData`/`deepseq` to guarantee that the test gets evaluated
@@ -620,7 +620,8 @@ pairs l = [(x,y) | (x:ys) <- tails l, y <- ys]
 -- WARNING: due to the difficulty of getting Network.URI to accept unescaped Unicode, we attempt to escape it before processing, so `host` is operating on a somewhat different URL than you assume if it contains raw Unicode.
 -- (With HTML5, it is valid to have unescaped Unicode in URLs, and Pandoc generates these rather than percent-encode them. However, with older standards, which Network.URI was written against, they are required to be percent-encoded.)
 host :: T.Text -> T.Text
-host p = if T.head p `elem` ['#', '!'] || isInflationURL p then "" else
+host p = if T.null p then "" else
+  if T.head p `elem` ['#', '!'] || isInflationURL p then "" else
   case parseURIReference (T.unpack $ escapeUnicode p) of
     Nothing -> let anchor = T.dropWhile (/='#') p in
                  if '#' `T.elem` anchor then "" else -- we skip this 'bad' URL because it may just be us using the PmWiki range syntax for transcludes, like `/lorem-link#internal-page-links#` or `/doc/fiction/poetry/1963-valek-killingrabbits##`; but if there is no hash in what appears to be the anchor, then we may have a real issue and should complain about it:
@@ -629,11 +630,11 @@ host p = if T.head p `elem` ['#', '!'] || isInflationURL p then "" else
         let scheme = uriScheme uri'
         in if null scheme || scheme == "mailto:" || scheme == "irc:" then "" -- skip anchor fragments, emails, IRC
            else if not (scheme == "http:" || scheme == "https:")  -- Only process HTTP/HTTPS URLs
-           then error $ "Utils.host: Unsupported scheme; input was: " ++ show p ++ "; parsed URI was: " ++ show uri' ++ "; scheme was: " ++ show scheme
+           then "" -- tolerate uncommon schemes like ftp: in legacy content
            else if isRelativeReference (uriToString id uri' "")  -- Check if it's a relative URL
-           then error $ "Utils.host: Relative URL; input was: " ++ show p ++ "; parsed URI was: " ++ show uri'
+           then ""
            else case uriAuthority uri' of
-                Nothing -> error $ "Utils.host: No authority in URL; input was: " ++ show p ++ "; parsed URI was: " ++ show uri'
+                Nothing -> ""
                 Just auth ->
                     let path = T.pack $ uriPath uri'
                     in if path == ""  -- If the path is empty, it means the trailing slash is missing

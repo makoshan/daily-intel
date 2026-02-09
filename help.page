@@ -1,0 +1,17 @@
+---
+title: Help
+description: "How to use the site features."
+created: 2026-02-09
+status: draft
+confidence: possible
+importance: 0
+css-extension: dropcaps-not
+...
+
+# Help
+
+This is a placeholder `/help` page so links on the homepage don’t 404.
+
+- Theme toggle: use the floating toolbar (top-right on desktop, bottom-right on mobile).
+- Popups/popovers: hover or tap links; use the toolbar to disable if needed.
+

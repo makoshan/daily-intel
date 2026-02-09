@@ -1,0 +1,365 @@
+---
+title: "Cultural drift: cleaning methods"
+description: Forgotten chores and their use by Romanticism
+created: 7 May 2013
+tags: sociology, criticism, poetry, politics
+status: in progress
+belief: likely
+...
+
+I find it interesting how many small cultural changes impede our understanding of even recent materials, in a less recondite form of [incommensurability](!Wikipedia "Commensurability (philosophy of science)"). I am sure historians could cite thousands of examples where ordinary practices or beliefs or techniques have been lost and baffle modern-day people reading about them, but I would like to record here some of the ones I have discovered for myself. For example:
+
+> "Tu Mu relates a stratagem of Chu-ko Liang, who in 149 BC, when occupying Yang-p'ing and about to be attacked by Ssu-ma I, suddenly struck his colors, stopped the beating of the drums, and flung open the city gates, showing only a few men engaged in sweeping and sprinkling the ground. This unexpected proceeding had the intended effect; for Ssu-ma I, suspecting an ambush, actually drew off his army and retreated." --Editorial note by [Lionel Giles](!Wikipedia), _[The Art of War](!Wikipedia)_ (1910)
+
+In this case, barely a century separates me from Giles's translation, but nevertheless, I have to think carefully to understand all of what he wrote, and specifically, the "sprinkling the ground" bit which he writes without any annotation or further explanation (as if it was obvious, as perhaps it was). Some methods of cleaning have just been forgotten - who these days can read a clause like "sprinkling the ground" and understand implicitly what it means?
+
+No, it doesn't mean that the men were watering plants - that wouldn't make sense in the quoted context of a city gate. Nor does it mean that they're building some sort of water-trap - the point of Chu-Ko Liang's stratagem is that this is an activity which looks completely normal and innocent. It's not religious, either. So what is it? As the conjunction with "sweeping" suggests, the reason for sprinkling water is really very simple: it's to keep the dust down. In such a high traffic area of an ancient city, the plants on the ground will have died ages ago and the soil been rubbed away by feet and wheels, leaving just dust, clay, feces, etc to raise a cloud and choke travelers and be a nuisance. Simple, logical, useful, but not necessarily the sort of thing that would occur to a modern reader so accustomed to concrete and asphalt and heavily built-up urban environments.
+
+<!--
+> Yup, I'm from Bangalore. My parents are from a town in south India called Salem. That's where, when I was a boy and went visiting, I've seen this. But this habit of sprinkling water is quite common in Tamil Nadu (as far as I know), and you will still see it in smaller towns/villages there (Salem unfortunately has grown tremendously and lost any/all small town charm it had) -- I'm saying this because I'm sure someone somewhere has a flickr photo or more of women doing this, from their trip to south India. I tried a cursory search for web/photo hits but did not find any. The whitewashed walls and sanded floor, this will be harder (I think) to get hits on the web for. I remember my grandpa's house had this before it was torn down many years ago. If you have more specific questions, my email address is the same as my lw handle at gmail.
+
+I didn't find anything either, but I did discover something almost as good: apparently it's still a little niche ritual thing in Japan called 'uchimizu', and there's quite a few photos of it online:
+
+- https://secure.flickr.com/search/?w=all&q=uchimizu&m=text
+- http://www.world-insights.com/uchimizu-sprinkle-water-on-the-road/
+- http://www.dannychoo.com/post/en/1015/Uchimizu.html
+http://nezumiya.net/en/archives/45 "With Uchimizu, we can reduce the temperature about 2 degrees Celsius by the heat of evaporation."
+No dice on sanded floors though.
+-->
+
+# Sand
+
+I remember a similar example in the poems of Wallace Stevens (born 1879): there was a passage in "[The Ordinary Women](!Wikipedia)" about poor women (maids?) and a "beachy floor"[^ordinary-women], and I pointed out to my professor (who loved Stevens and had taught him for many decades) that the most obvious meaning of "beachy" was "sandy" and particularly in a large building such as a palace, this was how one might clean a wooden floor, by scrubbing it with sand. He said he had never heard of cleaning floors in such a manner. A rare audiovisual depiction of scrubbing tables with sand comes to us courtesy of [_Game of Thrones_, season 1 episode 4](http://www.youtube.com/watch?v=nx6h4Dosu2M "Jon Snow - Bastard named Snow not a good life for a child"), but more famously, wooden sailing ships didn't necessarily have sand handy, so they used sandstone rocks or "[holystones](!Wikipedia)" for scrubbing the decks.
+
+[^ordinary-women]: A short excerpt:
+
+    > Then from their poverty they rose, \
+    > From dry catarrhs, and to guitars \
+    > They flitted \
+    > Through the palace walls. \
+    >
+    > ...The gaunt guitarists on the strings \
+    > Rumbled a-day and a-day, a-day. \
+    > The moonlight \
+    > Rose on the beachy floors...
+
+We can find other mentions of sand and floors, often praise; for example:
+
+> "Simplicity of life, even the barest, is not a misery, but the very foundation of refinement: a sanded floor and whitewashed walls, and the green trees, and flowery meads, and living waters outside; or a grimy palace amid the smoke with a regiment of housemaids always working to smear the dirt together so that it may be unnoticed; which, think you, is the most refined, the most fit for a gentleman of those 2 dwellings?" --[William Morris](!Wikipedia)
+
+Part of what interests me is that not only have we forgotten, we've forgotten that we've forgotten. If Wade-Giles or any of the Stevens anthologies had included footnotes explaining their uses of water or sand, this would be much less interesting to me. They would simply be known unknowns, not unknown unknowns.
+
+## Trends
+
+When did "sanded floor" become so obscure? A useful tool for historical waxing and waning is Google's [Ngram Viewer](http://books.google.com/ngrams/), where we can graph instances of the phrase (remembering that probably a lot of modern hits will relate to construction or home improvement) from [1765-2008](http://books.google.com/ngrams/graph?content=sanded+floor&year_start=1765&year_end=2008&corpus=15&smoothing=1):
+
+![Plotting instances of the phrase "sanded floor" in the Google Books corpus over 3 centuries using Ngram](/images/2013-ngram-sandstone.png)
+
+Maybe some of the increase can be explained by increased availability of 1800s books (or just the no doubt enormous growth in publishing over those centuries), but the abrupt decline from the 1890s onward is interesting. We know that sanded floors are no longer common even in ships, as sandable wooden floors have presumably been replaced by [oilcloth](!Wikipedia) or [linoleum](!Wikipedia "Linoleum#Use") or other products; do the 1890s mark the beginning of the end and the decade of 'Peak Sand'? If we [zoom in on sanded floors & oilcloth/oilskin & linoleum 1880-2008](http://books.google.com/ngrams/graph?content=sanded+floor%2Clinoleum%2Coilcloth%2Coilskin&year_start=1880&year_end=2008&corpus=15&smoothing=1), we find that this seems plausible - linoleum seems to have been monstrously successful post-1900:
+
+![Ditto, but narrowing to post-1880 and including linoleum & oilcloth](/images/2013-ngram-sandstoneoilskinlinoleum.png)
+
+## Historical context
+
+How were sanded floors described or viewed by people back then? Searching [Google Books for "sanded floor"](https://encrypted.google.com/search?q=%22sanded+floor%22&btnG=Search+Books&tbm=bks) and going through the first few pages of hits turns up modern material on home construction & repair and occasional literature using it as an epithet for the desert, but also a number of older prosaic uses - ranging from traveler's accounts to minutes of insane asylum meetings to novels and short stories and poems (one of which is hard not to read as blatant Quaker propaganda), and in particular, if we put them in chronological order, we can see some interesting trends:
+
+1. _The Poet's Craft: A Course in the Critical Appreciation of Poetry_, Scott 1957:
+
+    > Goldsmith's most famous poem, _The Deserted Village_, was enthusiastically received when it first appeared in May, 1770...It comes from a letter written to his brother...:
+    >
+    >> Your last letter, I repeat it, was too short: you should have given me your opinion of the design of the heroicomical poem which I sent you...The room in which he lies, may be described somewhat in this way:
+    >>
+    >>> The window, patch'd with paper, lent a ray, \
+    >>> That feebly shew'd the state in which he lay. \
+    >>> The sanded floor, that grits beneath the tread: \
+    >>> The humid wall with paltry pictures spread...
+2. [_John Clare and Community_](http://www.amazon.com/Clare-Community-Cambridge-Studies-Romanticism/dp/052188702X/), John Goodridge 2012:
+
+    > ...The last of the group of four early 'wish' poems is "After reading in a Letter proposals for building a Cottage", published in Clare's second collection, _The Village Minstrel_ (1821)...Clare is clearly determined to do things his own way. There are to be no redundant possessions or luxuries here, not even a library or a study, just "A cubboard for the books" (l. 32). He would like a sanded floor, though, as he points out in the concluding lines:
+    >
+    >> Along the floor some sand Ill sift \
+    >> to make it fit to live in \
+    >> & then Ill thank ye for the gift \
+    >> As somthing worth the giving (ll. 33-6)^25^
+    >
+    > This may merely reflect the common rural reality of a well-trodden earth floor in need of sand, but it might also recall the "nicely-sanded floor" of Goldsmith's idealised alehouse in _The Deserted Village_ (l.227), or perhaps Robinson Crusoe in his snug cave, an early literary hero whose story could always, as Clare puts it, "fill my fancys" (_By Himself_, 57).
+3. _The London Literary Gazette and Journal of Belles Lettres, Arts, Sciences, Etc_ 1827 gives us a humorous poem about a delusive drunkard sailor which concludes
+
+    > ...The wet deception from his eyes / Kept fading more and more; / He only saw the bar-maid stand / With pouting lip, before / The small green parlour at The Ship / And little sanded floor!
+4. _Three Courses and a Desert_, Clarke & Cruikshank, 1830 humorous novel:
+
+    > ..."Honour them as much as you please, Waldron", replied Archibald: "honour them, and welcome: but I beseech you, do not entrap me to honour another of them...conceive the misery, if you can, of dining in a room, falsely designated a parlour, with a sanded floor! My teeth were set on edge every time I moved a foot."
+    >
+    > "Ay, but, brother, provided the table be well covered", observed Reginald, "one might, methinks, even put up with a clean, dry, sanded floor."
+    >
+    > ..."_Pindaruum quisquis studet emulari_, brother Waldron", exclaimed Reginald; but he was cut short, in his intended quotation, by Archibald, who said, "And if I plume myself on any merit of mine, - except, from my boyhood, always having balanced to a fraction, - it is on that of preferring a good carpet to a sanded floor; a Hoby's boot to a hob-shoe; a tooth by Ruspini, to fill up a gap made by time, to no tooth at all..."
+5. _The Spirit of the English Magazines_ 1832, "The Spy and the Traitor":
+
+    > ...It seemed to be an uninhabited building...His companion, however, soon joined him and silently led the way towards a low door. having entered, he made it secure, and requesting him to follow, he conducted the stranger along a narrow passage...He now stood in a low square room, slightly furnished, and with an unpainted wainscot, and a sanded floor. Here and there a coarse picture, in a black frame, under a triumphal arch of asparagus or evergreen, hung against the white wall...
+6. The January 1839 _Southern Literary Messenger: Devoted to Every Department of Literature and the Fine Arts, Volume 5_ offers this architectural description:
+
+    > ...The room was illuminated by eight windows with not even a paper curtain - nothing but the dark scarlet bombazet demi-curtain, which seems the favorite ensign of our country inns...And further, this "delightful _Saxon_" apartment had a sanded floor, which, as my young companions chose to course up and down its fifty of length, was rather unfriendly to the sweet offices of sleep. But in spite of this - in spite of the windows rattling in their casements - in spite of a rising northeaster - of the blowing open of the door, and the pelting in of the rain, a king might have envied our sound sleep on the teamsters' beds of this "delightful Saxon" apartment! Such wonderful transmuters are exercise and fatigue, of straw-beds and coarse coverings into down and fine linen.
+7. _The Boston Quarterly Review_ 1841, "Conversations with a Radical":
+
+    > _R._: ...Poverty and wealth are merely relative terms. The only true method of judging of this matter is to ascertain whether the position of the producer, relatively to that of the accumulator, be higher or lower, than it was at the epoch of the Revolution, before the marvellous powers of machinery, of science, and capital had been made to bear on production, as they have been since. Grant that a yard of calico may be purchased now at an eighth of what it cost fifty years ago; what is gained, if in order to maintain the same relative social position, the blacksmith's wife must put seven yards more into her gown, or have eight gowns to one then? You know, Sir, if you know anything about it, that, notwithstanding the general advance of wealth and the vast multiplication of the necessaries and conveniences of life, it is altogether more difficult for the common laborer to maintain the same social position now, than it was fifty years ago....The mechanic, it may be, receives two and even three times as much, nominally, for his labor now as he did then, and is required to pay two or three times less for what he purchases; but then he must have as much more as this difference implies in order to be a man of the same consequence that he was. The blacksmith's wife must have a carpet now, where a nicely sanded floor was enough then; and a French calico instead of a homemade, copperas-dyed, two-and-linen gown, which was her pride then...
+    >
+    > _C_. And I should suppose that with your great affection for blacksmiths, and especially for blacksmith's wives, you would rejoice that it is so.
+    >
+    > _R_. No. My friends, the blacksmith and his wife, the shoemaker and his wife, the housewright, and the wheelright and their wives, are all poorer than they were. Their houses may look better outwardly, but they are not so comfortable inside. They have more compared with what they then had, but less compared with what is now the general style of living. The sanded floor, the copperas gown, the checked apron, the butternut coat, and tow shirt, frock, and trowsers, were good enough for them then, for they were as good as their neighbor's had...Each family manufactured for itself, and felt itself independent; and the feeling of independence, that we have within ourselves the means of providing for our own wants, is worth more than all the carpets, French calicoes, French silk, satin, lace, and the like things in the world. Those were happy times.
+8. _Friendship's Offering_, Phillips and Sampson, 1843:
+
+    > The Sabbath morn called him to seek the meeting-house of his sect, which was situate at a short distance from the village. There it stood, with its gray walls and flagged roof - its bright small-paned windows, and weather-beaten door and shutters - its shade of arching lime trees, and its green graveyard, surrounded by a low wall and humble wicket, on which the peasant might lean and moralize; for the dread of desecration which encircles the burial places in cities with palisadoes and chevaux-de-frise had not reached the inhabitants of that peaceful land. Its interior corresponded with the neatness and simplicity of its outward appearance. The walls seemed to have been recently white-washed, and the sand on the floor cracked beneath his tread, as he sought a seat on one of the old oaken forms. Few were the assembled worshippers.
+
+    > ...he marshalled us into the house. The _ben_ end of the old-fashioned farmhouse, had exhibited the usual decorations of an _amrie_, a clock and a pair of press-beds, with a clean swept ingle, and carefully sanded floor, had underground a metamorphosis not less violent than some of Ovid's or Harlequin's. The _amrie_ had given place to a satin-wood work-table, the clock to a mirror...and the once sanded floor was covered with an already soiled and faded carpet, to whose delicate colours, Peter, Fresh from the clay furrows, and his two sheep-dogs dripping from the pond, had nearly proved equally fatal.
+9. [_A Historical Guide to Henry David Thoreau_](http://www.amazon.com/Historical-Thoreau-Guides-American-Authors/dp/0195138635/) 2000 provides a handy discussion of cleaning floors with sand in New England (exactly the region of concern for the poem quoted previously):
+
+    > ...Additionally, Thoreau argues that kindness to the poor might best be shown by self-employment of heads of household in the kitchen (_Walden_ 1854, 76). He assents to [Harriet] Beecher's notion that housework can be a "pleasant" pastime and offers his own guide to simplified cleaning:
+    >
+    >> When my floor was dirty, I rose early, and, setting all my furniture out of doors on the grass, bed and bedstead making but one budget, dashed water on the floor, and sprinkled white sand from the pond on it, and then with a broom scrubbed it clean and white. (_Walden_, 112-113)
+    >
+    > The white wood floors, as Jane Nylander explains in her study of New England households, were those left unfinished, with sand the favored abrasive cleaning agent into the early nineteenth century. One New Hampshire woman recalled that in the 1830s, "It was all so very clean, the chairs, table, floor and all the woodwork was unpainted and was kept white by being scoured with sand" (Nylander, [_Our Own Snug Fireside_](http://www.amazon.com/Our-Own-Snug-Fireside-1760-1860/dp/0300059531), 118-119). Thoreau's sand scrub implicitly rejects the latter days of carpeting and of paint (the latter surface easier to maintain, according to Beecher), and his example of housekeeping argues for a simpler domesticity practiced in the recent past, once again upholding the ethos of cleanliness.
+10. _The recreations of a country parson_, Boyd 1866:
+
+    > I like to think of the effect which tidiness has in equalising the real content of the rich and poor. If even you, my reader, find it pleasant to go into the humblest little dwelling where perfect neatness reigns, think what pleasure the inmates (perhaps the solitary inmate) of that dwelling must have in daily maintaining that speckless tidiness, and living in the midst of it. There is to me a perfect charm about a sanded floor, and about deal ["A slice sawn from a log of timber (now always of fir or pine), and usually understood to be more than seven inches wide, and not more than three thick"] furniture scrubbed into the perfection of cleanliness. How nice the table and the chairs look; how inviting that solitary big arm-chair by the little fire!...God has made us so that there is a racy enjoyment, a delightful smack, about extreme simplicity co-existing with extreme tidiness. I don't mean to say that I should prefer that sanded floor and those chairs of deal to a Turkey carpet and carved oak or walnut; but I assert that there is a certain indefinable relish about the simpler furnitures...So if you gain something by having a grand house, you lose something too, and something which is the more constantly and sensibly felt - you lose the joy of simple tidiness; and your life grows so artificial, that many days you never think of your dwelling at all, nor remember what it looks like.
+11. [_Sinful Tunes and Spirituals: Black Folk Music to the Civil War_](http://www.amazon.com/Sinful-Tunes-Spirituals-BLACK-American/dp/0252071506/), Epstein, quotes an 1876 South Carolina travel account of a black "jig":
+
+    > ...The feet moved about in the most grotesque manner stamping, slamming, and banging the floor, not unlike the pattering of hail on the housetop. The conflict between brogan [leather shoe] and the sanded floor was terrific. It was hard work, and at intervals of five or ten minutes, he was relieved...
+12. [Henry James](!Wikipedia), [_Washington Square_](!Wikipedia "Washington Square (novel)") 1880
+
+    > The situation was really thrilling, and it scarcely seemed to her a false note when her companion asked for an oyster stew, and proceeded to consume it before her eyes...Morris looked some moments at the sanded floor of the shop; he seemed to be disposed to linger a moment.
+13. _Poems_, by David Atwood Wasson 1888, "O'er The Sanded Floor":
+
+    > ...She sits o'er the sanded floor / By the fireplace wide and high; / And there she is sitting for me evermore, / Still and pure as a star in the sky. / A child of three summer seasons then, / Three dreaming summers, was I; and when / Another was gone of those long years, / Unmothered a month had I been...
+14. _The Atlantic Monthly, Volume 65_ 1890 "The Begum's Daughter":
+
+    > ..."I will do nothing of the sort!" cried the daughter, in a sudden flutter. The matron, opening wide her small black eyes, started after the retreating maiden, and thereupon spent a good half hour puzzling over this trifling circumstance, as she paced to and fro upon the sanded floor.
+15. _Hilton Hall, Or, A Thorn in the Flesh: A Novel_, Louise Dubois 1898
+
+    >> "The whitewashed wall, the nicely sanded floor, \
+    >> The varnished clock that click'd behind the door."
+    >
+    > A charming, delightful spot on the banks of the Winnipisoegee river, is the little hamlet of the Bridge. On the crest of the hell, near the outskirts of the hamlet, stands the three roomed cottage of the blacksmith. His family, a wife, two sons and a daughter, Edward, Donnallen and Mary Hilton. The house contained a sitting-room, furnished with chairs, centre table, small mirror, fireplace adorned with ferns and cattails upon mantle, two brass candlesticks and snuffers, sanded floor. Bedroom, a rag carpet, tiny foot rest, chairs and bureau. Kitchen, a shade at the back, whitewashed and sanded floor, kept spotlessly clean by Donnallen, the youngest boy...The outdoor premises were equally clean...They lived frugally, as the mother wished to keep up the old custom of saving something to start the children in life. So Donnallen was a happy barefoot boy...
+16. _Year Book, Volume 3_, [Rowfant Club](http://ech.case.edu/cgi/article.pl?id=RC2) 1899, "President's Address":
+
+    > ...The best estate of the Rowfant Club is an alert, active, eager membership to plan, invent, suggest, adopt, and a willing, capable board of Fellowes to execute. We turn with fondest recollections to the vigorous days of this club, housed in a single scantily furnished room at Case Hall, on a sanded floor. But the sanded floor did not give it vigor. It existed in the men who trod the sanded floor. Our scant surroundings did not inspire its life, but the aims, the ambitions, the lively club aspirations of the men who sought these surroundings...
+17. _House Beautiful_, Volume 15, "Our Colonial Room", Stevens 1903
+
+    > ...Joan gazed at me with a conviction that would have done credit to Molly Pitcher, or Betsey Ross, or any of those women. "Your colonial novels will never got out of fashion", she said...She extracted from the file the description of the setting for the second act; over this she pondered a moment, running a finger along the lines, as her habit is when she considers a bit of manuscript critically. "Of course", she said, "you had to change it for the stage. they could hardly be expected to use the sanded floor; but I liked it better in the book." A pause. "Pictures in oval frames - striped wall - haircloth - long sofa - andirons - candlesticks -" she mused. "I suppose we shall have to give up the sanded floor, too", she said ruefully. "It was considered common and out of date, even then", said I. "I wouldn't be thought so now." "Let's pass over the question." She sighed delicately..."I will forget about the sanded floor", she said.
+18. _Gateway_, Volumes 5-6 1905, "A Legend of The Flag":
+
+    > ...Betsey Ross in her homespun dress / Has paused for a moment of idleness; / The little shop with the sanded floor / Looks bright from the half-way open door; / But Betsey watches with anxious eyes / A cloud of dust that sees arise. / Adown the street there's a goodyly stir - / A party of horsemen are seeking her. / "Mistress Betsey", the first one cries - / Low on his forehead the cocked h lies - / "In the name of Congress, we bid you leave / Your other labors a flag to weave:"...Then the years went by, and Betsey's soul / Had fled ere the war-drum ceased to roll; / And Betsey's daughter stood by the door / Of the little shop with the sanded floor. / "Give us more flags", the soldiers cried; / "We have naught but rags where the stars are dyed / With the blood of foes, and the milk-white bars / Are torn, like our breasts, with ragged scars." / But the maiden said, "Do you know the Friends [Quakers]? / They weave no banners for warlike ends. / ...I can weave no flags that may wave in strife / Whose brother is seeking a brother's life." / Then silent the veterans turned away / From that quiet maid in the robe of gray, / Who after them closed the heavy door / Of the little shop with the sanded floor...
+19. _[Our Mr. Wrenn: The Romantic Adventures of a Gentle Man](!Wikipedia)_, Sinclair Lewis 1914:
+
+    > As he stole into the car Dr. Mittyford seemed comparatively human, remarking: "I feel bored this evening. I thought I would give you a _nuit blanche_. How would you like to go to the Red Unicorn at Brempton - one of the few untouched old inns?" "That would be nice", said Mr. Wrenn, unenthusiastically...The tap-room of the Red Unicorn was lighted by candles and a fireplace. That is a simple thing to say, but it was not a simple thing for Mr. Wrenn to see. As he observed the trembling shadows on the sanded floor he wriggled and excitedly murmured, "Gee!... gee whittakers!" The shadows slipped in arabesques over the dust-gray floor and scampered as bravely among rafters as though they were in such a tale as men told in believing days. Rustics in smocks drank ale from tankards; an in a corner was snoring an ear-ringed peddler with his beetle-black head propped on an oilcloth pack. Stamping in, chilly from the ride, Mr. Wrenn laughed aloud. With a comfortable feeling on the side toward the fire he stuck his slight legs straight out before the old-time settle, looked devil-may-care, made delightful ridges on the sanded floor with his toe, and clapped a pewter pot on his knee with a small emphatic "Wop!"
+20. _Annual Report of the State Board of Insanity of the Commonwealth of Massachusetts_ 1915, unexpectedly brings up an example in the comments of trustee Edmund A. Whitman:
+
+    > ...I did, however, come to this meeting with some degree of enthusiasm, because at least one subject to be discussed was one in which I was interested at home; that is, the question of slippery floors...I think we can go to an excess of cleanliness. It has disturbed me on various occasions to see these demented patients travelling back and forth mopping or swabbing the floors with these wipers...If a chance could be made so that the rules will prevent any patients from touching one of these things, and that all the cleaning should be done by the attendants, you would get floors that would not be anywhere near as slippery. I have been, perhaps, brought up in as much horror of dirt as the rest of you. It is the very wealthy only who can afford to keep their floors in this highly polished condition in the outside world; mine are not, I know. It is not so very many years ago when our ancestors had a different kind of floor. You recall that old poem: -
+    >
+    >> I never had a piece of bread, particularly good and wide, \
+    >> But that it fell upon the sanded floor, and always on the buttered side.
+    >
+    > If we could go back to our sanded floor we would not have this trouble about falling down. If too much is done about keeping the floors clean they will be superclean...this constant rubbing is not necessary...
+21. _Old-House Journal_, Mar-Apr 1988; "The Bare Facts About Early Floors", Cotton:
+
+    > Another technique, one that now seems particularly peculiar, was "sanding" the floors clean. Sand was sprinkled over the bare floors to collect dirt and grease, in the manner that dry-cleaning compounds are used in today's automobile repair shops. When the sand was swept up, the week's dirt went along with it. An occasional good scrubbing with sand and water kept floors looking relatively new. And in accordance with an early American naval tradition, floors also were "holy stoned" - that is, a porous, pumice-like stone (sometimes sandstone) was rubbed across a sanded floor to clean it.
+    >
+    > A less common, but not rare, practice was to create a "sand carpet". Decorative patterns were created in sand spread across the floor. According to one account, the best parlors were "swept and garnished every morning with sand sifted through a 'sand sieve' and sometimes smoothed with a hair broom into quaint circles and fancy wreaths." Herringbone patterns were also documented.
+22. _Dictionary of Newfounland English_ 1990, includes an entry for "planching", which reads in part:
+
+    > ...(a) Floor-boards; the floor of a dwelling; (b) planks laid down to form the floor of a barn, fishing-stage, or the cabin or engine-room of a vessel.
+    >
+    > 1901 _Christmas Review_ 5 "The Outharbour Planter": his house the village meetin' place, tho' it not always was a mansion; / Its carpet was a sanded floor, with sometimes sawdust on the planchin' 1906 _Nfld Qtly_ Dec, p. 4 the floor or 'planchio', as it is called, is well scrubbed and sprinkled with sand....1972 MURRAY 188-9 Some early kitchens had the 'planchen' (floor) covered with tar paper, except for about a foot around each side which was left bare.
+23. [_The Encyclopedia of Kitchen History_](http://www.amazon.com/Encyclopedia-of-Kitchen-History-ebook/dp/B000SI8HYA/), ed Snodgrass 2004, as one would hope of "an overview of the evolution of foods and cooking styles, food storage, utensils and equipment from prehistory to the present day" mentions sand repeatedly for its uses in casting containers, building ovens, storing sensitive vegetable matter, and in particular, offers multiple useful quotes on its employment in floors and cleaning:
+
+    > ...Because of the difficulty of removing congealed grease and baked-on crust from cooking and dining implements, dishwashing has traditionally been, as the essayist Christopher Morley described it, "an ignoble chore, a kind of hateful discipline." (Franklin 1997, 429) The job began in prehistory with sand-scouring of pottery and utensils at the nearest water source. In the Roman villa, slaves cleaned tabletops and scoured stone and tile floors with handfuls of sand. Another useful substance, cuttlefish bone, served as a cleaning abrasive, as did the horsetail (_Equisetum_), commonly called pewter wort, scouring rush, or shave grass, a plant with jointed stems suitable for scouring wooden utensils, dairy vessels, and pewter.
+
+    > ...The first brickyard in the colonies, which opened in Salem in 1629, produced square-cut, stackable materials to even out a floor and brick a chimney. By sweeping sand between the pavers, the housekeeper created a durable floor that absorbed kitchen waste and slops, yet dried quickly.
+
+    > ...Humble homemakers kept a box of sand layered with grass or straw for scrubbing forks
+
+    > ...In addition to a stiff broom, brushes, abrasive powder, and sand, the cleaner of floors relied on a homemade device composed of old rags sliced into strips and spiked onto a mop nail that was driven into a handle.
+
+    > ...In 1803, Dorothy Wordsworth visited humble Highland cottages that she described in _Recollections of a Tour Made in Scotland_. In one kitchen, she found a sanded floor and tiny dresser with benches along the wall, where the cook stored peat. Besides a bag of oatmeal at the hearth, the flour barrel doubled as a table with the addition of a baking board as tabletop.
+
+    > ...In the South, Marseilles-born Antoine Alciatore launched a tradition of kitchen élan at his [Restaurant Antoine](!Wikipedia "Antoine's"), opened in New Orleans 1840. An immaculate, sand-floored diner, it grew to rival the reputation of Delmonico's and the Cafe Anglais in Paris from the skill of the master chef, who returned to France in 1885 and left son Jules Alciatore in charge.
+
+    > ...In her _Cooking School Text Book and Housekeeper's Guide to Cookery and Kitchen Management_ (1879), the U.S. domestic authority Juliet Corson emphasized the importance of copper utensils...She reminded the thrifty cook that old copper had a higher resale value. On the matter of cleaning copper cookware, she cited the New York Cooking School's best chef, who washed utensils in soda water and scoured them with a blend of soft soap and sand.
+
+Taken as a whole, the excerpts seem to tell a story of sanded floors going from ordinary unremarked part of life to increasingly disliked compared to alternatives like carpets (related to economic growth & increasing wealth?) to an example of the growth of consumerism and then to a backlash where the sanded floors become a nostalgic emblem of the 'good old days' and actual sanded floors only appear in busy restaurants, to finally, completely obsolete and eventually a forgotten part of history to be resurrected in specialist tomes.
+
+In particular, I'm fascinated how a number of the post-1840 quotes take a *moralizing* approach: in these quotes, sanded floors represents the battle of the good old vs the bad new - mocked by arriving consumerists as unpleasant and primitive, and admired by more conservative persons as cleaner and purer and simpler. Who knew? I guess cleanliness really is next to godliness - after all, purity/disgust/cleanliness is one of the moral drives identified by [moral psychology](!Wikipedia) like [Jonathan Haidt](!Wikipedia) ([_The Righteous Mind_](http://www.amazon.com/Righteous-Mind-Divided-Politics-Religion/dp/0307455777/)), talk of clean and pure appear in all sorts of racist or genocidal propaganda, and the best book on North Korean racial ideology is not called [_The Cleanest Race_](http://www.amazon.com/The-Cleanest-Race-Koreans-Themselves/dp/1935554344/) for nothing (and was not a stock trope of Chinese/Japanese/Koreans depictions of Westerners was portraying them as inferior "barbarians" by focusing on their poor personal hygiene - they smelled bad and didn't bathe?).
+
+# Poll
+
+Curious to what extent this knowledge has been lost, how many well-educated intelligent Westerners were still able to interpret the specifics correctly, I [posted a poll on LessWrong](http://lesswrong.com/lw/hc0/open_thread_may_114_2013/8xi0#body_t1_8xi0) written as follows:
+
+    This is a poll on a minor historical point which came up on `#lesswrong` where we wondered
+    how obscure some trivia was; please do not look up anything mentioned here - knowing the
+    answers does not make you a better person. I'm just curious.
+
+    1. Do you know what a "holystone" is and is used for?
+
+        - no
+        - unsure
+        - yes
+    2. In this passage:
+
+        > "Tu Mu relates a stratagem of Chu-ko Liang, who in 149 BC, when occupying Yang-p'ing
+          and about to be attacked by Ssu-ma I, suddenly struck his colors, stopped the beating
+          of the drums, and flung open the city gates, showing only a few men engaged in sweeping
+          and sprinkling the ground. This unexpected proceeding had the intended effect; for
+          Ssu-ma I, suspecting an ambush, actually drew off his army and retreated."
+
+       Do you know why the men are "sprinkling the ground"?
+
+       - no
+       - unsure
+       - yes
+
+       If yes, please reply to this comment using [rot13](!Wikipedia), with
+       what you believe they are doing and why.
+    3. In this passage:
+
+        > "Simplicity of life, even the barest, is not a misery, but the very foundation of refinement:
+        a sanded floor and whitewashed walls, and the green trees, and flowery meads, and living
+        waters outside; or a grimy palace amid the smoke with a regiment of housemaids always working
+        to smear the dirt together so that it may be unnoticed; which, think you, is the most refined,
+        the most fit for a gentleman of those 2 dwellings?"
+
+        Does "sanded floor" refer to...?
+
+        - a floor made of dirt
+        - a floor recently repainted
+        - a dirty floor
+        - a floor scrubbed with sand
+        - a floor made of sandstone
+
+LWers tend to be intelligent and well-read, hence the number who know the right answer is probably an upper-bound on the general population's knowledge of this trivia. [The responses](/docs/2013-07-22-sand-lwpoll.csv) were *mostly* as expected:
+
+1. no: 90%, yes: 5%
+2. no: 66%, yes: 3%
+3. in descending order:
+
+    - "a floor scrubbed with sand": 82%
+    - "a floor made of dirt": 13%
+    - "a floor made of sandstone": 3%
+    - "a dirty floor": 2%
+
+Mostly, because while we obtained the expect majority ignorance on the matter of holystones & sprinkling water to keep down dust, the majority cottons on the right guess in the third question. Some of the replies to the poll agreed with me that this meant I screwed up the wording of the options or its placement, and made it too easy to guess. It seems impossible that a full 82% of LWers would know about scrubbing floors with sand - when they *didn't* know about scrubbing ship decks with sandstone or the now equally obscure practice of watering dust.
+
+So presumably the people taking my little LW poll were clued in by either the first two questions, the correct response sticking out, or by the passage itself giving too much context and implicitly defining what "sanded floor" means. All three hypotheses can be tested by running suitably modified polls:
+
+1. if the first two questions alerted poll-takers to what was going on, then presumably putting the key question *first* would resolve it
+2. if the correct response is too obvious, then replace it by an option which is a superset: "none of the above". Anyone who knows what a sanded floor is will know that none of the other options match, and pick "none of the above".
+3. if the passage is too obvious, use a different passage. The Rowfant Club passage looks like a good candidate.
+
+So I made 3 surveys on Toluna/QuickSurveys (which I used for my previous [iodine eye-color survey](Nootropics#iodine-eye-color-changes)): the first randomized the order of questions, which will let us compare how being put first affects the Morris quote; the second was identical except it replaced question 3's "a floor scrubbed with sand" by "other (none of the above)"; the third was identical to the first, except it replaced the Morris quote with the Rowfant Club quote previously quoted from Google Books. Toluna doesn't seem to easily support testing all 3 variations at once, so I will simply run each survey for a week or so, and analyze each hypothesis separately. If a tweak eliminates the absurdly high guesses at what "sanded floor" means, it should be pretty obvious as the correct response rate plummets from 82% to more like 5%.
+
+<!-- TODO: ping the following LW users as promised:
+http://lesswrong.com/message/compose/?to=abramdemski
+http://lesswrong.com/message/compose/?to=ahartell
+http://lesswrong.com/message/compose/?to=aleksiL
+http://lesswrong.com/message/compose/?to=ArisKatsaris
+http://lesswrong.com/message/compose/?to=arundelo
+http://lesswrong.com/message/compose/?to=ChristianKl
+http://lesswrong.com/message/compose/?to=DubiousTwizzler
+http://lesswrong.com/message/compose/?to=Emile
+http://lesswrong.com/message/compose/?to=Eneasz
+http://lesswrong.com/message/compose/?to=gwern
+http://lesswrong.com/message/compose/?to=iconreforged
+http://lesswrong.com/message/compose/?to=James_Miller
+http://lesswrong.com/message/compose/?to=Kaj_Sotala
+http://lesswrong.com/message/compose/?to=khafra
+http://lesswrong.com/message/compose/?to=mcallisterjp
+http://lesswrong.com/message/compose/?to=moreati
+http://lesswrong.com/message/compose/?to=moridinamael
+http://lesswrong.com/message/compose/?to=nicdevera
+http://lesswrong.com/message/compose/?to=oooo
+http://lesswrong.com/message/compose/?to=Oscar_Cunningham
+http://lesswrong.com/message/compose/?to=Qiaochu_Yuan
+http://lesswrong.com/message/compose/?to=quanticle
+http://lesswrong.com/message/compose/?to=rejuvyesh
+http://lesswrong.com/message/compose/?to=Sniffnoy
+http://lesswrong.com/message/compose/?to=TeMPOraL
+http://lesswrong.com/message/compose/?to=TodesBrot
+http://lesswrong.com/message/compose/?to=toner
+http://lesswrong.com/message/compose/?to=Vaniver -->
+
+# External links
+
+- ["The What-You’d-Implicitly-Heard-Before Telling Thing"](http://slatestarcodex.com/2013/06/17/the-what-youd-implicitly-heard-before-telling-thing/) -(Yvain)
+
+# Appendix
+## "Scanners Live in Vain" as realistic SF
+
+One of the classic stories of noted SF author [Cordwainer Smith](!Wikipedia) was his inventive 1945 short story "[Scanners Live in Vain](!Wikipedia)" ([TvTropes](http://tvtropes.org/pmwiki/pmwiki.php/Literature/ScannersLiveInVain)), set in Smith's "Instrumentality of Mankind" fiction universe. The story depicts a member of a guild of men surgically modified to sever their brains from their senses and who control their body mechanically, through observation; the purpose of their guild is to enable interstellar travel as otherwise outer space drives humans insane & suicidal (the "Great Pain of Space"); and how the member deals with a technological breakthrough which defeats the pain of space and renders obsolete the guild & all its sacrifices. It is an example of the gothic & surreal fantastical elements with an almost visual intensity that render Smith's SF unique, and earned descriptions like "sheer originality of concept" for the pain of space and the guild founded to deal with it (and later, speculation that Smith was also "[Kirk Allen](!Wikipedia)" & derived story elements from [hallucinations of future lives](http://www.theatlantic.com/entertainment/archive/2013/03/remembering-cordwainer-smith-full-time-sci-fi-author-part-time-earthling/274344/ "Remembering Cordwainer Smith: Full-Time Sci-Fi Author, Part-Time Earthling; The author, born 100 years ago, shocked science-fiction readers with his extreme depictions of other worlds - and his rumored belief that he sometimes lived in one")).
+
+The pain of space is generally interpreted as reifying a metaphorical or philosophical reaction to space or Smith's own life at the time (a theme that would appear in other works as well, see TvTropes's ["Space Madness"](http://tvtropes.org/pmwiki/pmwiki.php/Literature/ScannersLiveInVain)), due to the overall theme that the other members of the guild had themselves become insane (in a moral sense) due to having been severed from their senses in a classic 'mind vs body/heart' conflict. The [_SF Encyclopedia_](http://www.sf-encyclopedia.com/entry/smith_cordwainer) describes the surgery as "with an effect on their behaviour that resembles severe autism", and D'Ammassa's [_Encyclopedia of Science Fiction_](http://www.amazon.com/Encyclopedia-Science-Fiction-Library-Movements/dp/0816059241/) (pg324) comments "Smith examines a variety of themes in the story: the conflict between duty to a small group as opposed to society at large, the unfortunate consequences of divorcing emotion from reason and compassion from action." Hellekson ([_The Science Fiction of Cordwainer Smith_](http://www.amazon.com/The-Science-Fiction-Cordwainer-Smith/dp/078641149X), pg87):
+
+> The Great Pain of Space and Martel's personal feelings of panic and despair are more mature expressions of the young Paul Linebarger's [Cordwainer Smith] terror, when Smith's self-understanding and maturity allowed him to write of the thing that as an adolescent he simply feared. Most critics have read the Great Pain of Space as a metaphorical working of the author's psychological despair, though I would also link it to the terror of death that Paul Linebarger expressed sixteen years before he wrote "Scanners". Perhaps Smith's fundamental fear of the comprehension of death drove this psychological despair, which was likely exacerbated by his endemic health problems. Elms, in his entry on Cordwainer Smith in [James Gunn's](!Wikipedia "James Gunn (author)") [_New Encyclopedia of science Fiction_](http://www.amazon.com/The-New-Encyclopedia-Science-Fiction/dp/067081041X) (1988), notes that "Scanners" is a "story remarkable for its depiction of the desperate steps necessary to control the psychological pain induced by long-distance space travel" (422), although I would note that in "Scanners", the pain unprotected spacefarers experience is real and physical; this real pain is read as psychological. Gary K. Wolfe, in his analysis of "[The Game of Rat and Dragon](!Wikipedia)"^[In the "The Game of Rat and Dragon", space itself is not dangerous but in the darkness between solar systems lurk psychic monsters which turn ships' passengers into "lunatics, damaged beyond repair, to be wakened, and fed, and cleaned, and put to sleep, wakened and fed again until their lives were ended." As in "Scanners Live in Vain" and another striking Smith story, "[Mother Hitton's Littul Kittons](!Wikipedia)", the solution is another form of life (oysters, cats, and mink respectively). Animals and human-animal hybrids appear throughout Smith's fiction.], notes that "the 'pain-of-space' itself...and human vulnerability to the dragons are further evidences of man's physical and psychological vulnerability and alienation in space" (["Mythic Structures"](http://www.depauw.edu/sfs/backissues/12/wolfe12.htm "'Mythic Structures in Cordwainer Smith`s `The Game of Rat and Dragon`', [# 12 = Volume 4, Part 2 = July 1977]"), 148).
+
+These seem like reasonable interpretations. After all, everyone is well aware that [obviously](!Wikipedia "Hindsight bias") humans can go to space without problem & spend years in orbit: while there are [negative health effects](!Wikipedia "Effect of spaceflight on the human body") like weakened bones or cardiovascular systems (reduced blood), and occasional acute issues like under high acceleration or motion sickness, or psychological issues related to stress & confinement & lack of nature ([not universally negative](!Wikipedia "Overview effect")), and well-understood issues of ordinary radiation from cosmic rays or the sun, there is certainly no "Great Pain of Space". It is a fantasy element, reflective of primitive fears of the unknown & status quo bias.
+
+Or is it? There may be a forgotten historical context here - this would not be the first time I have run into [Whiggish](!Wikipedia "Whig history") claims about the past which turn out to be reasonable in their original context, exaggerated, or false.
+
+(For example, [Drapetomania](!Wikipedia) is cited as an example of the Antebellum South's medicalization of slaves the better to oppress them, ignoring the fact that it was supported by only its inventor, was mocked, had no practical consequences, and was of less importance to its time than [Time Cube](!Wikipedia) is to our own.
+The British science writer [Dionysius Lardner](!Wikipedia) supposedly scoffed at the idea of fast trains, claiming "Rail travel at high speed is not possible because passengers, unable to breathe, would die of asphyxia"; but there is [no good source that he ever said that](https://en.wikipedia.org/wiki/Talk:Dionysius_Lardner#Did_he_actually_say_that.3F), and it seems to have been made up in 1980 by someone who couldn't spell his first name right.
+[Bicycle face](!Wikipedia) was claimed by an encyclopedia and a few other books to be a disorder pushed by the English medical establishment to discourage women from bicycling & keep them under control; but [the scanty primary sources barely supported its existence](https://plus.google.com/103530621949492999968/posts/iX58s8HxY5k) as an obscure concept known from a few newspaper columns, and certainly not the anti-feminist tool of oppression it was depicted as.
+In his interesting book _Fragments of an Anarchist Anthropology_, Graeber claims Nazi rallies were "inspired by" Harvard pep rallies, but without any sources; I investigated this in more depth and concluded that the connection was [real but very tenuous](https://en.wikipedia.org/wiki/Talk:Pep_rally#Naziism_deletion:_reliability_of_info.3F).
+A feminist wrote that 'This was a time before women had the right to vote. If they did attend college at all, it was at the risk of contracting "neuralgia, uterine disease, hysteria, and other derangements of the nervous system" (according to Harvard gynecologist Edward H. Clarke)'; this was a grossly out-of-context quote which libeled a man with noble & progressive beliefs, as I pointed out [in my comment](https://plus.google.com/+RajiniRao/posts/3PXGwCrkUAB).
+A more contemporary example comes courtesy of [Mt. Gox](!Wikipedia): everyone 'knew' it was started to be an exchange for trading _Magic: the Gathering_ cards, until I observed that my thorough online research turned up no hard evidence of it but rather endless Chinese whispers; the truth, [as revealed by founder Jed McCaleb](/docs/2014-mccaleb) turned out to be rather stranger.
+Finally, I might mention that almost all discussions of [Thomas Robert Malthus](!Wikipedia) are erroneous and show the speaker has not actually read _An Essay_.)
+
+In 1945, knowledge of outer space was scant. No one had gone to outer space and returned alive, neither man nor [ape](!Wikipedia "Monkeys and apes in space") nor dog. The US and Russian programs were only just starting up and competing for the products of the Nazi rocketry programs. Pictures taken from space would not be available until a year later in 1946 using a V-2 (and verifying that at least some machinery would work in space), and any life form would not be launched until fruit flies survived a trip up on a V-2 in 1947, 2 years later; a monkey would not be launched for 3 years (Albert I in June 1948). So I was fascinated to read in the chapter "Star Crazy" of Roach's 2010 [_Packing for Mars_](http://www.amazon.com/Packing-Mars-Curious-Science-Life/dp/B00AR2BCLW) a lengthy discussion of how even up the '60s there were serious concerns - like in Smith's story - about whether astronauts could remain sane in space rather than suicidal, and this was not fringe speculation but mainstream & reasonable extrapolation from disturbing datapoints in aviation:
+
+> There was a great deal of conjecture at the time - both at the Soviet space agency and at NASA - about the unique psychological consequences of breaching the cosmos. Would hurtling into "the black," as pilots used to call it, blow the astronaut's mind? Hear the ominous words of psychiatrist Eugene Brody, speaking at the 1959 Symposium on Space Psychiatry: "Separation from the earth with all of its unconscious symbolic significance for man,…might in theory at least be expected…to produce - even in a well-selected and trained pilot - something akin to the panic of schizophrenia."
+>
+> There was worry that [Gagarin](!Wikipedia "Yuri Gagarin") might come unhinged and sabotage the history-making mission. It was enough of a worry that the powers-that-be locked the manual controls of the Vostok capsule before liftoff. What if something went awry and communications went dead and Pilot-Cosmonaut #1 needed to take control of the capsule? His superiors had thought about that too, and seemingly turned to game show hosts for advice. Gagarin was given a sealed envelope containing the secret combination to unlock the controls.
+>
+> The concerns were not altogether fatuous. In [a study published in the April 1957 issue of _Aviation Medicine_](http://spacemedicineassociation.org/timeline/1957/28003.pdf "'The Break-off Phenomenon: A Feeling of Separation from the Earth Experienced by Pilots at High Altitude', Clark & Graybiel 1957"), 35% of 137 pilots interviewed reported having experienced a strange feeling of detachment from Earth while flying at high altitudes, almost always during a solo flight. "I feel like I have broken the bonds from the terrestrial sphere," said one pilot.
+>
+> The phenomenon was pervasive enough for psychologists to give it a name: the "breakaway effect". For a majority of these pilots, the feeling wasn't one of panic, but of euphoria. Only 18 of the 137 characterized their feelings as fear or anxiety. "It seems so peaceful, it seems like you are in another world." "I feel like a giant." "A king," said another. Three commented that they felt nearer to God. A pilot named Mal Ross, who set a series of altitude records in experimental aircraft in the late 1950s, twice reported an eerie "feeling of exultation, of wanting to fly on and on."
+>
+> The year the _Aviation Medicine_ article ran, Colonel [Joe Kittinger](!Wikipedia "Joseph Kittinger") [ascended to 96,000 feet](!Wikipedia "Project Manhigh") in an upright, phone-booth-sized sealed capsule suspended beneath a helium balloon. With his oxygen dangerously low, Kittinger was ordered by his superior, David Simons, to begin his descent. "`COME AND GET ME`", replied Kittinger, letter by letter in Morse code. Kittinger says it was a joke, but Simons didn't take it that way. (Morse code has always been a tough medium for humor.) In his memoir [_Man High_](http://www.amazon.com/Man-High-David-G-Simons/dp/B0007FU9NG), Simons recalls thinking that "the weird and little understood breakaway phenomenon could be taking hold of Kittinger's mind,…that he…was gripped in this strange reverie and was hellbent on flying on and on without regard for the consequences."
+>
+> Simons compared the breakaway phenomenon to "the deadly raptures of the deep." "Rapture of the deep" is a medical condition - a feeling of calm and invulnerability that can steal over a diver, usually at depths below 100 feet. It is more prosaically known as [nitrogen narcosis](!Wikipedia), or as the Martini Effect (one drink for every 33 feet below 65 feet). Simons speculated that one day soon aerospace physicians would be talking about a condition "known as the deadly rapture of space."
+>
+> He was right, though NASA preferred the less flowery term "space euphoria." "Some NASA shrinks," wrote astronaut [Gene Cernan](!Wikipedia) in [his memoir]("'The Last Man on the Moon', Cernan & Davis 1999"), "had warned that when I looked down and saw the Earth speeding past so far below, I might be swamped by space euphoria." [see also the ["overview effect"](http://www.theoverviewblog.com/space-euphoria/)] Cernan would soon be undertaking a spacewalk - history's third - during [Gemini IX](!Wikipedia). The psychologists were nervous because the first two spacewalkers had expressed not only an odd euphoria but a worrisome disinclination to go back inside the capsule. "I felt excellent and in a cheerful mood and reluctant to leave free space," wrote [Alexei Leonov](!Wikipedia), the first human to, in 1965, float freely in the vacuum of space, attached to his [Vokshod capsule](!Wikipedia "Voskhod (spacecraft)") by an air hose. "As for the so-called psychological barrier that was supposed to be insurmountable by man preparing to confront the cosmic abyss alone, I not only did not sense any barrier, but even forgot that there could be one."
+>
+> Four minutes into NASA's first spacewalk, [Gemini IV](!Wikipedia) astronaut [Ed White](!Wikipedia) gushed that he felt "like a million dollars." He struggled to find the words for it. "I've…it's just tremendous." There are moments when the mission transcript reads like the transcript of a 1970s encounter group. Here are White and his commander, James McDivitt, a couple of Air Force guys, after it's over:
+>
+>>  `WHITE`: That was the most natural feeling, Jim. \
+>>  `McDIVITT`: …You looked like you were in your mother's womb.
+>
+> NASA's concern was not that their astronaut was euphoric, but that euphoria might have overtaken good sense. During White's twenty minutes of bliss, Mission Control repeatedly tries to break in. Finally the capsule communicator, [Gus Grissom](!Wikipedia), gets through to McDivitt.
+>
+>>  `GRISSOM`: Gemini 4, get back in! \
+>>  `McDIVITT`: They want you to come back in now. \
+>>  `WHITE`: Back in? \
+>>  `McDIVITT`: Back in. \
+>>  `GRISSOM`: Roger, we've been trying to talk to you for awhile here. \
+>>  `WHITE`: Aw, Cape, let me just [take] a few pictures. \
+>>  `McDIVITT`: No, back in. Come on. \
+>>  `WHITE`: …Listen, you could almost not drag me in, but I'm coming.
+>
+> But he wasn't. Two more minutes passed. McDivitt starts to plead.
+>
+>>  `McDIVITT`: Just come on in… \
+>>  `WHITE`: Actually, I'm trying to get a better picture. \
+>>  `McDIVITT`: No, come on in. \
+>>  `WHITE`: I'm trying to get a picture of the spacecraft now. \
+>>  `McDIVITT`: Ed, come on in here!
+>
+> Another minute passes before White makes a move toward the hatch, saying, "This is the saddest moment of my life." Rather than worrying about astronauts not wanting to come back in, the space agencies should have been worrying about them not being able to. It took White twenty-five minutes to get back through the hatch and safely in.
+>
+> ...After Ed White's spacewalk, reports of space euphoria were rare, and soon the psychologists stopped worrying. They had something new to worry on: "[EVA](!Wikipedia"de-unicode") height vertigo." (EVA is short for "extravehicular activity," meaning spacewalking.) The image of Earth rushing by some 200 miles below can cause paralyzing fear. [Mir](!Wikipedia) astronaut [Jerry Linenger](!Wikipedia) wrote in [his memoir](http://www.amazon.com/Off-Planet-Surviving-Perilous-Station/dp/007136112X "'Off The Planet: Surviving Five Perilous Months Aboard The Space Station MIR', Linenger 2000") about the "dreadful and persistent" feeling that he was "plummeting earthward…at ten times or a hundred times faster" than he'd experienced during parachute free falls. Which he was. (The difference, of course, is that the astronaut is falling in a huge circle around Earth and doesn't hit the ground.)
+>
+> "White-knuckled, I gripped the handrail…," wrote Linenger of his agonized moments on the end of Mir's 50-foot telescoping arm, "forcing myself to keep my eyes open and not scream." I once listened to a [Hamilton Sundstrand](!Wikipedia) suit engineer tell the story of an unnamed spacewalker exiting the hatch and then turning to wrap both spacesuited arms around a colleague's legs.
+>
+> ...Aerospace biologists had established that humans can function for a few seconds without gravity. But what about an hour, a day, a week? "People ask, Why?" says Britz of the era of the spacefaring chimp. "Mary, we just didn't know." What were the longer-term effects of space travel-not only of weightlessness, but of cosmic radiation? (High-energy atomic particles have been zinging through space at ferocious speeds since the Big Bang. Earth's magnetic field protects us by deflecting cosmic rays, but in space, these invisible bullets smash unimpeded through cells, causing mutations. It's serious enough that astronauts are classified as radiation workers.)
+>
+> Every mode of travel has its signature mental aberration. Eskimo hunters traveling alone on still, glassy waters are sometimes stricken by "kayak angst" - delusions that their boat is flooding or that the front end is either sinking or rising up out of the water. Of related interest: ["A Preliminary Report of Kayak-Angst Among the Eskimo of West Greenland"](/docs/1963-gussow.pdf) includes a discussion of Eskimo suicide motives and notes that 4 out of the 50 suicides investigated were elderly Eskimos who "took their lives as a direct result of uselessness due to old age." No mention was made of whether they cast themselves adrift on ice floes, as you sometimes hear, and whether travel by ice floe has its own unique anxiety syndrome.
+
+We see clearly here a widespread and known fear of the effects of outer space, fears about radiation and suicidal actions, and parallels in the known extremes of aviation. While not all of this data & speculation was available to Smith in 1945 (for example, the aviation survey was published 12 years later), it is reasonable to suppose that he could well have had any of this in mind when he devised his pain of space.
+
+So any interpretation of "Scanners Live in Vain" must take this historical scientific context into consideration as a sufficient explanation of the presence of the plot device & its characteristics, and not ignorantly jump to a conclusion that the pain of space must necessarily be metaphorical or symbolic in some way.

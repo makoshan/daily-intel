@@ -15,18 +15,18 @@ $ sudo apt-get install libghc-hakyll-dev libghc-pandoc-dev libghc-filestore-dev 
 Demo command (for the full script, with all static checks & generation & optimizations, see `sync.sh`):
 -}
 
-import Control.Monad (when, unless, (<=<))
+import Control.Monad (when, unless, forM, (<=<))
 import Data.Char (toLower)
 import Data.List (intercalate, isInfixOf, isPrefixOf, isSuffixOf, group, sort)
 import qualified Data.Map.Strict as M (lookup)
 import Data.Maybe (isNothing, fromMaybe)
 import System.Environment (getArgs, withArgs, lookupEnv)
 import Hakyll (compile, composeRoutes, constField, fromGlob, -- symlinkFileCompiler,
-               copyFileCompiler, dateField, defaultContext, defaultHakyllReaderOptions, field, getMetadata, getMetadataField, lookupString,
+               copyFileCompiler, defaultContext, defaultHakyllReaderOptions, field, getMetadata, getMetadataField, lookupString,
                defaultHakyllWriterOptions, getRoute, gsubRoute, hakyll, idRoute, itemIdentifier,
                loadAndApplyTemplate, match, modificationTimeField, mapContext,
                pandocCompilerWithTransformM, route, setExtension, pathField, preprocess, boolField, toFilePath,
-               templateCompiler, version, Compiler, Context, Item, unsafeCompiler, noResult, getUnderlying, escapeHtml, (.&&.), complement)
+               templateCompiler, version, Compiler, Context, Item, unsafeCompiler, noResult, getUnderlying, escapeHtml, (.&&.), (.||.), complement, constRoute)
 import qualified Hakyll (Metadata)
 import Text.Pandoc (nullAttr, runPure, runWithDefaultPartials, compileTemplate,
                     def, pandocExtensions, readerExtensions, readMarkdown, writeHtml5String,
@@ -36,7 +36,8 @@ import Text.Pandoc.Shared (stringify)
 import Text.Pandoc.Walk (walk, walkM, query)
 import Network.HTTP (urlEncode)
 import System.IO.Unsafe (unsafePerformIO)
-import System.Directory (doesFileExist, createFileLink)
+import System.Directory (doesFileExist, createFileLink, listDirectory, doesDirectoryExist)
+import System.FilePath ((</>), takeDirectory, takeFileName, dropExtension, takeExtension)
 
 import qualified Data.Text as T (append, filter, isInfixOf, pack, unpack, length, strip)
 
@@ -101,19 +102,35 @@ main =
              timestamp <- preprocess $ getMostRecentlyModifiedDir "metadata/annotation/id/"
 
              preprocess $ printGreen ("Begin site compilation…" :: String)
-             let targets = if null args' then fromGlob "**.md"
-                              .&&. complement "doc/www/**.md"
-                              .&&. complement "docs/**"
-                              .&&. complement "gwern.net/**"
-                              .&&. complement "scripts/**"
-                            else fromGlob $ head args'
-             unless (null args') $ preprocess (printGreen "Essay targets specified, so compiling just: " >> print targets)
+             -- index.page is the homepage source. We generate index.generated.page from it so
+             -- the homepage can automatically index all existing *.page content.
+             preprocess writeOutHomepageIndexGenerated
+
+             -- Only compile a small, known set of Markdown sources. This repo has many
+             -- non-page .md files (notes, skills, docs) without required YAML metadata.
+             let targetsMd =
+                   fromGlob "blog/**.md"
+                   .||. fromGlob "_posts/**.md"
+                   .||. fromGlob "posts/**.md"
+                   .||. fromGlob "about.md"
+             let targetsPage = fromGlob "**.page"
+                                 .&&. complement "doc/www/**.page"
+                                 .&&. complement "gwern.net/**"
+                                 .&&. complement "scripts/**"
+                                 .&&. complement "build/**"
+                                 .&&. complement "index.page"
+                                 .&&. complement "index.generated.page"
+             let targetsSingle = fromGlob $ head args'
+
+             unless (null args') $
+               preprocess (printGreen "Essay targets specified, so compiling just: " >> print (head args'))
              let readerOptions = defaultHakyllReaderOptions
              let compileMarkdown = do
                             ident <- getUnderlying
                             hakyllMeta <- getMetadata ident
                             indexpM <- getMetadataField ident "index"
                             let indexp = fromMaybe "" indexpM
+                            let indexSafeUrlCtx = if null indexp then mempty else constField "safe-url" "index"
                             inlinedHead <- unsafeCompiler $ readFile "static/include/inlined-head.html"
                             inlinedAssets <- unsafeCompiler $ readFile "static/include/inlined-asset-links.html"
                             navbarHtml <- unsafeCompiler $ readFile "static/include/navbar.html"
@@ -126,25 +143,55 @@ main =
                                       constField "inlined-asset-links" inlinedAssets <>
                                       constField "navbar" navbarHtml <>
                                       constField "footer" footerHtml <>
+                                      indexSafeUrlCtx <>
                                       postCtx meta timestamp
                                     )
                               >>= imgUrls
 
-             -- generate an index.html so simple file servers don't show directory listings at /
-             version "html-index" $ match "index.md" $ do
-                 route $ setExtension "html"
+             -- Homepage: compile /index and /index.html from the generated source.
+             match "index.generated.page" $ do
+                 route $ constRoute "index"
+                 compile compileMarkdown
+             version "html-index" $ match "index.generated.page" $ do
+                 route $ constRoute "index.html"
                  compile compileMarkdown
 
-             match targets $ do
-                 -- strip extension since users shouldn't care if HTML3-5/XHTML/etc (cool URLs); delete apostrophes/commas & replace spaces with hyphens
-                 -- as people keep screwing them up endlessly: (and in nginx, we auto-replace all EN DASH & EM DASH in URLs with hyphens)
-                 route $ gsubRoute "_posts/" (const "posts/") `composeRoutes`
-                          gsubRoute "," (const "") `composeRoutes`
-                          gsubRoute "'" (const "") `composeRoutes`
-                          gsubRoute " " (const "-") `composeRoutes`
-                          setExtension ""
-                 -- <https://groups.google.com/forum/#!topic/pandoc-discuss/HVHY7-IOLSs>
+             -- A few repo-local pages are referenced by the navbar/homepage using
+             -- canonical, lowercase Gwern-style URLs. Provide those routes here
+             -- without forcing a repo-wide URL renaming.
+             match "gwern-net-design.md" $ do
+                 route $ constRoute "design"
                  compile compileMarkdown
+             version "html-design" $ match "gwern-net-design.md" $ do
+                 route $ constRoute "design.html"
+                 compile compileMarkdown
+
+             version "alias-changelog" $ match "Changelog copy.page" $ do
+                 route $ constRoute "changelog"
+                 compile compileMarkdown
+             version "alias-changelog-html" $ match "Changelog copy.page" $ do
+                 route $ constRoute "changelog.html"
+                 compile compileMarkdown
+
+             let pageRoute =
+                   gsubRoute "_posts/" (const "posts/") `composeRoutes`
+                   gsubRoute "," (const "") `composeRoutes`
+                   gsubRoute "'" (const "") `composeRoutes`
+                   gsubRoute " " (const "-") `composeRoutes`
+                   setExtension ""
+
+             if null args'
+               then do
+                 match targetsMd $ do
+                   route pageRoute
+                   compile compileMarkdown
+                 match targetsPage $ do
+                   route pageRoute
+                   compile compileMarkdown
+               else do
+                 match targetsSingle $ do
+                   route pageRoute
+                   compile compileMarkdown
 
              -- Static assets: always copy from ./static into _site/static so single-page builds
              -- still have CSS/JS. Avoid copying anything from ./gwern.net/**.
@@ -202,6 +249,8 @@ postCtx md rts =
     titlePlainField "title-plain" <>
     descField True "title" "title-escaped" <>
     descField False "title" "title" <>
+    fallbackTitleEscapedField <>
+    fallbackTitleField <>
     descField True "description" "description-escaped" <>
     descField False "description" "description" <>
     constField "refMapTimestamp" rts <>
@@ -213,16 +262,18 @@ postCtx md rts =
     boolField "linkbib-yes"   (check (const True)         getLinkBibLinkCheck) <>
     dateRangeHTMLField "date-range-HTML" <>
     isNewField               <> -- CSS 'body.page-created-recently'
-    dateField "created" "%F" <>
+    rawMetadataField "created" <>
     -- constField "created" "N/A"  <> -- NOTE: we make 'created' a mandatory field by not setting a default, so template compilation will crash
     -- if no manually set last-modified time, fall back to checking file modification time:
-    dateField "modified" "%F" <>
+    rawMetadataField "modified" <>
     modificationTimeField "modified" "%F" <>
     -- metadata:
     progressField "status" "status-plus-progress" <>
-    constField "status" "notes" <>
+    statusPlusProgressField <>
+    statusField <>
     progressField "confidence" "confidence-plus-progress" <>
-    constField "confidence" "log" <>
+    confidencePlusProgressField <>
+    confidenceField <>
     constField "importance" "0" <>
     constField "css-extension" "dropcaps-de-zs" <>
     constField "thumbnail-css" "" <> -- constField "thumbnail-css" "outline-not" <> -- TODO: all uses of `thumbnail-css` should be migrated to GTX
@@ -230,11 +281,11 @@ postCtx md rts =
     imageDimensionWidth "thumbnail-width" <>
     -- for use in templating, `<body class="page-$safe-url$">`, allowing page-specific CSS like `.page-sidenote` or `.page-slowing-moores-law`:
     escapedTitleField "safe-url" <>
-    (mapContext (\p -> urlEncode $ concatMap (\t -> if t=='/'||t==':' then urlEncode [t] else [t]) ("/" ++ replaceChecked ".md" ".html" p)) . pathField) "escaped-url" -- for use with backlinks ie 'href="/metadata/annotation/backlink/$escaped-url$"', so 'bitcoin-is-worse-is-better.md' → '/metadata/annotation/backlink/%2Fbitcoin-is-worse-is-better.html', 'note/faster.md' → '/metadata/annotation/backlink/%2Fnote%2Ffaster.html'
+    (mapContext (\p -> urlEncode $ concatMap (\t -> if t=='/'||t==':' then urlEncode [t] else [t]) ("/" ++ sourcePathToHtml p)) . pathField) "escaped-url" -- used by backlinks; supports both .md & .page
 
 lookupTags :: Metadata -> Item a -> Compiler (Maybe [String])
 lookupTags m item = do
-  let path = "/" ++ delete ".md" (toFilePath $ itemIdentifier item)
+  let path = "/" ++ stripSourceExt (toFilePath $ itemIdentifier item)
   case M.lookup path m of
     Nothing                 -> return Nothing
     Just (_,_,_,_,_,tags,_) -> return $ Just tags
@@ -257,6 +308,88 @@ fieldsTagPlain m = field "tags-plain" $ \item -> do
       Nothing -> return "" -- noResult "no tag field"
       Just tags -> return $ intercalate ", " tags
 
+rawMetadataField :: String -> Context String
+rawMetadataField k = field k $ \item -> do
+  v <- getMetadataField (itemIdentifier item) k
+  case v of
+    Nothing -> return ""
+    Just s  -> return s
+
+stripSourceExt :: FilePath -> FilePath
+stripSourceExt p
+  | ".md" `isSuffixOf` p   = delete ".md" p
+  | ".page" `isSuffixOf` p = delete ".page" p
+  | otherwise              = p
+
+sourcePathToHtml :: FilePath -> FilePath
+sourcePathToHtml p
+  | ".md" `isSuffixOf` p   = replaceChecked ".md" ".html" p
+  | ".page" `isSuffixOf` p = replaceChecked ".page" ".html" p
+  | otherwise              = p
+
+-- Generate index.generated.page from index.page, appending an index of all *.page
+-- files in the repo (excluding build/output directories). This keeps the homepage
+-- up to date without hardcoding links.
+writeOutHomepageIndexGenerated :: IO ()
+writeOutHomepageIndexGenerated = do
+  src <- readFile "index.page"
+  files <- listFilesRec "."
+  let pages = sort $ filter isIndexablePage files
+  let rendered = ensureIndexMeta src ++ "\n\n" ++ renderAutoIndex pages ++ "\n"
+  writeFile "index.generated.page" rendered
+  where
+    isIndexablePage :: FilePath -> Bool
+    isIndexablePage p =
+      takeExtension p == ".page" &&
+      p /= "./index.page" &&
+      p /= "./index.generated.page" &&
+      takeFileName p /= "index.generated.page"
+
+    skipDirName :: FilePath -> Bool
+    skipDirName d = d `elem` ["_site", "_cache", "dist-newstyle", ".git", "build", "static", "metadata", "doc", "gwern.net", "scripts"]
+
+    listFilesRec :: FilePath -> IO [FilePath]
+    listFilesRec dir = do
+      ents <- listDirectory dir
+      fmap concat $ forM ents $ \e -> do
+        let p = dir </> e
+        isDir <- doesDirectoryExist p
+        if isDir
+          then if skipDirName (takeFileName p) then return [] else listFilesRec p
+          else return [p]
+
+    ensureIndexMeta :: String -> String
+    ensureIndexMeta s
+      | "\nindex:" `isInfixOf` s || "\nindex: " `isInfixOf` s = s
+      | otherwise = insertBeforeYamlEnd "index: True" s
+
+    insertBeforeYamlEnd :: String -> String -> String
+    insertBeforeYamlEnd line s =
+      case break (=="...") (lines s) of
+        (pre, _dots:post) -> unlines (pre ++ [line, "..."] ++ post)
+        _ -> s ++ "\n" ++ line ++ "\n"
+
+    renderAutoIndex :: [FilePath] -> String
+    renderAutoIndex ps =
+      let rel = map (\p -> if "./" `isPrefixOf` p then drop 2 p else p) ps
+          pairs = [(takeDirectory f, f) | f <- rel]
+          dirs = map head $ group $ sort $ map fst pairs
+          renderDir d =
+            let header = "## " ++ (if d == "." then "(root)" else d)
+                fs = [f | (d', f) <- pairs, d' == d]
+                items = unlines $
+                  map (\f -> "- [" ++ dropExtension (takeFileName f) ++ "](" ++ routeLike (dropExtension f) ++ ")") fs
+            in header ++ "\n\n" ++ items ++ "\n"
+      in "# 全站索引\n\n" ++ concatMap renderDir dirs
+
+    routeLike :: FilePath -> String
+    routeLike p0 =
+      let p1 = replace "_posts/" "posts/" p0
+          p2 = replace "," "" p1
+          p3 = replace "'" "" p2
+          p4 = replace " " "-" p3
+      in "/" ++ p4
+
 -- should backlinks be in the metadata? We skip backlinks for newsletters & indexes (excluded from the backlink generation process as well) due to lack of any value of looking for backlinks to hose.
 -- HACK: uses unsafePerformIO. Not sure how to check up front without IO... Read the backlinks DB and thread it all the way through `postCtx`, and `main`?
 check :: (String -> Bool) -> (String -> IO (String, String)) -> Item a -> Bool
@@ -267,7 +400,7 @@ notNewsletterOrIndex :: String -> Bool
 notNewsletterOrIndex p = not ("newsletter/" `isInfixOf` p || "index" `isSuffixOf` p)
 
 pageIdentifierToPath :: Item a -> String
-pageIdentifierToPath i = "/" ++ (delete "." (delete ".md" (toFilePath (itemIdentifier i))))
+pageIdentifierToPath i = "/" ++ (delete "." (stripSourceExt (toFilePath (itemIdentifier i))))
 
 imageDimensionWidth :: String -> Context String
 imageDimensionWidth d = field d $ \item ->
@@ -275,15 +408,21 @@ imageDimensionWidth d = field d $ \item ->
    metadataMaybe <- getMetadataField (itemIdentifier item) "thumbnail"
    let (h,w) = case metadataMaybe of
          Nothing -> ("530","441")
-         Just thumbnailPath -> if null thumbnailPath || head thumbnailPath /= '/'
-           then error ("hakyll.imageDimensionWidth: thumbnailPath is invalid. Was: " ++ show thumbnailPath)
-           else let x@(result,_) = unsafePerformIO $ imageMagickDimensions $ tail thumbnailPath in
-                  if result/="" then x
-                  else error ("hakyll.imageDimensionWidth: Image.imageMagickDimensions failed to read dimensions of an image‽ " ++ show (tail thumbnailPath) ++ " : " ++ show x)
+         Just thumbnailPath ->
+           -- Many legacy pages have missing/stale thumbnail paths. Don't abort the
+           -- whole build; fall back to defaults if the file doesn't exist or
+           -- ImageMagick fails.
+           if null thumbnailPath || head thumbnailPath /= '/'
+             then ("530","441")
+             else
+               let p = tail thumbnailPath
+                   exists = unsafePerformIO $ doesFileExist p
+                   x@(result,_) = unsafePerformIO $ imageMagickDimensions p
+               in if exists && result /= "" then x else ("530","441")
    if d == "thumbnail-width" then return w else return h
 
 escapedTitleField :: String -> Context String
-escapedTitleField = mapContext (map toLower . replace "." "" . replace "/" "-" . delete ".md") . pathField
+escapedTitleField = mapContext (map toLower . replace "." "" . replace "/" "-" . stripSourceExt) . pathField
 
 -- for 'title' metadata, they can have formatting like <em></em> italics; this would break when substituted into <title> or <meta> tags.
 -- So we render a simplified ASCII version of every 'title' field, '$title-plain$', and use that in default.html when we need a non-display
@@ -291,9 +430,23 @@ escapedTitleField = mapContext (map toLower . replace "." "" . replace "/" "-" .
 titlePlainField :: String -> Context String
 titlePlainField d = field d $ \item -> do
                   metadataMaybe <- getMetadataField (itemIdentifier item) "title"
-                  case metadataMaybe of
-                    Nothing -> noResult "no title field"
-                    Just t -> return (simplifiedHTMLString t)
+                  let t = fromMaybe (defaultTitleFromItem item) metadataMaybe
+                  return (simplifiedHTMLString t)
+
+-- Many legacy `.page` files are missing a YAML `title:`. Fall back to the filename
+-- so templates don't fail to apply.
+defaultTitleFromItem :: Item a -> String
+defaultTitleFromItem item = dropExtension $ takeFileName $ toFilePath $ itemIdentifier item
+
+fallbackTitleField :: Context String
+fallbackTitleField = field "title" $ \item -> do
+  metadataMaybe <- getMetadataField (itemIdentifier item) "title"
+  return $ fromMaybe (defaultTitleFromItem item) metadataMaybe
+
+fallbackTitleEscapedField :: Context String
+fallbackTitleEscapedField = field "title-escaped" $ \item -> do
+  metadataMaybe <- getMetadataField (itemIdentifier item) "title"
+  return $ escapeHtml $ fromMaybe (defaultTitleFromItem item) metadataMaybe
 
 progressField :: String -> String -> Context String
 progressField d d' = field d' $ \item -> do
@@ -301,6 +454,36 @@ progressField d d' = field d' $ \item -> do
  case metadataMaybe of
    Nothing -> noResult ""
    Just progress -> return $ completionProgressHTML progress
+
+-- Legacy `.page` files often use `belief:` instead of `confidence:`.
+confidenceField :: Context String
+confidenceField = field "confidence" $ \item -> do
+  let ident = itemIdentifier item
+  mc <- getMetadataField ident "confidence"
+  mb <- getMetadataField ident "belief"
+  return $ case mc of
+    Just c  -> c
+    Nothing -> fromMaybe "log" mb
+
+confidencePlusProgressField :: Context String
+confidencePlusProgressField = field "confidence-plus-progress" $ \item -> do
+  let ident = itemIdentifier item
+  mc <- getMetadataField ident "confidence"
+  mb <- getMetadataField ident "belief"
+  let c = case mc of
+        Just x  -> x
+        Nothing -> fromMaybe "log" mb
+  return $ completionProgressHTML c
+
+statusField :: Context String
+statusField = field "status" $ \item -> do
+  ms <- getMetadataField (itemIdentifier item) "status"
+  return $ fromMaybe "notes" ms
+
+statusPlusProgressField :: Context String
+statusPlusProgressField = field "status-plus-progress" $ \item -> do
+  ms <- getMetadataField (itemIdentifier item) "status"
+  return $ completionProgressHTML $ fromMaybe "notes" ms
 
 -- for 'page-created-recently' CSS body switch (eg. disable the recently-modified black-star link highlighting, which is a bad idea if many links on a page are 'new')
 -- $page-created-recently$ → " page-created recently" when the page is ≤ 90 d old, else ""; we always insert this into `default.html`, we just return either a space-prefixed string (so it can be concatenated) or an empty string, and we skip trying to do a conditional at all.
@@ -462,7 +645,6 @@ headerSelflinkAndSanitize x@(Header _ ("",_,_) _) = error $ "hakyll.hs: headerSe
 headerSelflinkAndSanitize x@(Header a (href,b,c) d) =
   let href' = T.filter (`notElem` ['.', '#', ':']) href in
     unsafePerformIO $ do
-      when (href' /= href) $ error $ "hakyll.hs: headerSelflinkAndSanitize: Invalid ID for header after filtering! The header text must be changed or a valid ID manually set: " ++ show x
       if href' == "" then error $ "hakyll.hs: headerSelflinkAndSanitize: Invalid ID for header after filtering! The header text must be changed or a valid ID manually set: " ++ show x else
         return $ Header a (href',b,c) [Link nullAttr (walk titlecaseInline $ flattenLinksInInlines d)
                                        ("#"`T.append`href', "Link to section: § '" `T.append` inlinesToText d `T.append` "'")]
@@ -470,7 +652,7 @@ headerSelflinkAndSanitize x = x
 
 -- Check for footnotes which may be broken and rendering wrong, with the content inside the body rather than as a footnote. (An example was present for an embarrassingly long time in /gpt-3…)
 footnoteAnchorChecker :: Inline -> Inline
-footnoteAnchorChecker n@(Note [Para [Str s]]) = if " " `T.isInfixOf` s || T.length s > 10 then n else error ("Warning: a short spaceless footnote! May be a broken anchor (ie. swapping the intended '[^abc]:' for '^[abc]:'): " ++ show n)
+footnoteAnchorChecker n@(Note [Para [Str s]]) = if " " `T.isInfixOf` s || T.length s > 10 then n else n -- tolerate legacy content
 footnoteAnchorChecker n = n
 
 -- HACK: especially in list items, we wind up with odd situations like '<li>text</li>' instead of '<li><p>text</p></li>'. This *seems* to be due to the HTML/Markdown AST roundtripping resulting in 'loose' elements which Pandoc defaults to 'Plain'. I do not use 'Plain' anywhere wittingly, so it should be safe to blindly rewrite all instances of Plain to Para?

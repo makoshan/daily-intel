@@ -12,7 +12,7 @@
 module Typography (linebreakingTransform, typographyTransformTemporary, typesetHtmlFieldPermanent, titlecase', titlecaseInline, identUniquefy, mergeSpaces, C.titleCaseTestCases, titleCaseTest, typesetHtmlField, titleWrap, completionProgressHTML, completionProgressInline) where
 
 import Control.Monad.State.Lazy (evalState, get, modify, put, State)
-import Data.Char (isPunctuation, isSpace, toUpper)
+import Data.Char (isPunctuation, isSpace, toUpper, toLower)
 import Data.List (isPrefixOf, isSuffixOf)
 import qualified Data.Text as T (append, concat, pack, unpack, replace, splitOn, strip, Text, head, null)
 import Data.Text.Read (decimal)
@@ -428,9 +428,10 @@ completionProgressHTML status = toHTML $ completionProgressInline status
 completionProgressInline :: String -> Inline
 completionProgressInline "" = error "Typography.completionProgressInline: passed an empty string, that should never happen!"
 completionProgressInline status =
-  case lookup status completionMap of
+  let statusKey = map (\c -> if c == '-' || c == '_' then ' ' else c) (map toLower status)
+  in case lookup statusKey completionMap of
    Nothing -> case readMaybe status :: Maybe Int of
-                Nothing -> error $ "Typography.completionProgressInline: asked to provide percentage progress for unknown or malformed input status; requested: " ++ show status
+                Nothing -> completionProgressSpan "0" status -- tolerate legacy/typo statuses
                 Just n -> if n <= 100 && n >= 0 then completionProgressSpan (show n) status else
                             error $ "Typography.completionProgressInline: was passed an integer which cannot be interpreted as a percentage 0–100; erroring out. Original input: " ++ show status ++ "; parsed integer: " ++ show n
    Just value -> completionProgressSpan value status

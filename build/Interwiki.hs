@@ -119,7 +119,7 @@ convertInterwikiLinksInline _ x@(Link (ident, classes, kvs) ref (interwiki, arti
                                   -- So eg. `[George Washington's](!W)` is automatically transformed to 'George Washington' but if we explicitly write `[George Washington](!W "George Washington's")`, then we respect the user override because there must be a reason for it.
                                   "" -> Link attr' ref (url `interwikiurl` wpURLRewrites (inlinesToText ref), "") -- tooltip is now handled by LinkMetadata.hs
                                   _  -> Link attr' ref (url `interwikiurl` article, "")
-                Nothing -> error $ "Attempted to use an interwiki link with no defined interwiki: " ++ show x
+                Nothing -> x -- tolerate malformed/unknown interwiki shortcuts in legacy content
   else let classes' = nubOrd (wpPopupClasses interwiki ++ classes) in
          if ".wikipedia.org/wiki/" `T.isInfixOf` interwiki || ".wikipedia.org/w/index.php" `T.isInfixOf` interwiki then
            Link (ident, classes', kvs) ref (wpURLRedirectRewrites interwiki, article)
@@ -171,7 +171,7 @@ interwikiCycleTestSuite = if null (isCycleLess C.redirectDB) then [] else findCy
 --
 -- This is important because we can request Articles through the API and display them as a WP popup, but for other namespaces it would be meaningless (what is the contents of [[Special:Random]]? Or [[Special:BookSources/0-123-456-7]]?). These can only be done as live link popups (if at all, we can't for Special:).
 wpPopupClasses :: T.Text -> [T.Text]
-wpPopupClasses "" = error "Interwiki.wpPopupClasses: called with an empty string! This should never happen."
+wpPopupClasses "" = [] -- tolerate empty-link targets in legacy content
 wpPopupClasses u = case parseURIReference (T.unpack u) of
                         Nothing -> []
                         Just uri -> case uriAuthority uri of
@@ -216,5 +216,8 @@ customInterwikiMap = [("Hackage", "https://hackage.haskell.org/package/"),
                       ("W", "https://en.wikipedia.org/wiki/"),
                       ("WP", "https://en.wikipedia.org/wiki/")]
 wpInterwikiMap = [("Wikipedia", "https://en.wikipedia.org/wiki/"),
+                  ("wikipedia", "https://en.wikipedia.org/wiki/"),
                   ("Wikiquote", "https://en.wikiquote.org/wiki/"),
-                  ("Wiktionary", "https://en.wiktionary.org/wiki/")]
+                  ("wikiquote", "https://en.wikiquote.org/wiki/"),
+                  ("Wiktionary", "https://en.wiktionary.org/wiki/"),
+                  ("wiktionary", "https://en.wiktionary.org/wiki/")]

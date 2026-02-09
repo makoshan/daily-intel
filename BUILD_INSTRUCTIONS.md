@@ -57,12 +57,62 @@
       ```
       然后在 Windows 浏览器打开: `http://<WSL_IP>:8000/`
 
+5.  只构建并用静态服务器预览 (更接近最终部署形态):
+    ```bash
+    GWERN_ANNOTATIONS=0 \
+    GWERN_EXTERNAL_ANNOTATIONS=0 \
+    GWERN_WRITE_MISSING_ANNOTATIONS=0 \
+    GWERN_LINK_ANNOTATIONS=0 \
+    GWERN_LINK_SIZES=0 \
+    cabal run hakyll -- clean
+
+    GWERN_ANNOTATIONS=0 \
+    GWERN_EXTERNAL_ANNOTATIONS=0 \
+    GWERN_WRITE_MISSING_ANNOTATIONS=0 \
+    GWERN_LINK_ANNOTATIONS=0 \
+    GWERN_LINK_SIZES=0 \
+    cabal run hakyll -- build index.md
+    ```
+    然后用静态服务器打开生成目录 `../_site/` (见下方“本地预览方式”)。
+
 ## 目录结构
 
 -   `build/`: 包含构建逻辑 (`site.hs`, `daily-intel.cabal`)。
 -   `static/`: 包含 CSS, JS, 字体和模板。
 -   `metadata/`: 包含注释数据库。
 -   `about.md`: 展示设计功能的示例页面。
+
+## 样式与静态资源 (Gwern.net 1:1 复刻关键点)
+
+### 1. 实际加载的是哪套 CSS/JS
+
+页面最终加载的 CSS/JS 入口由 `static/include/inlined-asset-links.html` 决定。
+
+当前约定的稳定入口文件是:
+- `static/css/head.css`
+- `static/css/style.css`
+- `static/js/head.js`
+- `static/js/script.js`
+
+这些文件用于屏蔽 gwern.net 上“版本化文件名”(如 `head-VERSIONED.css`, `script-GENERATED.js`)带来的路径差异，方便在 HTML 中引用固定路径。
+
+### 2. 为什么页面会“没有 CSS”
+
+常见原因是只构建了单个页面，但 `_site/` 里没有同步静态资源。
+
+当前 `build/site.hs` 已强制在编译时复制 `static/**` 到 `_site/static/**`，即使只编译 `index.md` 也应该有样式。
+
+快速自检:
+```bash
+test -f ../_site/static/css/head.css && echo "ok: head.css"
+test -f ../_site/static/js/script.js && echo "ok: script.js"
+```
+
+### 3. 资源来源与同步策略
+
+项目里保留了 `gwern.net/` 目录作为上游参考/镜像，但运行时不应该出现 `/gwern.net/...` 路径。
+
+运行时资源统一从 `daily-intel/static/` 提供，并由 Hakyll 复制到 `_site/static/`。
 
 ## 故障排除与常见坑
 
@@ -97,6 +147,21 @@ cabal run hakyll -- watch
 mkdir -p ../doc
 ```
 
+### 6. 脚本行尾是 CRLF (WSL 报 `python\r` / `bad interpreter`)
+如果您在 WSL 里执行脚本时看到类似:
+- `/usr/bin/env: ‘python\r’: No such file or directory`
+- `bad interpreter: No such file or directory`
+
+通常是脚本被 Windows 写成了 CRLF 行尾。可用以下任一方式修复:
+```bash
+# 需要安装 dos2unix
+sudo apt-get install -y dos2unix
+dos2unix static/build/*
+
+# 或不安装额外工具 (sed)
+sed -i 's/\r$//' static/build/*
+```
+
 ### 6. 代理导致 502/连接失败
 如果 `curl` 或浏览器走代理导致本地访问失败:
 ```bash
@@ -107,9 +172,45 @@ curl --noproxy '*' -I http://127.0.0.1:8000/
 export NO_PROXY=localhost,127.0.0.1,::1
 ```
 
+Windows 侧如果开启了“系统代理”，需要把本地地址加入代理例外列表:
+- `localhost`
+- `127.0.0.1`
+- `::1`
+- `<WSL_IP>` (如果用 WSL IP 访问)
+
 ### 7. 首页显示目录列表
 如果访问 `/` 时显示目录列表，说明没有生成 `index.html`，请执行:
 ```bash
 GWERN_ANNOTATIONS=0 GWERN_EXTERNAL_ANNOTATIONS=0 GWERN_WRITE_MISSING_ANNOTATIONS=0 GWERN_LINK_ANNOTATIONS=0 GWERN_LINK_SIZES=0 \
 cabal run hakyll -- build index.md
 ```
+
+## 本地预览方式 (Windows 浏览器)
+
+### 方式 A: 直接用 Hakyll `watch` (WSL 内启动)
+
+优点: 修改后自动重建。
+
+如果 Windows 访问 `http://localhost:8000/` 出现 `ERR_CONNECTION_REFUSED` 或 `502`:
+- 先用 WSL 侧验证: `curl --noproxy '*' -I http://127.0.0.1:8000/`
+- 再改用 WSL IP: `http://<WSL_IP>:8000/`
+- 确保 Windows 代理例外已配置 (见上文)
+
+### 方式 B: 构建 `_site/` 后用静态服务器 (WSL 或 Windows 启动)
+
+WSL 启动并允许 Windows 用 WSL IP 访问:
+```bash
+cd /mnt/c/Users/ROG/.openclaw/workspace/projects/daily-intel
+python3 -m http.server 8000 --bind 0.0.0.0 --directory _site
+```
+Windows 浏览器打开: `http://<WSL_IP>:8000/`
+
+Windows 启动 (PowerShell):
+```powershell
+cd C:\Users\ROG\.openclaw\workspace\projects\daily-intel
+python -m http.server 8000 --bind 127.0.0.1 --directory _site
+```
+Windows 浏览器打开: `http://localhost:8000/`
+
+注意:
+- `http://0.0.0.0:8000/` 不是可访问的浏览器地址，只用于“绑定监听地址”，浏览器应使用 `localhost` 或实际 IP。
