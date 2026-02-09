@@ -1,0 +1,75 @@
+---
+title: Site Help
+description: "Short cheatsheet documentation about Gwern.net keybindings & features."
+thumbnail: /doc/cs/css/2023-11-08-gwern-gwernnet-essaypopup-catitecture-withanxiousblackcatatwindowsillthumbnail.png
+thumbnail-text: "Screenshot of Gwern.net popup features."
+created: 2024-04-05
+modified: 2024-12-04
+status: in progress
+confidence: log
+importance: 0
+css-extension: dropcaps-de-zs
+index: True
+error404: false
+backlink: False
+...
+
+- Switch to **Dark Mode**: click (<span class="icon-gear-solid"></span>) to open *Theme Toggle* → click (<span class="icon-moon-solid"></span>)
+
+    or back to **Light** Mode: click (<span class="icon-gear-solid"></span>) to open *Theme Toggle* → click (<span class="icon-sun-solid"></span>)
+- **Reader** Mode: `r`, or click (<span class="icon-gear-solid"></span>) to open *Theme Toggle* → click (<span class="icon-book-open-solid"></span>)
+- <span class="mobile-not">Disable **Popups**: click (<span class="icon-gear-solid"></span>) to open *Theme Toggle* → click (<span class="icon-message-slash-solid"></span>)</span><span class="desktop-not">Disable **Popovers**: hover any link → click (<span class="icon-eye-slash-solid"></span>)</span>
+- [**Search** Site](https://www.google.com/search?q=site%3Agwern%2Enet): `/`, or click (<span class="icon-magnifying-glass"></span>)
+
+<div class="mobile-not">
+**Popup Keybindings**: <!-- NOTE: keep synced with `popups.js:L1282:buttonTitles` -->
+
+- `Esc`: close current popup
+- to *Zoom*:
+
+  - `a`: zoom popup to fill left half of screen
+  - `s`: ... bottom half
+  - `w`: ... top half
+  - `d`: ... right half
+  - `q`: ... top-left
+  - `e`: ... top-right
+  - `x`: ... bottom-right
+  - `z`: ... bottom-left
+  - `f`: ... full-screen
+  - `r`: restore popup to default size
+  - `t`: minimize current popup; if only minimized popups, un-minimize most recently-minimized
+- `g`/`b`: cycle through un-minimized popups
+
+    - `Shift`-`g`/`b`: cycle all
+- `c`: 'pin'/sticky or 'unpin'/un-sticky popup
+- <code class="accesskey"><a href="https://en.wikipedia.org/wiki/Access_key">​</a>d/k</code>: toggle dark-mode <!-- weird link is a workaround the CSS injecting 'Auke+' -->
+- <code class="accesskey">p</code>: toggle pop-frames
+- <code class="accesskey">r</code>: cycle reader-mode
+- <code class="accesskey">t</code>: open/close toolbar
+- `v`: collapse/uncollapse popup (or double-click title bar)
+- `?`: pop up [this help page](/help "‘Site Help’, Gwern 2024")
+
+**Slideshow Keys**:
+
+- <code class="accesskey">Shift-l</code>: start image slideshow
+- `←`/` → ` or `↑`/`↓`: previous/next image
+- `Esc` or `click`: Hide zoomed image
+- `Space bar`: Reset image size & position
+- `Scroll` to zoom in/out
+
+    when zoomed in, `drag` to pan; `double-click` to reset size & position
+
+**Useful links**:
+
+<!-- TODO: - [full site user guide](/design#user-guide) -->
+- Browser keyboard shortcuts:
+
+    - [Firefox](https://support.mozilla.org/en-US/kb/keyboard-shortcuts-perform-firefox-tasks-quickly#w_current-page)
+    - [Chrome](https://support.google.com/chrome/answer/157179)
+    - [Safari](https://support.apple.com/guide/safari/keyboard-and-other-shortcuts-cpsh003/mac#ibrw51086045)
+- about site: [writings](/about "‘About This Website’, Gwern 2010"), [website design](/design "‘Design Of This Website’, Gwern 2010"), [Gwern](/me "‘About Gwern’, Gwern 2009")
+- [browse all files](/doc/index "‘Essays’, Gwern 2009"), or [newest links](/doc/newest/index "‘Essays’, Gwern 2009")
+- [browse new pages](/changelog "‘Changelog’, Gwern 2013")
+- [Substack](https://gwern.substack.com/ "‘Gwern.net newsletter (Substack subscription page)’, Gwern 2013") [newsletter](/doc/newsletter/index "‘Essays’, Gwern 2009")
+- [Google `site:` search](https://www.google.com/search?q=site%3Agwern%2Enet)
+</div>

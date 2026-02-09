@@ -9,7 +9,7 @@ echo "==========================================="
 echo ""
 
 # 获取脚本所在目录的父目录 (项目根目录)
-PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/..)" && pwd)"
+PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 BUILD_DIR="$PROJECT_ROOT/build"
 
 # 参数解析

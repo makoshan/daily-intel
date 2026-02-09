@@ -22376,3 +22376,1254 @@ design meta personal statistics/prediction
 
 
 
+---
+/2026/newsletter-2026-02-09
+
+
+2026-02-09
+2026-02-09
+
+
+
+---
+/2026/newsletter-2026-02-09
+
+
+2026-02-09
+2026-02-09
+
+
+
+---
+/design
+Design Of This Website
+Gwern
+2010-10-01
+2023-04-20
+
+cs/css cs/js cs/linkrot/archiving design/typography meta
+<figure><img class="float-right page-thumbnail  outline invert-not" height="0" width="0" src="/doc/design/2020-12-25-gwern-gwernnet-recursivepopups.png" title="Screenshot of Gwern.net demonstrating recursive popup functionality, allowing arbitrarily deep hypertext exploration of references and links." alt=""></figure><div class="page-description-annotation">
+<p>Meta page describing Gwern.net, the self-documenting website’s implementation and experiments for better ‘semantic zoom’ of hypertext; technical decisions using <a href="https://en.wikipedia.org/wiki/Markdown">Markdown</a> and static hosting.</p>
+</div>
+<p><strong>Gwern.net</strong> is implemented as a static website compiled via Hakyll from Pandoc Markdown and hosted on a dedicated server (due to expensive cloud bandwidth).</p>
+<p>It stands out from your standard Markdown static website by aiming at good typography, fast performance, and advanced (ie. 1980s-era) hypertext browsing features (at the cost of great implementation complexity); the <a href="/design#principles">4 design principles</a> are: aesthetically-pleasing minimalism, accessibility/progressive-enhancement, speed, and a ‘semantic zoom’ approach to hypertext use.</p>
+<p>Unusual features include the monochrome esthetics, <a href="/sidenote" id="gwern-sidenote" class="prefetch-not link-annotated link-page" data-filesize-bytes="70563" data-filesize-percentage="50" title="&#39;Sidenotes In Web Design&#39;, Gwern 2020">sidenotes</a> instead of footnotes on wide windows, efficient <a href="https://en.wikipedia.org/wiki/Initial">dropcaps</a>, smallcaps, collapsible sections, automatic inflation-adjusted currency, Wikipedia-style link icons &amp; infoboxes, custom <a href="https://en.wikipedia.org/wiki/Syntax_highlighting" id="_oIj-657b" class="link-annotated-partial link-live" data-link-icon="wikipedia" data-link-icon-type="svg" data-url-iframe="https://en.m.wikipedia.org/wiki/Syntax_highlighting#bodyContent" title="Syntax highlighting">syntax highlighting</a>, extensive local archives to fight linkrot, and an ecosystem of “popup”/“popover” annotations &amp; previews of links for frictionless browsing—the net effect of hierarchical structures with collapsing and instant popup access to excerpts enables iceberg-like pages where most information is hidden but the reader can easily drill down as deep as they wish. (For a demo of all features &amp; stress-test page, see <a href="/lorem" id="gwern-lorem" class="prefetch-not link-annotated link-page" data-filesize-bytes="14495" data-filesize-percentage="21" title="&#39;Lorem Ipsum&#39;, Gwern 2020">Lorem Ipsum</a>; for detailed guidelines, <a href="/style-guide" id="gwern-style-guide" class="prefetch-not link-modified-recently link-annotated link-page" data-filesize-bytes="143752" data-filesize-percentage="66" title="‘Manual of Style’, Gwern 2025">the Manual of Style</a>.)</p>
+<p>Also discussed are the <a href="/design-graveyard" id="gwern-design-graveyard" class="prefetch-not link-annotated link-page" data-filesize-bytes="200493" data-filesize-percentage="73" title="&#39;Design Graveyard&#39;, Gwern 2010">many failed experiments/changes</a> made along the way.</p>
+<div class="columns TOC">
+<ul>
+<li><a href="/design#benefit" id="toc-benefit">Benefit</a></li>
+<li><a href="/design#principles" id="toc-principles">Principles</a></li>
+<li><a href="/design#features" id="toc-features">Features</a>
+<ul>
+<li><a href="/design#backlink" id="toc-backlink">Backlink</a>
+<ul>
+<li><a href="/design#backlink-features" id="toc-backlink-features">Backlink Features</a>
+<ul>
+<li><a href="/design#in-context" id="toc-in-context">In-Context</a></li>
+<li><a href="/design#popups" id="toc-popups">Popups</a></li>
+</ul></li>
+<li><a href="/design#implementation" id="toc-implementation">Implementation</a>
+<ul>
+<li><a href="/design#other-uses" id="toc-other-uses">Other Uses</a></li>
+</ul></li>
+</ul></li>
+<li><a href="/design#similar-links" id="toc-similar-links">Similar Links</a></li>
+<li><a href="/design#link-bibliographies" id="toc-link-bibliographies">Link Bibliographies</a></li>
+<li><a href="/design#tags" id="toc-tags">Tags</a>
+<ul>
+<li><a href="/design#properties" id="toc-properties">Properties</a></li>
+<li><a href="/design#use-appearance" id="toc-use-appearance">Use &amp; Appearance</a></li>
+<li><a href="/design#features-1" id="toc-features-1">Features</a>
+<ul>
+<li><a href="/design#future-tag-features" id="toc-future-tag-features">Future Tag Features</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li><a href="/design#abandoned" id="toc-abandoned">Abandoned</a></li>
+<li><a href="/design#tools" id="toc-tools">Tools</a>
+<ul>
+<li><a href="/design#implementation-details" id="toc-implementation-details">Implementation Details</a></li>
+</ul></li>
+<li><a href="/design#external-links" id="toc-external-links">External Links</a></li>
+<li><a href="/design#appendix" id="toc-appendix">Appendix</a>
+<ul>
+<li><a href="/design#returns-to-design" id="toc-returns-to-design">Returns To Design?</a></li>
+</ul></li>
+</ul>
+</div>
+---
+/help
+Site Help
+Gwern
+2024-04-05
+2024-12-04
+
+cs/js meta
+<figure><img class="float-right page-thumbnail invert-not " height="0" width="0" src="/doc/cs/css/2023-11-08-gwern-gwernnet-essaypopup-catitecture-withanxiousblackcatatwindowsillthumbnail.png" title="Screenshot of Gwern.net popup features." alt=""></figure><div class="page-description-annotation">
+<p>Short cheatsheet documentation about Gwern.net keybindings &amp; features.</p>
+</div>
+---
+/help
+Site Help
+Gwern
+2024-04-05
+2024-12-04
+
+cs/js meta
+<figure><img class="float-right page-thumbnail invert-not " height="0" width="0" src="/doc/cs/css/2023-11-08-gwern-gwernnet-essaypopup-catitecture-withanxiousblackcatatwindowsillthumbnail.png" title="Screenshot of Gwern.net popup features." alt=""></figure><div class="page-description-annotation">
+<p>Short cheatsheet documentation about Gwern.net keybindings &amp; features.</p>
+</div>
+---
+/help
+Site Help
+Gwern
+2024-04-05
+2024-12-04
+
+cs/js meta
+<figure><img class="float-right page-thumbnail invert-not " height="0" width="0" src="/doc/cs/css/2023-11-08-gwern-gwernnet-essaypopup-catitecture-withanxiousblackcatatwindowsillthumbnail.png" title="Screenshot of Gwern.net popup features." alt=""></figure><div class="page-description-annotation">
+<p>Short cheatsheet documentation about Gwern.net keybindings &amp; features.</p>
+</div>
+---
+/design
+Design Of This Website
+Gwern
+2010-10-01
+2023-04-20
+
+cs/css cs/js cs/linkrot/archiving design/typography meta
+<figure><img class="float-right page-thumbnail  outline invert-not" height="0" width="0" src="/doc/design/2020-12-25-gwern-gwernnet-recursivepopups.png" title="Screenshot of Gwern.net demonstrating recursive popup functionality, allowing arbitrarily deep hypertext exploration of references and links." alt=""></figure><div class="page-description-annotation">
+<p>Meta page describing Gwern.net, the self-documenting website’s implementation and experiments for better ‘semantic zoom’ of hypertext; technical decisions using <a href="https://en.wikipedia.org/wiki/Markdown">Markdown</a> and static hosting.</p>
+</div>
+<p><strong>Gwern.net</strong> is implemented as a static website compiled via Hakyll from Pandoc Markdown and hosted on a dedicated server (due to expensive cloud bandwidth).</p>
+<p>It stands out from your standard Markdown static website by aiming at good typography, fast performance, and advanced (ie. 1980s-era) hypertext browsing features (at the cost of great implementation complexity); the <a href="/design#principles">4 design principles</a> are: aesthetically-pleasing minimalism, accessibility/progressive-enhancement, speed, and a ‘semantic zoom’ approach to hypertext use.</p>
+<p>Unusual features include the monochrome esthetics, <a href="/sidenote" id="gwern-sidenote" class="prefetch-not link-annotated link-page" data-filesize-bytes="70563" data-filesize-percentage="50" title="&#39;Sidenotes In Web Design&#39;, Gwern 2020">sidenotes</a> instead of footnotes on wide windows, efficient <a href="https://en.wikipedia.org/wiki/Initial">dropcaps</a>, smallcaps, collapsible sections, automatic inflation-adjusted currency, Wikipedia-style link icons &amp; infoboxes, custom <a href="https://en.wikipedia.org/wiki/Syntax_highlighting" id="_oIj-657b" class="link-annotated-partial link-live" data-link-icon="wikipedia" data-link-icon-type="svg" data-url-iframe="https://en.m.wikipedia.org/wiki/Syntax_highlighting#bodyContent" title="Syntax highlighting">syntax highlighting</a>, extensive local archives to fight linkrot, and an ecosystem of “popup”/“popover” annotations &amp; previews of links for frictionless browsing—the net effect of hierarchical structures with collapsing and instant popup access to excerpts enables iceberg-like pages where most information is hidden but the reader can easily drill down as deep as they wish. (For a demo of all features &amp; stress-test page, see <a href="/lorem" id="gwern-lorem" class="prefetch-not link-annotated link-page" data-filesize-bytes="14495" data-filesize-percentage="21" title="&#39;Lorem Ipsum&#39;, Gwern 2020">Lorem Ipsum</a>; for detailed guidelines, <a href="/style-guide" id="gwern-style-guide" class="prefetch-not link-modified-recently link-annotated link-page" data-filesize-bytes="143752" data-filesize-percentage="66" title="‘Manual of Style’, Gwern 2025">the Manual of Style</a>.)</p>
+<p>Also discussed are the <a href="/design-graveyard" id="gwern-design-graveyard" class="prefetch-not link-annotated link-page" data-filesize-bytes="200493" data-filesize-percentage="73" title="&#39;Design Graveyard&#39;, Gwern 2010">many failed experiments/changes</a> made along the way.</p>
+<div class="columns TOC">
+<ul>
+<li><a href="/design#benefit" id="toc-benefit">Benefit</a></li>
+<li><a href="/design#principles" id="toc-principles">Principles</a></li>
+<li><a href="/design#features" id="toc-features">Features</a>
+<ul>
+<li><a href="/design#backlink" id="toc-backlink">Backlink</a>
+<ul>
+<li><a href="/design#backlink-features" id="toc-backlink-features">Backlink Features</a>
+<ul>
+<li><a href="/design#in-context" id="toc-in-context">In-Context</a></li>
+<li><a href="/design#popups" id="toc-popups">Popups</a></li>
+</ul></li>
+<li><a href="/design#implementation" id="toc-implementation">Implementation</a>
+<ul>
+<li><a href="/design#other-uses" id="toc-other-uses">Other Uses</a></li>
+</ul></li>
+</ul></li>
+<li><a href="/design#similar-links" id="toc-similar-links">Similar Links</a></li>
+<li><a href="/design#link-bibliographies" id="toc-link-bibliographies">Link Bibliographies</a></li>
+<li><a href="/design#tags" id="toc-tags">Tags</a>
+<ul>
+<li><a href="/design#properties" id="toc-properties">Properties</a></li>
+<li><a href="/design#use-appearance" id="toc-use-appearance">Use &amp; Appearance</a></li>
+<li><a href="/design#features-1" id="toc-features-1">Features</a>
+<ul>
+<li><a href="/design#future-tag-features" id="toc-future-tag-features">Future Tag Features</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li><a href="/design#abandoned" id="toc-abandoned">Abandoned</a></li>
+<li><a href="/design#tools" id="toc-tools">Tools</a>
+<ul>
+<li><a href="/design#implementation-details" id="toc-implementation-details">Implementation Details</a></li>
+</ul></li>
+<li><a href="/design#external-links" id="toc-external-links">External Links</a></li>
+<li><a href="/design#appendix" id="toc-appendix">Appendix</a>
+<ul>
+<li><a href="/design#returns-to-design" id="toc-returns-to-design">Returns To Design?</a></li>
+</ul></li>
+</ul>
+</div>
+---
+/design
+Design Of This Website
+Gwern
+2010-10-01
+2023-04-20
+
+cs/css cs/js cs/linkrot/archiving design/typography meta
+<figure><img class="float-right page-thumbnail  outline invert-not" height="0" width="0" src="/doc/design/2020-12-25-gwern-gwernnet-recursivepopups.png" title="Screenshot of Gwern.net demonstrating recursive popup functionality, allowing arbitrarily deep hypertext exploration of references and links." alt=""></figure><div class="page-description-annotation">
+<p>Meta page describing Gwern.net, the self-documenting website’s implementation and experiments for better ‘semantic zoom’ of hypertext; technical decisions using <a href="https://en.wikipedia.org/wiki/Markdown">Markdown</a> and static hosting.</p>
+</div>
+<p><strong>Gwern.net</strong> is implemented as a static website compiled via Hakyll from Pandoc Markdown and hosted on a dedicated server (due to expensive cloud bandwidth).</p>
+<p>It stands out from your standard Markdown static website by aiming at good typography, fast performance, and advanced (ie. 1980s-era) hypertext browsing features (at the cost of great implementation complexity); the <a href="/design#principles">4 design principles</a> are: aesthetically-pleasing minimalism, accessibility/progressive-enhancement, speed, and a ‘semantic zoom’ approach to hypertext use.</p>
+<p>Unusual features include the monochrome esthetics, <a href="/sidenote" id="gwern-sidenote" class="prefetch-not link-annotated link-page" data-filesize-bytes="70563" data-filesize-percentage="50" title="&#39;Sidenotes In Web Design&#39;, Gwern 2020">sidenotes</a> instead of footnotes on wide windows, efficient <a href="https://en.wikipedia.org/wiki/Initial">dropcaps</a>, smallcaps, collapsible sections, automatic inflation-adjusted currency, Wikipedia-style link icons &amp; infoboxes, custom <a href="https://en.wikipedia.org/wiki/Syntax_highlighting" id="_oIj-657b" class="link-annotated-partial link-live" data-link-icon="wikipedia" data-link-icon-type="svg" data-url-iframe="https://en.m.wikipedia.org/wiki/Syntax_highlighting#bodyContent" title="Syntax highlighting">syntax highlighting</a>, extensive local archives to fight linkrot, and an ecosystem of “popup”/“popover” annotations &amp; previews of links for frictionless browsing—the net effect of hierarchical structures with collapsing and instant popup access to excerpts enables iceberg-like pages where most information is hidden but the reader can easily drill down as deep as they wish. (For a demo of all features &amp; stress-test page, see <a href="/lorem" id="gwern-lorem" class="prefetch-not link-annotated link-page" data-filesize-bytes="14495" data-filesize-percentage="21" title="&#39;Lorem Ipsum&#39;, Gwern 2020">Lorem Ipsum</a>; for detailed guidelines, <a href="/style-guide" id="gwern-style-guide" class="prefetch-not link-modified-recently link-annotated link-page" data-filesize-bytes="143752" data-filesize-percentage="66" title="‘Manual of Style’, Gwern 2025">the Manual of Style</a>.)</p>
+<p>Also discussed are the <a href="/design-graveyard" id="gwern-design-graveyard" class="prefetch-not link-annotated link-page" data-filesize-bytes="200493" data-filesize-percentage="73" title="&#39;Design Graveyard&#39;, Gwern 2010">many failed experiments/changes</a> made along the way.</p>
+<div class="columns TOC">
+<ul>
+<li><a href="/design#benefit" id="toc-benefit">Benefit</a></li>
+<li><a href="/design#principles" id="toc-principles">Principles</a></li>
+<li><a href="/design#features" id="toc-features">Features</a>
+<ul>
+<li><a href="/design#backlink" id="toc-backlink">Backlink</a>
+<ul>
+<li><a href="/design#backlink-features" id="toc-backlink-features">Backlink Features</a>
+<ul>
+<li><a href="/design#in-context" id="toc-in-context">In-Context</a></li>
+<li><a href="/design#popups" id="toc-popups">Popups</a></li>
+</ul></li>
+<li><a href="/design#implementation" id="toc-implementation">Implementation</a>
+<ul>
+<li><a href="/design#other-uses" id="toc-other-uses">Other Uses</a></li>
+</ul></li>
+</ul></li>
+<li><a href="/design#similar-links" id="toc-similar-links">Similar Links</a></li>
+<li><a href="/design#link-bibliographies" id="toc-link-bibliographies">Link Bibliographies</a></li>
+<li><a href="/design#tags" id="toc-tags">Tags</a>
+<ul>
+<li><a href="/design#properties" id="toc-properties">Properties</a></li>
+<li><a href="/design#use-appearance" id="toc-use-appearance">Use &amp; Appearance</a></li>
+<li><a href="/design#features-1" id="toc-features-1">Features</a>
+<ul>
+<li><a href="/design#future-tag-features" id="toc-future-tag-features">Future Tag Features</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li><a href="/design#abandoned" id="toc-abandoned">Abandoned</a></li>
+<li><a href="/design#tools" id="toc-tools">Tools</a>
+<ul>
+<li><a href="/design#implementation-details" id="toc-implementation-details">Implementation Details</a></li>
+</ul></li>
+<li><a href="/design#external-links" id="toc-external-links">External Links</a></li>
+<li><a href="/design#appendix" id="toc-appendix">Appendix</a>
+<ul>
+<li><a href="/design#returns-to-design" id="toc-returns-to-design">Returns To Design?</a></li>
+</ul></li>
+</ul>
+</div>
+---
+/changelog
+Changelog
+Gwern
+2013-09-15
+2026-01-16
+
+meta
+<div class="page-description-annotation">
+<p>Monthly chronological list of recent major writings/changes/additions to Gwern.net (see also the monthly newsletter).</p>
+</div>
+<p>This page is a changelog for Gwern.net: a monthly reverse chronological list of recent major writings/changes/additions.</p>
+<p>Following my writing can be a little difficult because it is often so incremental. So every month, in addition to my regular subreddit submissions, I write up reasonably-interesting changes and <a href="https://gwern.substack.com/" id="gwern-2013-substack" class="link-annotated" data-link-icon="substack" data-link-icon-type="svg" data-link-icon-color="#ff6719" title="&#39;Gwern.net newsletter (Substack subscription page)&#39;, Gwern 2013">send it out to the mailing list</a> in addition to a compilation of links &amp; reviews (<a href="/doc/newsletter/index" id="_Si8unX4J" class="prefetch-not link-annotated link-page" data-filesize-bytes="24828" data-filesize-percentage="32" title="&#39;Essays&#39;, Gwern 2009">archives</a>).</p>
+<p>For shortform writings, see <a href="/blog/index" class="prefetch-not link-page" data-filesize-bytes="23908" data-filesize-percentage="31" title="‘Blog Posts’, Gwern 2009">the blog index</a>; for a feed of recently-added links &amp; references, see the <a href="/doc/newest/index" id="_Pmf8zSbL" class="prefetch-not link-annotated link-page" data-filesize-bytes="56407" data-filesize-percentage="46" title="‘newest links’ directory">“newest links”</a> page.</p>
+<div class="columns TOC">
+<ul>
+<li><a href="/changelog#2026" id="toc-2026">2026</a>
+<ul>
+<li><a href="/changelog#january-2026" id="toc-january-2026">January 2026</a></li>
+</ul></li>
+<li><a href="/changelog#2025" id="toc-2025">2025</a>
+<ul>
+<li><a href="/changelog#december-2025" id="toc-december-2025">December 2025</a></li>
+<li><a href="/changelog#november-2025" id="toc-november-2025">November 2025</a></li>
+<li><a href="/changelog#october-2025" id="toc-october-2025">October 2025</a></li>
+<li><a href="/changelog#september-2025" id="toc-september-2025">September 2025</a></li>
+<li><a href="/changelog#august-2025" id="toc-august-2025">August 2025</a></li>
+<li><a href="/changelog#july-2025" id="toc-july-2025">July 2025</a></li>
+<li><a href="/changelog#june-2025" id="toc-june-2025">June 2025</a></li>
+<li><a href="/changelog#may-2025" id="toc-may-2025">May 2025</a></li>
+<li><a href="/changelog#april-2025" id="toc-april-2025">April 2025</a></li>
+<li><a href="/changelog#march-2025" id="toc-march-2025">March 2025</a></li>
+<li><a href="/changelog#february-2025" id="toc-february-2025">February 2025</a></li>
+<li><a href="/changelog#january-2025" id="toc-january-2025">January 2025</a></li>
+</ul></li>
+<li><a href="/changelog#2024" id="toc-2024">2024</a>
+<ul>
+<li><a href="/changelog#december-2024" id="toc-december-2024">December 2024</a></li>
+<li><a href="/changelog#november-2024" id="toc-november-2024">November 2024</a></li>
+<li><a href="/changelog#october-2024" id="toc-october-2024">October 2024</a></li>
+<li><a href="/changelog#september-2024" id="toc-september-2024">September 2024</a></li>
+<li><a href="/changelog#august-2024" id="toc-august-2024">August 2024</a></li>
+<li><a href="/changelog#july-2024" id="toc-july-2024">July 2024</a></li>
+<li><a href="/changelog#june-2024" id="toc-june-2024">June 2024</a></li>
+<li><a href="/changelog#may-2024" id="toc-may-2024">May 2024</a></li>
+<li><a href="/changelog#april-2024" id="toc-april-2024">April 2024</a></li>
+<li><a href="/changelog#march-2024" id="toc-march-2024">March 2024</a></li>
+<li><a href="/changelog#february-2024" id="toc-february-2024">February 2024</a></li>
+<li><a href="/changelog#january-2024" id="toc-january-2024">January 2024</a></li>
+</ul></li>
+<li><a href="/changelog#2023" id="toc-2023">2023</a>
+<ul>
+<li><a href="/changelog#december-2023" id="toc-december-2023">December 2023</a></li>
+<li><a href="/changelog#november-2023" id="toc-november-2023">November 2023</a></li>
+<li><a href="/changelog#october-2023" id="toc-october-2023">October 2023</a></li>
+<li><a href="/changelog#september-2023" id="toc-september-2023">September 2023</a></li>
+<li><a href="/changelog#august-2023" id="toc-august-2023">August 2023</a></li>
+<li><a href="/changelog#july-2023" id="toc-july-2023">July 2023</a></li>
+<li><a href="/changelog#june-2023" id="toc-june-2023">June 2023</a></li>
+<li><a href="/changelog#may-2023" id="toc-may-2023">May 2023</a></li>
+<li><a href="/changelog#april-2023" id="toc-april-2023">April 2023</a></li>
+<li><a href="/changelog#march-2023" id="toc-march-2023">March 2023</a></li>
+<li><a href="/changelog#february-2023" id="toc-february-2023">February 2023</a></li>
+<li><a href="/changelog#january-2023" id="toc-january-2023">January 2023</a></li>
+</ul></li>
+<li><a href="/changelog#2022" id="toc-2022">2022</a>
+<ul>
+<li><a href="/changelog#december-2022" id="toc-december-2022">December 2022</a></li>
+<li><a href="/changelog#november-2022" id="toc-november-2022">November 2022</a></li>
+<li><a href="/changelog#october-2022" id="toc-october-2022">October 2022</a></li>
+<li><a href="/changelog#september-2022" id="toc-september-2022">September 2022</a></li>
+<li><a href="/changelog#august-2022" id="toc-august-2022">August 2022</a></li>
+<li><a href="/changelog#july-2022" id="toc-july-2022">July 2022</a></li>
+<li><a href="/changelog#june-2022" id="toc-june-2022">June 2022</a></li>
+<li><a href="/changelog#may-2022" id="toc-may-2022">May 2022</a></li>
+<li><a href="/changelog#april-2022" id="toc-april-2022">April 2022</a></li>
+<li><a href="/changelog#march-2022" id="toc-march-2022">March 2022</a></li>
+<li><a href="/changelog#february-2022" id="toc-february-2022">February 2022</a></li>
+<li><a href="/changelog#january-2022" id="toc-january-2022">January 2022</a></li>
+</ul></li>
+<li><a href="/changelog#2021" id="toc-2021">2021</a>
+<ul>
+<li><a href="/changelog#december-2021" id="toc-december-2021">December 2021</a></li>
+<li><a href="/changelog#november-2021" id="toc-november-2021">November 2021</a></li>
+<li><a href="/changelog#october-2021" id="toc-october-2021">October 2021</a></li>
+<li><a href="/changelog#september-2021" id="toc-september-2021">September 2021</a></li>
+<li><a href="/changelog#august-2021" id="toc-august-2021">August 2021</a></li>
+<li><a href="/changelog#july-2021" id="toc-july-2021">July 2021</a></li>
+<li><a href="/changelog#june-2021" id="toc-june-2021">June 2021</a></li>
+<li><a href="/changelog#may-2021" id="toc-may-2021">May 2021</a></li>
+<li><a href="/changelog#april-2021" id="toc-april-2021">April 2021</a></li>
+<li><a href="/changelog#march-2021" id="toc-march-2021">March 2021</a></li>
+<li><a href="/changelog#february-2021" id="toc-february-2021">February 2021</a></li>
+<li><a href="/changelog#january-2021" id="toc-january-2021">January 2021</a></li>
+</ul></li>
+<li><a href="/changelog#2020" id="toc-2020">2020</a>
+<ul>
+<li><a href="/changelog#december-2020" id="toc-december-2020">December 2020</a></li>
+<li><a href="/changelog#november-2020" id="toc-november-2020">November 2020</a></li>
+<li><a href="/changelog#october-2020" id="toc-october-2020">October 2020</a></li>
+<li><a href="/changelog#september-2020" id="toc-september-2020">September 2020</a></li>
+<li><a href="/changelog#august-2020" id="toc-august-2020">August 2020</a></li>
+<li><a href="/changelog#july-2020" id="toc-july-2020">July 2020</a></li>
+<li><a href="/changelog#june-2020" id="toc-june-2020">June 2020</a></li>
+<li><a href="/changelog#may-2020" id="toc-may-2020">May 2020</a></li>
+<li><a href="/changelog#april-2020" id="toc-april-2020">April 2020</a></li>
+<li><a href="/changelog#march-2020" id="toc-march-2020">March 2020</a></li>
+<li><a href="/changelog#february-2020" id="toc-february-2020">February 2020</a></li>
+<li><a href="/changelog#january-2020" id="toc-january-2020">January 2020</a></li>
+</ul></li>
+<li><a href="/changelog#2019" id="toc-2019">2019</a>
+<ul>
+<li><a href="/changelog#december-2019" id="toc-december-2019">December 2019</a></li>
+<li><a href="/changelog#november-2019" id="toc-november-2019">November 2019</a></li>
+<li><a href="/changelog#october-2019" id="toc-october-2019">October 2019</a></li>
+<li><a href="/changelog#september-2019" id="toc-september-2019">September 2019</a></li>
+<li><a href="/changelog#august-2019" id="toc-august-2019">August 2019</a></li>
+<li><a href="/changelog#july-2019" id="toc-july-2019">July 2019</a></li>
+<li><a href="/changelog#june-2019" id="toc-june-2019">June 2019</a></li>
+<li><a href="/changelog#may-2019" id="toc-may-2019">May 2019</a></li>
+<li><a href="/changelog#april-2019" id="toc-april-2019">April 2019</a></li>
+<li><a href="/changelog#march-2019" id="toc-march-2019">March 2019</a></li>
+<li><a href="/changelog#february-2019" id="toc-february-2019">February 2019</a></li>
+<li><a href="/changelog#january-2019" id="toc-january-2019">January 2019</a></li>
+</ul></li>
+<li><a href="/changelog#2018" id="toc-2018">2018</a>
+<ul>
+<li><a href="/changelog#december-2018" id="toc-december-2018">December 2018</a></li>
+<li><a href="/changelog#november-2018" id="toc-november-2018">November 2018</a></li>
+<li><a href="/changelog#october-2018" id="toc-october-2018">October 2018</a></li>
+<li><a href="/changelog#september-2018" id="toc-september-2018">September 2018</a></li>
+<li><a href="/changelog#august-2018" id="toc-august-2018">August 2018</a></li>
+<li><a href="/changelog#july-2018" id="toc-july-2018">July 2018</a></li>
+<li><a href="/changelog#june-2018" id="toc-june-2018">June 2018</a></li>
+<li><a href="/changelog#may-2018" id="toc-may-2018">May 2018</a></li>
+<li><a href="/changelog#april-2018" id="toc-april-2018">April 2018</a></li>
+<li><a href="/changelog#march-2018" id="toc-march-2018">March 2018</a></li>
+<li><a href="/changelog#february-2018" id="toc-february-2018">February 2018</a></li>
+<li><a href="/changelog#january-2018" id="toc-january-2018">January 2018</a></li>
+</ul></li>
+<li><a href="/changelog#2017" id="toc-2017">2017</a>
+<ul>
+<li><a href="/changelog#december-2017" id="toc-december-2017">December 2017</a></li>
+<li><a href="/changelog#november-2017" id="toc-november-2017">November 2017</a></li>
+<li><a href="/changelog#october-2017" id="toc-october-2017">October 2017</a></li>
+<li><a href="/changelog#september-2017" id="toc-september-2017">September 2017</a></li>
+<li><a href="/changelog#august-2017" id="toc-august-2017">August 2017</a></li>
+<li><a href="/changelog#july-2017" id="toc-july-2017">July 2017</a></li>
+<li><a href="/changelog#june-2017" id="toc-june-2017">June 2017</a></li>
+<li><a href="/changelog#may-2017" id="toc-may-2017">May 2017</a></li>
+<li><a href="/changelog#april-2017" id="toc-april-2017">April 2017</a></li>
+<li><a href="/changelog#march-2017" id="toc-march-2017">March 2017</a></li>
+<li><a href="/changelog#february-2017" id="toc-february-2017">February 2017</a></li>
+<li><a href="/changelog#january-2017" id="toc-january-2017">January 2017</a></li>
+</ul></li>
+<li><a href="/changelog#2016" id="toc-2016">2016</a>
+<ul>
+<li><a href="/changelog#december-2016" id="toc-december-2016">December 2016</a></li>
+<li><a href="/changelog#november-2016" id="toc-november-2016">November 2016</a></li>
+<li><a href="/changelog#october-2016" id="toc-october-2016">October 2016</a></li>
+<li><a href="/changelog#september-2016" id="toc-september-2016">September 2016</a></li>
+<li><a href="/changelog#august-2016" id="toc-august-2016">August 2016</a></li>
+<li><a href="/changelog#july-2016" id="toc-july-2016">July 2016</a></li>
+<li><a href="/changelog#june-2016" id="toc-june-2016">June 2016</a></li>
+<li><a href="/changelog#may-2016" id="toc-may-2016">May 2016</a></li>
+<li><a href="/changelog#april-2016" id="toc-april-2016">April 2016</a></li>
+<li><a href="/changelog#march-2016" id="toc-march-2016">March 2016</a></li>
+<li><a href="/changelog#february-2016" id="toc-february-2016">February 2016</a></li>
+<li><a href="/changelog#january-2016" id="toc-january-2016">January 2016</a></li>
+</ul></li>
+<li><a href="/changelog#2015" id="toc-2015">2015</a>
+<ul>
+<li><a href="/changelog#december-2015" id="toc-december-2015">December 2015</a></li>
+<li><a href="/changelog#november-2015" id="toc-november-2015">November 2015</a></li>
+<li><a href="/changelog#october-2015" id="toc-october-2015">October 2015</a></li>
+<li><a href="/changelog#september-2015" id="toc-september-2015">September 2015</a></li>
+<li><a href="/changelog#august-2015" id="toc-august-2015">August 2015</a></li>
+<li><a href="/changelog#july-2015" id="toc-july-2015">July 2015</a></li>
+<li><a href="/changelog#june-2015" id="toc-june-2015">June 2015</a></li>
+<li><a href="/changelog#may-2015" id="toc-may-2015">May 2015</a></li>
+<li><a href="/changelog#april-2015" id="toc-april-2015">April 2015</a></li>
+<li><a href="/changelog#march-2015" id="toc-march-2015">March 2015</a></li>
+<li><a href="/changelog#february-2015" id="toc-february-2015">February 2015</a></li>
+<li><a href="/changelog#january-2015" id="toc-january-2015">January 2015</a></li>
+</ul></li>
+<li><a href="/changelog#2014" id="toc-2014">2014</a>
+<ul>
+<li><a href="/changelog#december-2014" id="toc-december-2014">December 2014</a></li>
+<li><a href="/changelog#november-2014" id="toc-november-2014">November 2014</a></li>
+<li><a href="/changelog#october-2014" id="toc-october-2014">October 2014</a></li>
+<li><a href="/changelog#september-2014" id="toc-september-2014">September 2014</a></li>
+<li><a href="/changelog#august-2014" id="toc-august-2014">August 2014</a></li>
+<li><a href="/changelog#july-2014" id="toc-july-2014">July 2014</a></li>
+<li><a href="/changelog#june-2014" id="toc-june-2014">June 2014</a></li>
+<li><a href="/changelog#may-2014" id="toc-may-2014">May 2014</a></li>
+<li><a href="/changelog#april-2014" id="toc-april-2014">April 2014</a></li>
+<li><a href="/changelog#march-2014" id="toc-march-2014">March 2014</a></li>
+<li><a href="/changelog#february-2014" id="toc-february-2014">February 2014</a></li>
+<li><a href="/changelog#january-2014" id="toc-january-2014">January 2014</a></li>
+</ul></li>
+<li><a href="/changelog#2013" id="toc-2013">2013</a>
+<ul>
+<li><a href="/changelog#december-2013" id="toc-december-2013">December 2013</a></li>
+<li><a href="/changelog#november-2013" id="toc-november-2013">November 2013</a></li>
+<li><a href="/changelog#october-2013" id="toc-october-2013">October 2013</a></li>
+<li><a href="/changelog#september-2013" id="toc-september-2013">September 2013</a></li>
+<li><a href="/changelog#august-2013" id="toc-august-2013">August 2013</a></li>
+<li><a href="/changelog#july-2013" id="toc-july-2013">July 2013</a></li>
+<li><a href="/changelog#june-2013" id="toc-june-2013">June 2013</a></li>
+<li><a href="/changelog#may-2013" id="toc-may-2013">May 2013</a></li>
+</ul></li>
+<li><a href="/changelog#2012-2013" id="toc-2012-2013"><span class="date-range" title="The date range 2012–2013 lasted 1 year, ending 13 years ago.">2012–2013<sub><span title="2012 was 14 years ago.">13ya</span></sub></span></a></li>
+<li><a href="/changelog#2011" id="toc-2011">2011</a></li>
+</ul>
+</div>
+---
+/doc/newest/index
+‘newest links’ directory
+
+2026-01-15
+2026-02-06
+
+meta
+<figure><img class="float-right page-thumbnail invert-not outline" height="0" width="0" src="/doc/long-now/2000-brand-clockofthelongnow-figure71-pacelayers-theorderofcivilization.jpg" title="" alt=""></figure><div class="page-description-annotation">
+<p>Bibliography for directory <code>newest</code>, most recent first: 62 <a href="/doc/newest/index#links" class="icon-not">annotations</a> &amp; 2 <a href="/doc/newest/index#miscellaneous" class="icon-not">links</a> (<a href="/doc/index" class="link-page link-tag directory-indexes-upwards link-annotated" data-link-icon="arrow-up-left" data-link-icon-type="svg" rel="tag" title="Link to parent directory">parent</a>).</p>
+</div>
+<p><a href="/doc/newest/abstract" id="gwern-doc-newest-abstract" class="prefetch-not include-content-core include-strict link-page" data-filesize-bytes="489" data-filesize-percentage="1" title="Transclude link for doc/newest/ tag-abstract page.">[page summary]</a></p>
+<div class="columns TOC">
+<ul>
+<li><a href="/doc/newest/index#see-also" id="toc-see-also">See Also</a></li>
+<li><a href="/doc/newest/index#gwern" id="toc-gwern">Gwern</a>
+<ul>
+<li><a href="/doc/newest/index#gwern-2025-section" id="toc-gwern-2025-section">“The Efficient Market Hypothesis in Action”, Gwern 2025</a></li>
+<li><a href="/doc/newest/index#gwern-mastroianni-2025-section" id="toc-gwern-mastroianni-2025-section">“2025 Inkhaven Writing Interview”, Gwern &amp; Mastroianni 2025</a></li>
+<li><a href="/doc/newest/index#gwern-gwtar-section" id="toc-gwern-gwtar-section">“Gwtar: a Static Efficient Single-File HTML Format”, Gwern 2026</a></li>
+<li><a href="/doc/newest/index#gwern-2025-apollonian-1-section" id="toc-gwern-2025-apollonian-1-section">“Apollonian #1: The Counted &amp; the Crowned”, Gwern et al 2025</a></li>
+<li><a href="/doc/newest/index#gwern-2026-hutter-prize-section" id="toc-gwern-2026-hutter-prize-section">“Towards a Better Hutter Prize”, Gwern 2026</a></li>
+<li><a href="/doc/newest/index#gwern-video-game-art-section" id="toc-gwern-video-game-art-section">“Video Games As Art”, Gwern 2025</a></li>
+<li><a href="/doc/newest/index#gwern-pro-2023-section" id="toc-gwern-pro-2023-section">“How Many Shower Controls Are There?”, Gwern &amp; Pro 2023</a></li>
+<li><a href="/doc/newest/index#gwern-2026-make-me-care-section" id="toc-gwern-2026-make-me-care-section">“First, Make Me Care”, Gwern 2025</a></li>
+<li><a href="/doc/newest/index#gwern-style-guide-section" id="toc-gwern-style-guide-section">“Manual of Style”, Gwern 2025</a></li>
+<li><a href="/doc/newest/index#gwern-2026-section" id="toc-gwern-2026-section">“I’d Show All My Online Friends, but I Now Worry They Wouldn’t Get It”, Gwern 2026</a></li>
+<li><a href="/doc/newest/index#gwern-2026-section" id="toc-gwern-2026-section">“Well, Well… Lookit Mister Fancy Pants Here”, Gwern 2026</a></li>
+</ul></li>
+<li><a href="/doc/newest/index#links" id="toc-links">Links</a>
+<ul>
+<li><a href="/doc/newest/index#malina-1988-section" id="toc-malina-1988-section">“Racial/ethnic Variation in the Motor Development and Performance of American Children”, Malina 1988</a></li>
+<li><a href="/doc/newest/index#likko-2014-section" id="toc-likko-2014-section">“Lessons from Barfight Litigation”, Likko 2014</a></li>
+<li><a href="/doc/newest/index#akyürek-et-al-2024-section" id="toc-akyürek-et-al-2024-section">“The Surprising Effectiveness of Test-Time Training for Few-Shot Learning”, Akyürek et al 2024</a></li>
+<li><a href="/doc/newest/index#_9nLhn3fK-section" id="toc-_9nLhn3fK-section">“Unix Command Line Conventions over Time”</a></li>
+<li><a href="/doc/newest/index#_VlLiDMAG-section" id="toc-_VlLiDMAG-section">“TimeCapsuleLLM: A LLM Trained Only on Data from Certain Time Periods to Reduce Modern Bias”</a></li>
+<li><a href="/doc/newest/index#hormeze-2021-section" id="toc-hormeze-2021-section">“Torn in the Center: On Gematria, Insanity, Meaning and Emptiness: ‘The Sort of Mental Sharpness You Need for the Kabbalah Is Almost Perpendicular to Sanity, More like a Very Specific and Redirectable Schizophrenia’”, Hormeze 2021</a></li>
+<li><a href="/doc/newest/index#andresen-2026-section" id="toc-andresen-2026-section">“How AI Is Learning to Think in Secret: On Thinkish, Neuralese, and the End of Readable Reasoning”, Andresen 2026</a></li>
+<li><a href="/doc/newest/index#crowley-2010-section" id="toc-crowley-2010-section">“Things Unix Can Do Atomically”, Crowley 2010</a></li>
+<li><a href="/doc/newest/index#_euvZeEyC-section" id="toc-_euvZeEyC-section">“For Your Consideration: <em>Inkhaven 2</em>”</a></li>
+<li><a href="/doc/newest/index#waymo-2026-section" id="toc-waymo-2026-section">“The Waymo World Model: A New Frontier For Autonomous Driving Simulation”, Waymo 2026</a></li>
+<li><a href="/doc/newest/index#carlini-2026-section" id="toc-carlini-2026-section">“Building a C Compiler With a Team of Parallel Claudes: We Tasked Claude-4.6-Opus Using Agent Teams to Build a C Compiler <span class="editorial">[In Rust]</span>, and Then (Mostly) Walked Away. Here’s What It Taught Us about the Future of Autonomous Software Development”, Carlini 2026</a></li>
+<li><a href="/doc/newest/index#fahy-et-al-2026-section" id="toc-fahy-et-al-2026-section">“Ultrastructural and Histological Cryopreservation of Mammalian Brains by Vitrification”, FAHY et al 2026</a></li>
+<li><a href="/doc/newest/index#_z7GQWDV4-section" id="toc-_z7GQWDV4-section">“Honey, I Shrunk the Brain”</a></li>
+<li><a href="/doc/newest/index#_Kj55RZte-section" id="toc-_Kj55RZte-section">“Dwarkesh Patel Dinner Party—Yuxi on the Wired”</a></li>
+<li><a href="/doc/newest/index#_CHeeCRx--section" id="toc-_CHeeCRx--section">“Repro<span class="cite"><span class="cite-author">Fro</span><span class="cite-date">2025</span></span> Party—Yuxi on the Wired”</a></li>
+<li><a href="/doc/newest/index#fryer-levitt-2006-section" id="toc-fryer-levitt-2006-section">“The Black-White Test Score Gap Through Third Grade”, Fryer &amp; Levitt 2006</a></li>
+<li><a href="/doc/newest/index#brand-2000-section" id="toc-brand-2000-section">“Pace Layers: the Order of Civilization”, Brand 2000</a></li>
+<li><a href="/doc/newest/index#serebryany-et-al-2021-section" id="toc-serebryany-et-al-2021-section">“SiliFuzz: Fuzzing CPUs by Proxy”, Serebryany et al 2021</a></li>
+<li><a href="/doc/newest/index#bethlehem-2025-section" id="toc-bethlehem-2025-section">“So You Want to Go to next Year’s Inkhaven: How <em>Not</em> to Write 30 Blog Posts in 30 Days”, Bethlehem 2025</a></li>
+<li><a href="/doc/newest/index#putilin-2025-section" id="toc-putilin-2025-section">“Writing As Psychotechnology”, Putilin 2025</a></li>
+<li><a href="/doc/newest/index#guy-2025-section" id="toc-guy-2025-section">“30 Days of Writing: My Inkhaven Experience; Who Knew Monk Mode Is at Odds With Socializing.”, Guy 2025</a></li>
+<li><a href="/doc/newest/index#prasad-2025-section" id="toc-prasad-2025-section">“Mentorship Anti-Patterns: D—N Bro”, Prasad 2025</a></li>
+<li><a href="/doc/newest/index#putilin-2025-section" id="toc-putilin-2025-section">42irrationalist @ “2025-11-21”</a></li>
+<li><a href="/doc/newest/index#croissanthology-2025-section" id="toc-croissanthology-2025-section">croissanthology @ “2025-11-02”</a></li>
+<li><a href="/doc/newest/index#bland-et-al-2022-section" id="toc-bland-et-al-2022-section">“Story Beyond the Eye: Glyph Positions Break PDF Text Redaction”, Bland et al 2022</a></li>
+<li><a href="/doc/newest/index#xie-et-al-2022-section" id="toc-xie-et-al-2022-section">“DINER: Disorder-Invariant Implicit Neural Representation”, Xie et al 2022</a></li>
+<li><a href="/doc/newest/index#zhu-et-al-2026-section" id="toc-zhu-et-al-2026-section">“PaperBanana: Automating Academic Illustration for AI Scientists”, Zhu et al 2026</a></li>
+<li><a href="/doc/newest/index#oak-shafiq-2025-section" id="toc-oak-shafiq-2025-section">“‘Hello, Is This Anna?’: Unpacking the Lifecycle of Pig-Butchering Scams”, Oak &amp; Shafiq 2025</a></li>
+<li><a href="/doc/newest/index#xu-zhang-2026-section" id="toc-xu-zhang-2026-section">“Language of Thought Shapes Output Diversity in Large Language Models”, Xu &amp; Zhang 2026</a></li>
+<li><a href="/doc/newest/index#yeats-1921-section" id="toc-yeats-1921-section">“A Prayer for My Daughter”, Yeats 1921</a></li>
+<li><a href="/doc/newest/index#edu-2026-section" id="toc-edu-2026-section">“Generative AI and Wikipedia Editing: What We Learned in 2025”, Edu 2026</a></li>
+<li><a href="/doc/newest/index#trpevski-et-al-2026-section" id="toc-trpevski-et-al-2026-section">“A Local Inhibitory Plasticity Rule for Control of Neuronal Firing Rate and Supralinear Dendritic Integration”, Trpevski et al 2026</a></li>
+<li><a href="/doc/newest/index#gupta-et-al-2024-section" id="toc-gupta-et-al-2024-section">“A Genome-Wide Investigation into the Underlying Genetic Architecture of Personality Traits and Overlap With Psychopathology”, Gupta et al 2024</a></li>
+<li><a href="/doc/newest/index#shor-2025-section" id="toc-shor-2025-section">“‘It’s a Way to Let Go’: The Intersection of Pleasure and Pain in Pornography”, Shor 2025</a></li>
+<li><a href="/doc/newest/index#clark-tree-2002b-section" id="toc-clark-tree-2002b-section">“Using <em>uh</em> and <em>um</em> in Spontaneous Speaking”, Clark &amp; Tree 2002b</a></li>
+<li><a href="/doc/newest/index#zhang-et-al-2024-section" id="toc-zhang-et-al-2024-section">“Proposing and Solving Olympiad Geometry With Guided Tree Search”, Zhang et al 2024</a></li>
+<li><a href="/doc/newest/index#zipursky-juurlink-2020-section" id="toc-zipursky-juurlink-2020-section">“The Implausibility of Neonatal Opioid Toxicity from Breastfeeding”, Zipursky &amp; Juurlink 2020</a></li>
+<li><a href="/doc/newest/index#arden-et-al-2025-section" id="toc-arden-et-al-2025-section"><em>Chronic Far-UVC (222nm) Light Exposure of SKH-1 Hairless Mice Does Not Cause Detectable Eye Pathology or Visual Deficits</em>, Arden et al 2025</a></li>
+<li><a href="/doc/newest/index#linday-2010-section" id="toc-linday-2010-section">“Cod Liver Oil, Young Children, and Upper Respiratory Tract Infections”, Linday 2010</a></li>
+<li><a href="/doc/newest/index#litman-2025-section" id="toc-litman-2025-section">“Scaled-Dot-Product Attention As One-Sided Entropic Optimal Transport”, Litman 2025</a></li>
+<li><a href="/doc/newest/index#team-et-al-2025-section" id="toc-team-et-al-2025-section">“Z-Image: An Efficient Image Generation Foundation Model With Single-Stream Diffusion Transformer”, Team et al 2025</a></li>
+<li><a href="/doc/newest/index#barrera-et-al-2025-section" id="toc-barrera-et-al-2025-section">“Inverted-Mode Scanning Tunneling Microscopy for Atomically Precise Fabrication”, Barrera et al 2025</a></li>
+<li><a href="/doc/newest/index#_1uBJD4Yo-section" id="toc-_1uBJD4Yo-section">“VTuber Ovulation Tracker”</a></li>
+<li><a href="/doc/newest/index#levitt-list-2009-section" id="toc-levitt-list-2009-section">“Field Experiments in Economics: The Past, the Present, and the Future”, Levitt &amp; List 2009</a></li>
+<li><a href="/doc/newest/index#li-et-al-2026-section" id="toc-li-et-al-2026-section">“Peripheral Cancer Attenuates Amyloid Pathology in Alzheimer’s Disease via Cystatin-C Activation of TREM2”, Li et al 2026</a></li>
+<li><a href="/doc/newest/index#pavlov-2026-section" id="toc-pavlov-2026-section">“Differentiable Logic Synthesis: Spectral Coefficient Selection via Sinkhorn-Constrained Composition”, Pavlov 2026</a></li>
+<li><a href="/doc/newest/index#wang-et-al-2025-section" id="toc-wang-et-al-2025-section">“Direct Effect of Genetic Ancestry on Complex Traits in a Mexican Population”, Wang et al 2025</a></li>
+<li><a href="/doc/newest/index#kiockete-2026-section" id="toc-kiockete-2026-section">“I Solved Cartpole-V1 Using Only Bitwise Ops With Differentiable Logic Synthesis”, kiockete 2026</a></li>
+<li><a href="/doc/newest/index#crawford-et-al-2023-section" id="toc-crawford-et-al-2023-section">“Subjective Impact of Age-Related Hearing Loss Is Worse for Those Who Routinely Experience Boredom and Failures of Attention”, Crawford et al 2023</a></li>
+<li><a href="/doc/newest/index#kosmyna-et-al-2025-section" id="toc-kosmyna-et-al-2025-section">“Your Brain on ChatGPT: Accumulation of Cognitive Debt When Using an AI Assistant for Essay Writing Task”, Kosmyna et al 2025</a></li>
+<li><a href="/doc/newest/index#whitelam-2025-section" id="toc-whitelam-2025-section">“Generative Thermodynamic Computing”, Whitelam 2025</a></li>
+<li><a href="/doc/newest/index#davis-2020-section" id="toc-davis-2020-section">“Survey Data on Cis and Trans Women Among Haskell Programmers”, Davis 2020</a></li>
+<li><a href="/doc/newest/index#kardas-obrien-2018-section" id="toc-kardas-obrien-2018-section">“Easier Seen Than Done: Merely Watching Others Perform Can Foster an Illusion of Skill Acquisition”, Kardas &amp; O’Brien 2018</a></li>
+<li><a href="/doc/newest/index#macleish-1926-section" id="toc-macleish-1926-section"><em>Ars Poetica</em>, MacLeish 1926</a></li>
+<li><a href="/doc/newest/index#ebert-2012-section" id="toc-ebert-2012-section">“Okay, Kids, Play on My Lawn”, Ebert 2012</a></li>
+<li><a href="/doc/newest/index#ericksen-et-al-1980-section" id="toc-ericksen-et-al-1980-section">“The Cultivation of the Soil As a Moral Directive: Population Growth, Family Ties, and the Maintenance of Community Among the Old Order Amish”, Ericksen et al 1980</a></li>
+<li><a href="/doc/newest/index#chao-1987-section" id="toc-chao-1987-section">“Estimating the Population Size for Capture-Recapture Data With Unequal Catchability”, Chao 1987</a></li>
+<li><a href="/doc/newest/index#colwell-coddington-1994-section" id="toc-colwell-coddington-1994-section">“Estimating Terrestrial Biodiversity through Extrapolation”, Colwell &amp; Coddington 1994</a></li>
+<li><a href="/doc/newest/index#zhang-et-al-2025-section" id="toc-zhang-et-al-2025-section">“TurboDiffusion: Accelerating Video Diffusion Models by 100–200 Times”, Zhang et al 2025</a></li>
+<li><a href="/doc/newest/index#mowbray-gollmann-2007-section" id="toc-mowbray-gollmann-2007-section">“Electing the Doge of Venice: Analysis of a 13<sup>th</sup> Century Protocol”, Mowbray &amp; Gollmann 2007</a></li>
+<li><a href="/doc/newest/index#anantharaman-et-al-2019-section" id="toc-anantharaman-et-al-2019-section">“Mismorphism: The Heart of the Weird Machine”, Anantharaman et al 2019</a></li>
+<li><a href="/doc/newest/index#andreasen-powers-1975-section" id="toc-andreasen-powers-1975-section">“Creativity and Psychosis: An Examination of Conceptual Style”, Andreasen &amp; Powers 1975</a></li>
+<li><a href="/doc/newest/index#titled-links-wikipedia" id="toc-titled-links-wikipedia">Wikipedia (36)</a></li>
+</ul></li>
+<li><a href="/doc/newest/index#miscellaneous" id="toc-miscellaneous">Miscellaneous</a></li>
+<li><a href="/doc/newest/index#link-bibliography-section" id="toc-link-bibliography-section">Bibliography</a></li>
+</ul>
+</div>
+---
+/doc/meta/index
+‘meta’ directory
+
+2025-02-10
+2025-12-09
+
+
+<figure><img class="float-right page-thumbnail invert-not outline" height="0" width="0" src="/doc/meta/2025-08-08-gwern-gwernnet-desktopheader-blogversion-darkmode.png" title="" alt=""></figure><div class="page-description-annotation">
+<p>Bibliography for directory <code>meta</code>, most recent first: 1 <a href="/doc/meta/index#see-alsos" class="icon-not">related tag</a>, 3 <a href="/doc/meta/index#links" class="icon-not">annotations</a>, &amp; 7 <a href="/doc/meta/index#miscellaneous" class="icon-not">links</a> (<a href="/doc/index" class="link-page link-tag directory-indexes-upwards link-annotated" data-link-icon="arrow-up-left" data-link-icon-type="svg" rel="tag" title="Link to parent directory">parent</a>).</p>
+</div>
+<div class="columns TOC">
+<ul>
+<li><a href="/doc/meta/index#see-also" id="toc-see-also">See Also</a></li>
+<li><a href="/doc/meta/index#gwern" id="toc-gwern">Gwern</a>
+<ul>
+<li><a href="/doc/meta/index#gwern-2009-section" id="toc-gwern-2009-section">“Essays”, Gwern 2009</a></li>
+<li><a href="/doc/meta/index#gwern-mastroianni-2025-section" id="toc-gwern-mastroianni-2025-section">“2025 Inkhaven Writing Interview”, Gwern &amp; Mastroianni 2025</a></li>
+<li><a href="/doc/meta/index#gwern-2009-blog-index-section" id="toc-gwern-2009-blog-index-section">“Blog Posts”, Gwern 2009</a></li>
+<li><a href="/doc/meta/index#gwern-changelog-section" id="toc-gwern-changelog-section">“Changelog”, Gwern 2013</a></li>
+<li><a href="/doc/meta/index#gwern-newsletter-2019-13-section" id="toc-gwern-newsletter-2019-13-section">“2019 News”, Gwern 2019</a></li>
+<li><a href="/doc/meta/index#gwern-style-guide-section" id="toc-gwern-style-guide-section">“Manual of Style”, Gwern 2025</a></li>
+<li><a href="/doc/meta/index#gwern-poetry-html-section" id="toc-gwern-poetry-html-section">“Poetry HTML Typesetting”, Gwern 2026</a></li>
+<li><a href="/doc/meta/index#gwern-website-luxury-section" id="toc-gwern-website-luxury-section">“Does Website Luxury Exist?”, Gwern 2024</a></li>
+<li><a href="/doc/meta/index#gwern-xanadu-section" id="toc-gwern-xanadu-section">“Project Xanadu: Even More Hindsight”, Gwern 2025</a></li>
+<li><a href="/doc/meta/index#gwern-design-graveyard-section" id="toc-gwern-design-graveyard-section">“Design Graveyard”, Gwern 2010</a></li>
+<li><a href="/doc/meta/index#gwern-fulltext-section" id="toc-gwern-fulltext-section">“Research Bounties On Fulltexts”, Gwern 2018</a></li>
+<li><a href="/doc/meta/index#gwern-2025-large-files-section" id="toc-gwern-2025-large-files-section">“Gwern.net Large File Support”, Gwern 2025</a></li>
+<li><a href="/doc/meta/index#gwern-note-note-section" id="toc-gwern-note-note-section">“Miscellaneous”, Gwern 2009</a></li>
+<li><a href="/doc/meta/index#gwern-2024-rss-section" id="toc-gwern-2024-rss-section">“Towards Better RSS Feeds”, Gwern 2024</a></li>
+<li><a href="/doc/meta/index#gwern-help-section" id="toc-gwern-help-section">“Site Help”, Gwern 2024</a></li>
+<li><a href="/doc/meta/index#gwern-patel-2024-section" id="toc-gwern-patel-2024-section">“Gwern Branwen—How an Anonymous Researcher Predicted AI’s Trajectory”, Gwern &amp; Patel 2024</a></li>
+<li><a href="/doc/meta/index#gwern-dropcap-section" id="toc-gwern-dropcap-section">“Dropcap Generation With AI”, Gwern 2023</a></li>
+<li><a href="/doc/meta/index#gwern-404-section" id="toc-gwern-404-section">“Gwern.net 404 Error Page”, Gwern 2012</a></li>
+<li><a href="/doc/meta/index#gwern-about-section" id="toc-gwern-about-section">“About This Website”, Gwern 2010</a></li>
+<li><a href="/doc/meta/index#gwern-traffic-section" id="toc-gwern-traffic-section">“Gwern.net Website Traffic”, Gwern 2011</a></li>
+<li><a href="/doc/meta/index#gwern-design-section" id="toc-gwern-design-section">“Design Of This Website”, Gwern 2010</a></li>
+<li><a href="/doc/meta/index#gwern-archiving-section" id="toc-gwern-archiving-section">“Archiving URLs”, Gwern 2011</a></li>
+<li><a href="/doc/meta/index#gwern-lorem-section" id="toc-gwern-lorem-section">“Lorem Ipsum”, Gwern 2020</a></li>
+<li><a href="/doc/meta/index#gwern-ab-test-section" id="toc-gwern-ab-test-section">“A/B Testing Long-Form Readability on Gwern.net”, Gwern 2012</a></li>
+<li><a href="/doc/meta/index#gwern-old-reddit-com-r-gwern-2-section" id="toc-gwern-old-reddit-com-r-gwern-2-section">“/r/gwern Subreddit”, Gwern 2018</a></li>
+<li><a href="/doc/meta/index#gwern-2013-substack-section" id="toc-gwern-2013-substack-section">“Gwern.net Newsletter (Substack Subscription Page)”, Gwern 2013</a></li>
+<li><a href="/doc/meta/index#gwern-lithium-section" id="toc-gwern-lithium-section">“Lithium in Ground-Water and Well-Being”, Gwern 2010</a></li>
+</ul></li>
+<li><a href="/doc/meta/index#links" id="toc-links">Links</a>
+<ul>
+<li><a href="/doc/meta/index#deepseek-et-al-2025-section" id="toc-deepseek-et-al-2025-section">“DeepSeek-V3.2: Pushing the Frontier of Open Large Language Models”, DeepSeek et al 2025</a></li>
+<li><a href="/doc/meta/index#_5rgyaS5E-section" id="toc-_5rgyaS5E-section">“<code>gwern.net</code> As a Source of Information in Wikipedia”</a></li>
+<li><a href="/doc/meta/index#_5XXtSLir-section" id="toc-_5XXtSLir-section">“<code>Gwern.net</code> Google Site Search”</a></li>
+</ul></li>
+<li><a href="/doc/meta/index#miscellaneous" id="toc-miscellaneous">Miscellaneous</a></li>
+<li><a href="/doc/meta/index#link-bibliography-section" id="toc-link-bibliography-section">Bibliography</a></li>
+</ul>
+</div>
+---
+/doc/cs/linkrot/archiving/index
+‘Internet archiving’ directory
+
+2020-06-05
+2025-12-04
+
+cs/algorithm/information
+<figure><img class="float-right page-thumbnail invert-not outline" height="0" width="0" src="/doc/cs/linkrot/archiving/2020-03-03-meganwarnock-picardfacepalmcartoon.jpg" title="" alt=""></figure><div class="page-description-annotation">
+<p>Bibliography for directory <code>cs/linkrot/archiving</code>, most recent first: 1 <a href="/doc/cs/linkrot/archiving/index#see-alsos" class="icon-not">related tag</a>, 41 <a href="/doc/cs/linkrot/archiving/index#links" class="icon-not">annotations</a>, &amp; 26 <a href="/doc/cs/linkrot/archiving/index#miscellaneous" class="icon-not">links</a> (<a href="/doc/cs/linkrot/index" class="link-page link-tag directory-indexes-upwards link-annotated" data-link-icon="arrow-up-left" data-link-icon-type="svg" rel="tag" title="Link to parent directory">parent</a>).</p>
+</div>
+<p><a href="/archiving" id="gwern-archiving" class="prefetch-not link-page link-annotated include-annotation include-strict" data-filesize-bytes="88086" data-filesize-percentage="56" title="Transclude link for doc/cs/linkrot/archiving/ annotation of essay on this topic.">[essay on this tag topic]</a></p>
+<div class="columns TOC">
+<ul>
+<li><a href="/doc/cs/linkrot/archiving/index#see-also" id="toc-see-also">See Also</a></li>
+<li><a href="/doc/cs/linkrot/archiving/index#gwern" id="toc-gwern">Gwern</a>
+<ul>
+<li><a href="/doc/cs/linkrot/archiving/index#gwern-gwtar-section" id="toc-gwern-gwtar-section">“Gwtar: a Static Efficient Single-File HTML Format”, Gwern 2026</a></li>
+<li><a href="/doc/cs/linkrot/archiving/index#gwern-design-graveyard-section" id="toc-gwern-design-graveyard-section">“Design Graveyard”, Gwern 2010</a></li>
+<li><a href="/doc/cs/linkrot/archiving/index#gwern-fulltext-section" id="toc-gwern-fulltext-section">“Research Bounties On Fulltexts”, Gwern 2018</a></li>
+<li><a href="/doc/cs/linkrot/archiving/index#gwern-search-case-studies-section" id="toc-gwern-search-case-studies-section">“Internet Search Case Studies”, Gwern 2019</a></li>
+<li><a href="/doc/cs/linkrot/archiving/index#gwern-search-section" id="toc-gwern-search-section">“Internet Search Tips”, Gwern 2018</a></li>
+<li><a href="/doc/cs/linkrot/archiving/index#gwern-design-section" id="toc-gwern-design-section">“Design Of This Website”, Gwern 2010</a></li>
+<li><a href="/doc/cs/linkrot/archiving/index#gwern-archiving-section" id="toc-gwern-archiving-section">“Archiving URLs”, Gwern 2011</a></li>
+<li><a href="/doc/cs/linkrot/archiving/index#gwern-sort-section" id="toc-gwern-sort-section">“The <code>sort –key</code> Trick”, Gwern 2014</a></li>
+<li><a href="/doc/cs/linkrot/archiving/index#gwern-dnm-archive-section" id="toc-gwern-dnm-archive-section">“Darknet Market Archives (2013–2015)”, Gwern 2013</a></li>
+<li><a href="/doc/cs/linkrot/archiving/index#gwern-google-shutdown-section" id="toc-gwern-google-shutdown-section">“Predicting Google Closures”, Gwern 2013</a></li>
+<li><a href="/doc/cs/linkrot/archiving/index#gwern-timestamping-section" id="toc-gwern-timestamping-section">“Easy Cryptographic Timestamping of Files”, Gwern 2015</a></li>
+<li><a href="/doc/cs/linkrot/archiving/index#gwern-haskell-wikipedia-archive-bot-section" id="toc-gwern-haskell-wikipedia-archive-bot-section">“Writing a Wikipedia Link Archive Bot”, Gwern 2008</a></li>
+<li><a href="/doc/cs/linkrot/archiving/index#gwern-haskell-archiving-github-section" id="toc-gwern-haskell-archiving-github-section">“Archiving GitHub”, Gwern 2011</a></li>
+<li><a href="/doc/cs/linkrot/archiving/index#gwern-haskell-wikipedia-rss-archive-bot-section" id="toc-gwern-haskell-wikipedia-rss-archive-bot-section">“Writing a Wikipedia RSS Link Archive Bot”, Gwern 2009</a></li>
+<li><a href="/doc/cs/linkrot/archiving/index#gwern-resilient-software-section" id="toc-gwern-resilient-software-section">“Resilient Haskell Software”, Gwern 2008</a></li>
+</ul></li>
+<li><a href="/doc/cs/linkrot/archiving/index#links" id="toc-links">Links</a>
+<ul>
+<li><a href="/doc/cs/linkrot/archiving/index#rougeux-2025-section" id="toc-rougeux-2025-section">“The Making of <em>Printing Types</em>”, Rougeux 2025</a></li>
+<li><a href="/doc/cs/linkrot/archiving/index#liu-2025-section" id="toc-liu-2025-section">“<code>cyc-Archive</code>: An Archive of Material Related to the Cyc Project”, Liu 2025</a></li>
+<li><a href="/doc/cs/linkrot/archiving/index#rougeux-2025-section" id="toc-rougeux-2025-section">“‘New York and Erie Railroad Organizational Diagram’: A Recreation of One of the First Charts of Its Kind from the 19<sup>th</sup> Century”, Rougeux 2025</a></li>
+<li><a href="/doc/cs/linkrot/archiving/index#rosenthal-2025-section" id="toc-rosenthal-2025-section">“Archival Storage”, Rosenthal 2025</a></li>
+<li><a href="/doc/cs/linkrot/archiving/index#lane-et-al-2025-section" id="toc-lane-et-al-2025-section">“ELIZA Reanimated: The World’s First Chatbot Restored on the World’s First Time Sharing System”, Lane et al 2025</a></li>
+<li><a href="/doc/cs/linkrot/archiving/index#_uqUn-1E0-section" id="toc-_uqUn-1E0-section">“Visualizing All Books of the World in ISBN-Space”</a></li>
+<li><a href="/doc/cs/linkrot/archiving/index#verstak-acharya-2024-section" id="toc-verstak-acharya-2024-section">“Google Scholar Turns 20: Fun Facts about Google Scholar § The Early Days”, Verstak &amp; Acharya 2024</a></li>
+<li><a href="/doc/cs/linkrot/archiving/index#_Ne1ji9rw-section" id="toc-_Ne1ji9rw-section">“How Do Archivists Package Things? The Battle of the Boxes”</a></li>
+<li><a href="/doc/cs/linkrot/archiving/index#harrington-2024-section" id="toc-harrington-2024-section">“The Untold Story Behind a Meteoric Rise: The Early Days of Valve from a Woman Inside”, Harrington 2024</a></li>
+<li><a href="/doc/cs/linkrot/archiving/index#goodwin-2024-section" id="toc-goodwin-2024-section">“HUGE Google Search Document Leak Reveals Inner Workings of Ranking Algorithm: The Documents Reveal How Google Search Is Using, or Has Used, Clicks, Links, Content, Entities, Chrome Data and More for Ranking.”, Goodwin 2024</a></li>
+<li><a href="/doc/cs/linkrot/archiving/index#jones-et-al-2023-section" id="toc-jones-et-al-2023-section">“Insights from a Laboratory Fire”, Jones et al 2023</a></li>
+<li><a href="/doc/cs/linkrot/archiving/index#brunelle-et-al-2021-section" id="toc-brunelle-et-al-2021-section">“Introducing A Dark Web Archival Framework”, Brunelle et al 2021</a></li>
+<li><a href="/doc/cs/linkrot/archiving/index#ratcliffe-2019-section" id="toc-ratcliffe-2019-section">“Gscan2pdf: A GUI to Produce PDFs from Scanned Documents”, Ratcliffe 2019</a></li>
+<li><a href="/doc/cs/linkrot/archiving/index#elsey-2016-section" id="toc-elsey-2016-section">“When Nothing Ever Goes Out of Print: Maintaining Backlist Ebooks”, Elsey 2016</a></li>
+<li><a href="/doc/cs/linkrot/archiving/index#tweney-ayala-2015-section" id="toc-tweney-ayala-2015-section">“Memory and the Construction of Scientific Meaning: Michael Faraday’s Use of Notebooks and Records”, Tweney &amp; Ayala 2015</a></li>
+<li><a href="/doc/cs/linkrot/archiving/index#klein-et-al-2014-section" id="toc-klein-et-al-2014-section">“Scholarly Context Not Found: One in Five Articles Suffers from Reference Rot”, Klein et al 2014</a></li>
+<li><a href="/doc/cs/linkrot/archiving/index#levy-2014-section" id="toc-levy-2014-section">“The Gentleman Who Made Google Scholar: Google’s Tool for Empowering Research Is 10 Years Old. Its Founder Is Just Beginning”, levy 2014</a></li>
+<li><a href="/doc/cs/linkrot/archiving/index#zittrain-albert-2013-section" id="toc-zittrain-albert-2013-section">“Perma: Scoping and Addressing the Problem of Link and Reference Rot in Legal Citations”, Zittrain &amp; Albert 2013</a></li>
+<li><a href="/doc/cs/linkrot/archiving/index#_n6HeS94_-section" id="toc-_n6HeS94_-section">“John Bruno Hare Obituary”</a></li>
+<li><a href="/doc/cs/linkrot/archiving/index#aronsky-et-al-2007-section" id="toc-aronsky-et-al-2007-section">“The Prevalence and Inaccessibility of Internet References in the Biomedical Literature at the Time of Publication”, Aronsky et al 2007</a></li>
+<li><a href="/doc/cs/linkrot/archiving/index#greene-meissner-2005-section" id="toc-greene-meissner-2005-section">“More Product, Less Process: Revamping Traditional Archival Processing”, Greene &amp; Meissner 2005</a></li>
+<li><a href="/doc/cs/linkrot/archiving/index#dobra-fienberg-2004-section" id="toc-dobra-fienberg-2004-section">“How Large Is the World Wide Web?”, Dobra &amp; Fienberg 2004</a></li>
+<li><a href="/doc/cs/linkrot/archiving/index#hey-trefethen-2003-section" id="toc-hey-trefethen-2003-section">“The Data Deluge: An E-Science Perspective”, Hey &amp; Trefethen 2003</a></li>
+<li><a href="/doc/cs/linkrot/archiving/index#lawrence-2001-section" id="toc-lawrence-2001-section">“Free Online Availability Substantially Increases a Paper’s Impact”, Lawrence 2001</a></li>
+<li><a href="/doc/cs/linkrot/archiving/index#bradlow-schmittlein-2000-section" id="toc-bradlow-schmittlein-2000-section">“The Little Engines That Could: Modeling the Performance of World Wide Web Search Engines”, Bradlow &amp; Schmittlein 2000</a></li>
+<li><a href="/doc/cs/linkrot/archiving/index#shōtetsu-carter-1997-section" id="toc-shōtetsu-carter-1997-section"><em>Unforgotten Dreams: Poems by the Zen Monk Shōtetsu</em>, Shōtetsu &amp; Carter 1997</a></li>
+<li><a href="/doc/cs/linkrot/archiving/index#_iQIoaAIl-section" id="toc-_iQIoaAIl-section">“<em>Space Jam</em> Homepage”</a></li>
+<li><a href="/doc/cs/linkrot/archiving/index#tweney-1991-section" id="toc-tweney-1991-section">“Faraday’s Notebooks: the Active Organization of Creative Science”, Tweney 1991</a></li>
+<li><a href="/doc/cs/linkrot/archiving/index#witty-1973-section" id="toc-witty-1973-section">“The Other <em>Pínakes</em> and Reference Works of Callimachus”, Witty 1973</a></li>
+<li><a href="/doc/cs/linkrot/archiving/index#witty-1958-section" id="toc-witty-1958-section">“The <em>Pínakes</em> of Callimachus”, Witty 1958</a></li>
+<li><a href="/doc/cs/linkrot/archiving/index#_5E7MzBYH-section" id="toc-_5E7MzBYH-section">“How Archives Can Make—Or Break—A Philosopher’s Reputation”</a></li>
+<li><a href="/doc/cs/linkrot/archiving/index#_tJiwP-Mw-section" id="toc-_tJiwP-Mw-section">“The Backrooms of the Internet Archive”</a></li>
+<li><a href="/doc/cs/linkrot/archiving/index#_pZ2a2Sca-section" id="toc-_pZ2a2Sca-section">“The Original WWW Proposal Is a Word for Macintosh 4.0 File from 1990, Can We Open It?”</a></li>
+<li><a href="/doc/cs/linkrot/archiving/index#_1BfRaw8n-section" id="toc-_1BfRaw8n-section">“The Old Family Photos Project: Lessons in Creating Family Photos That People Want to Keep”, Schindler 2026</a></li>
+<li><a href="/doc/cs/linkrot/archiving/index#_FNxhcGu8-section" id="toc-_FNxhcGu8-section">“SingleFile”, Lormeau 2026</a></li>
+<li><a href="/doc/cs/linkrot/archiving/index#_UuaES1bV-section" id="toc-_UuaES1bV-section">“Century-Scale Storage: If You Had to Store Something for 100 Years, How Would You Do It?”, Neely-Cohen 2026</a></li>
+<li><a href="/doc/cs/linkrot/archiving/index#_3OA14h7_-section" id="toc-_3OA14h7_-section">“A Lunar Library”</a></li>
+<li><a href="/doc/cs/linkrot/archiving/index#_Gg5txYLl-section" id="toc-_Gg5txYLl-section">“2024 Guide on Removing DRM from Kobo &amp; Kindle Ebooks”</a></li>
+<li><a href="/doc/cs/linkrot/archiving/index#_MC3j3TLB-section" id="toc-_MC3j3TLB-section">“Internet Archive Hacked, Data Breach Impacts 31 Million Users”</a></li>
+<li><a href="/doc/cs/linkrot/archiving/index#_O_7nr7en-section" id="toc-_O_7nr7en-section">“Policymakers Don’t Have Access to Paywalled Articles”</a></li>
+<li><a href="/doc/cs/linkrot/archiving/index#_tpKGIusm-section" id="toc-_tpKGIusm-section">“To Preserve Their Work—And Drafts of History—Journalists Take Archiving into Their Own Hands”</a></li>
+<li><a href="/doc/cs/linkrot/archiving/index#titled-links-wikipedia" id="toc-titled-links-wikipedia">Wikipedia (6)</a></li>
+</ul></li>
+<li><a href="/doc/cs/linkrot/archiving/index#miscellaneous" id="toc-miscellaneous">Miscellaneous</a></li>
+<li><a href="/doc/cs/linkrot/archiving/index#link-bibliography-section" id="toc-link-bibliography-section">Bibliography</a></li>
+</ul>
+</div>
+---
+/doc/design/typography/index
+‘typography’ directory
+
+2019-11-10
+2026-02-04
+
+design/visualization
+<figure><img class="float-right page-thumbnail invert-not outline" height="0" width="0" src="/doc/design/typography/2026-01-02-gwern-apollonian1-exampleofsinglewordvsdoublewordlinebreakinginpoems.png" title="" alt=""></figure><div class="page-description-annotation">
+<p>Bibliography for directory <code>design/typography</code>, most recent first: 11 <a href="/doc/design/typography/index#see-alsos" class="icon-not">related tags</a>, 253 <a href="/doc/design/typography/index#links" class="icon-not">annotations</a>, &amp; 141 <a href="/doc/design/typography/index#miscellaneous" class="icon-not">links</a> (<a href="/doc/design/index" class="link-page link-tag directory-indexes-upwards link-annotated" data-link-icon="arrow-up-left" data-link-icon-type="svg" rel="tag" title="Link to parent directory">parent</a>).</p>
+</div>
+<div class="columns TOC">
+<ul><li><a href="/doc/design/typography/index#see-also" id="toc-see-also">See Also</a></li><li><a href="/doc/design/typography/index#gwern" id="toc-gwern">Gwern</a><ul>
+<li><a href="/doc/design/typography/index#gwern-2026-proportionalpreproblem-section" id="toc-gwern-2026-proportionalpreproblem-section">“Proportional Fonts in <code>pre</code> Tags Do Not Preserve WYSIWYG Whitespace or Vertical Alignment”, Gwern 2026</a></li>
+<li><a href="/doc/design/typography/index#gwern-2026-apollonian1-printed-demo-section" id="toc-gwern-2026-apollonian1-printed-demo-section">“‘Apollonian #1: The Counted &amp; the Crowned’, by Gwern, GPT-5.2 Pro, Claude-4.5-Opus, Kimi K2 Thinking, Gemini-3-Pro-Preview · Print PDF”, Gwern 2026</a></li>
+<li><a href="/doc/design/typography/index#gwern-poetry-html-section" id="toc-gwern-poetry-html-section">“Poetry HTML Typesetting”, Gwern 2026</a></li>
+<li><a href="/doc/design/typography/index#gwern-2026-centeredcaesurascreenshot-section" id="toc-gwern-2026-centeredcaesurascreenshot-section">“CSS Demo of Vertically Aligned Alliterative Verse in the Poem ‘Apollonian #1: The Counted &amp; the Crowned’”, Gwern 2026</a></li>
+<li><a href="/doc/design/typography/index#claude-2-et-al-2023-section" id="toc-claude-2-et-al-2023-section">“Claude-2: Bats With Baby Faces”, Claude-2 et al 2023</a></li>
+<li><a href="/doc/design/typography/index#gwern-design-graveyard-section" id="toc-gwern-design-graveyard-section">“Design Graveyard”, Gwern 2010</a></li>
+<li><a href="/doc/design/typography/index#gwern-sidenote-section" id="toc-gwern-sidenote-section">“Sidenotes In Web Design”, Gwern 2020</a></li>
+<li><a href="/doc/design/typography/index#gwern-subscript-section" id="toc-gwern-subscript-section">“Subscripts For Citations”, Gwern 2020</a></li>
+<li><a href="/doc/design/typography/index#gwern-utext-section" id="toc-gwern-utext-section">“Utext: Rich Unicode Documents”, Gwern 2023</a></li>
+<li><a href="/doc/design/typography/index#gwern-ab-test-indent-section" id="toc-gwern-ab-test-indent-section">“A/B Testing Indentation &amp; Justification”, Gwern 2022</a></li>
+<li><a href="/doc/design/typography/index#gwern-font-section" id="toc-gwern-font-section">“Who Buys Fonts?”, Gwern 2021</a></li>
+<li><a href="/doc/design/typography/index#gwern-design-section" id="toc-gwern-design-section">“Design Of This Website”, Gwern 2010</a></li>
+<li><a href="/doc/design/typography/index#gwern-lorem-section" id="toc-gwern-lorem-section">“Lorem Ipsum”, Gwern 2020</a></li>
+<li><a href="/doc/design/typography/index#gwern-ab-test-section" id="toc-gwern-ab-test-section">“A/B Testing Long-Form Readability on Gwern.net”, Gwern 2012</a></li>
+<li><a href="/doc/design/typography/index#gwern-fake-journal-club-section" id="toc-gwern-fake-journal-club-section">“Fake Journal Club: Teaching Critical Reading”, Gwern 2022</a></li>
+<li><a href="/doc/design/typography/index#gwern-variable-section" id="toc-gwern-variable-section">“Rare Greek Variables”, Gwern 2021</a></li>
+<li><a href="/doc/design/typography/index#gwern-2020-smallcaps-filter-section" id="toc-gwern-2020-smallcaps-filter-section">“Auto-Smallcaps Filter”, Gwern 2020</a></li>
+</ul></li><li><a href="/doc/design/typography/index#links" id="toc-links">Links</a><ul><li><a href="/doc/design/typography/index#zhu-et-al-2026-section" id="toc-zhu-et-al-2026-section">“PaperBanana: Automating Academic Illustration for AI Scientists”, Zhu et al 2026</a></li><li><a href="/doc/design/typography/index#heller-2026-section" id="toc-heller-2026-section">“Font of the Month: Noeler”, Heller 2026</a></li><li><a href="/doc/design/typography/index#gwern-2026-section" id="toc-gwern-2026-section">“Example on ‘Apollonian #1’ of How Regular Line-Breaking Can Result in Confusing-To-Read Orphans”, Gwern 2026</a></li><li><a href="/doc/design/typography/index#swerdlow-2025-section" id="toc-swerdlow-2025-section">“Dۭۭۭۭۭۭۭۭۭۭۭۭۭۭۭۭۭۭۢۢۢۢۢۢۢۢۢۢۢۢۢۢۢrۭۭۭۭۭۭۭۭۭۭۭۭۭۭۭۭۭۭۢۢۢۢۢۢۢۢۢۢۢۢۢۢۢaۣۣۣۣۭۭۭۭۭۭۭۭۭۭۭۭۭۭۜۢۢۢۢۢۢۢۢۢۢۢۢۢۢwۣۣۣۣۭۭۭۭۭۭۭۭۭۭۭۭۭۭۜۜۜۜۜۢۢۢۢۢۢۢۢۢۢۢiۣۣۣۣۣۭۭۭۭۭۭۭۭۭۭۭۭۭۜۜۜۜۜۢۢۢۢۢۢۢۢۢۢۢnۣۣۣۣۣۣۭۭۭۭۭۭۭۭۭۭۭۭۜۜۜۜۜۜۢۢۢۢۢۢۢۢۢۢۢgۣۣۣۣۣۣۭۭۭۭۭۭۭۭۭۭۭۭۜۜۜۜۜۜۢۢۢۢۢۢۢۢۢۢۢ Wۣۣۣۣۣۣۭۭۭۭۭۭۭۭۭۭۭۭۜۜۜۜۜۜۜۜۜۢۢۢۢۢۢۢۢiۣۣۣۣۣۣۣۣۭۭۭۭۭۭۭۭۭۭۭۜۜۜۜۜۜۜۜۜۜۢۢۢۢۢۢۢۢtۣۣۣۣۣۣۣۣۭۭۭۭۭۭۭۭۭۭۭۜۜۜۜۜۜۜۜۜۜۜۢۢۢۢۢۢۢhۣۣۣۣۣۣۣۣۭۭۭۭۭۭۭۭۭۭۭۜۜۜۜۜۜۜۜۜۜۜۜۢۢۢۢۢۢ Zۣۣۣۣۣۣۣۭۭۭۭۭۭۭۭۭۭۭۜۜۜۜۜۜۜۜۜۜۜۜۜۢۢۢۢۢeۣۣۣۣۣۣۭۭۭۭۭۭۭۭۭۭۭۭۜۜۜۜۜۜۜۜۜۜۜۜۜۜۢۢۢۢۢrۣۣۣۣۣۣۣۭۭۭۭۭۭۣۭۭۭۭۭۜۜۜۜۜۜۜۜۜۜۜۜۜۜۜۢۢۢۢoۣۣۣۣۣۣۣۭۭۭۭۭۭۣۭۭۭۭۭۜۜۜۜۜۜۜۜۜۜۜۜۜۜۜۜۢۢۢ-Wۣۣۣۣۣۣۭۭۭۭۭۭۭۣۭۭۭۭۜۜۜۜۜۜۜۜۜۜۜۜۜۜۜۢۢۢۢiۣۣۣۣۣۣۣۭۭۭۭۭۣۣۭۭۭۭۭۜۜۜۜۜۜۜۜۜۜۜۜۜۜۜۢۢۢۢdۣۭۣۣۣۣۣۣۣۣۣۣۣۣۣۭۭۭۭۜۜۜۜۜۜۜۜۜۜۜۜۜۜۜۢۢۢۢtۣۭۣۣۣۣۣۣۭۭۭۭۣۣۭۭۭۭۭۜۜۜۜۜۜۜۜۜۜۜۜۜۜۢۢۢۢۢhۣۣۭۣۣۣۭۭۭۭۭۭۭۣۭۭۭۭۜۜۜۜۜۜۜۜۜۜۜۜۜۜۢۢۢۢۢ Cۣۣۣۭۣۭۭۭۭۭۭۭۭۣۭۭۭۭۜۜۜۜۜۜۜۜۜۜۜۜۜۢۢۢۢۢhۣۣۣۣۣۭۭۭۭۭۭۭۭۣۭۭۭۭۜۜۜۜۜۜۜۜۜۜۜۜۜۢۢۢۢۢaۣۣۣۣۣۭۭۭۭۭۭۭۭۣۭۭۭۭۜۜۜۜۜۜۜۜۜۜۜۜۢۢۢۢۢۢrۣۣۣۣۣۭۭۭۭۭۭۭۭۭۭۭۭۭۜۜۜۜۜۜۜۜۜۜۜۢۢۢۢۢۢۢaۣۣۣۣۣۭۭۭۭۭۭۭۭۭۭۭۭۭۜۜۜۜۜۜۜۜۜۜۢۢۢۢۢۢۢۢcۣۣۣۣۣۭۭۭۭۭۭۭۭۭۭۭۭۭۜۜۜۜۜۜۜۜۜۜۜۢۢۢۢۢۢۢtۣۣۣۣۣۣۭۭۭۭۭۭۭۭۭۭۭۭۜۜۜۜۜۜۜۜۜۜۜۢۢۢۢۢۢۢeۣۣۣۣۣۣۭۭۭۭۭۭۭۭۭۭۭۭۜۜۜۜۜۜۜۜۜۜۜۢۢۢۢۢۢۢrۣۣۣۣۣۣۭۭۭۭۭۭۭۭۭۭۭۭۜۜۜۜۜۜۜۢۜۢۢۢۢۢۢۢۢsۣۣۣۣۣۣۭۭۭۭۭۭۭۭۭۭۭۭۜۜۜۜۜۜۜۢۢۢۢۢۢۢۢۢۢ: A Set of 18 <em>Tajwid</em> Unicode Characters Generally Only Seen in the Qur’an Broke My Assumptions about Text Rendering”, Swerdlow 2025</a></li><li><a href="/doc/design/typography/index#humphries-2025-section" id="toc-humphries-2025-section">“Gemini 3 Solves Handwriting Recognition and It’s a Bitter Lesson; Testing Shows That Gemini 3 Has Effectively Solved Handwriting on English Texts, One of the Oldest Problems in AI, Achieving Expert Human Levels of Performance”, Humphries 2025</a></li><li><a href="/doc/design/typography/index#heller-2025-section" id="toc-heller-2025-section">“Font of the Month: Archive Matrix”, Heller 2025</a></li><li><a href="/doc/design/typography/index#prokopov-2025-section" id="toc-prokopov-2025-section">“I Am Sorry, but Everyone Is Getting Syntax Highlighting Wrong: If Everything Is Highlighted, Nothing Is Highlighted”, Prokopov 2025</a></li><li><a href="/doc/design/typography/index#budiu-2025-section" id="toc-budiu-2025-section">“Apple’s New ‘Liquid Glass’ Visual Language Is Cracked, and Usability Suffers in IOS 26”, Budiu 2025</a></li><li><a href="/doc/design/typography/index#tarng-et-al-2025-section" id="toc-tarng-et-al-2025-section">“Visual Features Across Modalities: SVG and ASCII Art Reveal Cross-Modal Understanding”, Tarng et al 2025</a></li><li><a href="/doc/design/typography/index#trumbo-2025-section" id="toc-trumbo-2025-section">“<em>Heliand: An Anglish Loretelling; An Anglisc Gildanwrit of the Godlorish Tidings</em> § Rewards [Kickstarter]”, Trumbo 2025</a></li><li><a href="/doc/design/typography/index#tei-2025-section" id="toc-tei-2025-section">“Guidelines for Electronic Text Encoding and Interchange: § 6 Verse”, TEI 2025</a></li><li><a href="/doc/design/typography/index#jenissimo-2025-section" id="toc-jenissimo-2025-section">“<code>unfake.js</code>: Fix AI Pixel Art and Vector Images Right in Your Browser”, jenissimo 2025</a></li><li><a href="/doc/design/typography/index#gutenberg-2025-section" id="toc-gutenberg-2025-section">“CSS Cookbook/Poetry”, Gutenberg 2025</a></li><li><a href="/doc/design/typography/index#sherman-2025-section" id="toc-sherman-2025-section">“The Arcane Alphabets of Black Sabbath: To Commemorate Ozzy Osbourne, We Take a Deep Dive into the Obscure Sources for the Titling Designs on Black Sabbath’s Early Album Covers”, Sherman 2025</a></li><li><a href="/doc/design/typography/index#heller-2025-section" id="toc-heller-2025-section">“Jana Thork Font”, Heller 2025</a></li><li><a href="/doc/design/typography/index#anthony-2025-section" id="toc-anthony-2025-section">“MacPaint Art From The Mid-80s Still Looks Great Today”, Anthony 2025</a></li><li><a href="/doc/design/typography/index#aitechnopagan-2025-section" id="toc-aitechnopagan-2025-section">AITechnoPagan @ “2025-05-24”</a></li><li><a href="/doc/design/typography/index#uncle_deluge-2025-section" id="toc-uncle_deluge-2025-section">uncle_deluge @ “2025-05-23”</a></li><li><a href="/doc/design/typography/index#horning-2025-section" id="toc-horning-2025-section">“Font Activations: A Note on the Type”, Horning 2025</a></li><li><a href="/doc/design/typography/index#denis-2025-section" id="toc-denis-2025-section">“Mystical Notation for PostScript”, Denis 2025</a></li><li><a href="/doc/design/typography/index#hellers-2025-section" id="toc-hellers-2025-section">“Font of the Month: Ella Stencil Font”, Hellers 2025</a></li><li><a href="/doc/design/typography/index#kosiyabong-2025-section" id="toc-kosiyabong-2025-section">“Experimo Specimen”, Kosiyabong 2025</a></li><li><a href="/doc/design/typography/index#rougeux-2025-section" id="toc-rougeux-2025-section">“Remaking of ‘The New York and Erie Railroad Organizational Diagram’”, Rougeux 2025</a></li><li><a href="/doc/design/typography/index#rougeux-2025-section" id="toc-rougeux-2025-section">“‘New York and Erie Railroad Organizational Diagram’: A Recreation of One of the First Charts of Its Kind from the 19<sup>th</sup> Century”, Rougeux 2025</a></li><li><a href="/doc/design/typography/index#pippi-et-al-2025-section" id="toc-pippi-et-al-2025-section">“Emuru: Zero-Shot Styled Text Image Generation, but Make It Autoregressive”, Pippi et al 2025</a></li><li><a href="/doc/design/typography/index#jones-2025-section" id="toc-jones-2025-section">“Kerning, the Hard Way”, Jones 2025</a></li><li><a href="/doc/design/typography/index#wichary-2025-section" id="toc-wichary-2025-section">“Gorton: The Hardest Working Font in Manhattan”, Wichary 2025</a></li><li><a href="/doc/design/typography/index#bell-2025-section" id="toc-bell-2025-section">“OpenAI Unveils Its First Ever Rebrand: A New Typeface, Word Mark, Symbol and Palette Underpin All the Ways in Which OpenAI’s Technology Interacts With the Real World”, Bell 2025</a></li><li><a href="/doc/design/typography/index#spiegel-et-al-2025-section" id="toc-spiegel-et-al-2025-section">“Visual Theory of Mind Enables the Invention of Proto-Writing”, Spiegel et al 2025</a></li><li><a href="/doc/design/typography/index#rosmalen-2025-section" id="toc-rosmalen-2025-section">“Archive Matrix Font Type Specimen”, Rosmalen 2025</a></li><li><a href="/doc/design/typography/index#_hddQdIsk-section" id="toc-_hddQdIsk-section">“Walmart Introduces Updated Look and Feel: A Testament to Heritage and Innovation”</a></li><li><a href="/doc/design/typography/index#_VgTkQkkw-section" id="toc-_VgTkQkkw-section">“Won’t versus Can’t: Sandbagging-Like Behavior from Claude Models”</a></li><li><a href="/doc/design/typography/index#_LGfznVBI-section" id="toc-_LGfznVBI-section">“Making a Unicode Progress Bar”</a></li><li><a href="/doc/design/typography/index#sanity-2024-section" id="toc-sanity-2024-section">“Stega-Encoding [Embedding Metadata in Apps With Unicode Steganography]”, Sanity 2024</a></li><li><a href="/doc/design/typography/index#__r6-7nvH-section" id="toc-__r6-7nvH-section">“Invisible Unicode Text That AI Chatbots Understand and Humans Can’t? Yep, It’s a Thing”</a></li><li><a href="/doc/design/typography/index#_NsjkDL1H-section" id="toc-_NsjkDL1H-section">“My Dead Father Is ‘Writing’ Me Notes Again”</a></li><li><a href="/doc/design/typography/index#wickström-2024-section" id="toc-wickström-2024-section">“The Monospace Web: A Minimalist Design Exploration”, Wickström 2024</a></li><li><a href="/doc/design/typography/index#mac-conger-2024-1-section" id="toc-mac-conger-2024-1-section">“How Elon Musk Got Tangled Up in Blue § Homoglyph Attack”, Mac &amp; Conger 2024</a></li><li><a href="/doc/design/typography/index#jingyi-2024-section" id="toc-jingyi-2024-section">“<code>handwriter.ttf</code>: Handwriting Synthesis With Harfbuzz WASM”, Jingyi 2024</a></li><li><a href="/doc/design/typography/index#me-kell-2024-section" id="toc-me-kell-2024-section">“Pandoc Proposal (#10077): Preserve Leading, Trailing, and Multiple Interword Spaces <span class="editorial">[Rejected]</span>”, me-kell 2024</a></li><li><a href="/doc/design/typography/index#esfahbod-2024-section" id="toc-esfahbod-2024-section">“State of Text Rendering 2024”, Esfahbod 2024</a></li><li><a href="/doc/design/typography/index#414design-2024-section" id="toc-414design-2024-section">“4lph4bet_processor: This Script Processes a Grid Image Generated With the 4lph4bet Family of LoRAs for Stable Diffusion 1.5 for Font Creation Using Calligraphr”, 414design 2024</a></li><li><a href="/doc/design/typography/index#mdn-2024-section" id="toc-mdn-2024-section">“</a><pre><code>: The Preformatted Text HTML Element”, MDN 2024
+“Fonts Hanging Out”, Cordova 2024
+“ArtPrompt: ASCII Art-Based Jailbreak Attacks against Aligned LLMs”, Jiang et al 2024
+“FBSH: Font With Built-In Syntax Highlighting for Hand-Coded Websites”, Lotvonen 2024
+“800 Years of English Handwriting”, Office 2024
+“Honk Color Font (Ek Type)”, Goshar &amp; Datye 2024
+“Honk Color Font Specimen”, Goshar &amp; Datye 2024
+“ASCII Smuggler Tool: Crafting Invisible Text and Decoding Hidden Codes”
+“Microsoft Copilot: From Prompt Injection to Exfiltration of Personal Information”
+“FontDiffuser: One-Shot Font Generation via Denoising Diffusion With Multi-Scale Content Aggregation and Style Contrastive Learning”, Yang et al 2023
+“StarVector: Generating Scalable Vector Graphics Code from Images”, Rodriguez et al 2023
+“The LessWrong 2022 Review § Cost of Book Production”, Habryka 2023
+“Evolving the Reddit Brand: A More Accessible, Bespoke Typography, New Conversation Bubbles and Colors, and a New Snoo Logo—Now With Opposable Thumbs!”, Reddit 2023
+“TextDiffuser-2: Unleashing the Power of Language Models for Text Rendering”, Chen et al 2023
+“AnyText: Multilingual Visual Text Generation And Editing”, Tuo et al 2023
+“HGGC Explores $4 Billion Sale of Typeface Firm Monotype”, Gould &amp; Tan 2023
+“Typography on Pencils, 1–5”, Present &amp; Correct 2023
+“‘The Uniformity of a Distinctive National Character’: Loops, Knots, and Bernardo De Gálvez’s Calligraphic Equestrian Portrait”, Hyman 2023
+“Mangosteen (Ek Type) [Malayalam Circular Font]”, Shingre 2023
+“Mangosteen Specimen”, Shingre 2023
+“Character-Aware Models Improve Visual Text Rendering”, Liu et al 2022
+“Colors of an App Icon: 2022 Edition”, Hall 2022
+“‘Morris Troy’ Font in Use”
+“Story Beyond the Eye: Glyph Positions Break PDF Text Redaction”, Bland et al 2022
+“Fast Text Placement Scheme for ASCII Art Synthesis”, Chung &amp; Kwon 2022
+“Combinator-Nbe: nbe.agda § Line 64”, Huang 2022
+“COLRv1 Color Gradient Vector Fonts in Chrome 98”, Röttsches &amp; Sheeter 2022
+“Mimoid [A Stanislaw Lem-Inspired Topologically Distorted Variable Font]”, Wekwert 2022
+“Fooled by Beautiful Data: Visualization Esthetics Bias Trust in Science, News, and Social Media”, Lin &amp; Thornton 2022
+“An Unsupervised Font Style Transfer Model Based on Generative Adversarial Networks”, Zeng &amp; Pan 2021
+“[Jayme Odgers’s Remiscences of Working for Paul Rand]”, Odgers 2021
+“HTCN: Harmonious Text Colorization Network for Visual-Textual Presentation Design”, Yang et al 2021c
+“Unpaired Font Family Synthesis Using Conditional Generative Adversarial Networks”, Hassan et al 2021
+“Say Hello to Our Big New Japanese Collection With Zen Fonts: Learn about the Complex Beauty of Japanese Fonts”
+“A Very Niche, Very Logical Font Inspired by Vintage Typewriters + Python Script: Jeremy Mickel’s Latest Is a No-Nonsense [Script/italic] Monospace/Monoscript With a Certain Type of Charm”, Gosling 2021
+“Why Are the Poetry Format Options on the Web So S—Y? Attention Must Be Paid to Style and Formatting”, Nester 2021
+“Time Travel: A Live Demo of the Intermedia Hypertext System—Circa 1989”, Meyrowitz 2020
+“ALL-CAPS”, Arbel &amp; Toler 2020b
+“TT2020: Advanced, Open Source, Hyperrealistic, Multilingual Typewriter Font for a New Decade”, Brennan 2020
+“Footnote 36: Redisturbed: In This Issue We’re Focusing on the Redisturbed Typeface For The New Decade [Redisturbed Is a Fresh Look at Our Original Disturbance Typeface from 1993. Looking Deeper at the Concept of a Unicase Alphabet and Designing It for Expanded Use Today. More Weights, Optical Sizes, Language Support and OpenType Features.]”, Tankard 2020
+“The Samuel Johnson of Emoji”
+“Singular: Possible Futures of the Singularity”, Yu &amp; GPT-3 2020
+“Open Source Fonts Are Love Letters to the Design Community: Typefaces That Be Freely Used and Modified Give Others a Chance to Hone Their Craft—And Share Valuable Feedback”, Finley 2020
+“Free Movie Of the Week”, Things 2020
+“Text for Proofing Fonts: A Farewell to The Quick Brown Fox”, Hoefler 2020
+“What’s in a Font?: Ideological Perceptions of Typography”, Haenschen &amp; Tamul 2019
+“Moxomenon”, Searls 2019
+“Founding and Growing Adobe Systems, Inc”, Warnock &amp; Geschke 2019
+“popups.js”, Achmiz 2019
+“wikipedia-Popups.js”, Achmiz 2019
+“This Page Is a Truly Naked, Brutalist Html Quine”, Bambrick 2019
+“Minipax: A Typeface for Dystopias”, Ronot 2019
+“The First Printed Math Books”, Boardley 2019
+“B612 Is an Highly Legible Open Source Font Family, Designed and Tested to Be Used on Aircraft Cockpit Screens”, PolarSys et al 2019
+“FIGR: Few-Shot Image Generation With Reptile”, Clouâtre &amp; Demers 2019
+“What Every Engineer Should Know About Inventing § Chapter 4: Theories of Creativity [Wine/printing]”, Middendorf 2019 (page 5)
+“Everyday Printed Matter: Kurt Schwitters’s Experimental Typography”, Pröbsting 2019
+“Spooky Fizz Buzz § Pg42”, Menghrajani 2019 (page 42)
+“Logic Is a Warmly Technical Monospace Typeface in 5 Weights of Roman and Italic Styles, With a Special Connecting Script Version”, Mickel &amp; Hayes 2019
+“IA Writer Has 3 Custom Made Writing Fonts That Are Available for Download”, iA 2018
+“Issho: Designed by Dutchscot, London”, Designed 2018
+“Writing in Blood [Buddhism]”, Eisen 2018
+“Structural Typography: Type As Both Language and Composition”, Heck 2018
+“Rupi Kaur and the Rise of the Instagram Poet-Entrepreneur: Social Media Is Turning an Art Form into an Industry”, Hill &amp; Yuan 2018
+“Comic Shanns: a Classy Font for Programming”, González 2018
+“The Origins of PostScript”, Warnock 2018
+“The Devil’s in the g–tails: Deficient Letter-Shape Knowledge and Awareness despite Massive Visual Experience”, Wong et al 2018
+“Threading Is Sticky: How Threaded Conversations Promote Comment System User Retention”, Budak et al 2017
+“From Boiling Lead and Black Art: An Essay on the History of Mathematical Typography”, Smith 2017
+“Implementing Recommendations From Web Accessibility Guidelines: A Comparative Study of Nondisabled Users and Users With Visual Impairments”, Schmutz et al 2017
+“Consider Adding Explicit Semantics for Representing Poetry to Facilitate Reading With Assistive Technologies, Indication of Lines, Stanzas, Etc.”, jasonjgw 2017
+“Go Fonts: An Announcement”, Tao et al 2016
+“Blade Runner (Typeset In The Future)”, Addey 2016
+“When Nothing Ever Goes Out of Print: Maintaining Backlist Ebooks”, Elsey 2016
+“Implementing Recommendations From Web Accessibility Guidelines: Would They Also Provide Benefits to Nondisabled Users”, Schmutz et al 2016
+“Visions of the Future: 14 Space Travel Posters of Colorful, Exotic Space Settings Are Now Available Free for Downloading and Printing”, Goods et al 2016
+“The Colors Of An App Icon: A Study into the Color Distribution”, Hall 2015
+“Alien (Typeset In The Future)”, Addey 2014
+“The Sony Logo That Never Was: In 1981, Sony Asked the Public to Redesign Their Logo. Then It Realized It Was a Huge Mistake”, Brownlee 2014
+“Formatting Poetry Using CSS”, Mclain 2014
+“‘More Consistent and Systematic Than Any Form of Writing I Know’: Kurt Schwitters’s Systemschrift”, Fuller 2014
+“Introducing Courier Prime [Serif Monospace Font]”, August &amp; Dague-Greene 2013
+“Simple Ideas That Changed Printing and Publishing”, Warnock 2012
+“Rebuilding the Typographic Society”, Butterick 2012
+Sweating Bullets: Notes about Inventing PowerPoint, Gaskins 2012
+“Hyphenation: Configurable Knuth-Liang Hyphenation”, Kmett 2012
+“I’m Comic Sans, Asshole [Short Imagined Monologues]”, Lacher 2010
+“How to Format Poetry on the Web: an Incomplete Guide”, Bonta 2010
+“The (Mostly) True Story of Helvetica and the New York City Subway”, Shaw 2008
+“Subpixel Text Encoding”, Sarnoff 2008
+“BREATHTAKING Design Strategy”, Group 2008
+“CTAN: /tex-Archive/language/hyph-Utf8”, Miklavec et al 2008
+“The Road to Clarity”, Yaffa 2007
+“Minuscule Type Specimen”, Huot-Marchand 2007
+“The Phenomenon of the &quot;Gros Canon&quot;”, Amert 2005
+“Host: Deep into the Mercenary World of Take-No-Prisoners Political Talk Radio”, Wallace 2005
+“Sparkline Theory and Practice”, Tufte 2004
+“Sparkline Theory and Practice”, Tufte 2004
+“Black And White Haven Winamp Skin”
+“Type &amp; Typography: Highlights from Matrix, the Review for Printers and Bibliophiles”, Archive 2003
+“About John August”, August 2003
+“Naked Objects: a Technique for Designing More Expressive Systems”, Pawson &amp; Matthews 2001
+“Joachim of Fiore and Apocalyptic Immanence”, Ziolo 2001
+“Letter Spirit (Part Two): Modeling Creativity in a Visual Domain”, Rehling 2001
+“Monotype and Photosetting”, Boag 2000
+“こめじるし【※, 米印】”, Gally 2000
+“German Bold Italic”, Sugiyama 1997
+“About The Classic Typewriter Page”, Polt 1995
+“The Classic Typewriter Page: Typewriter Fonts”, Polt 1995
+“Letter Spirit: An Emergent Model of the Perception and Creation of Alphabetic Style”, Hofstadter &amp; McGraw 1993
+“Letter Spirit: An Architecture for Creativity in a Microdomain”, McGraw &amp; Hofstadter 1993
+“Miles Albert Tinker and the Zone of Optimal Typography”, Sutherland 1989
+“Hypertext and the Oxford English Dictionary”, Raymond &amp; Tompa 1988
+“Hypertext 1987: Keynote Address”, Dam 1988
+“The Printing of Mathematics”, Wishart 1988
+“Embedded Menus: Selecting Items in Context”, Koved &amp; Shneiderman 1986
+“Readability of Computer-Generated Fill-Justified Text”, Trollip &amp; Sales 1986
+“Error Patterns in Novice and Skilled Transcription Typing”, Grudin 1983
+“Meta-Font, Metamathematics, and Metaphysics: Comments on Donald Knuth’s Article ‘The Concept of a Meta-Font’”, Hofstadter 1982
+“The Concept of a Meta-Font”, Knuth 1982
+“The Letter S”, Knuth 1980
+“Saul Bass Pitch Video for Bell System Logo Redesign”, Bass 1969
+Legibility of Print, Tinker 1963
+The Printing of Mathematics: Aids for Authors and Editors and Rules for Compositors and Readers at the University Press, Oxford, Chaundy et al 1954
+“The Art of Spacing: A Treatise on the Proper Distribution of White Space in Typography”, Bartels 1926
+“R-P-O-P-H-E-S-S-A-G-R”, Cummings 1923
+“Human or Machine: A Subjective Comparison of Piet Mondrian’s ‘Composition With Lines’ (1917) and a Computer-Generated Picture”, Noll 1917
+“Jgs Font”
+“The World’s First Code-Free Sparkline Typeface: Displaying Charts in Text without Having to Use Code”
+“ASCII Characters Are Not Pixels: a Deep Dive into ASCII Rendering; a Look at How I Used Shape Vectors to Achieve Sharp, High-Quality ASCII Rendering”, Harri 2026
+“Why Are Tech Companies Making Custom Typefaces?”
+“Japanese Game Developers Face Ridiculously High Font License Fees following US Acquisition of Major Domestic Provider. Live-Service Games to Take the Biggest Blow”
+“Occlution Grotesque”
+“Screen Serif Fonts”, Achmiz 2026
+“Explaining Code Using ASCII Art”
+Web Typography, Rutter 2026
+“CSS: text-Wrap: Pretty”, MDN 2026
+“Markdeep Features: Admonitions”, McGuire 2026
+“Markdeep Features: Multiple Columns”, McGuire 2026
+“List of Pangrams”
+“Fredrick Brennan Homepage”, Brennan 2026
+“Departure Mono”
+“OpenType Font Features Guide”
+“CSS: text-Wrap”, MDN 2026
+“CSS: white-Space”, MDN 2026
+“PaperBanana: Automating Academic Illustration for AI Scientists”
+“Tufte CSS”
+“Ek Type”, Type 2026
+“PARANOIA SANS”
+“CMU Typewriter [Serif Monospace Font]”
+“Go Mono [Serif Monospace Font]”
+“BioRhyme Font”
+“Bitter Font”
+“Cutive Font”
+“Zilla Slab Font”
+Fonts In Use
+“Aleo Font Family”
+“Bad-Apple-Font: Playing ‘Bad Apple!​!’ With Harfbuzz WASM Shaper”, Jingyi 2026
+“How I Did Relay Quine”
+“z80-Sans: OpenType Font That Disassembles Z80 CPU Instructions”, nevesnunes 2026
+“Kelmscott Mono: A Black Letter for the Text Editor”, Calvin 2026
+“Ellipsizing of Text in Middle of String”
+“Y-Combinator Codex”
+“Past Lives of the Paragraph”
+“Blowing-Up-Groundhogs/font-Square-V2”
+“WT Morris Roman”, Company 2026
+“Jack Daw Fonts”
+“Two Slice, a Font That’s Only 2 Pixels Tall”, Fatula 2026
+“Hamiltonian Cycles on Ammann-Beenker Tilings”
+“Alan Dague-Greene”
+“ASCII Silhouettify Color Gallery”
+“Line Blocks”, Pandoc 2026
+“Butterick’s Practical Typography”
+“Triplicate Font”, Butterick 2026
+“Programming Prayer: The Woven Book of Hours (1886–1887)”
+“The Model Book of Calligraphy (1561–1596) [Image Gallery]”, Review 2026
+“W. W. Denslow’s Illustrations for The Wonderful Wizard of Oz”
+“Dr. Pfeffer’s Fonts [Latin, Gothic, Runic]”, Pfeffer 2026
+“Digital Color Meter User Guide for Mac”
+“Toshi Omagari”
+“WALL·E”
+“Dan Rhatigan”, Rhatigan 2026
+“Website Design—Why Do People Not Notice Our Enormous, Prominent, Clear and Contrasting Purple Banner?”
+“Scunthorpe Sans: a Profanity-Blocking Font”
+“Typophile”
+“Japanese Sound Effects and What They Mean”
+“Japanese Web Design: Why You So 2003?”
+“Notes on Monospace, Fonts, ASCII, Unicode”
+Fontemon
+“CodingFont”, Typogram 2026
+“Sunrise Font”
+“The Effect of CRTs on Pixel Art”
+“Kicks Condor”, Condor 2026
+“Creative Fansubbing Techniques: Part 1”
+“Creative Fansubbing Techniques: Part 2”
+“MonoLisa: Font Follows Function”
+“Towards Moore’s Law Software: Part 3 of 3”
+“Decoding the Defiance of Henry VIII’s First Wife”
+“An abjad for English”
+“A Letter We’ve Seen Millions of Times, yet Can’t Write: Despite Seeing It Millions of times in Pretty Much Every Picture Book, Every Novel, Every Newspaper and Every Email Message, People Are Essentially Unaware of the More Common Version of the Lowercase Print Letter ‘G’, Johns Hopkins Researchers Have Found”
+“Mathematical Notation: Past and Future”
+“Libertinus Mono [Serif Monospace Font]”
+“Surface-Stable Fractal Dithering”
+“Apple or IPod? Easy Fix for Adversarial Textual Attacks on OpenAI’s CLIP Model!”
+“Saul Bass Pitch Video for Bell System Logo Redesign § Stripes Are Modern”
+ProxyUniversal
+_Soilleir_
+poetengineer__
+“Bracket Symbols”, Munroe 2026
+“algol_nu [Syntax Highlighting Theme]”
+“Chinese Window Lattice And CSS”
+Sort By Magic
+
+typography-systems
+accessibility-typography
+font-design
+
+Wikipedia (67)
+
+Miscellaneous
+Bibliography</code></pre>
+</div>
+---
+/doc/cs/js/index
+‘JS’ directory
+
+2021-02-14
+2026-01-27
+
+design/typography design/visualization
+<figure><img class="float-right page-thumbnail invert-not outline" height="0" width="0" src="/doc/cs/js/2025-02-21-gwern-gwernnet-404pageguessesintendedurlusingsitemapeditdistance.jpg" title="" alt=""></figure><div class="page-description-annotation">
+<p>Bibliography for directory <code>cs/js</code>, most recent first: 40 <a href="/doc/cs/js/index#links" class="icon-not">annotations</a> &amp; 37 <a href="/doc/cs/js/index#miscellaneous" class="icon-not">links</a> (<a href="/doc/cs/index" class="link-page link-tag directory-indexes-upwards link-annotated" data-link-icon="arrow-up-left" data-link-icon-type="svg" rel="tag" title="Link to parent directory">parent</a>).</p>
+</div>
+<div class="columns TOC">
+<ul>
+<li><a href="/doc/cs/js/index#see-also" id="toc-see-also">See Also</a></li>
+<li><a href="/doc/cs/js/index#gwern" id="toc-gwern">Gwern</a>
+<ul>
+<li><a href="/doc/cs/js/index#gwern-poetry-html-section" id="toc-gwern-poetry-html-section">“Poetry HTML Typesetting”, Gwern 2026</a></li>
+<li><a href="/doc/cs/js/index#gwern-xanadu-section" id="toc-gwern-xanadu-section">“Project Xanadu: Even More Hindsight”, Gwern 2025</a></li>
+<li><a href="/doc/cs/js/index#gwern-design-graveyard-section" id="toc-gwern-design-graveyard-section">“Design Graveyard”, Gwern 2010</a></li>
+<li><a href="/doc/cs/js/index#gwern-sidenote-section" id="toc-gwern-sidenote-section">“Sidenotes In Web Design”, Gwern 2020</a></li>
+<li><a href="/doc/cs/js/index#gwern-help-section" id="toc-gwern-help-section">“Site Help”, Gwern 2024</a></li>
+<li><a href="/doc/cs/js/index#gwern-dropcap-section" id="toc-gwern-dropcap-section">“Dropcap Generation With AI”, Gwern 2023</a></li>
+<li><a href="/doc/cs/js/index#gwern-note-statistic-section" id="toc-gwern-note-statistic-section">“Statistical Notes”, Gwern 2014</a></li>
+<li><a href="/doc/cs/js/index#gwern-ab-test-indent-section" id="toc-gwern-ab-test-indent-section">“A/B Testing Indentation &amp; Justification”, Gwern 2022</a></li>
+<li><a href="/doc/cs/js/index#gwern-design-section" id="toc-gwern-design-section">“Design Of This Website”, Gwern 2010</a></li>
+<li><a href="/doc/cs/js/index#gwern-lorem-section" id="toc-gwern-lorem-section">“Lorem Ipsum”, Gwern 2020</a></li>
+<li><a href="/doc/cs/js/index#gwern-lorem-table-section" id="toc-gwern-lorem-table-section">“Lorem Ipsum: Tables”, Gwern 2020</a></li>
+<li><a href="/doc/cs/js/index#gwern-ab-test-section" id="toc-gwern-ab-test-section">“A/B Testing Long-Form Readability on Gwern.net”, Gwern 2012</a></li>
+<li><a href="/doc/cs/js/index#gwern-banner-section" id="toc-gwern-banner-section">“Banner Ads Considered Harmful”, Gwern 2017</a></li>
+</ul></li>
+<li><a href="/doc/cs/js/index#links" id="toc-links">Links</a>
+<ul>
+<li><a href="/doc/cs/js/index#willison-2025-section" id="toc-willison-2025-section">“I Ported JustHTML from Python to JavaScript With Codex CLI &amp; GPT-5.2 in 4.5 Hours”, Willison 2025</a></li>
+<li><a href="/doc/cs/js/index#d-2025-section" id="toc-d-2025-section">“Extreme Server Side Rendering [Never-Closed HTTP Connections]”, D. 2025</a></li>
+<li><a href="/doc/cs/js/index#_m-MB_i4i-section" id="toc-_m-MB_i4i-section">“Web Page Annoyances That I Don’t Inflict on You Here”</a></li>
+<li><a href="/doc/cs/js/index#boehs-2024-section" id="toc-boehs-2024-section">“The Fascinating Security Model of Dark Web Marketplaces”, Boehs 2024</a></li>
+<li><a href="/doc/cs/js/index#sireneva-2024-section" id="toc-sireneva-2024-section">“WebP: The WebPage Compression Format”, Sireneva 2024</a></li>
+<li><a href="/doc/cs/js/index#seyfi-2024-section" id="toc-seyfi-2024-section">“Introducing: Mark Scroll Positions Extension”, Seyfi 2024</a></li>
+<li><a href="/doc/cs/js/index#achmiz-2019-section" id="toc-achmiz-2019-section">“<code>popups.js</code>”, Achmiz 2019</a></li>
+<li><a href="/doc/cs/js/index#achmiz-2019-wikipediapopups-section" id="toc-achmiz-2019-wikipediapopups-section">“<code>wikipedia-Popups.js</code>”, Achmiz 2019</a></li>
+<li><a href="/doc/cs/js/index#dieulot-2019-section" id="toc-dieulot-2019-section">“Instant.page: Make Your Site’s Pages Instant in 1 Minute and Improve Your Conversion Rate Noticeably.”, Dieulot 2019</a></li>
+<li><a href="/doc/cs/js/index#osmani-2018-section" id="toc-osmani-2018-section">“A Netflix Web Performance Case Study: Improving Time-To-Interactive for Netflix.com on Desktop [By Reducing JS]”, Osmani 2018</a></li>
+<li><a href="/doc/cs/js/index#_wTziDvbi-section" id="toc-_wTziDvbi-section">“Frank Chimero”</a></li>
+<li><a href="/doc/cs/js/index#aslanides-2017-section" id="toc-aslanides-2017-section">“AIXIjs: A Software Demo for General Reinforcement Learning”, Aslanides 2017</a></li>
+<li><a href="/doc/cs/js/index#smilkov-carter-2016-section" id="toc-smilkov-carter-2016-section">“A Neural Network Playground”, Smilkov &amp; Carter 2016</a></li>
+<li><a href="/doc/cs/js/index#mcguire-2015-section" id="toc-mcguire-2015-section">“Markdeep”, McGuire 2015</a></li>
+<li><a href="/doc/cs/js/index#victor-2011-section" id="toc-victor-2011-section">“Explorable Explanations”, Victor 2011</a></li>
+<li><a href="/doc/cs/js/index#zorn-2002-section" id="toc-zorn-2002-section">“DHTML JavaScript Tooltips”, Zorn 2002</a></li>
+<li><a href="/doc/cs/js/index#felten-schneider-2000-section" id="toc-felten-schneider-2000-section">“Timing Attacks on Web Privacy”, Felten &amp; Schneider 2000</a></li>
+<li><a href="/doc/cs/js/index#hopkins-1999-hypertext-section" id="toc-hopkins-1999-hypertext-section">“Re: Xanadu–some Initial Reactions [NeWS, Elisp, HyperTIES, GNU Info]”, Hopkins 1999</a></li>
+<li><a href="/doc/cs/js/index#hopkins-1999-scripting-languages-section" id="toc-hopkins-1999-scripting-languages-section">“Re: Xanadu–some Initial Reactions [The Need for Scripting Languages]”, Hopkins 1999</a></li>
+<li><a href="/doc/cs/js/index#winer-1996-section" id="toc-winer-1996-section">“The Killer Tag [HTML Transclusions]”, Winer 1996</a></li>
+<li><a href="/doc/cs/js/index#_eQ-HNcX7-section" id="toc-_eQ-HNcX7-section">“The Ur Programming Language Family”</a></li>
+<li><a href="/doc/cs/js/index#_qlc2ALZg-section" id="toc-_qlc2ALZg-section">“Popularity”, Eich 2026</a></li>
+<li><a href="/doc/cs/js/index#_5Qx5Sxo1-section" id="toc-_5Qx5Sxo1-section">“Bruno Simon’s Homepage”, Simon 2026</a></li>
+<li><a href="/doc/cs/js/index#_GBGRASi_-section" id="toc-_GBGRASi_-section">“Window API: <code>stop</code>”</a></li>
+<li><a href="/doc/cs/js/index#_7nFTOE3B-section" id="toc-_7nFTOE3B-section">“These Waifus Do Not Exist”, Achmiz 2026</a></li>
+<li><a href="/doc/cs/js/index#_emdTAFpE-section" id="toc-_emdTAFpE-section">“These Waifus Do Not Exist 2.0”, Achmiz 2026</a></li>
+<li><a href="/doc/cs/js/index#_bTOmie_--section" id="toc-_bTOmie_--section">“Blob—Web APIs”</a></li>
+<li><a href="/doc/cs/js/index#_ThXYzqH9-section" id="toc-_ThXYzqH9-section">“IntersectionObserver”</a></li>
+<li><a href="/doc/cs/js/index#_szJ9tF7G-section" id="toc-_szJ9tF7G-section">“Web APIs: Speculation Rules API”</a></li>
+<li><a href="/doc/cs/js/index#_U0evPgMI-section" id="toc-_U0evPgMI-section">“Window: <code>stop()</code> Method—Web APIs”, MDN 2026</a></li>
+<li><a href="/doc/cs/js/index#_Le_kfBfu-section" id="toc-_Le_kfBfu-section">“HTTP: Accept Header”, MDN 2026</a></li>
+<li><a href="/doc/cs/js/index#_Xps1ysSe-section" id="toc-_Xps1ysSe-section">“Mixed Content—Security on the Web”</a></li>
+<li><a href="/doc/cs/js/index#_hxfY0q2z-section" id="toc-_hxfY0q2z-section">“A WebAssembly Runtime Implemented in TypeScript Types [Which Runs <em>Doom</em>]”</a></li>
+<li><a href="/doc/cs/js/index#_VXOat9wZ-section" id="toc-_VXOat9wZ-section">“Ranges and Content and Transfer Encoding · Issue #11 · Httpwg/http-Core”</a></li>
+<li><a href="/doc/cs/js/index#_ntOkBlWY-section" id="toc-_ntOkBlWY-section">“<code>reorder.js</code>”</a></li>
+<li><a href="/doc/cs/js/index#_barnkuBV-section" id="toc-_barnkuBV-section">“Reckoning: Part 2”</a></li>
+<li><a href="/doc/cs/js/index#_2QgMaTjs-section" id="toc-_2QgMaTjs-section">“Marblizer”</a></li>
+<li><a href="/doc/cs/js/index#_wObePqvI-section" id="toc-_wObePqvI-section">“TikZJax”</a></li>
+<li><a href="/doc/cs/js/index#_VdXkHOpq-section" id="toc-_VdXkHOpq-section">simonw</a></li>
+<li><a href="/doc/cs/js/index#_iqC0Ghfm-section" id="toc-_iqC0Ghfm-section">“Yamauchi No.10 Family Office”</a></li>
+<li><a href="/doc/cs/js/index#titled-links-wikipedia" id="toc-titled-links-wikipedia">Wikipedia (4)</a></li>
+</ul></li>
+<li><a href="/doc/cs/js/index#miscellaneous" id="toc-miscellaneous">Miscellaneous</a></li>
+<li><a href="/doc/cs/js/index#link-bibliography-section" id="toc-link-bibliography-section">Bibliography</a></li>
+</ul>
+</div>
+---
+/doc/meta/index
+‘meta’ directory
+
+2025-02-10
+2025-12-09
+
+
+<figure><img class="float-right page-thumbnail invert-not outline" height="0" width="0" src="/doc/meta/2025-08-08-gwern-gwernnet-desktopheader-blogversion-darkmode.png" title="" alt=""></figure><div class="page-description-annotation">
+<p>Bibliography for directory <code>meta</code>, most recent first: 1 <a href="/doc/meta/index#see-alsos" class="icon-not">related tag</a>, 3 <a href="/doc/meta/index#links" class="icon-not">annotations</a>, &amp; 7 <a href="/doc/meta/index#miscellaneous" class="icon-not">links</a> (<a href="/doc/index" class="link-page link-tag directory-indexes-upwards link-annotated" data-link-icon="arrow-up-left" data-link-icon-type="svg" rel="tag" title="Link to parent directory">parent</a>).</p>
+</div>
+<div class="columns TOC">
+<ul>
+<li><a href="/doc/meta/index#see-also" id="toc-see-also">See Also</a></li>
+<li><a href="/doc/meta/index#gwern" id="toc-gwern">Gwern</a>
+<ul>
+<li><a href="/doc/meta/index#gwern-2009-section" id="toc-gwern-2009-section">“Essays”, Gwern 2009</a></li>
+<li><a href="/doc/meta/index#gwern-mastroianni-2025-section" id="toc-gwern-mastroianni-2025-section">“2025 Inkhaven Writing Interview”, Gwern &amp; Mastroianni 2025</a></li>
+<li><a href="/doc/meta/index#gwern-2009-blog-index-section" id="toc-gwern-2009-blog-index-section">“Blog Posts”, Gwern 2009</a></li>
+<li><a href="/doc/meta/index#gwern-changelog-section" id="toc-gwern-changelog-section">“Changelog”, Gwern 2013</a></li>
+<li><a href="/doc/meta/index#gwern-newsletter-2019-13-section" id="toc-gwern-newsletter-2019-13-section">“2019 News”, Gwern 2019</a></li>
+<li><a href="/doc/meta/index#gwern-style-guide-section" id="toc-gwern-style-guide-section">“Manual of Style”, Gwern 2025</a></li>
+<li><a href="/doc/meta/index#gwern-poetry-html-section" id="toc-gwern-poetry-html-section">“Poetry HTML Typesetting”, Gwern 2026</a></li>
+<li><a href="/doc/meta/index#gwern-website-luxury-section" id="toc-gwern-website-luxury-section">“Does Website Luxury Exist?”, Gwern 2024</a></li>
+<li><a href="/doc/meta/index#gwern-xanadu-section" id="toc-gwern-xanadu-section">“Project Xanadu: Even More Hindsight”, Gwern 2025</a></li>
+<li><a href="/doc/meta/index#gwern-design-graveyard-section" id="toc-gwern-design-graveyard-section">“Design Graveyard”, Gwern 2010</a></li>
+<li><a href="/doc/meta/index#gwern-fulltext-section" id="toc-gwern-fulltext-section">“Research Bounties On Fulltexts”, Gwern 2018</a></li>
+<li><a href="/doc/meta/index#gwern-2025-large-files-section" id="toc-gwern-2025-large-files-section">“Gwern.net Large File Support”, Gwern 2025</a></li>
+<li><a href="/doc/meta/index#gwern-note-note-section" id="toc-gwern-note-note-section">“Miscellaneous”, Gwern 2009</a></li>
+<li><a href="/doc/meta/index#gwern-2024-rss-section" id="toc-gwern-2024-rss-section">“Towards Better RSS Feeds”, Gwern 2024</a></li>
+<li><a href="/doc/meta/index#gwern-help-section" id="toc-gwern-help-section">“Site Help”, Gwern 2024</a></li>
+<li><a href="/doc/meta/index#gwern-patel-2024-section" id="toc-gwern-patel-2024-section">“Gwern Branwen—How an Anonymous Researcher Predicted AI’s Trajectory”, Gwern &amp; Patel 2024</a></li>
+<li><a href="/doc/meta/index#gwern-dropcap-section" id="toc-gwern-dropcap-section">“Dropcap Generation With AI”, Gwern 2023</a></li>
+<li><a href="/doc/meta/index#gwern-404-section" id="toc-gwern-404-section">“Gwern.net 404 Error Page”, Gwern 2012</a></li>
+<li><a href="/doc/meta/index#gwern-about-section" id="toc-gwern-about-section">“About This Website”, Gwern 2010</a></li>
+<li><a href="/doc/meta/index#gwern-traffic-section" id="toc-gwern-traffic-section">“Gwern.net Website Traffic”, Gwern 2011</a></li>
+<li><a href="/doc/meta/index#gwern-design-section" id="toc-gwern-design-section">“Design Of This Website”, Gwern 2010</a></li>
+<li><a href="/doc/meta/index#gwern-archiving-section" id="toc-gwern-archiving-section">“Archiving URLs”, Gwern 2011</a></li>
+<li><a href="/doc/meta/index#gwern-lorem-section" id="toc-gwern-lorem-section">“Lorem Ipsum”, Gwern 2020</a></li>
+<li><a href="/doc/meta/index#gwern-ab-test-section" id="toc-gwern-ab-test-section">“A/B Testing Long-Form Readability on Gwern.net”, Gwern 2012</a></li>
+<li><a href="/doc/meta/index#gwern-old-reddit-com-r-gwern-2-section" id="toc-gwern-old-reddit-com-r-gwern-2-section">“/r/gwern Subreddit”, Gwern 2018</a></li>
+<li><a href="/doc/meta/index#gwern-2013-substack-section" id="toc-gwern-2013-substack-section">“Gwern.net Newsletter (Substack Subscription Page)”, Gwern 2013</a></li>
+<li><a href="/doc/meta/index#gwern-lithium-section" id="toc-gwern-lithium-section">“Lithium in Ground-Water and Well-Being”, Gwern 2010</a></li>
+</ul></li>
+<li><a href="/doc/meta/index#links" id="toc-links">Links</a>
+<ul>
+<li><a href="/doc/meta/index#deepseek-et-al-2025-section" id="toc-deepseek-et-al-2025-section">“DeepSeek-V3.2: Pushing the Frontier of Open Large Language Models”, DeepSeek et al 2025</a></li>
+<li><a href="/doc/meta/index#_5rgyaS5E-section" id="toc-_5rgyaS5E-section">“<code>gwern.net</code> As a Source of Information in Wikipedia”</a></li>
+<li><a href="/doc/meta/index#_5XXtSLir-section" id="toc-_5XXtSLir-section">“<code>Gwern.net</code> Google Site Search”</a></li>
+</ul></li>
+<li><a href="/doc/meta/index#miscellaneous" id="toc-miscellaneous">Miscellaneous</a></li>
+<li><a href="/doc/meta/index#link-bibliography-section" id="toc-link-bibliography-section">Bibliography</a></li>
+</ul>
+</div>
+---
+/doc/cs/css/index
+Link to cs/css tag index
+
+
+2026-02-09
+
+
+
+---
+/doc/meta/index
+‘meta’ directory
+
+2025-02-10
+2025-12-09
+
+
+<figure><img class="float-right page-thumbnail invert-not outline" height="0" width="0" src="/doc/meta/2025-08-08-gwern-gwernnet-desktopheader-blogversion-darkmode.png" title="" alt=""></figure><div class="page-description-annotation">
+<p>Bibliography for directory <code>meta</code>, most recent first: 1 <a href="/doc/meta/index#see-alsos" class="icon-not">related tag</a>, 3 <a href="/doc/meta/index#links" class="icon-not">annotations</a>, &amp; 7 <a href="/doc/meta/index#miscellaneous" class="icon-not">links</a> (<a href="/doc/index" class="link-page link-tag directory-indexes-upwards link-annotated" data-link-icon="arrow-up-left" data-link-icon-type="svg" rel="tag" title="Link to parent directory">parent</a>).</p>
+</div>
+<div class="columns TOC">
+<ul>
+<li><a href="/doc/meta/index#see-also" id="toc-see-also">See Also</a></li>
+<li><a href="/doc/meta/index#gwern" id="toc-gwern">Gwern</a>
+<ul>
+<li><a href="/doc/meta/index#gwern-2009-section" id="toc-gwern-2009-section">“Essays”, Gwern 2009</a></li>
+<li><a href="/doc/meta/index#gwern-mastroianni-2025-section" id="toc-gwern-mastroianni-2025-section">“2025 Inkhaven Writing Interview”, Gwern &amp; Mastroianni 2025</a></li>
+<li><a href="/doc/meta/index#gwern-2009-blog-index-section" id="toc-gwern-2009-blog-index-section">“Blog Posts”, Gwern 2009</a></li>
+<li><a href="/doc/meta/index#gwern-changelog-section" id="toc-gwern-changelog-section">“Changelog”, Gwern 2013</a></li>
+<li><a href="/doc/meta/index#gwern-newsletter-2019-13-section" id="toc-gwern-newsletter-2019-13-section">“2019 News”, Gwern 2019</a></li>
+<li><a href="/doc/meta/index#gwern-style-guide-section" id="toc-gwern-style-guide-section">“Manual of Style”, Gwern 2025</a></li>
+<li><a href="/doc/meta/index#gwern-poetry-html-section" id="toc-gwern-poetry-html-section">“Poetry HTML Typesetting”, Gwern 2026</a></li>
+<li><a href="/doc/meta/index#gwern-website-luxury-section" id="toc-gwern-website-luxury-section">“Does Website Luxury Exist?”, Gwern 2024</a></li>
+<li><a href="/doc/meta/index#gwern-xanadu-section" id="toc-gwern-xanadu-section">“Project Xanadu: Even More Hindsight”, Gwern 2025</a></li>
+<li><a href="/doc/meta/index#gwern-design-graveyard-section" id="toc-gwern-design-graveyard-section">“Design Graveyard”, Gwern 2010</a></li>
+<li><a href="/doc/meta/index#gwern-fulltext-section" id="toc-gwern-fulltext-section">“Research Bounties On Fulltexts”, Gwern 2018</a></li>
+<li><a href="/doc/meta/index#gwern-2025-large-files-section" id="toc-gwern-2025-large-files-section">“Gwern.net Large File Support”, Gwern 2025</a></li>
+<li><a href="/doc/meta/index#gwern-note-note-section" id="toc-gwern-note-note-section">“Miscellaneous”, Gwern 2009</a></li>
+<li><a href="/doc/meta/index#gwern-2024-rss-section" id="toc-gwern-2024-rss-section">“Towards Better RSS Feeds”, Gwern 2024</a></li>
+<li><a href="/doc/meta/index#gwern-help-section" id="toc-gwern-help-section">“Site Help”, Gwern 2024</a></li>
+<li><a href="/doc/meta/index#gwern-patel-2024-section" id="toc-gwern-patel-2024-section">“Gwern Branwen—How an Anonymous Researcher Predicted AI’s Trajectory”, Gwern &amp; Patel 2024</a></li>
+<li><a href="/doc/meta/index#gwern-dropcap-section" id="toc-gwern-dropcap-section">“Dropcap Generation With AI”, Gwern 2023</a></li>
+<li><a href="/doc/meta/index#gwern-404-section" id="toc-gwern-404-section">“Gwern.net 404 Error Page”, Gwern 2012</a></li>
+<li><a href="/doc/meta/index#gwern-about-section" id="toc-gwern-about-section">“About This Website”, Gwern 2010</a></li>
+<li><a href="/doc/meta/index#gwern-traffic-section" id="toc-gwern-traffic-section">“Gwern.net Website Traffic”, Gwern 2011</a></li>
+<li><a href="/doc/meta/index#gwern-design-section" id="toc-gwern-design-section">“Design Of This Website”, Gwern 2010</a></li>
+<li><a href="/doc/meta/index#gwern-archiving-section" id="toc-gwern-archiving-section">“Archiving URLs”, Gwern 2011</a></li>
+<li><a href="/doc/meta/index#gwern-lorem-section" id="toc-gwern-lorem-section">“Lorem Ipsum”, Gwern 2020</a></li>
+<li><a href="/doc/meta/index#gwern-ab-test-section" id="toc-gwern-ab-test-section">“A/B Testing Long-Form Readability on Gwern.net”, Gwern 2012</a></li>
+<li><a href="/doc/meta/index#gwern-old-reddit-com-r-gwern-2-section" id="toc-gwern-old-reddit-com-r-gwern-2-section">“/r/gwern Subreddit”, Gwern 2018</a></li>
+<li><a href="/doc/meta/index#gwern-2013-substack-section" id="toc-gwern-2013-substack-section">“Gwern.net Newsletter (Substack Subscription Page)”, Gwern 2013</a></li>
+<li><a href="/doc/meta/index#gwern-lithium-section" id="toc-gwern-lithium-section">“Lithium in Ground-Water and Well-Being”, Gwern 2010</a></li>
+</ul></li>
+<li><a href="/doc/meta/index#links" id="toc-links">Links</a>
+<ul>
+<li><a href="/doc/meta/index#deepseek-et-al-2025-section" id="toc-deepseek-et-al-2025-section">“DeepSeek-V3.2: Pushing the Frontier of Open Large Language Models”, DeepSeek et al 2025</a></li>
+<li><a href="/doc/meta/index#_5rgyaS5E-section" id="toc-_5rgyaS5E-section">“<code>gwern.net</code> As a Source of Information in Wikipedia”</a></li>
+<li><a href="/doc/meta/index#_5XXtSLir-section" id="toc-_5XXtSLir-section">“<code>Gwern.net</code> Google Site Search”</a></li>
+</ul></li>
+<li><a href="/doc/meta/index#miscellaneous" id="toc-miscellaneous">Miscellaneous</a></li>
+<li><a href="/doc/meta/index#link-bibliography-section" id="toc-link-bibliography-section">Bibliography</a></li>
+</ul>
+</div>
+---
+/doc/meta/index
+‘meta’ directory
+
+2025-02-10
+2025-12-09
+
+
+<figure><img class="float-right page-thumbnail invert-not outline" height="0" width="0" src="/doc/meta/2025-08-08-gwern-gwernnet-desktopheader-blogversion-darkmode.png" title="" alt=""></figure><div class="page-description-annotation">
+<p>Bibliography for directory <code>meta</code>, most recent first: 1 <a href="/doc/meta/index#see-alsos" class="icon-not">related tag</a>, 3 <a href="/doc/meta/index#links" class="icon-not">annotations</a>, &amp; 7 <a href="/doc/meta/index#miscellaneous" class="icon-not">links</a> (<a href="/doc/index" class="link-page link-tag directory-indexes-upwards link-annotated" data-link-icon="arrow-up-left" data-link-icon-type="svg" rel="tag" title="Link to parent directory">parent</a>).</p>
+</div>
+<div class="columns TOC">
+<ul>
+<li><a href="/doc/meta/index#see-also" id="toc-see-also">See Also</a></li>
+<li><a href="/doc/meta/index#gwern" id="toc-gwern">Gwern</a>
+<ul>
+<li><a href="/doc/meta/index#gwern-2009-section" id="toc-gwern-2009-section">“Essays”, Gwern 2009</a></li>
+<li><a href="/doc/meta/index#gwern-mastroianni-2025-section" id="toc-gwern-mastroianni-2025-section">“2025 Inkhaven Writing Interview”, Gwern &amp; Mastroianni 2025</a></li>
+<li><a href="/doc/meta/index#gwern-2009-blog-index-section" id="toc-gwern-2009-blog-index-section">“Blog Posts”, Gwern 2009</a></li>
+<li><a href="/doc/meta/index#gwern-changelog-section" id="toc-gwern-changelog-section">“Changelog”, Gwern 2013</a></li>
+<li><a href="/doc/meta/index#gwern-newsletter-2019-13-section" id="toc-gwern-newsletter-2019-13-section">“2019 News”, Gwern 2019</a></li>
+<li><a href="/doc/meta/index#gwern-style-guide-section" id="toc-gwern-style-guide-section">“Manual of Style”, Gwern 2025</a></li>
+<li><a href="/doc/meta/index#gwern-poetry-html-section" id="toc-gwern-poetry-html-section">“Poetry HTML Typesetting”, Gwern 2026</a></li>
+<li><a href="/doc/meta/index#gwern-website-luxury-section" id="toc-gwern-website-luxury-section">“Does Website Luxury Exist?”, Gwern 2024</a></li>
+<li><a href="/doc/meta/index#gwern-xanadu-section" id="toc-gwern-xanadu-section">“Project Xanadu: Even More Hindsight”, Gwern 2025</a></li>
+<li><a href="/doc/meta/index#gwern-design-graveyard-section" id="toc-gwern-design-graveyard-section">“Design Graveyard”, Gwern 2010</a></li>
+<li><a href="/doc/meta/index#gwern-fulltext-section" id="toc-gwern-fulltext-section">“Research Bounties On Fulltexts”, Gwern 2018</a></li>
+<li><a href="/doc/meta/index#gwern-2025-large-files-section" id="toc-gwern-2025-large-files-section">“Gwern.net Large File Support”, Gwern 2025</a></li>
+<li><a href="/doc/meta/index#gwern-note-note-section" id="toc-gwern-note-note-section">“Miscellaneous”, Gwern 2009</a></li>
+<li><a href="/doc/meta/index#gwern-2024-rss-section" id="toc-gwern-2024-rss-section">“Towards Better RSS Feeds”, Gwern 2024</a></li>
+<li><a href="/doc/meta/index#gwern-help-section" id="toc-gwern-help-section">“Site Help”, Gwern 2024</a></li>
+<li><a href="/doc/meta/index#gwern-patel-2024-section" id="toc-gwern-patel-2024-section">“Gwern Branwen—How an Anonymous Researcher Predicted AI’s Trajectory”, Gwern &amp; Patel 2024</a></li>
+<li><a href="/doc/meta/index#gwern-dropcap-section" id="toc-gwern-dropcap-section">“Dropcap Generation With AI”, Gwern 2023</a></li>
+<li><a href="/doc/meta/index#gwern-404-section" id="toc-gwern-404-section">“Gwern.net 404 Error Page”, Gwern 2012</a></li>
+<li><a href="/doc/meta/index#gwern-about-section" id="toc-gwern-about-section">“About This Website”, Gwern 2010</a></li>
+<li><a href="/doc/meta/index#gwern-traffic-section" id="toc-gwern-traffic-section">“Gwern.net Website Traffic”, Gwern 2011</a></li>
+<li><a href="/doc/meta/index#gwern-design-section" id="toc-gwern-design-section">“Design Of This Website”, Gwern 2010</a></li>
+<li><a href="/doc/meta/index#gwern-archiving-section" id="toc-gwern-archiving-section">“Archiving URLs”, Gwern 2011</a></li>
+<li><a href="/doc/meta/index#gwern-lorem-section" id="toc-gwern-lorem-section">“Lorem Ipsum”, Gwern 2020</a></li>
+<li><a href="/doc/meta/index#gwern-ab-test-section" id="toc-gwern-ab-test-section">“A/B Testing Long-Form Readability on Gwern.net”, Gwern 2012</a></li>
+<li><a href="/doc/meta/index#gwern-old-reddit-com-r-gwern-2-section" id="toc-gwern-old-reddit-com-r-gwern-2-section">“/r/gwern Subreddit”, Gwern 2018</a></li>
+<li><a href="/doc/meta/index#gwern-2013-substack-section" id="toc-gwern-2013-substack-section">“Gwern.net Newsletter (Substack Subscription Page)”, Gwern 2013</a></li>
+<li><a href="/doc/meta/index#gwern-lithium-section" id="toc-gwern-lithium-section">“Lithium in Ground-Water and Well-Being”, Gwern 2010</a></li>
+</ul></li>
+<li><a href="/doc/meta/index#links" id="toc-links">Links</a>
+<ul>
+<li><a href="/doc/meta/index#deepseek-et-al-2025-section" id="toc-deepseek-et-al-2025-section">“DeepSeek-V3.2: Pushing the Frontier of Open Large Language Models”, DeepSeek et al 2025</a></li>
+<li><a href="/doc/meta/index#_5rgyaS5E-section" id="toc-_5rgyaS5E-section">“<code>gwern.net</code> As a Source of Information in Wikipedia”</a></li>
+<li><a href="/doc/meta/index#_5XXtSLir-section" id="toc-_5XXtSLir-section">“<code>Gwern.net</code> Google Site Search”</a></li>
+</ul></li>
+<li><a href="/doc/meta/index#miscellaneous" id="toc-miscellaneous">Miscellaneous</a></li>
+<li><a href="/doc/meta/index#link-bibliography-section" id="toc-link-bibliography-section">Bibliography</a></li>
+</ul>
+</div>
+---
+/doc/cs/js/index
+‘JS’ directory
+
+2021-02-14
+2026-01-27
+
+design/typography design/visualization
+<figure><img class="float-right page-thumbnail invert-not outline" height="0" width="0" src="/doc/cs/js/2025-02-21-gwern-gwernnet-404pageguessesintendedurlusingsitemapeditdistance.jpg" title="" alt=""></figure><div class="page-description-annotation">
+<p>Bibliography for directory <code>cs/js</code>, most recent first: 40 <a href="/doc/cs/js/index#links" class="icon-not">annotations</a> &amp; 37 <a href="/doc/cs/js/index#miscellaneous" class="icon-not">links</a> (<a href="/doc/cs/index" class="link-page link-tag directory-indexes-upwards link-annotated" data-link-icon="arrow-up-left" data-link-icon-type="svg" rel="tag" title="Link to parent directory">parent</a>).</p>
+</div>
+<div class="columns TOC">
+<ul>
+<li><a href="/doc/cs/js/index#see-also" id="toc-see-also">See Also</a></li>
+<li><a href="/doc/cs/js/index#gwern" id="toc-gwern">Gwern</a>
+<ul>
+<li><a href="/doc/cs/js/index#gwern-poetry-html-section" id="toc-gwern-poetry-html-section">“Poetry HTML Typesetting”, Gwern 2026</a></li>
+<li><a href="/doc/cs/js/index#gwern-xanadu-section" id="toc-gwern-xanadu-section">“Project Xanadu: Even More Hindsight”, Gwern 2025</a></li>
+<li><a href="/doc/cs/js/index#gwern-design-graveyard-section" id="toc-gwern-design-graveyard-section">“Design Graveyard”, Gwern 2010</a></li>
+<li><a href="/doc/cs/js/index#gwern-sidenote-section" id="toc-gwern-sidenote-section">“Sidenotes In Web Design”, Gwern 2020</a></li>
+<li><a href="/doc/cs/js/index#gwern-help-section" id="toc-gwern-help-section">“Site Help”, Gwern 2024</a></li>
+<li><a href="/doc/cs/js/index#gwern-dropcap-section" id="toc-gwern-dropcap-section">“Dropcap Generation With AI”, Gwern 2023</a></li>
+<li><a href="/doc/cs/js/index#gwern-note-statistic-section" id="toc-gwern-note-statistic-section">“Statistical Notes”, Gwern 2014</a></li>
+<li><a href="/doc/cs/js/index#gwern-ab-test-indent-section" id="toc-gwern-ab-test-indent-section">“A/B Testing Indentation &amp; Justification”, Gwern 2022</a></li>
+<li><a href="/doc/cs/js/index#gwern-design-section" id="toc-gwern-design-section">“Design Of This Website”, Gwern 2010</a></li>
+<li><a href="/doc/cs/js/index#gwern-lorem-section" id="toc-gwern-lorem-section">“Lorem Ipsum”, Gwern 2020</a></li>
+<li><a href="/doc/cs/js/index#gwern-lorem-table-section" id="toc-gwern-lorem-table-section">“Lorem Ipsum: Tables”, Gwern 2020</a></li>
+<li><a href="/doc/cs/js/index#gwern-ab-test-section" id="toc-gwern-ab-test-section">“A/B Testing Long-Form Readability on Gwern.net”, Gwern 2012</a></li>
+<li><a href="/doc/cs/js/index#gwern-banner-section" id="toc-gwern-banner-section">“Banner Ads Considered Harmful”, Gwern 2017</a></li>
+</ul></li>
+<li><a href="/doc/cs/js/index#links" id="toc-links">Links</a>
+<ul>
+<li><a href="/doc/cs/js/index#willison-2025-section" id="toc-willison-2025-section">“I Ported JustHTML from Python to JavaScript With Codex CLI &amp; GPT-5.2 in 4.5 Hours”, Willison 2025</a></li>
+<li><a href="/doc/cs/js/index#d-2025-section" id="toc-d-2025-section">“Extreme Server Side Rendering [Never-Closed HTTP Connections]”, D. 2025</a></li>
+<li><a href="/doc/cs/js/index#_m-MB_i4i-section" id="toc-_m-MB_i4i-section">“Web Page Annoyances That I Don’t Inflict on You Here”</a></li>
+<li><a href="/doc/cs/js/index#boehs-2024-section" id="toc-boehs-2024-section">“The Fascinating Security Model of Dark Web Marketplaces”, Boehs 2024</a></li>
+<li><a href="/doc/cs/js/index#sireneva-2024-section" id="toc-sireneva-2024-section">“WebP: The WebPage Compression Format”, Sireneva 2024</a></li>
+<li><a href="/doc/cs/js/index#seyfi-2024-section" id="toc-seyfi-2024-section">“Introducing: Mark Scroll Positions Extension”, Seyfi 2024</a></li>
+<li><a href="/doc/cs/js/index#achmiz-2019-section" id="toc-achmiz-2019-section">“<code>popups.js</code>”, Achmiz 2019</a></li>
+<li><a href="/doc/cs/js/index#achmiz-2019-wikipediapopups-section" id="toc-achmiz-2019-wikipediapopups-section">“<code>wikipedia-Popups.js</code>”, Achmiz 2019</a></li>
+<li><a href="/doc/cs/js/index#dieulot-2019-section" id="toc-dieulot-2019-section">“Instant.page: Make Your Site’s Pages Instant in 1 Minute and Improve Your Conversion Rate Noticeably.”, Dieulot 2019</a></li>
+<li><a href="/doc/cs/js/index#osmani-2018-section" id="toc-osmani-2018-section">“A Netflix Web Performance Case Study: Improving Time-To-Interactive for Netflix.com on Desktop [By Reducing JS]”, Osmani 2018</a></li>
+<li><a href="/doc/cs/js/index#_wTziDvbi-section" id="toc-_wTziDvbi-section">“Frank Chimero”</a></li>
+<li><a href="/doc/cs/js/index#aslanides-2017-section" id="toc-aslanides-2017-section">“AIXIjs: A Software Demo for General Reinforcement Learning”, Aslanides 2017</a></li>
+<li><a href="/doc/cs/js/index#smilkov-carter-2016-section" id="toc-smilkov-carter-2016-section">“A Neural Network Playground”, Smilkov &amp; Carter 2016</a></li>
+<li><a href="/doc/cs/js/index#mcguire-2015-section" id="toc-mcguire-2015-section">“Markdeep”, McGuire 2015</a></li>
+<li><a href="/doc/cs/js/index#victor-2011-section" id="toc-victor-2011-section">“Explorable Explanations”, Victor 2011</a></li>
+<li><a href="/doc/cs/js/index#zorn-2002-section" id="toc-zorn-2002-section">“DHTML JavaScript Tooltips”, Zorn 2002</a></li>
+<li><a href="/doc/cs/js/index#felten-schneider-2000-section" id="toc-felten-schneider-2000-section">“Timing Attacks on Web Privacy”, Felten &amp; Schneider 2000</a></li>
+<li><a href="/doc/cs/js/index#hopkins-1999-hypertext-section" id="toc-hopkins-1999-hypertext-section">“Re: Xanadu–some Initial Reactions [NeWS, Elisp, HyperTIES, GNU Info]”, Hopkins 1999</a></li>
+<li><a href="/doc/cs/js/index#hopkins-1999-scripting-languages-section" id="toc-hopkins-1999-scripting-languages-section">“Re: Xanadu–some Initial Reactions [The Need for Scripting Languages]”, Hopkins 1999</a></li>
+<li><a href="/doc/cs/js/index#winer-1996-section" id="toc-winer-1996-section">“The Killer Tag [HTML Transclusions]”, Winer 1996</a></li>
+<li><a href="/doc/cs/js/index#_eQ-HNcX7-section" id="toc-_eQ-HNcX7-section">“The Ur Programming Language Family”</a></li>
+<li><a href="/doc/cs/js/index#_qlc2ALZg-section" id="toc-_qlc2ALZg-section">“Popularity”, Eich 2026</a></li>
+<li><a href="/doc/cs/js/index#_5Qx5Sxo1-section" id="toc-_5Qx5Sxo1-section">“Bruno Simon’s Homepage”, Simon 2026</a></li>
+<li><a href="/doc/cs/js/index#_GBGRASi_-section" id="toc-_GBGRASi_-section">“Window API: <code>stop</code>”</a></li>
+<li><a href="/doc/cs/js/index#_7nFTOE3B-section" id="toc-_7nFTOE3B-section">“These Waifus Do Not Exist”, Achmiz 2026</a></li>
+<li><a href="/doc/cs/js/index#_emdTAFpE-section" id="toc-_emdTAFpE-section">“These Waifus Do Not Exist 2.0”, Achmiz 2026</a></li>
+<li><a href="/doc/cs/js/index#_bTOmie_--section" id="toc-_bTOmie_--section">“Blob—Web APIs”</a></li>
+<li><a href="/doc/cs/js/index#_ThXYzqH9-section" id="toc-_ThXYzqH9-section">“IntersectionObserver”</a></li>
+<li><a href="/doc/cs/js/index#_szJ9tF7G-section" id="toc-_szJ9tF7G-section">“Web APIs: Speculation Rules API”</a></li>
+<li><a href="/doc/cs/js/index#_U0evPgMI-section" id="toc-_U0evPgMI-section">“Window: <code>stop()</code> Method—Web APIs”, MDN 2026</a></li>
+<li><a href="/doc/cs/js/index#_Le_kfBfu-section" id="toc-_Le_kfBfu-section">“HTTP: Accept Header”, MDN 2026</a></li>
+<li><a href="/doc/cs/js/index#_Xps1ysSe-section" id="toc-_Xps1ysSe-section">“Mixed Content—Security on the Web”</a></li>
+<li><a href="/doc/cs/js/index#_hxfY0q2z-section" id="toc-_hxfY0q2z-section">“A WebAssembly Runtime Implemented in TypeScript Types [Which Runs <em>Doom</em>]”</a></li>
+<li><a href="/doc/cs/js/index#_VXOat9wZ-section" id="toc-_VXOat9wZ-section">“Ranges and Content and Transfer Encoding · Issue #11 · Httpwg/http-Core”</a></li>
+<li><a href="/doc/cs/js/index#_ntOkBlWY-section" id="toc-_ntOkBlWY-section">“<code>reorder.js</code>”</a></li>
+<li><a href="/doc/cs/js/index#_barnkuBV-section" id="toc-_barnkuBV-section">“Reckoning: Part 2”</a></li>
+<li><a href="/doc/cs/js/index#_2QgMaTjs-section" id="toc-_2QgMaTjs-section">“Marblizer”</a></li>
+<li><a href="/doc/cs/js/index#_wObePqvI-section" id="toc-_wObePqvI-section">“TikZJax”</a></li>
+<li><a href="/doc/cs/js/index#_VdXkHOpq-section" id="toc-_VdXkHOpq-section">simonw</a></li>
+<li><a href="/doc/cs/js/index#_iqC0Ghfm-section" id="toc-_iqC0Ghfm-section">“Yamauchi No.10 Family Office”</a></li>
+<li><a href="/doc/cs/js/index#titled-links-wikipedia" id="toc-titled-links-wikipedia">Wikipedia (4)</a></li>
+</ul></li>
+<li><a href="/doc/cs/js/index#miscellaneous" id="toc-miscellaneous">Miscellaneous</a></li>
+<li><a href="/doc/cs/js/index#link-bibliography-section" id="toc-link-bibliography-section">Bibliography</a></li>
+</ul>
+</div>
