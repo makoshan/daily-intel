@@ -11,104 +11,99 @@ backlink: False
 ...
 
 <style type="text/css">
-/* Match gwern.net homepage layout: compact + wide; stack on mobile. */
-div#markdownBody section {
-  display: inline-block;
-  vertical-align: top;
-  max-width: 720px;
-  margin-right: 2.2rem;
+/* Homepage layout:
+   - Use flex at the top level to control wrapping between major sections.
+   - Keep nested sections (level2+) normal so lists don't turn into accidental columns. */
+div#markdownBody {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.8rem 2.2rem;
+  align-items: flex-start;
+  margin: 0 auto;
 }
+
+/* Default: each major section is a full-width block. */
+div#markdownBody > section.level1 {
+  flex: 0 0 100%;
+  max-width: 980px;
+}
+
+/* First 3 major sections: three columns on wide screens. */
+@media (min-width: 1400px) {
+  div#markdownBody > section.level1:nth-of-type(-n+3) {
+    flex: 1 1 calc((100% - 2.2rem * 2) / 3);
+    max-width: calc((100% - 2.2rem * 2) / 3);
+    min-width: 280px;
+  }
+}
+
+/* Make column tops align neatly. */
+div#markdownBody > section.level1 > h1 { margin-top: 0; }
+
 div#TOC { display: none; }
 div#donations { display: none; }
 div#metadata { display: none; }
-body { max-width: 1700px; }
+body { max-width: 1700px; margin: 0 auto; }
 li { margin-top: 0em; }
 li p { margin: 0em; }
+
 @media (max-width: 900px) {
   body { max-width: none; }
-  div#markdownBody section { display: block; max-width: none; margin-right: 0; }
+  div#markdownBody { display: block; }
+  div#markdownBody > section.level1 { max-width: none; }
 }
 </style>
 
-<div class="abstract">
-<p><span class="smallcaps">这是</span> <strong>Mako Shan</strong> 个人网站。我写关于区块链、技术、经济学，以及每日资讯摘录。</p>
+<div id="abstract" class="abstract smallcaps-not">
+这是 <strong>Mako Shan</strong> 的个人网站。
+我写关于区块链、技术与经济学，以及每日科技情报。
+我最知名的内容包括：[加密经济学](#加密经济学)与公共物品融资；[每日Newsletter](#newsletter)的技术资讯精选；以及关于软件选择与统计实验的思考。
 
-<p>推荐阅读：
-<a href="/blockchain/sound-money" class="link-local">Sound Money</a>⁠、
-<a href="/blockchain/gitcoin-grants" class="link-local">Gitcoin Grants</a>⁠、
-<a href="/blockchain/dragon-slayer-become-the-dragon" class="link-local">Radical Market</a>⁠、
-<a href="/blockchain/uniswap-social-money" class="link-local">Social Money</a>⁠。</p>
+<span class="smallcaps">导航</span>：关于本站的理念与方法，参见 *[About 页面](/About)*；
+关于网站的功能与实现，参见 *[设计说明](/design)*（如有）；
+关于我本人的信息与联系方式，参见 *[me 页面](/me)*；
+查看最新内容，参见 *[Changelog](/Changelog)*，或订阅 [<em>Newsletter</em>](https://v2eth.substack.com/) ([归档](/newsletter/))。
 
-<p>更多信息：<em><a href="/About" class="link-local">About</a></em>;
-更新日志：<em><a href="/Changelog" class="link-local">Changelog</a></em>;
-订阅更新：<em><a href="https://v2eth.substack.com/">Substack</a></em>（<a href="/newsletter/index" class="link-local">archives</a>）。</p>
+<span class="smallcaps">功能</span>：网站支持 *暗色模式* (<span class="dark-mode-selector-inline"></span>)、*阅读模式* (<span class="reader-mode-selector-inline"></span>)、*禁用弹窗* (<span class="extracts-mode-selector-inline"></span>) 以及 *搜索* (<span class="search-mode-selector-inline"></span>)，使用右上角的浮动工具栏 (<span class="toolbar-mode-selector-inline"></span>) 即可切换；更多信息请参见 [*帮助页面*](/help){.link-annotated-not}。
+<!-- NOTE: this </index> page rewrites titles to condense them and make them shorter, for more uniform solid blocks of text and to improve the layout of multi-column rendering. All the titles in a section should be similar lengths, and not be long enough to trigger wrapping! We want to put our best and most elegant foot forward to readers arriving at Gwern.net for the first time... -->
 </div>
 
 # Newsletter
 
-- [Newsletter 主页](/newsletter/index "Daily Intel Newsletter 归档")
-- [主题索引](/newsletter/topics "按主题浏览 Newsletter")
-- [最新一期 (2026-02-09)](/newsletter/newsletter-2026-02-09 "今日科技情报")
+- [最新 (2026-02-09)](/2026/newsletter-2026-02-09)
+- [Newsletter 归档](/newsletter/)
+- [主题索引](/newsletter/topics)
 
+# 加密经济学
 
-## 加密经济学
+- [货币的历史: 从金本位到区块链](/blockchain/sound-money)
+- [Gitcoin Grants: 公共物品融资机制](/blockchain/gitcoin-grants)
+- [当屠龙者成为恶龙](/blockchain/dragon-slayer-become-the-dragon)
+- [Social Money: 代币化你的时间和才能](/blockchain/uniswap-social-money)
 
-- [货币的历史: 从金本位到区块链](/blockchain/sound-money "研究货币的起源和未来")
-- [Gitcoin Grants: 公共物品融资机制](/blockchain/gitcoin-grants "二次方资助 (Quadratic Funding)")
-- [当屠龙者成为恶龙: 灵感买家俱乐部](/blockchain/dragon-slayer-become-the-dragon "激励与治理的重新设计")
-- [Social Money: 代币化你的时间和才能](/blockchain/uniswap-social-money "个人代币/社交货币与 Uniswap")
+# 计算机科学
 
-## 计算机科学
+- [选择软件的标准](/Choosing%20Software)
+- [归档 URLs](/Archiving%20URLs)
+- [开源许可证演化](/Evolutionary%20Licenses)
 
-- [选择软件的标准](/Choosing%20Software "使软件值得长期使用的标准")
-- [归档 URLs](/Archiving%20URLs "网页归档的重要性与方法")
-- [开源许可证演化](/Evolutionary%20Licenses "开源许可证的政治与演化")
+# 统计学
 
-## 统计学与实验
+- [Zeo 睡眠追踪](/Zeo)
+- [Google 产品关闭预测](/Google%20shutdowns)
+- [Google Alerts 统计](/Google%20Alerts)
+- [HN 统计分析](/HN)
 
-- [Zeo 睡眠追踪](/Zeo "使用 Zeo 进行睡眠追踪实验")
-- [Google 产品关闭预测](/Google%20shutdowns "预测 Google 何时关闭产品")
-- [Google Alerts 统计](/Google%20Alerts "Google Alerts 使用统计")
-- [HN 统计](/HN "Hacker News 统计分析")
+# 文化哲学
 
-## 哲学与社会学
+- [Sand](/Sand)
+- [Anchoring](/Anchoring)
+- [Book reviews](/Book-reviews)
+- [Copyright](/Copyright)
 
-- [Sand](/Sand "诗歌、批评与政治")
-- [Anchoring](/Anchoring "锚定效应")
-- [Book reviews](/Book-reviews "书评")
-- [Copyright](/Copyright "版权问题")
+# 站点导航
 
-## 动漫与文化评论
-
-- [Against The Miletians](/Against%20The%20Miletians "针对米利都人")
-- [Touhou 统计分析](/Touhou "东方 Project 的统计学分析")
-- [Hafu](/hafu "动漫与社会学分析")
-- [FMP Parody](/FMP%20parody "全金属狂潮评论")
-- [Aria's past, present, and future](/Arias-past-present-and-future "咏叹调的过去、现在和未来")
-- [Death Note Ending](/Death-Note-Ending "死亡笔记结局分析")
-- [Death Note script](/Death-Note-script "死亡笔记剧本")
-
-
-## 历史文献
-
-- [1955 Nash](/docs/1955-nash)
-- [1963 Asimov: Sword of Achilles](/docs/1963-asimov-sword-of-achilles)
-- [1985 Hofstadter](/docs/1985-hofstadter)
-- [1987 Rossi](/docs/1987-rossi)
-- [2002 Gibson](/docs/2002-gibson)
-
-## 日本文化研究
-
-- [1996 Animerica: Conscience of Otaking](/docs/1996-animerica-conscience-otaking)
-- [1997 Utena](/docs/1997-utena)
-- [2002 Notenki Memoirs](/docs/2002-notenki-memoirs)
-- [2002 Radiance](/docs/2002-radiance)
-
-# 其他
-
-- [About](/About "关于本站")
-- [Changelog](/Changelog "更新日志")
-- [Links](/Links "链接页面")
-- [Notes](/Notes "笔记")
-- [TODO](/TODO "待办事项")
-- [me](/me "关于我")
+- [About](/About)
+- [Changelog](/Changelog)
+- [Links](/Links)
+- [me](/me)

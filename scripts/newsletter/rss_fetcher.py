@@ -8,15 +8,46 @@ class RSSFetcher:
     
     def __init__(self):
         self.sources = {
+            # 原有源
             "newshacker": {
                 "name": "News Hacker",
                 "url": "https://api.newshacker.me/rss",
-                "category": "极客洞察"
+                "category": "极客洞察",
+                "limit": 10
             },
             "hacker_podcast": {
                 "name": "Hacker Podcast",
                 "url": "https://hacker-podcast.agi.li/rss.xml",
-                "category": "播客"
+                "category": "播客",
+                "limit": 5
+            },
+            
+            # 新增源 - 国际平台
+            "hackernews": {
+                "name": "Hacker News",
+                "url": "https://hnrss.org/frontpage?points=50",  # 高质量文章
+                "category": "开源&AI",
+                "limit": 15
+            },
+            "github_trending": {
+                "name": "GitHub Trending",
+                "url": "https://mshibanami.github.io/GitHubTrendingRSS/daily/all.xml",
+                "category": "开源项目",
+                "limit": 10
+            },
+            
+            # 新增源 - 中文平台
+            "sspai": {
+                "name": "少数派",
+                "url": "https://sspai.com/feed",
+                "category": "生活科技",
+                "limit": 10
+            },
+            "wallstreetcn": {
+                "name": "华尔街见闻",
+                "url": "https://rsshub.app/wallstreetcn/news/global",  # 全球要闻
+                "category": "财经市场",
+                "limit": 10
             }
         }
     
@@ -44,13 +75,15 @@ class RSSFetcher:
             print(f"Error fetching {feed_url}: {e}")
             return []
     
-    def fetch_all_sources(self, limit_per_source: int = 10) -> Dict:
+    def fetch_all_sources(self, limit_per_source: int = None) -> Dict:
         """抓取所有配置的 RSS 源"""
         results = {}
         
         for key, config in self.sources.items():
             print(f"Fetching {config['name']}...")
-            articles = self.fetch_feed(config["url"], limit_per_source)
+            # 使用源自己的 limit，如果没有则使用参数的 limit，最后默认 10
+            limit = config.get('limit', limit_per_source or 10)
+            articles = self.fetch_feed(config["url"], limit)
             results[key] = {
                 "name": config["name"],
                 "category": config["category"],
