@@ -1,0 +1,1458 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Inlined head (no SSI): injected by Hakyll from static/include/inlined-head.html -->
+  <style id="inlined-styles-colors">
+:root {
+    /*  General.
+     */
+    --GW-body-background-color: #fff;
+    --GW-body-text-color: #000;
+
+    /*  Selection.
+     */
+    --GW-text-selection-background-color: #333;
+    --GW-text-selection-color: #fff;
+
+	/*	Links.
+	 */
+    --GW-body-link-color: #333;
+    --GW-body-link-hover-color: #888;
+    --GW-body-link-visited-color: #666;
+    --GW-body-link-inverted-color: #eee;
+    --GW-body-link-inverted-hover-color: #ccc;
+    --GW-body-link-inverted-visited-color: #ddd;
+
+    /*  Blockquotes.
+     */
+    --GW-blockquote-border-color-level-one: #ccc;
+    --GW-blockquote-border-color-level-two: #c4c4c4;
+    --GW-blockquote-border-color-level-three: #b3b3b3;
+    --GW-blockquote-border-color-level-four: #a6a6a6;
+    --GW-blockquote-background-color-level-one: #f8f8f8;
+    --GW-blockquote-background-color-level-two: #e6e6e6;
+    --GW-blockquote-background-color-level-three: #d8d8d8;
+
+    /*  Abstracts.
+     */
+    --GW-abstract-border-color: #bbb;
+
+	/*	Block context highlighting.
+	 */
+	--GW-block-context-span-highlight-color: #ddd;
+
+    /*  Table of contents.
+     */
+    --GW-TOC-border-color: #ccc;
+    --GW-TOC-background-color: #f8f8f8;
+    --GW-TOC-collapse-button-text-color: #ccc;
+    --GW-TOC-collapse-button-text-hover-color: #fff;
+    --GW-TOC-collapse-button-color: rgba(248, 248, 248, 0.8);
+    --GW-TOC-collapse-button-hover-color: #ddd;
+    --GW-TOC-collapse-button-border-hover-color: #000;
+    --GW-TOC-link-hover-background-color: #ececec;
+    --GW-TOC-link-hover-color: #000;
+    --GW-TOC-link-hover-indicator-bar-color: #ccc;
+    --GW-TOC-number-color: #909090;
+    --GW-TOC-number-hover-color: #313131;
+
+    /*  Collapse blocks.
+        */
+	--GW-collapse-abstract-blockquote-hover-color: #eee;
+	--GW-collapse-disclosure-button-color: #eee;
+	--GW-collapse-disclosure-button-hover-color: #ddd;
+	--GW-collapse-in-blockquote-disclosure-button-color: #ddd;
+	--GW-collapse-in-blockquote-disclosure-button-hover-color: #ccc;
+	--GW-collapse-disclosure-button-text-color: #bbb;
+	--GW-collapse-disclosure-button-text-hover-color: #fff;
+	--GW-collapse-in-blockquote-disclosure-button-text-color: #999;
+	--GW-collapse-in-blockquote-disclosure-button-text-hover-color: #888;
+
+	/*	Inline collapses.
+	 */
+	--GW-collapse-inline-disclosure-button-text-color: #555;
+	--GW-collapse-inline-disclosure-button-text-hover-color: #999;
+
+	/*	Aux-links collapse blocks.
+	 */
+	--GW-aux-links-collapse-border-color: #c4c4c4;
+
+    /*  Headings.
+     */
+    --GW-H1-border-color: #888;
+    --GW-H2-border-color: #888;
+
+    /*  Comments.
+     */
+    --GW-comment-section-top-border-color: #999;
+
+    /*  Lists.
+     */
+    --GW-bulleted-list-marker-color: #808080;
+
+    /*  Figures.
+     */
+    --GW-figure-outline-color: #888;
+    --GW-figure-caption-outline-color: #888;
+
+	/*	Embeds.
+	 */
+	--GW-embed-border-color: #ddd;
+
+    /*  Epigraphs.
+     */
+    --GW-epigraph-quotation-mark-color: #808080;
+
+    /*  Footnotes.
+     */
+    --GW-footnote-border-color: #aaa;
+    --GW-footnote-highlighted-border-color: #aaa;
+    --GW-footnotes-section-top-rule-color: #ccc;
+    --GW-footnote-backlink-border-color: #000;
+    --GW-footnote-backlink-border-hover-color: #999;
+
+    /*  Footnote references.
+     */
+    --GW-highlighted-link-outline-color: #999;
+
+    /*  Sidenotes.
+     */
+    --GW-sidenote-highlight-box-shadow-color: #aaa;
+    --GW-sidenote-border-color: #aaa;
+    --GW-sidenote-scrollbar-thumb-color: #aaa;
+    --GW-sidenote-scrollbar-thumb-hover-color: #999;
+    --GW-sidenote-self-link-border-color: #aaa;
+
+	/*	Annotations.
+	 */
+	--GW-section-highlighted-border-color: #666;
+
+    /*  Tables.
+     */
+    --GW-table-border-color: #000;
+    --GW-table-caption-border-color: #000;
+    --GW-table-row-horizontal-border-color: #000;
+    --GW-table-scrollbar-thumb-color: #aaa;
+    --GW-table-scrollbar-thumb-hover-color: #999;
+    --GW-table-scrollbar-border-color: #000;
+    --GW-table-column-heading-hover-background-color: #e2f0f2;
+    --GW-table-sorted-column-heading-background-color: #8bd0ed;
+    --GW-table-sorted-column-heading-text-color: #fff;
+    --GW-table-sorted-column-heading-text-shadow-color: #000;
+    --GW-table-zebra-stripe-alternate-row-background-color: #f6f6f6;
+    --GW-table-row-hover-outline-color: #000;
+
+    /*  Code blocks.
+     */
+    --GW-code-element-border-color: #c8c8c8;
+    --GW-code-element-background-color: #fafafa;
+    --GW-pre-element-border-color: #c8c8c8;
+    --GW-pre-element-background-color: #fafafa;
+    --GW-pre-element-scrollbar-track-color: #fafafa;
+    --GW-pre-element-scrollbar-thumb-color: #ccc;
+    --GW-pre-element-scrollbar-thumb-hover-color: #999;
+    --GW-code-block-line-highlight-background-color: #ffd;
+    --GW-code-block-line-highlight-border-color: #ddd;
+    --GW-code-block-line-number-color: #aaa;
+    --GW-code-block-line-number-divider-color: #ccc;
+
+
+    /*  Syntax highlight theme.
+     */
+    --GW-syntax-highlight-color-normal: #1f1c1b;
+    --GW-syntax-highlight-color-attribute: #002561;
+    --GW-syntax-highlight-color-data-type: inherit;
+    --GW-syntax-highlight-color-variable: #666666;
+    --GW-syntax-highlight-color-other: inherit;
+    --GW-syntax-highlight-color-preprocessor: inherit;
+    --GW-syntax-highlight-color-extension: #777;
+    --GW-syntax-highlight-color-comment: #77947b;
+    --GW-syntax-highlight-color-control-flow: #003900;
+    --GW-syntax-highlight-color-keyword: #002561;
+    --GW-syntax-highlight-color-operator: #002561;
+    --GW-syntax-highlight-color-special-char: #607880;
+    --GW-syntax-highlight-color-built-in: #002561;
+    --GW-syntax-highlight-color-function: #002561;
+    --GW-syntax-highlight-color-constant: inherit;
+    --GW-syntax-highlight-color-base-n: inherit;
+    --GW-syntax-highlight-color-dec-val: inherit;
+    --GW-syntax-highlight-color-float: inherit;
+    --GW-syntax-highlight-color-information: inherit;
+    --GW-syntax-highlight-color-char: inherit;
+    --GW-syntax-highlight-color-string: inherit;
+    --GW-syntax-highlight-color-verbatim-string: inherit;
+    --GW-syntax-highlight-color-alert: #bf0303;
+    --GW-syntax-highlight-color-error: #ff0000;
+    --GW-syntax-highlight-color-import: #777777;
+    --GW-syntax-highlight-color-special-string: #666666;
+
+    /*  Math.
+     */
+    --GW-math-block-background-color: #f6f6f6;
+    --GW-math-block-background-color-flash: #fff;
+    --GW-math-block-scrollbar-border-color: #ccc;
+    --GW-math-block-scrollbar-thumb-color: #ccc;
+    --GW-math-block-scrollbar-thumb-hover-color: #999;
+
+    /*  Dropcaps.
+     */
+    --GW-dropcaps-goudy-color: #000;
+    --GW-dropcaps-yinit-color: #0d0d0d;
+    --GW-dropcaps-yinit-text-shadow-color: #777;
+    --GW-dropcaps-de-zs-color: #1b1b1b;
+    --GW-dropcaps-cheshire-color: #191919;
+    --GW-dropcaps-kanzlei-color: #191919;
+
+    /*  Admonitions.
+     */
+    --GW-admonition-note-left-border-color: #909090;
+    --GW-admonition-note-background-color: #d8d8d8;
+    --GW-admonition-tip-left-border-color: #d8d8d8;
+    --GW-admonition-tip-background-color: #f0f0f0;
+    --GW-admonition-warning-left-border-color: #5a5a5a;
+    --GW-admonition-warning-background-color: #9a9a9a;
+    --GW-admonition-warning-text-color: #fff;
+    --GW-admonition-error-left-border-color: #2d2d2d;
+    --GW-admonition-error-background-color: #5a5a5a;
+    --GW-admonition-error-text-color: #fff;
+    --GW-admonition-reversed-link-color: #ddd;
+    --GW-admonition-reversed-link-color-hover: #ccc;
+    --GW-admonition-reversed-link-underline-gradient-line-color: #ccc;
+    --GW-admonition-reversed-link-underline-gradient-line-color-hover: #bbb;
+
+	/*	Footer.
+	 */
+    --GW-bottom-ornament-line-color: #000;
+
+	/*	Pop-frames (popups or popins).
+	 */
+    --GW-popframes-object-popframe-background-color: #fff;
+
+    --GW-extracts-options-dialog-backdrop-background-color: rgba(255, 255, 255, 0.95);
+    --GW-extracts-options-dialog-background-color: var(--GW-body-background-color);
+    --GW-extracts-options-dialog-border-color: #aaa;
+    --GW-extracts-options-dialog-box-shadow-color: #444;
+    --GW-extracts-options-dialog-horizontal-rule-color: #ccc;
+    --GW-extracts-options-dialog-button-background-color: var(--GW-body-background-color);
+    --GW-extracts-options-dialog-button-text-color: #000;
+    --GW-extracts-options-dialog-button-border-color: #000;
+    --GW-extracts-options-dialog-button-hover-box-shadow-color: #000;
+    --GW-extracts-options-dialog-option-button-explanation-text-color: #777;
+    --GW-extracts-options-dialog-option-button-hover-text-color: #777;
+    --GW-extracts-options-dialog-radio-button-border-color: #000;
+
+    /*  Popups.
+     */
+    --GW-popups-popup-background-color: var(--GW-body-background-color);
+
+    --GW-popups-popup-border-color: #ccc;
+    --GW-popups-popup-box-shadow-color: #ccc;
+    --GW-popups-popup-border-focused-color: #aaa;
+    --GW-popups-popup-box-shadow-focused-color: #aaa;
+
+    --GW-popups-popup-title-bar-background-color: #fff;
+    --GW-popups-popup-title-bar-button-color: #bbb;
+    --GW-popups-popup-title-bar-button-color-hover: #000;
+    --GW-popups-popup-title-bar-button-color-disabled: #eee;
+	--GW-popups-popup-title-color: #aaa;
+    --GW-popups-popup-title-link-hover-color: var(--GW-body-link-hover-color);
+    --GW-popups-popup-title-bar-button-focused-color: #777;
+    --GW-popups-popup-title-bar-button-focused-color-hover: #000;
+    --GW-popups-popup-title-bar-button-focused-color-disabled: #ddd;
+    --GW-popups-popup-title-bar-submenu-box-shadow-color: #ddd;
+	--GW-popups-popup-title-focused-color: #000;
+    --GW-popups-popup-title-link-hover-focused-color: var(--GW-body-link-hover-color);
+
+    --GW-popups-popup-scrollbar-thumb-color: #ddd;
+    --GW-popups-popup-scrollbar-thumb-hover-color: #bbb;
+    --GW-popups-popup-scrollbar-thumb-focused-color: #ccc;
+    --GW-popups-popup-scrollbar-thumb-hover-focused-color: #999;
+
+    /*  Popins.
+     */
+    --GW-popins-popin-background-color: var(--GW-body-background-color);
+
+    --GW-popins-popin-border-color: #aaa;
+    --GW-popins-popin-backdrop-color: rgba(0, 0, 0, 0.4);
+    --GW-popins-popin-box-shadow-color: #aaa;
+
+    --GW-popins-popin-title-bar-background-color: #fff;
+    --GW-popins-popin-title-bar-button-color: #777;
+
+    --GW-popins-popin-scrollbar-thumb-color: #ccc;
+    --GW-popins-popin-scrollbar-thumb-hover-color: #999;
+
+    --GW-popins-popin-stack-counter-text-color: #fff;
+    --GW-popins-popin-stack-counter-background-color: #bbb;
+
+    /*  Image focus.
+     */
+    --GW-image-focus-image-hover-drop-shadow-color: #777;
+
+	/*	Page toolbar.
+	 */
+    --GW-page-toolbar-border-color: #aaa;
+	--GW-page-toolbar-control-button-color: #aaa;
+	--GW-page-toolbar-control-button-active-color: #000;
+
+	/*	Page toolbar widgets.
+	 */
+	--GW-page-toolbar-button-icon-color: #aaa;
+	--GW-page-toolbar-button-selectable-icon-color: #e4e4e4;
+	--GW-page-toolbar-button-selected-icon-color: #777;
+    --GW-page-toolbar-button-text-color: #666;
+    --GW-page-toolbar-button-disabled-text-color: #ccc;
+    --GW-page-toolbar-button-highlighted-text-color: #000;
+
+	/*	Reader mode.
+	 */
+	--GW-reader-mode-masked-links-key-toggle-info-alert-panel-background-color: rgba(0, 0, 0, 0.8);
+	--GW-reader-mode-masked-links-key-toggle-info-alert-panel-text-color: #fff;
+	--GW-reader-mode-masked-links-key-toggle-info-alert-panel-text-shadow-color: #000;
+	--GW-reader-mode-masked-links-key-toggle-info-alert-panel-key-icon-border-color: #bbb;
+	--GW-reader-mode-masked-links-key-toggle-info-alert-panel-key-icon-background-color: #444;
+
+	/*	“Back to top” link.
+	 */
+	--GW-back-to-top-link-color: #ccc;
+	--GW-back-to-top-link-hover-color: #999;
+
+	/*	Mobile floating header.
+	 */
+	--GW-floating-header-box-shadow-color: #ccc;
+	--GW-floating-header-scroll-indicator-color: #999;
+
+	/*	“Skip to content” accessibility link.
+	 */
+	--GW-skip-to-content-text-color: #fff;
+	--GW-skip-to-content-border-color: #fff;
+	--GW-skip-to-content-background-color: #bf1722;
+
+	/*	Nav header.
+	 */
+	--GW-nav-header-link-color: #888;
+	--GW-nav-header-link-hover-color: #000;
+
+	/*	X of the day.
+	 */
+	--GW-x-of-the-day-border-color: #ccc;
+}
+:root {
+    --GW-popups-popup-title-bar-pattern: var(--GW-image-pattern-dotted-e6e6e6-on-fff-2x-gif);
+    --GW-popups-popup-title-bar-pattern-focused: var(--GW-image-pattern-dotted-fff-on-e6e6e6-2x-gif);
+
+	--GW-checkerboard-scrollbar-background-image: var(--GW-image-checkerboard-777-fff-2x-gif);
+	--GW-checkerboard-scrollbar-hover-background-image: var(--GW-image-checkerboard-000-fff-2x-gif);
+}
+
+@media all and (max-width: 649px) {
+	.poem,
+	.editorial {
+		text-shadow: 0 0 0 currentColor;
+	}
+}
+</style>
+<style id="inlined-styles-colors-dark" media="all and (prefers-color-scheme: dark)">
+:root {
+    /*  General.
+     */
+    --GW-body-background-color: #000;
+    --GW-body-text-color: #fff;
+
+    /*  Selection.
+     */
+    --GW-text-selection-background-color: #dcdcdc;
+    --GW-text-selection-color: #000;
+
+	/*	Links.
+	 */
+    --GW-body-link-color: #dcdcdc;
+    --GW-body-link-hover-color: #999;
+    --GW-body-link-visited-color: #b4b4b4;
+    --GW-body-link-inverted-color: #333;
+    --GW-body-link-inverted-hover-color: #5c5c5c;
+    --GW-body-link-inverted-visited-color: #494949;
+
+    /*  Blockquotes.
+     */
+    --GW-blockquote-border-color-level-one: #5c5c5c;
+    --GW-blockquote-border-color-level-two: #646464;
+    --GW-blockquote-border-color-level-three: #747474;
+    --GW-blockquote-border-color-level-four: #7f7f7f;
+    --GW-blockquote-background-color-level-one: #212121;
+    --GW-blockquote-background-color-level-two: #3e3e3e;
+    --GW-blockquote-background-color-level-three: #4f4f4f;
+
+    /*  Abstracts.
+     */
+    --GW-abstract-border-color: #6c6c6c;
+
+	/*	Block context highlighting.
+	 */
+	--GW-block-context-span-highlight-color: #494949;
+
+    /*  Table of contents.
+     */
+    --GW-TOC-border-color: #5c5c5c;
+    --GW-TOC-background-color: #212121;
+    --GW-TOC-collapse-button-text-color: #5c5c5c;
+    --GW-TOC-collapse-button-text-hover-color: #000;
+    --GW-TOC-collapse-button-color: rgba(33, 33, 33, 0.8);
+    --GW-TOC-collapse-button-hover-color: #494949;
+    --GW-TOC-collapse-button-border-hover-color: #fff;
+    --GW-TOC-link-hover-background-color: #363636;
+    --GW-TOC-link-hover-color: #fff;
+    --GW-TOC-link-hover-indicator-bar-color: #5c5c5c;
+    --GW-TOC-number-color: #929292;
+    --GW-TOC-number-hover-color: #ddd;
+
+    /*  Collapse blocks.
+        */
+	--GW-collapse-abstract-blockquote-hover-color: #333;
+	--GW-collapse-disclosure-button-color: #333;
+	--GW-collapse-disclosure-button-hover-color: #494949;
+	--GW-collapse-in-blockquote-disclosure-button-color: #494949;
+	--GW-collapse-in-blockquote-disclosure-button-hover-color: #5c5c5c;
+	--GW-collapse-disclosure-button-text-color: #6c6c6c;
+	--GW-collapse-disclosure-button-text-hover-color: #000;
+	--GW-collapse-in-blockquote-disclosure-button-text-color: #8b8b8b;
+	--GW-collapse-in-blockquote-disclosure-button-text-hover-color: #999;
+
+	/*	Inline collapses.
+	 */
+	--GW-collapse-inline-disclosure-button-text-color: #c1c1c1;
+	--GW-collapse-inline-disclosure-button-text-hover-color: #8b8b8b;
+
+	/*	Aux-links collapse blocks.
+	 */
+	--GW-aux-links-collapse-border-color: #646464;
+
+    /*  Headings.
+     */
+    --GW-H1-border-color: #999;
+    --GW-H2-border-color: #999;
+
+    /*  Comments.
+     */
+    --GW-comment-section-top-border-color: #8b8b8b;
+
+    /*  Lists.
+     */
+    --GW-bulleted-list-marker-color: #9f9f9f;
+
+    /*  Figures.
+     */
+    --GW-figure-outline-color: #999;
+    --GW-figure-caption-outline-color: #999;
+
+	/*	Embeds.
+	 */
+	--GW-embed-border-color: #494949;
+
+    /*  Epigraphs.
+     */
+    --GW-epigraph-quotation-mark-color: #9f9f9f;
+
+    /*  Footnotes.
+     */
+    --GW-footnote-border-color: #7c7c7c;
+    --GW-footnote-highlighted-border-color: #7c7c7c;
+    --GW-footnotes-section-top-rule-color: #5c5c5c;
+    --GW-footnote-backlink-border-color: #fff;
+    --GW-footnote-backlink-border-hover-color: #8b8b8b;
+
+    /*  Footnote references.
+     */
+    --GW-highlighted-link-outline-color: #8b8b8b;
+
+    /*  Sidenotes.
+     */
+    --GW-sidenote-highlight-box-shadow-color: #7c7c7c;
+    --GW-sidenote-border-color: #7c7c7c;
+    --GW-sidenote-scrollbar-thumb-color: #7c7c7c;
+    --GW-sidenote-scrollbar-thumb-hover-color: #8b8b8b;
+    --GW-sidenote-self-link-border-color: #7c7c7c;
+
+	/*	Annotations.
+	 */
+	--GW-section-highlighted-border-color: #b4b4b4;
+
+    /*  Tables.
+     */
+    --GW-table-border-color: #fff;
+    --GW-table-caption-border-color: #fff;
+    --GW-table-row-horizontal-border-color: #fff;
+    --GW-table-scrollbar-thumb-color: #7c7c7c;
+    --GW-table-scrollbar-thumb-hover-color: #8b8b8b;
+    --GW-table-scrollbar-border-color: #fff;
+    --GW-table-column-heading-hover-background-color: #2b3637;
+    --GW-table-sorted-column-heading-background-color: #216983;
+    --GW-table-sorted-column-heading-text-color: #000;
+    --GW-table-sorted-column-heading-text-shadow-color: #fff;
+    --GW-table-zebra-stripe-alternate-row-background-color: #252525;
+    --GW-table-row-hover-outline-color: #fff;
+
+    /*  Code blocks.
+     */
+    --GW-code-element-border-color: #606060;
+    --GW-code-element-background-color: #1d1d1d;
+    --GW-pre-element-border-color: #606060;
+    --GW-pre-element-background-color: #1d1d1d;
+    --GW-pre-element-scrollbar-track-color: #1d1d1d;
+    --GW-pre-element-scrollbar-thumb-color: #5c5c5c;
+    --GW-pre-element-scrollbar-thumb-hover-color: #8b8b8b;
+    --GW-code-block-line-highlight-background-color: #171600;
+    --GW-code-block-line-highlight-border-color: #494949;
+    --GW-code-block-line-number-color: #7c7c7c;
+    --GW-code-block-line-number-divider-color: #5c5c5c;
+
+
+    /*  Syntax highlight theme.
+     */
+    --GW-syntax-highlight-color-normal: #f1edec;
+    --GW-syntax-highlight-color-attribute: #b9e8ff;
+    --GW-syntax-highlight-color-data-type: inherit;
+    --GW-syntax-highlight-color-variable: #b4b4b4;
+    --GW-syntax-highlight-color-other: inherit;
+    --GW-syntax-highlight-color-preprocessor: inherit;
+    --GW-syntax-highlight-color-extension: #a6a6a6;
+    --GW-syntax-highlight-color-comment: #7f9c83;
+    --GW-syntax-highlight-color-control-flow: #b4edaf;
+    --GW-syntax-highlight-color-keyword: #b9e8ff;
+    --GW-syntax-highlight-color-operator: #b9e8ff;
+    --GW-syntax-highlight-color-special-char: #94adb6;
+    --GW-syntax-highlight-color-built-in: #b9e8ff;
+    --GW-syntax-highlight-color-function: #b9e8ff;
+    --GW-syntax-highlight-color-constant: inherit;
+    --GW-syntax-highlight-color-base-n: inherit;
+    --GW-syntax-highlight-color-dec-val: inherit;
+    --GW-syntax-highlight-color-float: inherit;
+    --GW-syntax-highlight-color-information: inherit;
+    --GW-syntax-highlight-color-char: inherit;
+    --GW-syntax-highlight-color-string: inherit;
+    --GW-syntax-highlight-color-verbatim-string: inherit;
+    --GW-syntax-highlight-color-alert: #ff8470;
+    --GW-syntax-highlight-color-error: #ff4a39;
+    --GW-syntax-highlight-color-import: #a6a6a6;
+    --GW-syntax-highlight-color-special-string: #b4b4b4;
+
+    /*  Math.
+     */
+    --GW-math-block-background-color: #252525;
+    --GW-math-block-background-color-flash: #000;
+    --GW-math-block-scrollbar-border-color: #5c5c5c;
+    --GW-math-block-scrollbar-thumb-color: #5c5c5c;
+    --GW-math-block-scrollbar-thumb-hover-color: #8b8b8b;
+
+    /*  Dropcaps.
+     */
+    --GW-dropcaps-goudy-color: #fff;
+    --GW-dropcaps-yinit-color: #f9f9f9;
+    --GW-dropcaps-yinit-text-shadow-color: #a6a6a6;
+    --GW-dropcaps-de-zs-color: #efefef;
+    --GW-dropcaps-cheshire-color: #f1f1f1;
+    --GW-dropcaps-kanzlei-color: #f1f1f1;
+
+    /*  Admonitions.
+     */
+    --GW-admonition-note-left-border-color: #929292;
+    --GW-admonition-note-background-color: #4f4f4f;
+    --GW-admonition-tip-left-border-color: #4f4f4f;
+    --GW-admonition-tip-background-color: #303030;
+    --GW-admonition-warning-left-border-color: #bdbdbd;
+    --GW-admonition-warning-background-color: #8a8a8a;
+    --GW-admonition-warning-text-color: #000;
+    --GW-admonition-error-left-border-color: #e1e1e1;
+    --GW-admonition-error-background-color: #bdbdbd;
+    --GW-admonition-error-text-color: #000;
+    --GW-admonition-reversed-link-color: #494949;
+    --GW-admonition-reversed-link-color-hover: #5c5c5c;
+    --GW-admonition-reversed-link-underline-gradient-line-color: #5c5c5c;
+    --GW-admonition-reversed-link-underline-gradient-line-color-hover: #6c6c6c;
+
+	/*	Footer.
+	 */
+    --GW-bottom-ornament-line-color: #fff;
+
+	/*	Pop-frames (popups or popins).
+	 */
+    --GW-popframes-object-popframe-background-color: #000;
+
+    --GW-extracts-options-dialog-backdrop-background-color: rgba(0, 0, 0, 0.95);
+    --GW-extracts-options-dialog-background-color: var(--GW-body-background-color);
+    --GW-extracts-options-dialog-border-color: #7c7c7c;
+    --GW-extracts-options-dialog-box-shadow-color: #cecece;
+    --GW-extracts-options-dialog-horizontal-rule-color: #5c5c5c;
+    --GW-extracts-options-dialog-button-background-color: var(--GW-body-background-color);
+    --GW-extracts-options-dialog-button-text-color: #fff;
+    --GW-extracts-options-dialog-button-border-color: #fff;
+    --GW-extracts-options-dialog-button-hover-box-shadow-color: #fff;
+    --GW-extracts-options-dialog-option-button-explanation-text-color: #a6a6a6;
+    --GW-extracts-options-dialog-option-button-hover-text-color: #a6a6a6;
+    --GW-extracts-options-dialog-radio-button-border-color: #fff;
+
+    /*  Popups.
+     */
+    --GW-popups-popup-background-color: var(--GW-body-background-color);
+
+    --GW-popups-popup-border-color: #5c5c5c;
+    --GW-popups-popup-box-shadow-color: #5c5c5c;
+    --GW-popups-popup-border-focused-color: #7c7c7c;
+    --GW-popups-popup-box-shadow-focused-color: #7c7c7c;
+
+    --GW-popups-popup-title-bar-background-color: #000;
+    --GW-popups-popup-title-bar-button-color: #6c6c6c;
+    --GW-popups-popup-title-bar-button-color-hover: #fff;
+    --GW-popups-popup-title-bar-button-color-disabled: #333;
+	--GW-popups-popup-title-color: #7c7c7c;
+    --GW-popups-popup-title-link-hover-color: var(--GW-body-link-hover-color);
+    --GW-popups-popup-title-bar-button-focused-color: #a6a6a6;
+    --GW-popups-popup-title-bar-button-focused-color-hover: #fff;
+    --GW-popups-popup-title-bar-button-focused-color-disabled: #494949;
+    --GW-popups-popup-title-bar-submenu-box-shadow-color: #494949;
+	--GW-popups-popup-title-focused-color: #fff;
+    --GW-popups-popup-title-link-hover-focused-color: var(--GW-body-link-hover-color);
+
+    --GW-popups-popup-scrollbar-thumb-color: #494949;
+    --GW-popups-popup-scrollbar-thumb-hover-color: #6c6c6c;
+    --GW-popups-popup-scrollbar-thumb-focused-color: #5c5c5c;
+    --GW-popups-popup-scrollbar-thumb-hover-focused-color: #8b8b8b;
+
+    /*  Popins.
+     */
+    --GW-popins-popin-background-color: var(--GW-body-background-color);
+
+    --GW-popins-popin-border-color: #7c7c7c;
+    --GW-popins-popin-backdrop-color: rgba(255, 255, 255, 0.4);
+    --GW-popins-popin-box-shadow-color: #7c7c7c;
+
+    --GW-popins-popin-title-bar-background-color: #000;
+    --GW-popins-popin-title-bar-button-color: #a6a6a6;
+
+    --GW-popins-popin-scrollbar-thumb-color: #5c5c5c;
+    --GW-popins-popin-scrollbar-thumb-hover-color: #8b8b8b;
+
+    --GW-popins-popin-stack-counter-text-color: #000;
+    --GW-popins-popin-stack-counter-background-color: #6c6c6c;
+
+    /*  Image focus.
+     */
+    --GW-image-focus-image-hover-drop-shadow-color: #a6a6a6;
+
+	/*	Page toolbar.
+	 */
+    --GW-page-toolbar-border-color: #7c7c7c;
+	--GW-page-toolbar-control-button-color: #7c7c7c;
+	--GW-page-toolbar-control-button-active-color: #fff;
+
+	/*	Page toolbar widgets.
+	 */
+	--GW-page-toolbar-button-icon-color: #7c7c7c;
+	--GW-page-toolbar-button-selectable-icon-color: #404040;
+	--GW-page-toolbar-button-selected-icon-color: #a6a6a6;
+    --GW-page-toolbar-button-text-color: #b4b4b4;
+    --GW-page-toolbar-button-disabled-text-color: #5c5c5c;
+    --GW-page-toolbar-button-highlighted-text-color: #fff;
+
+	/*	Reader mode.
+	 */
+	--GW-reader-mode-masked-links-key-toggle-info-alert-panel-background-color: rgba(255, 255, 255, 0.8);
+	--GW-reader-mode-masked-links-key-toggle-info-alert-panel-text-color: #000;
+	--GW-reader-mode-masked-links-key-toggle-info-alert-panel-text-shadow-color: #fff;
+	--GW-reader-mode-masked-links-key-toggle-info-alert-panel-key-icon-border-color: #6c6c6c;
+	--GW-reader-mode-masked-links-key-toggle-info-alert-panel-key-icon-background-color: #cecece;
+
+	/*	“Back to top” link.
+	 */
+	--GW-back-to-top-link-color: #5c5c5c;
+	--GW-back-to-top-link-hover-color: #8b8b8b;
+
+	/*	Mobile floating header.
+	 */
+	--GW-floating-header-box-shadow-color: #5c5c5c;
+	--GW-floating-header-scroll-indicator-color: #8b8b8b;
+
+	/*	“Skip to content” accessibility link.
+	 */
+	--GW-skip-to-content-text-color: #000;
+	--GW-skip-to-content-border-color: #000;
+	--GW-skip-to-content-background-color: #ff847b;
+
+	/*	Nav header.
+	 */
+	--GW-nav-header-link-color: #999;
+	--GW-nav-header-link-hover-color: #fff;
+
+	/*	X of the day.
+	 */
+	--GW-x-of-the-day-border-color: #5c5c5c;
+}
+:root {
+    /*  Adjust background color to prevent pixels from turning off (contrary to 
+    	popular belief, pixels turning off saves trivial energy, like <1% in 
+    	measurements, and causes nasty scrolling/update jank due to delay in 
+    	pixels turning back on), and improve contrast with the white.
+     */
+    --GW-body-background-color: #161616;
+
+    /*  Dial back from pure white to keep contrast from being *too* high & 
+    	‘stark’ (#fff bg / #000 text seems to work in light mode, but not in 
+    	dark mode, perhaps because of differences in lighting environment?)
+     */
+    --GW-body-text-color: #f1f1f1;
+
+    --GW-popups-popup-title-bar-pattern: var(--GW-image-pattern-dotted-161616-on-252525-2x-gif);
+    --GW-popups-popup-title-bar-pattern-focused: var(--GW-image-pattern-dotted-161616-on-3e3e3e-2x-gif);
+
+    --GW-popins-popin-backdrop-color: rgba(0, 0, 0, 0.6);
+
+    --GW-popins-popin-title-bar-button-color: #bbb;
+
+    --GW-checkerboard-scrollbar-background-image: var(--GW-image-checkerboard-888-000-2x-gif);
+    --GW-checkerboard-scrollbar-hover-background-image: var(--GW-image-checkerboard-bfbfbf-000-2x-gif);
+}
+
+.dark-mode-invert,
+.dark-mode-invert::before,
+.dark-mode-invert::after {
+	filter: var(--dark-mode-invert-filter, none);
+}
+
+/*  Admonition icons.
+ */
+div.admonition.tip::before {
+    filter: invert(1);
+}
+div.admonition.note::before {
+    filter: none;
+}
+div.admonition.warning::before {
+    filter: none;
+}
+div.admonition.error::before {
+    filter: none;
+}
+
+/*  SVG icons in the two darker styles of admonitions.
+ */
+div.admonition.warning a[data-link-icon-type='svg'] .link-icon-hook::after,
+div.admonition.error a[data-link-icon-type='svg'] .link-icon-hook::after {
+    filter: none;
+}
+
+/*  For sortable table column headings, we use dark versions of the up/down/both
+    arrow icons.
+ */
+table th.tablesorter-header {
+    background-image: url('/static/img/tablesorter/tablesorter-bg-dark.gif');
+}
+table th.tablesorter-headerAsc {
+    background-image: url('/static/img/tablesorter/tablesorter-asc-dark.gif');
+}
+table th.tablesorter-headerDesc {
+    background-image: url('/static/img/tablesorter/tablesorter-desc-dark.gif');
+}
+
+/*  Images that are marked as '.invert' by the server are inverted,
+    hue-rotated, and desaturated. Other (non-invertible) images are merely
+    desaturated. Hovering over an image restores it to its original state.
+    Hierarchy: ‘.invert-not’/‘.invert-not-auto’: no inversion or grayscale;
+    ‘.invert’/‘.invert-auto’: inverted (uninverted upon mouse hover);
+    none: grayscaled (ungrayscaled on hover).
+ */
+figure img.invert,
+figure img.invert-auto {
+    filter: grayscale(50%) invert(100%) brightness(95%) hue-rotate(180deg);
+}
+figure img:not(.invert):not(.invert-auto) {
+    filter: grayscale(50%);
+}
+figure img,
+figure img.invert,
+figure img.invert-auto {
+    transition: filter 0.25s ease;
+}
+figure img:not(.drop-filter-on-hover-not):hover,
+figure img:not(.drop-filter-on-hover-not).invert:hover,
+figure img:not(.drop-filter-on-hover-not).invert-auto:hover,
+figure img:not(.drop-filter-on-hover-not):not(.invert):not(.invert-auto):hover {
+    filter: none;
+    transition: filter 0s ease 0.25s;
+}
+
+figure img[src$=".svg"].invert:hover,
+figure img[src$=".svg"].invert-auto:hover {
+    filter: grayscale(50%) invert(100%) brightness(95%) hue-rotate(180deg);
+}
+
+/*  Image alt-text.
+ */
+figure img.invert::before,
+figure img.invert-auto::before {
+    filter: invert(1);
+}
+figure img.invert:hover::before,
+figure img.invert-auto:hover::before {
+    filter: none;
+}
+/*  Styling the image alt-text interferes with the transitions in dark mode.
+    (We include non-class’d `img` in this selector for consistency.)
+
+    TEMPORARY until we transition to a color-based instead of filter-based
+    scheme for this. —SA 2022-07-29
+ */
+figure img,
+figure img:hover,
+figure img.invert,
+figure img.invert:hover,
+figure img.invert-auto,
+figure img.invert-auto:hover {
+    transition: none;
+}
+
+/*  For images which have been marked up (manually or automatically) with 
+	‘.invert-not’, we avoid any filtering at all. If they are manually marked up
+	(artwork, diagrams with multiple subtly-different colors matched to a 
+	legend/caption), the color is important and shouldn’t be faded out by 
+	default. (Or invertOrNot has judged the image to be non-invertible, which
+	presumably means something like the above also.)
+ */
+#markdownBody figure img.invert-not,
+#markdownBody figure img.invert-not-auto {
+    filter: none;
+}
+
+/*  The loading spinner for object popups (image, iframe, object) is inverted
+    and made more visible in dark mode.
+ */
+.popframe.loading::before {
+    filter: invert(1);
+    opacity: 0.4;
+}
+
+/*  “Loading failed” messages for object popups.
+ */
+.popframe.loading-failed::after {
+    opacity: 0.4;
+}
+
+/*  Masked links key toggle info alert panel.
+ */
+div#masked-links-key-toggle-info-alert img {
+    filter: drop-shadow(0 0 3px var(--GW-reader-mode-masked-links-key-toggle-info-alert-panel-text-shadow-color));
+}
+
+/*  Recently-modified icon, manicule.
+ */
+.has-recently-modified-icon .recently-modified-icon-hook::before,
+.manicule svg {
+    filter: invert(1);
+}
+
+/*	Poem caesura marks.
+ */
+div.poem span.caesura-mark {
+	opacity: 0.3;
+}
+@media all and (max-width: 649px) {
+	div.poem span.caesura-mark {
+		opacity: 0.4;
+	}
+}
+</style>
+<link rel="stylesheet" href="/static/css/head.css?v=1770514858">
+<script src="/static/js/head.js?v=1770514858"></script>
+<link rel="preload" href="/static/img/icon/icons.svg?v=1768170615" as="image">
+
+
+  
+  <!-- Hint at necessary third-party domains -->
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+
+  <meta name="title" content="LessWrong 锚定效应实验">
+  <meta name="citation_title" content="LessWrong 锚定效应实验">
+  <meta name="og:title" content="LessWrong 锚定效应实验">
+  <meta name="twitter:title" content="LessWrong 锚定效应实验">
+  <meta name="generator" content="https://github.com/gwern/gwern.net/">
+  <meta name="creator" content="gwern.net">
+  
+  <meta name="author" content="Gwern">
+  <meta name="citation_author" content="Gwern">
+  
+  <meta name="contact" content="https://gwern.net/me#contact">
+  <link rel="index" title="Gwern.net homepage" href="https://gwern.net/index">
+  <link href="https://gwern.substack.com/feed" type="application/rss+xml" rel="alternate" title="ATOM/RSS feed of Gwern.net newsletters with additions and links.">
+
+  <meta name="twitter:creator" content="gwern">
+  <meta name="twitter:site" content="gwern.net">
+  <meta name="og:site" content="gwern.net">
+  <meta name="og:type" content="article">
+  <meta name="description" content="无意义的正面/负面评论是否会使文章质量评分产生偏高或偏低的偏移？">
+  <meta name="og:description" content="无意义的正面/负面评论是否会使文章质量评分产生偏高或偏低的偏移？">
+  <meta property="og:image" content="https://gwern.net/static/img/logo/logo-whitebg-large-border.png">
+  <meta property="og:image:alt" content="Default thumbnail text: the Gwern.net site logo, a logotype of a large blackletter fraktur capital letter &#39;G&#39; on a white background.">
+  <meta property="og:image:height" content="530">
+  <meta property="og:image:width" content="441">
+  <meta property="gwern:thumbnail:css-classes" content>
+  <meta name="keywords" content>
+  <meta name="dc.date.issued" content="27 Feb 2012">
+  
+  <meta name="citation_publication_date" content="27 Feb 2012">
+  <meta name="dcterms.modified" content>
+  <link rel="schema.dcterms" href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/">
+  <meta name="dcterms.rights" content="CC PD-0">
+  <meta name="dc.rights" content="https://creativecommons.org/publicdomain/zero/1.0/">
+  <link rel="canonical" href="https://gwern.net/Anchoring">
+  <meta name="citation_fulltext_html_url" content="https://gwern.net/Anchoring">
+  <meta name="og:url" content="https://gwern.net/Anchoring">
+  <link rel="alternate" type="text/markdown" href="https://gwern.net/Anchoring.md" title="Markdown source of ‘LessWrong 锚定效应实验’ page"> <!-- Also available via Accept header -->
+  <meta name="page-body-classes" content="page-anchoring dropcaps-de-zs">
+  <meta name="citation_fulltext_world_readable" content>
+  <meta name="color-scheme" content="light dark">
+
+  
+  <title>LessWrong 锚定效应实验 · Gwern.net</title>
+  
+
+  <link id="favicon" rel="icon" type="image/png" href="/static/img/logo/logo-favicon-small.png">
+  <link id="favicon-dark" rel="icon" type="image/png" href="/static/img/logo/logo-favicon-small-dark.png" media="all and (prefers-color-scheme: dark)">
+  <link id="favicon-apple-touch" rel="apple-touch-icon" type="image/png" href="/static/img/logo/logo-favicon-appletouch.png">
+  <link id="favicon-apple-touch-dark" rel="apple-touch-icon" type="image/png" href="/static/img/logo/logo-favicon-appletouch-dark.png" media="all and (prefers-color-scheme: dark)">
+
+  <!-- CSS for JS-disabled users: ensure that NoScripters know what they are missing even if they jump to a section & miss the warning at top/bottom. -->
+  <noscript>
+    <style>
+      #markdownBody #noscript-warning-header {
+          position: fixed; /* sticky */
+          top: 6px; /* at top */
+          width: 58%;
+          z-index: 99; /* Make sure it is on top */
+          background-color: #f8f8f8; /* Set a solid background color so legible while positioned over text */
+          border-color: var(--GW-abstract-border-color); /* Make look like theme-toggle/admonitions a bit more */
+          border-width: 6px 6px 6px 6px;
+          border-style: double;
+      }
+      #markdownBody #noscript-warning-header p { margin: 10px; }
+      nav#navbar { padding-top: 160px; } /* avoid overlap with page header */
+    </style>
+  </noscript>
+</head>
+
+<body class="page-anchoring dropcaps-de-zs">
+  <!-- Inlined asset links (no SSI): injected by Hakyll from static/include/inlined-asset-links.html -->
+  <link rel="stylesheet" href="/static/css/style.css?v=1770491984" media="print" onload="this.media=`all`">
+<script src="/static/js/script.js?v=1770491982" defer></script>
+
+
+  <main>
+    <a id="skip-to-content-link" href="#markdownBody">Skip to main content</a>
+
+    <!-- Navbar (no SSI): injected by Hakyll from static/include/navbar.html -->
+        <nav id="navbar">
+      <a class="logo" rel="home me contents" href="/index" accesskey="\" title="Homepage: categorized list of articles index"><svg class="logo-image" viewbox="0 0 64 75">
+      <use href="/static/img/logo/logo-smooth.svg#logo"></use></svg></a>
+      <div class="navbar-links">
+        <a class="site link-page link-annotated" href="/about" title="Site ideals, source, content, traffic, examples, license" rel="author">Site</a>
+        <a class="design link-page link-annotated" href="/design" title="Design and implementation notes">Design</a>
+        <a class="new link-page link-annotated" href="/changelog" title="Changelog of what’s new or updated">New</a>
+        <a class="blog link-page" href="/blog/index" title="Shortform Gwern writings">Blog</a>
+        <a class="links link-page" href="/Links" title="Links page">Links</a>
+        <a class="patreon" href="https://www.patreon.com/gwern" title="Link to Patreon donation profile to support my writing" rel="me">Patreon</a>
+        <a class="mail" href="https://gwern.substack.com/" title="Monthly mailing list: newsletter signup form" rel="me">Substack</a>
+      </div>
+    </nav>
+
+
+    <article>
+
+      <header>
+        <h1>LessWrong 锚定效应实验</h1>
+      </header>
+
+      
+      <div class="markdownBody" id="page-metadata">
+          
+        <div class="page-description"><p>无意义的正面/负面评论是否会使文章质量评分产生偏高或偏低的偏移？</p></div>
+        <div class="page-metadata-fields">
+            
+            
+            <span class="page-status" title="Writing status of current page: ranges &#39;abandoned&#39;/&#39;notes&#39;/&#39;draft&#39;/&#39;in progress&#39;/&#39;finished&#39;"><em><span class="completion-status" data-progress-percentage="100">finished</span></em></span>
+            <span class="page-confidence"><a href="/about#confidence-tags" title="Explanation of &#39;confidence&#39; metadata: probability of overall being meaningfully correct, expressed as Kesselman Estimative Words (ranging 0–100%: &#39;certain&#39;/&#39;highly likely&#39;/&#39;likely&#39;/&#39;possible&#39;/&#39;unlikely&#39;/&#39;highly unlikely&#39;/&#39;remote&#39;/&#39;impossible&#39;)">certainty</a>: <em><span class="completion-status" data-progress-percentage="34">unlikely</span></em></span>
+            <span class="page-importance"><a href="/about#importance-tags" title="Explanation of &#39;importance&#39; metadata: rating 1–10 about how much a topic matters to the world.">importance</a>: <em>0</em></span>
+            
+            
+            
+        </div>
+      </div>
+      
+
+      <div id="TOC" class="TOC"><ul>
+<li><a href="#问题" id="toc-问题">问题</a></li>
+<li><a href="#实验设计" id="toc-实验设计">实验设计</a>
+<ul>
+<li><a href="#评论变体" id="toc-评论变体">评论变体</a></li>
+</ul></li>
+<li><a href="#问答" id="toc-问答">问答</a></li>
+<li><a href="#数据" id="toc-数据">数据</a></li>
+<li><a href="#分析" id="toc-分析">分析</a>
+<ul>
+<li><a href="#文章效果" id="toc-文章效果">文章效果</a></li>
+<li><a href="#评论待遇" id="toc-评论待遇">评论待遇</a></li>
+</ul></li>
+<li><a href="#外部链接" id="toc-外部链接">外部链接</a></li>
+</ul></div> <div id="markdownBody" class="markdownBody"><blockquote>
+<p>我在 <a href="https://www.lesswrong.com/" id="_xgkZOI9c" class="link-live" data-link-icon="LW" data-link-icon-type="text" data-link-icon-color="#7faf83" data-url-iframe="https://www.greaterwrong.com/?format=preview&amp;theme=classic">LessWrong</a> 上进行了一项非正式实验，测试 karma 分数是否容易受到基于首条评论的锚定效应影响；发现了一个中等偏大的效应量，但数据不符合假设的正态分布，因此可能存在也可能不存在实际的锚定效应。</p>
+</blockquote>
+<section id="问题" class="level1">
+<h1><a href="#问题" title="Link to section: § &#39;问题&#39;">问题</a></h1>
+<p>2012年2月27日，在 <code>#lesswrong</code> 频道：</p>
+<pre><code>Grognor&gt; I&#39;ve been reading the highest-scoring articles, and I have noticed a pattern
+         a MUCH HIGHER PROPORTION of top-scoring articles have &quot;upvoted&quot; in the first two words in the
+         first comment
+         (standard disclaimer: correlation is not causation blah blah)
+         http://lesswrong.com/r/lesswrong/lw/6r6/tendencies_in_reflective_equilibrium/ then I see this,
+         one of the follow-ups to one of the top-scoring articles like this. the first comment
+         says &quot;not upvoted&quot;
+         and it has a much lower score
+         while reading it, I was wondering &quot;why is this at only 23? this is one of the best articles
+                                           I&#39;ve ever oh look at that comment&quot;
+         I&#39;m definitely hitting on a real phenomenon here, probably some social thing that says
+         &quot;hey if he upvoted, I should too&quot; and it seems to be incredibly
+         strongly related to the first comment
+         the proportion is really quite astounding
+         http://lesswrong.com/lw/5n6/i_know_im_biased_but/ compare this to the
+         Tendencies in Reflective Equilibrium post. Compared to that, it&#39;s awful, but it has
+         nearly the same score. Note the distinct lack of a first comment saying &quot;not upvoted&quot;
+         (side note: I thought my article, &quot;on saying the obvious&quot;, would have a much lower score than
+         it did. note the first comment: &quot;good points, all of them.&quot;)
+         it seems like it&#39;s having more of an effect than I would naively predict
+...
+gwern&gt; Grognor: hm. maybe I should register a sockpuppet and on every future article I write flip a coin
+                and write either upvoted or downvoted
+quanticle&gt; gwern: Aren&#39;t you afraid you&#39;ll incur Goodhart&#39;s wrath?
+gwern&gt; quanticle: no, that would be if I only put in &#39;upvoted&#39; comments
+gwern&gt; Grognor: do these comments tend to include any reasons?
+Grognor&gt; gwern: yes
+
+Boxo&gt; you suggesting that the comments cause the upvotes? I&#39;d rather say that the post is just the kind
+      of post that makes lots people think as their first reaction
+      &quot;hell yeah imma upvote this&quot;, makes upvoting salient to them, and then some of that bubbles up to
+      the comments
+Grognor&gt; Boxo: I&#39;m not suggesting it&#39;s entirely that simple, no, but I do think it&#39;s obvious now that a
+              first comment that says &quot;upvoted for reasons x, y, and z&quot;
+              will cause more people to upvote than otherwise would have, and vice versa
+Boxo&gt; (ie. you saw X and Y and though X caused Y, but I think there&#39;s a Z that causes both X and Y)
+ksotala&gt; Every now and then, I catch myself wanting to upvote something because others have upvoted it
+         already. It sounds reasonable that having an explicit comment
+         declaring &quot;I upvoted&quot; might have an even stronger effect.
+ksotala&gt; On the other hand, I usually decide to up/downvote before reading the comments.
+gwern&gt; ksotala: you should turn on anti-kibitzing then
+rmmh&gt; gwern: maybe karma blinding like HN would help
+Boxo&gt; I guess any comment about voting could remind people to vote, in whatever direction. Could test this
+      if you had the total number of votes per post.
+Grognor&gt; that too. the effect here is multifarious and complicated and the intricate details could not
+         possibly be worked out, which is exactly why this proportion of first comments with an &#39;upvoted&#39;
+         note surprises me</code></pre>
+<p>这种<a href="https://en.wikipedia.org/wiki/%E9%94%9A%E5%AE%9A%E6%95%88%E5%BA%94" id="_Uilufwtz" class="link-live" data-link-icon="wikipedia" data-link-icon-type="svg" data-url-iframe="https://en.m.wikipedia.org/wiki/%E9%94%9A%E5%AE%9A%E6%95%88%E5%BA%94#bodyContent">锚定效应</a>或<a href="https://en.wikipedia.org/wiki/%E7%A4%BE%E4%BC%9A%E8%AE%A4%E5%90%8C" id="_T5rNlke2" class="link-live" data-link-icon="wikipedia" data-link-icon-type="svg" data-url-iframe="https://en.m.wikipedia.org/wiki/%E7%A4%BE%E4%BC%9A%E8%AE%A4%E5%90%8C#bodyContent">社会认同</a>效应所导致的<a href="https://en.wikipedia.org/wiki/%E5%85%88%E5%8F%91%E4%BC%98%E5%8A%BF" id="_lbjgzwn9" class="link-live" data-link-icon="wikipedia" data-link-icon-type="svg" data-url-iframe="https://en.m.wikipedia.org/wiki/%E5%85%88%E5%8F%91%E4%BC%98%E5%8A%BF#bodyContent">先发优势</a>在我看来是合理的。至少有一项在线实验发现了类似的现象：<a href="http://web.natur.cuni.cz/~houdek3/papers/Muchnik%20et%20al%202013.pdf" id="_vASyUfBb" data-link-icon="pdf" data-link-icon-type="svg" data-link-icon-color="#f40f02" title="Muchnik et al 2013">“Social Influence Bias: A Randomized Experiment”</a>：</p>
+<blockquote>
+<p>Our society is increasingly relying on the digitized, aggregated opinions of others to make decisions. We therefore designed and analyzed a large-scale randomized experiment on a social news aggregation Web site to investigate whether knowledge of such aggregates distorts decision-making. Prior ratings created significant bias in individual rating behavior, and positive and negative social influences created asymmetric herding effects. Whereas negative social influence inspired users to correct manipulated ratings, positive social influence increased the likelihood of positive ratings by 32% and created accumulating positive herding that increased final ratings by 25% on average. This positive herding was topic-dependent and affected by whether individuals were viewing the opinions of friends or enemies. A mixture of changing opinion and greater turnout under both manipulations together with a natural tendency to up-vote on the site combined to create the herding effects. Such findings will help interpret collective judgment accurately and avoid social influence bias in collective intelligence in the future.</p>
+</blockquote>
+</section>
+<section id="实验设计" class="level1">
+<h1><a href="#实验设计" title="Link to section: § &#39;实验设计&#39;">实验设计</a></h1>
+<p>因此在2月27日那天，我注册了账号 <a href="http://lesswrong.com/user/Rhwawn/" id="_W5x3JO5U">“Rhwawn”</a><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>。我发表了一些高质量的评论和点赞，以便将该账号塑造为一个合法的活跃用户。</p>
+<p>此后，每当我撰写一篇文章或讨论帖并公开发布后，我就会抛一枚硬币：如果是正面，就以 Rhwawn 的身份发表一条”已点赞（Upvoted）“的评论；如果是反面，就发表一条”已踩（Downvoted）“的评论，并附带一些额外文字（见下一节）。不用说，实际上并没有进行任何投票操作。然后我会以该账号在其他文章/讨论帖上发表一些高质量评论和投票，以此掩盖实验干预行为。（在任何情况下，我都不会对已经用 <a href="http://lesswrong.com/user/gwern" id="_hWBkoNdd">Gwern</a> 账号回复过或投票过的人进行点赞或踩。）最后，我在日历上设置了30天后的提醒，届时记录该文章/讨论帖的 karma 值。我发帖频率并不<em>那么</em>高，因此我决定在一年后即<span class="date-range">2013<sub><span title="2013 was 13 years ago.">13ya</span></sub></span>年2月27日停止实验。后来我提前结束了实验，因为到<span class="date-range">2012<sub><span title="2012 was 14 years ago.">14ya</span></sub></span>年9月我已经不再觉得这是一个有趣的问题了，它作为一项未完成的任务给我带来了心理负担，而且为了掩盖锚定评论而以 Rhwawn 身份做出一些真正有价值的贡献，这种不算微不足道的麻烦也阻碍了我的发帖意愿。</p>
+<p>为了扩大样本量，我将 <a href="http://lesswrong.com/recentposts" id="_xs1CpkLe">Recent Posts</a> 的内容通过 <code>xclip -o | grep &#39;^by &#39; | cut -d &#39; &#39; -f 2 | sort | uniq -c | sort -g</code> 处理，选出发帖数&gt;=6的所有人（除我之外共8人），并给他们发送了一条简短消息，说明我希望获得更大的样本以及参与所需的工作量（“每次你发表文章或讨论帖时大约需要半分钟到一分钟的时间，为期一年。对大多数人来说，这不过是每周或每月一次的事情。”）</p>
+<p>对于回复的人，我发送了这份文档的副本，并解释了他们的操作流程：每次发帖时抛一枚硬币，然后以同样的方式发布评论（Rhwawn 账号的密码已与他们共享）；不过为了方便他们，一个月后记录 karma 值的工作由我来完成。（我订阅了参与者的发帖 RSS 推送；这并不能保证我能及时得知他们的发帖以便添加随机化的马甲评论——因此仍然需要他们的主动参与——但至少我可以处理日程安排和 karma 值的核查工作。）</p>
+<section id="评论变体" class="level2">
+<h2><a href="#评论变体" title="Link to section: § &#39;评论变体&#39;">评论变体</a></h2>
+<p>Grognor 指出原始评论是附带理由的，但遗憾的是，如果我为正面或负面评论都编造理由，某些批评或赞美必然比其他的更好，这将成为<em>另一个</em>变异来源；因此我添加了通用理由。</p>
+<p>根据我观察那些迅速沉入深渊的评论的经验，只写”已点赞”或”已踩”的评论对于锚定效应的研究来说不是好主意——它们很快就会被折叠隐藏，因此效应量会比通常小很多，而且被隐藏的评论本身可能也会产生锚定效应（我猜测：负面的，因为人们会想”这帖子怎么吸引了这种蠢评论？“）。</p>
+<p>而如果你选择更精心论证的评论，那就有点像 <a href="http://xkcd.com/810/" id="__drGugeK" data-link-icon="XKCD" data-link-icon-type="text,quad,sans">XKCD 漫画</a>所描绘的：高质量评论开始依赖于实验者自身的优势和劣势（我确信我能对心理学相关文章做出有质量的批评和赞美，但对于技术性的决策理论文章就不那么擅长了）。</p>
+<p>这是一种”做也不是，不做也不是”的两难困境。</p>
+<p>我希望我的策略能成为一个折中方案——不会过于琐碎以至于被踩到深渊，但也不会过于高质量和个性化以至于失去可比性。我认为我做到了比较接近的效果，因为从分析部分可以看到，正面的锚定评论仅遭受了较小的净踩数，这表明 LW 用户可能认为它不够好到值得点赞，但也没有明显差到值得踩。</p>
+<p>（当然，我并没有预料到正面和负面评论会被区别对待——它们本质上是同一件事，只是加了否定词。如果我事先知道这种双重标准，我也不确定该如何改变设计。）</p>
+<p>为了避免某些批评准确而另一些较差的问题，使用了一个固定的理由列表，并做了少量变化以使其适合具体情境：</p>
+<ol type="1">
+<li><p>负面评论；“已踩；……”</p>
+<ul>
+<li><p>“过于依赖 <em>n</em> 项研究”</p></li>
+<li><p>“引用了太多研究”</p></li>
+<li><p>“过于依赖个人轶事”</p></li>
+<li><p>“数学内容过多”</p></li>
+<li><p>“数学内容不够”</p></li>
+<li><p>“相当显而易见”</p></li>
+<li><p>“不太有趣”</p></li>
+</ul></li>
+<li><p>正面评论；“已点赞；……”</p>
+<ul>
+<li><p>“很好地运用了 <em>n</em> 项研究”</p></li>
+<li><p>“引用充分详实”</p></li>
+<li><p>“轶事引人入胜”</p></li>
+<li><p>“数学运用严谨”</p></li>
+<li><p>“数学用量恰到好处”</p></li>
+<li><p>“一点也不显而易见”</p></li>
+<li><p>“非常有趣”</p></li>
+</ul></li>
+</ol>
+</section>
+</section>
+<section id="问答" class="level1">
+<h1><a href="#问答" title="Link to section: § &#39;问答&#39;">问答</a></h1>
+<blockquote>
+<p>I will have to do some contemplation of values before I accept or reject. I like getting honest feedback on my posts, I like accumulating karma, and I also like performing experiments.</p>
+</blockquote>
+<p>随机化意味着你的预期 karma 值为0，除非你预期正面和负面效果之间存在不对称性。</p>
+<blockquote>
+<p>What do you anticipate doing with the data accumulated over the course of the experiment?</p>
+</blockquote>
+<p>哦，这很简单。将文章按正面锚定和负面锚定分为两组 karma 分数；输入双样本 t 检验来看均值是否不同以及差异是否显著。我大概可以直接从我<a href="Zeo#vitamin-d-analysis" id="__Mhoo8J5">各种 Zeo 相关的 <code>R</code></a> 分析会话中复制代码。</p>
+<p>如果我能达到 <em>p</em>&lt;0.10 或 <em>p</em>&lt;0.05 左右，就发表一篇文章，大张旗鼓地宣布发现了偏差，作为一个不应过于看重 karma 的实例教训；如果没有达到，就发表一篇讨论帖，讨论实验结果以及我认为结果未达到显著性的原因。（样本量不足？t 检验的假设太弱？）</p>
+<blockquote>
+<p>And the ethics?</p>
+</blockquote>
+<p>文章作者是自愿参与的，而且如前所述，预期的 karma 收益为0。因此没有人受到伤害，至于欺骗的问题，我认为这不是什么大事。我们已经被无数的启动效应、刺激和偏差所影响，因此再加一个被设计为总体效果中性的实验，在我看来是无害的。</p>
+<blockquote>
+<p>“What comes before determines what comes after…The thoughts of all men arise from the darkness. If you are the movement of your soul, and the cause of that movement precedes you, then how could you ever call your thoughts your own? How could you be anything other than a slave to the darkness that comes before?…History. Language. Passion. Custom. All these things determine what men say, think, and do. These are the hidden puppet-strings from which all men hang…all men are deceived….So long as what comes before remains shrouded, so long as men are already deceived, what does [deceiving men] matter?” –Kelhus, <a href="https://en.wikipedia.org/wiki/R._Scott_Bakker" id="_KTLzXetl" class="link-live" data-link-icon="wikipedia" data-link-icon-type="svg" data-url-iframe="https://en.m.wikipedia.org/wiki/R._Scott_Bakker#bodyContent">R. Scott Bakker</a>’s <em><a href="https://en.wikipedia.org/wiki/Prince_of_Nothing" id="_2rAJR55x" class="link-live" data-link-icon="wikipedia" data-link-icon-type="svg" data-url-iframe="https://en.m.wikipedia.org/wiki/Prince_of_Nothing#bodyContent">The Darkness That Comes Before</a></em></p>
+</blockquote>
+</section>
+<section id="数据" class="level1">
+<h1><a href="#数据" title="Link to section: § &#39;数据&#39;">数据</a></h1>
+<p>实验结果：</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><p>Post</p></th>
+<th style="text-align: left;"><p>Author</p></th>
+<th style="text-align: left;"><p>Date</p></th>
+<th style="text-align: left;"><p>Anchor</p></th>
+<th><p>Post karma</p></th>
+<th><p>Comment karma</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><p><a href="http://lesswrong.com/r/discussion/lw/ahz/cashing_out_cognitive_biases_as_behavior/" id="_AdmchDK7">Cashing Out Cognitive Biases as Behavior</a></p></td>
+<td style="text-align: left;"><p><a href="http://lesswrong.com/user/gwern" id="_hWBkoNdd">gwern</a></p></td>
+<td style="text-align: left;"><p>02 March</p></td>
+<td style="text-align: left;"><p>0</p></td>
+<td><p>11</p></td>
+<td><p>-4</p></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><p><a href="http://lesswrong.com/lw/aid/heuristics_and_biases_in_charity/" id="_km8pyaOi">Heuristics and Biases in Charity</a></p></td>
+<td style="text-align: left;"><p><a href="http://lesswrong.com/user/Kaj_Sotala/" id="_Rss-HCmW">Kaj_Sotala</a></p></td>
+<td style="text-align: left;"><p>02 March</p></td>
+<td style="text-align: left;"><p>0</p></td>
+<td><p>19</p></td>
+<td><p>-6</p></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><p><a href="http://lesswrong.com/lw/akr/i_was_not_almost_wrong_but_i_was_almost_right/" id="_daX5i_xd">I Was Not Almost Wrong But I Was Almost Right</a></p></td>
+<td style="text-align: left;"><p>Kaj_Sotala</p></td>
+<td style="text-align: left;"><p>08 March</p></td>
+<td style="text-align: left;"><p>1</p></td>
+<td><p>50</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><p><a href="http://lesswrong.com/lw/aks/emotional_regulation_part_i_a_problem_summary/" id="_xmbuD2er">Emotional regulation, Part I: a problem summary</a></p></td>
+<td style="text-align: left;"><p><a href="http://lesswrong.com/user/Swimmer963/" id="_MGKmI-j-">Swimmer963</a></p></td>
+<td style="text-align: left;"><p>05 March</p></td>
+<td style="text-align: left;"><p>0</p></td>
+<td><p>9</p></td>
+<td><p>-2</p></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><p><a href="http://lesswrong.com/r/discussion/lw/apm/how_would_you_stop_moores_law/" id="_BpCl9Nvp">How would you stop Moore’s Law?</a></p></td>
+<td style="text-align: left;"><p>gwern</p></td>
+<td style="text-align: left;"><p>10 March</p></td>
+<td style="text-align: left;"><p>1</p></td>
+<td><p>19</p></td>
+<td><p>-3</p></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><p><a href="http://lesswrong.com/r/discussion/lw/aq6/on_the_etiology_of_religious_belief/" id="_7PepKBi-">On the etiology of religious belief</a></p></td>
+<td style="text-align: left;"><p>gwern</p></td>
+<td style="text-align: left;"><p>11 March</p></td>
+<td style="text-align: left;"><p>0</p></td>
+<td><p>11</p></td>
+<td><p>-7</p></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><p><a href="http://lesswrong.com/lw/aq9/decision_theories_a_less_wrong_primer/" id="_d9P8zHig">Decision Theories: A Less Wrong Primer</a></p></td>
+<td style="text-align: left;"><p><a href="http://lesswrong.com/user/orthonormal/" id="_sGHG7IuW">orthonormal</a></p></td>
+<td style="text-align: left;"><p>13 March</p></td>
+<td style="text-align: left;"><p>1</p></td>
+<td><p>62</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><p><a href="http://lesswrong.com/lw/ase/schelling_fences_on_slippery_slopes/" id="_HRqqAVKm">Schelling fences on slippery slopes</a></p></td>
+<td style="text-align: left;"><p><a href="http://lesswrong.com/user/Yvain/" id="_dWJB2hcc">Yvain</a></p></td>
+<td style="text-align: left;"><p>16 March</p></td>
+<td style="text-align: left;"><p>1</p></td>
+<td><p>120</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><p><a href="http://lesswrong.com/r/lesswrong/lw/aq2/fallacies_as_weak_bayesian_evidence/" id="_RTbqjueJ">Fallacies as weak Bayesian evidence</a></p></td>
+<td style="text-align: left;"><p>Kaj_Sotala</p></td>
+<td style="text-align: left;"><p>18 March</p></td>
+<td style="text-align: left;"><p>1</p></td>
+<td><p>49</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><p><a href="http://lesswrong.com/lw/axl/decision_theories_a_semiformal_analysis_part_i/" id="_pFXIyS8f">Decision Theories: A Semi-Formal Analysis, Part I</a></p></td>
+<td style="text-align: left;"><p>orthonormal</p></td>
+<td style="text-align: left;"><p>24 March</p></td>
+<td style="text-align: left;"><p>1</p></td>
+<td><p>20</p></td>
+<td><p>-1</p></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><p><a href="http://lesswrong.com/lw/az6/decision_theories_a_semiformal_analysis_part_ii/" id="_1NRlodXz">Decision Theories: A Semi-Formal Analysis, Part II</a></p></td>
+<td style="text-align: left;"><p>orthonormal</p></td>
+<td style="text-align: left;"><p>06 April</p></td>
+<td style="text-align: left;"><p>0</p></td>
+<td><p>16</p></td>
+<td><p>-13</p></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><p><a href="http://lesswrong.com/lw/by9/to_like_each_other_sing_and_dance_in_synchrony/" id="_bYRZ9oup">To like each other, sing and dance in synchrony</a></p></td>
+<td style="text-align: left;"><p>Kaj_Sotala</p></td>
+<td style="text-align: left;"><p>23 April</p></td>
+<td style="text-align: left;"><p>0</p></td>
+<td><p>20</p></td>
+<td><p>4</p></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><p><a href="http://lesswrong.com/r/discussion/lw/bl3/living_forever_is_hard_part_3_the_state_of_life/" id="_w5ZimSd0">The state of life extension research</a></p></td>
+<td style="text-align: left;"><p>gwern</p></td>
+<td style="text-align: left;"><p>23 April</p></td>
+<td style="text-align: left;"><p>1</p></td>
+<td><p>10</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><p><a href="http://lesswrong.com/r/discussion/lw/cih/value_of_information_8_examples/" id="_HqoyoI0Y">Value of Information: 8 examples</a></p></td>
+<td style="text-align: left;"><p>gwern</p></td>
+<td style="text-align: left;"><p>18 May</p></td>
+<td style="text-align: left;"><p>0</p></td>
+<td><p>45</p></td>
+<td><p>-8</p></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><p><a href="http://lesswrong.com/r/discussion/lw/dds/hope_function/" id="_PedzLhlS">Hope Function</a></p></td>
+<td style="text-align: left;"><p>gwern</p></td>
+<td style="text-align: left;"><p>01 July</p></td>
+<td style="text-align: left;"><p>1</p></td>
+<td><p>22</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><p><a href="http://lesswrong.com/lw/dhe/to_learn_critical_thinking_study_critical_thinking/" id="_xKL3LO6-">To Learn Critical Thinking, Study Critical Thinking</a></p></td>
+<td style="text-align: left;"><p>gwern</p></td>
+<td style="text-align: left;"><p>07 July</p></td>
+<td style="text-align: left;"><p>0</p></td>
+<td><p>23</p></td>
+<td><p>-11</p></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><p><a href="http://lesswrong.com/r/discussion/lw/ecp/dragon_balls_hyperbolic_time_chamber/" id="_FXOTziNL">Dragon Ball’s Hyperbolic Time Chamber</a></p></td>
+<td style="text-align: left;"><p>gwern</p></td>
+<td style="text-align: left;"><p>02 Sep</p></td>
+<td style="text-align: left;"><p>0</p></td>
+<td><p>33</p></td>
+<td><p>-9</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="分析" class="level1">
+<h1><a href="#分析" title="Link to section: § &#39;分析&#39;">分析</a></h1>
+<p>对于分析部分，我有两个问题：</p>
+<ol type="1">
+<li><p>收到负面首条评论的帖子和收到正面首条评论的帖子，其 karma 之间是否存在差异？（任何差异都意味着其中一种或两种都产生了效果。）</p></li>
+<li><p>两种首条评论本身的 karma 之间是否存在差异（这是我在实验过程中开始怀疑的）？</p></li>
+</ol>
+<section id="文章效果" class="level2">
+<h2><a href="#文章效果" title="Link to section: § &#39;文章效果&#39;">文章效果</a></h2>
+<p>使用 <a href="http://www.indiana.edu/~kruschke/BEST/" id="_8MZzq5vI">BEST</a> 进行贝叶斯推断：</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>lw <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Anchor     =</span> <span class="fu">c</span>( <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>,  <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>),</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">Post.karma =</span> <span class="fu">c</span>(<span class="dv">11</span>,<span class="dv">19</span>,<span class="dv">50</span>, <span class="dv">9</span>,<span class="dv">19</span>,<span class="dv">11</span>,<span class="dv">62</span>,<span class="dv">120</span>,<span class="dv">49</span>,<span class="dv">20</span>,<span class="dv">16</span>,<span class="dv">20</span>,<span class="dv">10</span>,<span class="dv">45</span>,<span class="dv">22</span>,<span class="dv">23</span>,<span class="dv">33</span>))</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;BEST.R&quot;</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>neg <span class="ot">&lt;-</span> lw[lw<span class="sc">$</span>Anchor<span class="sc">==</span><span class="dv">0</span>,]<span class="sc">$</span>Post.karma</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>pos <span class="ot">&lt;-</span> lw[lw<span class="sc">$</span>Anchor<span class="sc">==</span><span class="dv">1</span>,]<span class="sc">$</span>Post.karma</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>mcmc <span class="ot">=</span> <span class="fu">BESTmcmc</span>(neg, pos)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">BESTplot</span>(neg, pos, <span class="at">mcmcChain=</span>mcmc)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>           SUMMARY.INFO</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>PARAMETER       mean  median     mode   HDIlow HDIhigh pcgtZero</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  mu1        <span class="fl">20.1792</span>  <span class="fl">20.104</span>  <span class="fl">20.0392</span>  <span class="fl">10.7631</span> <span class="fl">29.9835</span>       <span class="cn">NA</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  mu2        <span class="fl">41.9474</span>  <span class="fl">41.640</span>  <span class="fl">40.4661</span>  <span class="fl">11.0307</span> <span class="fl">75.1056</span>       <span class="cn">NA</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  muDiff    <span class="sc">-</span><span class="fl">21.7682</span> <span class="sc">-</span><span class="fl">21.519</span> <span class="sc">-</span><span class="fl">22.6345</span> <span class="sc">-</span><span class="fl">55.3222</span> <span class="fl">11.2283</span>    <span class="fl">8.143</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  sigma1     <span class="fl">13.1212</span>  <span class="fl">12.264</span>  <span class="fl">10.9018</span>   <span class="fl">5.8229</span> <span class="fl">22.4381</span>       <span class="cn">NA</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  sigma2     <span class="fl">40.9768</span>  <span class="fl">37.835</span>  <span class="fl">33.8565</span>  <span class="fl">16.5560</span> <span class="fl">72.6948</span>       <span class="cn">NA</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  sigmaDiff <span class="sc">-</span><span class="fl">27.8556</span> <span class="sc">-</span><span class="fl">24.995</span> <span class="sc">-</span><span class="fl">21.7802</span> <span class="sc">-</span><span class="fl">60.9420</span> <span class="sc">-</span><span class="fl">0.9855</span>    <span class="fl">0.838</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  nu         <span class="fl">30.0681</span>  <span class="fl">21.230</span>   <span class="fl">5.6449</span>   <span class="fl">1.0001</span> <span class="fl">86.5698</span>       <span class="cn">NA</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  nuLog10     <span class="fl">1.2896</span>   <span class="fl">1.327</span>   <span class="fl">1.4332</span>   <span class="fl">0.4332</span>  <span class="fl">2.0671</span>       <span class="cn">NA</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  effSz      <span class="sc">-</span><span class="fl">0.7718</span>  <span class="sc">-</span><span class="fl">0.765</span>  <span class="sc">-</span><span class="fl">0.7632</span>  <span class="sc">-</span><span class="fl">1.8555</span>  <span class="fl">0.3322</span>    <span class="fl">8.143</span></span></code></pre></div>
+<figure>
+<p><img alt="完整数据集的 BEST 结果图形摘要" data-aspect-ratio="1 / 1" decoding="async" height="100" id="_6mdLhHpW" loading="lazy" src="/images/lw-anchoring-yvain.png" width="100"></img></p>
+<figcaption><p>完整数据集的 BEST 结果图形摘要</p></figcaption>
+</figure>
+<p>结果被 Yvain 那篇非常受欢迎的帖子严重扭曲了；我们不能信任基于如此高分帖子得出的结果。让我们试试去掉 Yvain 的数据点。BEST 在显示结果时实际上崩溃了，可能是因为它假设至少有8个数据点之类的条件；而且我们是否应该使用像 BEST 这样基于正态分布的检验本身就值得商榷：仅从图形上就能看出这绝对不是正态分布。因此我们退回到无分布假设的 <a href="https://en.wikipedia.org/wiki/Mann%E2%80%93Whitney_U_test" id="_hTsoHQ0Q" class="link-live" data-link-icon="wikipedia" data-link-icon-type="svg" data-url-iframe="https://en.m.wikipedia.org/wiki/Mann%E2%80%93Whitney_U_test#bodyContent">Mann-Whitney U</a> 双样本检验（而非 <em>t</em> 检验）：</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wilcox.test</span>(Post.karma <span class="sc">~</span> Anchor, <span class="at">data=</span>lw)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    Wilcoxon rank sum test with continuity correction</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>data<span class="sc">:</span>  Post.karma by Anchor</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>W <span class="ot">=</span> <span class="dv">19</span>, p<span class="sc">-</span>value <span class="ot">=</span> <span class="fl">0.1117</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>...</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="fu">wilcox.test</span>(Post.karma <span class="sc">~</span> Anchor, <span class="at">data=</span>(lw[lw<span class="sc">$</span>Post.karma<span class="sc">&lt;</span><span class="dv">100</span>,]))</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    Wilcoxon rank sum test with continuity correction</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>data<span class="sc">:</span>  Post.karma by Anchor</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>W <span class="ot">=</span> <span class="dv">19</span>, p<span class="sc">-</span>value <span class="ot">=</span> <span class="fl">0.203</span></span></code></pre></div>
+<p>结果合理。为了绕过这个 bug，让我们将 Yvain 的数据替换为该组去掉他后的均值33；新的结果：</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>           SUMMARY.INFO</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>PARAMETER       mean   median     mode  HDIlow HDIhigh pcgtZero</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  mu1        <span class="fl">20.2877</span>  <span class="fl">20.2002</span>  <span class="fl">20.1374</span>  <span class="fl">10.863</span> <span class="fl">29.9532</span>       <span class="cn">NA</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  mu2        <span class="fl">32.7912</span>  <span class="fl">32.7664</span>  <span class="fl">32.8370</span>  <span class="fl">15.609</span> <span class="fl">50.4410</span>       <span class="cn">NA</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  muDiff    <span class="sc">-</span><span class="fl">12.5035</span> <span class="sc">-</span><span class="fl">12.4802</span> <span class="sc">-</span><span class="fl">12.2682</span> <span class="sc">-</span><span class="fl">32.098</span>  <span class="fl">7.3301</span>    <span class="fl">9.396</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  sigma1     <span class="fl">13.2561</span>  <span class="fl">12.3968</span>  <span class="fl">10.9385</span>   <span class="fl">6.044</span> <span class="fl">22.3085</span>       <span class="cn">NA</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  sigma2     <span class="fl">22.4574</span>  <span class="fl">20.6784</span>  <span class="fl">18.3106</span>  <span class="fl">10.449</span> <span class="fl">38.5859</span>       <span class="cn">NA</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  sigmaDiff  <span class="sc">-</span><span class="fl">9.2013</span>  <span class="sc">-</span><span class="fl">8.1031</span>  <span class="sc">-</span><span class="fl">7.1115</span> <span class="sc">-</span><span class="fl">28.725</span>  <span class="fl">7.6973</span>   <span class="fl">11.685</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  nu         <span class="fl">33.2258</span>  <span class="fl">24.5819</span>   <span class="fl">8.6726</span>   <span class="fl">1.143</span> <span class="fl">91.3693</span>       <span class="cn">NA</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  nuLog10     <span class="fl">1.3575</span>   <span class="fl">1.3906</span>   <span class="fl">1.4516</span>   <span class="fl">0.555</span>  <span class="fl">2.0837</span>       <span class="cn">NA</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  effSz      <span class="sc">-</span><span class="fl">0.7139</span>  <span class="sc">-</span><span class="fl">0.7066</span>  <span class="sc">-</span><span class="fl">0.7053</span>  <span class="sc">-</span><span class="fl">1.779</span>  <span class="fl">0.3607</span>    <span class="fl">9.396</span></span></code></pre></div>
+<figure>
+<p><img alt="将 Yvain 替换为均值后的 BEST 结果图形摘要" data-aspect-ratio="1 / 1" decoding="async" height="100" id="_qAtCR4EV" loading="lazy" src="/images/lw-anchoring-yvain-omitted.png" width="100"></img></p>
+<figcaption><p>将 Yvain 替换为均值后的 BEST 结果图形摘要</p></figcaption>
+</figure>
+<p>均值差异缩小了但并未消失；它大到可能的效应量中有10%为零或实际上是正向的（即增加 karma 而非减少）。这有些令人担忧，但我不太认真对待这个结果：</p>
+<ol type="1">
+<li><p>数据量不大</p></li>
+<li><p>如我们所见，存在极端异常值，这意味着 karma 分数服从高斯/正态分布的假设可能严重错误</p></li>
+<li><p>即使按面值理解，10个 karma 点的差异似乎也不足以产生任何重要的现实后果（比如让本该留下的人离开 LW）</p></li>
+</ol>
+<p>关于第二点，应对 BEST/<em>t</em> 检验的正态分布假设被违反的情况，主要有两种选择：要么换用一个假设更接近实际观测分布的检验方法，并寄望于这个新分布足够接近真实情况；要么使用完全不依赖分布假设的检验。</p>
+<p>例如，我们可以尝试将其建模为<a href="https://en.wikipedia.org/wiki/%E6%B3%8A%E6%9D%BE%E5%88%86%E5%B8%83" id="_ah-4vQpS" class="link-live" data-link-icon="wikipedia" data-link-icon-type="svg" data-url-iframe="https://en.m.wikipedia.org/wiki/%E6%B3%8A%E6%9D%BE%E5%88%86%E5%B8%83#bodyContent">泊松分布</a>，看看锚定变量是否是过程总和均值的重要预测因子——看起来确实如此：</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">glm</span>(Post.karma <span class="sc">~</span> Anchor, <span class="at">data=</span>lw, <span class="at">family=</span>poisson))</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>...</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>Deviance Residuals<span class="sc">:</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>   Min      <span class="dv">1</span>Q  Median      <span class="dv">3</span>Q     Max</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span><span class="fl">6.194</span>  <span class="sc">-</span><span class="fl">2.915</span>  <span class="sc">-</span><span class="fl">0.396</span>   <span class="fl">0.885</span>   <span class="fl">9.423</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>Coefficients<span class="sc">:</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>            Estimate Std. Error z value <span class="fu">Pr</span>(<span class="sc">&gt;</span><span class="er">|</span>z<span class="sc">|</span>)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>(Intercept)   <span class="fl">3.0339</span>     <span class="fl">0.0731</span>   <span class="fl">41.49</span>   <span class="sc">&lt;</span><span class="fl">2e-16</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>Anchor        <span class="fl">0.7503</span>     <span class="fl">0.0905</span>    <span class="fl">8.29</span>   <span class="sc">&lt;</span><span class="fl">2e-16</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>...</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">glm</span>(Post.karma <span class="sc">~</span> Anchor, <span class="at">data=</span>(lw[lw<span class="sc">$</span>Post.karma<span class="sc">&lt;</span><span class="dv">100</span>,]), <span class="at">family=</span>poisson))</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>...</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>Deviance Residuals<span class="sc">:</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>   Min      <span class="dv">1</span>Q  Median      <span class="dv">3</span>Q     Max</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span><span class="fl">4.724</span>  <span class="sc">-</span><span class="fl">2.386</span>  <span class="sc">-</span><span class="fl">0.744</span>   <span class="fl">2.493</span>   <span class="fl">4.594</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>Coefficients<span class="sc">:</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>            Estimate Std. Error z value <span class="fu">Pr</span>(<span class="sc">&gt;</span><span class="er">|</span>z<span class="sc">|</span>)</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>(Intercept)   <span class="fl">3.0339</span>     <span class="fl">0.0731</span>   <span class="fl">41.49</span>   <span class="sc">&lt;</span><span class="fl">2e-16</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>Anchor        <span class="fl">0.4669</span>     <span class="fl">0.0983</span>    <span class="fl">4.75</span>    <span class="fl">2e-06</span></span></code></pre></div>
+<p>（顺便说一下，我将这些 <em>p</em> 值视为效应存在的证据，即使它们没有低于0.05或我事先定义的其他 alpha 值：以如此小的样本量和相应较低的<a href="https://en.wikipedia.org/wiki/%E7%BB%9F%E8%AE%A1%E5%8A%9F%E6%95%88" id="_V7VCYHp2" class="link-live" data-link-icon="wikipedia" data-link-icon-type="svg" data-url-iframe="https://en.m.wikipedia.org/wiki/%E7%BB%9F%E8%AE%A1%E5%8A%9F%E6%95%88#bodyContent">统计功效</a>来说，要达到 <em>p</em>&lt;0.05，每条锚定评论就必须对文章 karma 产生离谱的巨大效应——但锚定评论产生如此效应是极不可能的！心理学中的锚定效应并没有<em>那么</em>万能：它是相对微妙的。因此我们面临着与 <a href="Lewis%20meditation" id="_ueD6Lo-k">2013年 Lewis 冥想实验结果</a>类似的问题——在这些情况下，如果能用更具相对性的指标如<a href="https://en.wikipedia.org/wiki/%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%9B%A0%E5%AD%90" id="_Lb-6M5Je" class="link-live" data-link-icon="wikipedia" data-link-icon-type="svg" data-url-iframe="https://en.m.wikipedia.org/wiki/%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%9B%A0%E5%AD%90#bodyContent">贝叶斯因子</a>来讨论会更好。）</p>
+</section>
+<section id="评论待遇" class="level2">
+<h2><a href="#评论待遇" title="Link to section: § &#39;评论待遇&#39;">评论待遇</a></h2>
+<p>这些毫无根据地赞扬或批评文章的无意义评论，社区是如何对待它们的？让我们来看看锚定评论的 karma：</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>neg <span class="ot">&lt;-</span> lw[lw<span class="sc">$</span>Anchor<span class="sc">==</span><span class="dv">0</span>,]<span class="sc">$</span>Comment.karma</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>pos <span class="ot">&lt;-</span> lw[lw<span class="sc">$</span>Anchor<span class="sc">==</span><span class="dv">1</span>,]<span class="sc">$</span>Comment.karma</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>mcmc <span class="ot">=</span> <span class="fu">BESTmcmc</span>(neg, pos)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">BESTplot</span>(neg, pos, <span class="at">mcmcChain=</span>mcmc)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>           SUMMARY.INFO</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>PARAMETER      mean  median     mode   HDIlow HDIhigh pcgtZero</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  mu1       <span class="sc">-</span><span class="fl">6.4278</span> <span class="sc">-</span><span class="fl">6.4535</span> <span class="sc">-</span><span class="fl">6.55032</span> <span class="sc">-</span><span class="fl">10.5214</span> <span class="sc">-</span><span class="fl">2.2350</span>       <span class="cn">NA</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  mu2       <span class="sc">-</span><span class="fl">0.2755</span> <span class="sc">-</span><span class="fl">0.2455</span> <span class="sc">-</span><span class="fl">0.01863</span>  <span class="sc">-</span><span class="fl">1.3180</span>  <span class="fl">0.7239</span>       <span class="cn">NA</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  muDiff    <span class="sc">-</span><span class="fl">6.1523</span> <span class="sc">-</span><span class="fl">6.1809</span> <span class="sc">-</span><span class="fl">6.25451</span> <span class="sc">-</span><span class="fl">10.3706</span> <span class="sc">-</span><span class="fl">1.8571</span>    <span class="fl">0.569</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  sigma1     <span class="fl">5.6508</span>  <span class="fl">5.2895</span>  <span class="fl">4.70143</span>   <span class="fl">2.3262</span>  <span class="fl">9.7424</span>       <span class="cn">NA</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  sigma2     <span class="fl">1.2614</span>  <span class="fl">1.1822</span>  <span class="fl">1.07138</span>   <span class="fl">0.2241</span>  <span class="fl">2.4755</span>       <span class="cn">NA</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  sigmaDiff  <span class="fl">4.3893</span>  <span class="fl">4.0347</span>  <span class="fl">3.53457</span>   <span class="fl">1.1012</span>  <span class="fl">8.5941</span>   <span class="fl">99.836</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  nu        <span class="fl">27.4160</span> <span class="fl">18.1596</span>  <span class="fl">4.04827</span>   <span class="fl">1.0001</span> <span class="fl">83.9648</span>       <span class="cn">NA</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  nuLog10    <span class="fl">1.2060</span>  <span class="fl">1.2591</span>  <span class="fl">1.41437</span>   <span class="fl">0.2017</span>  <span class="fl">2.0491</span>       <span class="cn">NA</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  effSz     <span class="sc">-</span><span class="fl">1.6750</span> <span class="sc">-</span><span class="fl">1.5931</span> <span class="sc">-</span><span class="fl">1.48805</span>  <span class="sc">-</span><span class="fl">3.2757</span> <span class="sc">-</span><span class="fl">0.1889</span>    <span class="fl">0.569</span></span></code></pre></div>
+<figure>
+<p><img alt="正面/负面评论待遇的完整数据集 BEST 结果图形摘要" data-aspect-ratio="1 / 1" decoding="async" height="100" id="_12Ihhrpr" loading="lazy" src="/images/lw-anchoring-comment.png" width="100"></img></p>
+<figcaption><p>正面/负面评论待遇的完整数据集 BEST 结果图形摘要</p></figcaption>
+</figure>
+<p>正如人们所期望的，两组评论最终都没有获得净正均值分数，但它们受到的对待明显不同：负面评论被踩的程度远远超过正面评论。我认为这或许暗示 LW 以负面和充满敌意著称的名声有些言过其实了：我们对考虑不周的批评和论点是负面和充满敌意的，但对空洞的赞美则不是。</p>
+</section>
+</section>
+<section id="外部链接" class="level1">
+<h1><a href="#外部链接" title="Link to section: § &#39;外部链接&#39;">外部链接</a></h1>
+<ul>
+<li><p><a href="http://lesswrong.com/lw/gft/lw_anchoring_experiment_maybe/" id="_dAXXRbQF">LW 讨论帖</a></p></li>
+</ul>
+</section>
+<aside id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr></hr>
+<ol>
+<li id="fn1"><p>如果你对这个账号名感到好奇：‘Rhwawn’ 和 ‘Gwern’ 都是威尔士故事集 <em><a href="https://en.wikipedia.org/wiki/Mabinogion" id="_FnP_mX4c" class="link-live" data-link-icon="wikipedia" data-link-icon-type="svg" data-url-iframe="https://en.m.wikipedia.org/wiki/Mabinogion#bodyContent">Mabinogion</a></em> 中的角色名。它们有共同的特点：短小、几乎独一无二，而且任何用 Google 搜索的人都能看出是假名——这也是我在<a href="https://en.wikipedia.org/wiki/User:Rhwawn" id="_e3c2LfZc" class="link-live" data-link-icon="wikipedia" data-link-icon-type="svg" data-url-iframe="https://en.m.wikipedia.org/wiki/User:Rhwawn#bodyContent">维基百科</a>上将其作为备用账号名的原因。<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</aside>
+
+      
+      <noscript><div id="noscript-warning-footer" class="admonition error" title="Warning to NoScript Users"><div class="admonition-title"><p>[<strong>Error</strong>: JavaScript disabled.]</p></div> <p>[Backlinks, similar links, and the bibliography require JS enabled to load.]</p></div></noscript>
+      
+      
+      
+      
+      </div> <!-- NOTE: unmatched, because it closes the opening div from the hakyll.hs $body$ Pandoc template -->
+
+    </article>
+
+    
+    <!-- SSI: Footer -->
+    <!-- FOOTER-BEGIN-->
+    <!-- Footer (no SSI): injected by Hakyll from static/include/footer.html -->
+        <nav id="navigation">
+      <svg id="navigation-left"><use href="/static/img/ornament/sequential-nav-icons-arabesque.svg#direction"></use></svg>
+      <a id="navigation-center" class="link-page-not" title="Return to top of current page" href="#top"><svg><use href="/static/img/ornament/sequential-nav-icons-arabesque.svg#center"></use></svg></a>
+      <svg id="navigation-right"><use href="/static/img/ornament/sequential-nav-icons-arabesque.svg#direction"></use></svg>
+    </nav>
+    <div class="markdownBody" id="footer">
+      <p id="footer-anonymous-feedback">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSd7uqL7B_l1HFIfXc8D_nZyumaOv58msK7jhl4XzQjWODWKdA/viewform" title="Google Docs web form for submitting anonymized feedback to Gwern Branwen">[ Send Anonymous Feedback ]</a>
+      </p>
+      <div id="x-of-the-day" class="dark-mode-invert">
+        <p><a id="qotd" class="include include-spinner-not" href="/metadata/today-quote.html">[Quote Of The Day]</a></p>
+        <p><a id="sotd" class="include include-spinner-not" href="/metadata/today-site.html">[Site Of The Day]</a></p>
+        <p><a id="atod" class="include include-spinner-not" href="/metadata/today-annotation.html">[Annotation Of The Day]</a></p>
+      </div>
+      <p><a id="psa-adblock" class="include adsense include-spinner-not" href="/metadata/psa-adblock.html">[adblock public service announcement]</a></p>
+    </div>
+
+    <!-- FOOTER-END -->
+    
+    <div id="footer-decoration-container"> <!-- Mandatory element for layout -->
+      <a rel="home me contents" title="Gwern.net homepage" class="footer-logo dark-mode-invert" href="/index">​</a>
+    </div>
+
+  </main>
+
+  <script defer src="https://www.googletagmanager.com/gtag/js?id=UA-18912926-1" onload="GW.googleAnalyticsLoaded = true;"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-18912926-1');
+  </script>
+  
+  
+</body>
+</html>

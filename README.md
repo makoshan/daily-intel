@@ -1,159 +1,93 @@
 # Daily Intel
 
-Mako 的日常情报站，记录市场研究、投资情报与行业洞察。
+> **基于 [Gwern.net](https://github.com/gwern/gwern.net) 的 Fork**  
+> 使用 Gwern 的 Hakyll 构建系统和设计理念，定制化用于个人站点与每日资讯发布。
 
-> 不只是资讯，更有技术趋势与多元观点的碰撞
+一个以 **Hakyll/Pandoc** 构建的静态站点，用来发布:
 
-## 🌐 在线访问
+- `Daily Intel` 每日资讯 Newsletter
+- 文章/随笔（区块链、技术、经济学、统计等）
+- docs/资料库（本地文档链接、注解、弹窗预览等能力来自 Gwern.net 风格的构建链路）
 
-https://makoshan.github.io/daily-intel/
+站点输出到项目根目录的 `_site/`。
 
----
+## 快速开始 (WSL)
 
-## 🚀 快速开始（新目录结构）
-
-### 本地开发
-
-```bash
-# 进入项目目录
-cd workspace/projects/daily-intel
-
-# 安装依赖
-bundle install
-
-# 本地预览
-bundle exec jekyll serve
-
-# 访问 http://localhost:4000/daily-intel/
-```
-
-### 手动生成日报
+构建（最直接的方式）:
 
 ```bash
-cd scripts
-
-# 1. 配置 API Key
-cp .env.example .env
-# 编辑 .env 填入 OPENAI_API_KEY
-
-# 2. 安装依赖
-pip install -r requirements.txt
-
-# 3. 运行生成器
-python daily-intel-pipeline.py
+cd /mnt/c/Users/ROG/.openclaw/workspace/projects/daily-intel/build
+cabal update
+cabal run hakyll -- build
 ```
 
----
+预览（在项目根目录跑，确保能处理无扩展名路由，比如 `/About`）:
 
-## 📁 目录结构
-
-```
-daily-intel/
-├── 📁 _posts/              # 文章目录
-│   └── YYYY-MM-DD-daily-intel.md
-├── 📁 _layouts/            # Jekyll 布局
-├── 📁 scripts/             # 自动化脚本
-│   ├── daily-intel-pipeline.py   # 主流程
-│   ├── rss_fetcher.py            # RSS 抓取
-│   ├── hn_comment_analyzer.py    # HN 评论分析
-│   ├── content_enhancer.py       # AI 内容增强
-│   ├── .env.example              # API Key 配置模板
-│   └── SECURITY.md               # 安全指南
-├── 📁 .github/workflows/   # GitHub Actions
-│   └── daily-intel.yml     # 自动定时任务
-├── 📁 assets/              # 静态资源
-├── 📄 index.html           # 首页
-└── 📄 _config.yml          # Jekyll 配置
-```
-
----
-
-## 🤖 自动化流程
-
-### 功能
-
-1. **数据抓取**
-   - News Hacker RSS
-   - Hacker Podcast RSS
-   - Hacker News Top Stories
-   - HN 评论分析
-
-2. **AI 内容增强**
-   - 技术背景分析
-   - 商业价值评估
-   - 多元观点聚合
-   - 标签自动生成
-
-3. **自动发布**
-   - 生成 Markdown
-   - Git 提交
-   - 自动推送
-   - GitHub Pages 部署
-
-### 定时任务
-
-**GitHub Actions** 每天 08:00 (CST) 自动运行：
-- 抓取最新资讯
-- AI 分析生成
-- 自动提交部署
-
-**手动触发**:
 ```bash
-cd scripts
-python daily-intel-pipeline.py
+cd /mnt/c/Users/ROG/.openclaw/workspace/projects/daily-intel
+python3 webserver.py --bind 0.0.0.0 --port 8000 --directory _site
 ```
 
----
+更完整的环境依赖与说明见 `BUILD_INSTRUCTIONS.md`。
 
-## 🏷️ 标签体系
+## 开发/生产构建
 
-### 技术标签
-- `#AI` - 人工智能
-- `#Agent` - 智能体
-- `#编程` - 开发工具
-- `#安全` - 网络安全
-- `#开源` - 开源项目
+开发构建（更快，默认关掉注解相关特性）:
 
-### 商业标签
-- `#投资` - 投资理财
-- `#创业` - 创业产品
-- `#市场` - 市场动态
+```bash
+bash scripts/build.sh
+```
 
----
+开发 watch（边改边编译）:
 
-## 📝 数据源
+```bash
+bash scripts/build.sh --watch
+```
 
-| 平台 | 数量 | 重点方向 |
-|------|------|----------|
-| Product Hunt | 10 条 | AI 编程工具、效率应用 |
-| Hacker News | 15 条 | 本地 AI、Agent 范式 |
-| GitHub Trending | 10 条 | AI 安全、Skills 生态 |
-| 少数派 | 10 条 | 生活方式、科技文化 |
-| 华尔街见闻 | 10 条 | 太空经济、投资市场 |
-| 虎扑 | 10 条 | 体育动态 |
+生产构建（启用注解等完整功能）:
 
----
+```bash
+bash scripts/build-production.sh
+```
 
-## 🔐 安全配置
+注: 生产模式也可以直接用 `build/site.hs` 的默认值:
 
-**⚠️ 重要**: API Key 不要提交到 GitHub！
+```bash
+cd build
+cabal run hakyll -- clean
+cabal run hakyll -- build +RTS -N -RTS
+```
 
-1. 本地开发: 使用 `scripts/.env` 文件（已忽略）
-2. GitHub Actions: 使用 Secrets (`OPENAI_API_KEY`)
+## Newsletter 生成
 
-详见: `scripts/SECURITY.md`
+Newsletter 生成与清理说明见 `scripts/NEWSLETTER_QUICKSTART.md`。
 
----
+典型流程（Windows 侧跑生成器 + WSL 侧编译）:
 
-## 📊 统计
+1. 生成某天的 Newsletter: `python scripts/newsletter/generator.py 2026-02-09`
+2. 生产构建: `bash scripts/build-production.sh --skip-convert`
+3. 预览: `python3 webserver.py --directory _site`
 
-- 总文章数：{{ site.posts | size }}
-- 最新更新：{{ site.time | date: "%Y-%m-%d %H:%M" }}
-- 数据源：6 个平台
-- 自动化：AI 增强 + 定时发布
+## 首页与路由
 
----
+- 首页源文件: `index.page`
+- 构建时会生成: `index.generated.page`
+- 输出: `_site/index` 与 `_site/index.html`
 
-## 📜 License
+首页布局（例如“三列一行”）主要通过 `index.page` 内嵌 CSS 控制顶层 `<section class="level1">` 的 flex/grid 行为。
 
-MIT
+## 目录结构 (概览)
+
+- `build/`: Hakyll 构建工程（`site.hs`, `daily-intel.cabal` 等）
+- `static/`: CSS/JS/模板/字体等静态资源
+- `_posts/`: 输入的 Markdown（部分会转换成 `.page`）
+- `newsletter/`: Newsletter 的 `.page` 源文件与索引
+- `docs/`: 本地资料库
+- `metadata/`: 注解/弹窗相关数据库与构建产物
+- `_site/`: 编译输出目录（部署/预览用）
+
+## 常见问题
+
+- `cabal update` 失败: 通常是 `~/.cabal` 写权限或网络问题，先检查 WSL 用户权限与网络连通性。
+- 构建报大量 “Link error … file does not exist”: 这是链接注解扫描阶段的提示，不一定会导致构建失败；真正会失败的错误会在最后以 `[ERROR]`/`CallStack` 形式出现。
+
